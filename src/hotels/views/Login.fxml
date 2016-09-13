@@ -14,11 +14,6 @@
    <children>
       <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="87.0" prefWidth="449.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Text fill="#b5bcb9" strokeType="OUTSIDE" strokeWidth="0.0" text="C - Clinic">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
             <ImageView fitHeight="50.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/logo.png" />
@@ -49,7 +44,7 @@
                   <Font size="15.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="324.0" layoutY="181.0" onAction="#gotoSignUp" text="Create an account" />
+            <Hyperlink layoutX="324.0" layoutY="181.0" text="Create an account" />
          </children></Pane>
       <ToolBar id="page-toolbar" layoutY="335.0" prefHeight="60.0" prefWidth="561.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="329.0" />
    </children>

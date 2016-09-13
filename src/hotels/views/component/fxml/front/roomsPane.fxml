@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.RoomsPane">
+   <children>
+      <HBox layoutY="435.0" prefHeight="19.0" prefWidth="962.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label text="All suite: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#d3d1d1" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="60.0" layoutY="10.0" text="Vacant: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#6ed06d" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="159.0" layoutY="10.0" text="Occupied: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#4a4545" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="258.0" layoutY="10.0" text="Dirty: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#999a2c" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="357.0" layoutY="10.0" text="Out of Order: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#f23838" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="456.0" layoutY="10.0" text="Reserved: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#386fdd" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+            <Label layoutX="555.0" layoutY="10.0" text="Due Out: ">
+               <graphic>
+                  <FontAwesomeIcon fill="#c900b5" glyphName="CIRCLE" />
+               </graphic>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

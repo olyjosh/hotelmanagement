@@ -45,10 +45,7 @@ public class Login implements Initializable{
                 toolBar, false, true,spacer1);
     }
     
-    @FXML
-    private void gotoSignUp(ActionEvent e) throws IOException{
-        app.gotoRegister();
-    }
+
 
     @FXML
     private void login(ActionEvent e) {
