@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="389.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="87.0" prefWidth="449.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Text fill="#b5bcb9" strokeType="OUTSIDE" strokeWidth="0.0" text="C - Clinic">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="50.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <Region fx:id="spacer1" prefHeight="58.0" prefWidth="54.0" />
+         </items>
+      </ToolBar>
+      <Pane id="page-tree" fx:id="bodyPane" layoutX="-1.0" layoutY="106.0" prefHeight="229.0" prefWidth="449.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
+         <children>
+            <VBox layoutX="47.0" layoutY="25.0" prefHeight="108.0" prefWidth="355.0" spacing="10.0">
+               <children>
+                  <HBox spacing="5.0" />
+                  <TextField fx:id="id" promptText="officer ID, email or phone" text="08061662025">
+                     <font>
+                        <Font size="17.0" />
+                     </font></TextField>
+                  <PasswordField id="passField" fx:id="pass" promptText="password" text="oxygen0609">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </VBox>
+            <Button layoutX="149.0" layoutY="156.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="151.0" text="Login" />
+            <Hyperlink layoutX="366.0" layoutY="178.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="324.0" layoutY="181.0" onAction="#gotoSignUp" text="Create an account" />
+         </children></Pane>
+      <ToolBar id="page-toolbar" layoutY="335.0" prefHeight="60.0" prefWidth="561.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="329.0" />
+   </children>
+   <stylesheets>
+      <URL value="@ensemble2.css" />
+      <URL value="@../ensemble2.css" />
+   </stylesheets>
+</AnchorPane>

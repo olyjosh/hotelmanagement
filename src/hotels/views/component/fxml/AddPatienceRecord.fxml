@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import org.controlsfx.control.textfield.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="addRecPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="26.0" layoutY="50.0" prefHeight="340.0" prefViewportHeight="290.0" prefViewportWidth="531.0" prefWidth="533.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="50.0">
+         <content>
+            <VBox layoutX="26.0" layoutY="77.0" prefHeight="329.0" prefWidth="531.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="77.0">
+               <children>
+                  <VBox fx:id="symVBox" layoutX="26.0" layoutY="77.0" prefHeight="58.0" prefWidth="531.0" spacing="3.0">
+                     <children>
+                        <Label text="Symptoms" />
+                        <FlowPane id="greyPane" fx:id="symPane" hgap="5.0" prefHeight="34.0" prefWidth="531.0" styleClass="greyPane" vgap="2.0">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <TextField fx:id="symField" styleClass="greyPane" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="tesVBox" layoutX="10.0" layoutY="10.0" prefHeight="58.0" prefWidth="531.0">
+                     <children>
+                        <Label text="Test" />
+                        <FlowPane fx:id="tesPane" hgap="5.0" prefHeight="34.0" prefWidth="531.0" styleClass="greyPane" vgap="2.0">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <children>
+                              <TextField fx:id="tesField" styleClass="greyPane" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="diaVBox" layoutX="10.0" layoutY="68.0" prefHeight="58.0" prefWidth="531.0">
+                     <children>
+                        <Label text="Diagnosis" />
+                        <FlowPane fx:id="diaPane" hgap="5.0" prefHeight="34.0" prefWidth="531.0" styleClass="greyPane" vgap="2.0">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <children>
+                              <TextField fx:id="diaField" styleClass="greyPane" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="preVBox" layoutX="10.0" layoutY="126.0" prefHeight="58.0" prefWidth="531.0">
+                     <children>
+                        <Label text="Prescription" />
+                        <FlowPane fx:id="prePane" hgap="5.0" prefHeight="34.0" prefWidth="531.0" styleClass="greyPane" vgap="2.0">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <children>
+                              <TextField fx:id="preField" styleClass="greyPane" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="comVBox" layoutX="10.0" layoutY="184.0" prefHeight="58.0" prefWidth="531.0">
+                     <children>
+                        <Label text="Doctors Comment" />
+                        <FlowPane fx:id="comPane" hgap="5.0" prefHeight="34.0" prefWidth="531.0" styleClass="greyPane" vgap="2.0">
+                           <children>
+                              <TextField fx:id="comField" styleClass="greyPane" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#save" text="Save">
+                           <graphic>
+                              <FontAwesomeIcon fill="#f2f2f2" glyphName="CHECK" size="1.2em" />
+                           </graphic></Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
