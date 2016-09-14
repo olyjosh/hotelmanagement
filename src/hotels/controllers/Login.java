@@ -14,7 +14,7 @@ import hotels.views.component.WindowTop;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.controlsfx.control.NotificationPane;
+//import org.controlsfx.control.NotificationPane;
 
 /**
  *
@@ -67,11 +67,11 @@ public class Login implements Initializable{
     }
     
     private void notifica(){
-        NotificationPane ntp = new NotificationPane();
-        toolBar.getItems().add(ntp);
-        ntp.showFromTopProperty().setValue(true);
-        ntp.show("Invalid login detail");
-        ntp.show();
+       // NotificationPane ntp = new NotificationPane();
+//        toolBar.getItems().add(ntp);
+//        ntp.showFromTopProperty().setValue(true);
+//        ntp.show("Invalid login detail");
+//        ntp.show();
         
     }
     
