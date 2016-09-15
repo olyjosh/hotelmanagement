@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import de.jensd.fx.glyphs.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
@@ -206,49 +207,16 @@
                         <StackPane fx:id="houseContentStack" layoutX="7.0" layoutY="104.0" prefHeight="456.0" prefWidth="1234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="103.0" />
                         <ToolBar prefHeight="102.0" prefWidth="1234.0">
                            <items>
-                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="276.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="192.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="House keeping settings" />
+                                          <Label id="newLabel" text="House Keeping Management" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Maid">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Room Status">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Task">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST_OL" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="152.0">
-                                 <children>
-                                    <HBox id="title" alignment="BASELINE_CENTER">
-                                       <children>
-                                          <Label id="newLabel" text="Booking Operation" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Suite List">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
@@ -257,26 +225,41 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="434.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="Out of Order Rooms" />
+                                          <Label id="newLabel" text="Task Management" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Add">
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="New Task">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="TASKS" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                      <FontAwesomeIcon fill="#005b03" glyphName="PLUS" size="1.5em" styleClass="fontAwesomeIcon" />
+                                                   </children>
+                                                </GlyphsStack>
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="List">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Task List">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="TASKS" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Line endX="30.0" rotate="90.0" startX="-10.0" />
+                                          <Button contentDisplay="TOP" layoutX="33.0" layoutY="16.0" mnemonicParsing="false" text="Schedule Task">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#ff83d6" glyphName="CLOCK_O" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="56.0" layoutY="16.0" mnemonicParsing="false" text="Scheduled Task List">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
                                                       <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
-                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="1.5em" styleClass="fontAwesomeIcon" text="" />
                                                    </children>
                                                 </GlyphsStack>
                                              </graphic>
@@ -285,61 +268,23 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="817.0" layoutY="10.0" prefHeight="92.0" prefWidth="221.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="144.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="Guest Operations" />
+                                          <Label id="newLabel" text="Maids Management" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Ledger">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Maid List">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
-                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" />
-                                                      <FontAwesomeIcon fill="#614c4c" glyphName="CALCULATOR" size="1.5em" />
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" size="2.5em" />
+                                                      <FontAwesomeIcon fill="#575656" glyphName="FEMALE" layoutX="10.0" layoutY="21.0" size="1.5em" />
                                                    </children>
                                                 </GlyphsStack>
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Guest List">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" text="Messages">
-                                             <graphic>
-                                                <GlyphsStack>
-                                                   <children>
-                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="COMMENT" size="2.5em" />
-                                                      <FontAwesomeIcon fill="WHITE" glyphName="GROUP" />
-                                                   </children>
-                                                </GlyphsStack>
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="787.0" layoutY="10.0" prefHeight="92.0" prefWidth="152.0">
-                                 <children>
-                                    <HBox id="title" alignment="BASELINE_CENTER">
-                                       <children>
-                                          <Label id="newLabel" text="Others" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>

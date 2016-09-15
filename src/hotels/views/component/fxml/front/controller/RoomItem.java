@@ -7,6 +7,7 @@ package hotels.views.component.fxml.front.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,12 +19,14 @@ import javafx.scene.control.Label;
  */
 public class RoomItem implements Initializable {
 
+    @FXML private Button roomNo;
+    @FXML private Label roomType, roomOccupant;
+    
+    
+    
     /**
      * Initializes the controller class.
      */
-    private Button roomNo;
-    private Label roomType, roomOccupant;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
