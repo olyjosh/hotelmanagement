@@ -7,15 +7,21 @@ package hotels.views.component.fxml.front.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.HBox;
 
 /**
  * FXML Controller class
  *
  * @author mac
  */
+
+
 public class Content implements Initializable {
 
+    @FXML private HBox contentHBox;
+    
     /**
      * Initializes the controller class.
      */

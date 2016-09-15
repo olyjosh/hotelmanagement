@@ -4,24 +4,26 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author mac
  */
-public class HouseKeep implements Initializable {
+public class MaidManagement implements Initializable {
 
-    @FXML private TextArea foComment, hkComment,
-            lastServiceRequest,remarks;
-    @FXML private Label lastVisitedDate,lastMaid,serviceStatus,nextOn,outOfOrderReason,nextReservation;
-    @FXML private TableView table; 
-    @FXML private ChoiceBox floor,suiteType,room,roomStatus, maid;
-
+    @FXML private ListView maidList;
+    @FXML private TableView recentMaidTaskTable;
+    @FXML private Label firstName, lastName, email,phone;
+    @FXML private TextArea comment;
+    @FXML private VBox commentPane;
+    
+    
     /**
      * Initializes the controller class.
      */
