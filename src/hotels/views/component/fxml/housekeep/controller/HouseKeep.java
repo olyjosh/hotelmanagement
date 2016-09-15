@@ -1,5 +1,4 @@
-
-package hotels.views.component.fxml.front.controller;
+package hotels.views.component.fxml.housekeep.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,7 +9,7 @@ import javafx.fxml.Initializable;
  *
  * @author mac
  */
-public class RoomsPane implements Initializable {
+public class HouseKeep implements Initializable {
 
     /**
      * Initializes the controller class.

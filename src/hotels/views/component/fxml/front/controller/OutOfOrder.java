@@ -1,4 +1,3 @@
-
 package hotels.views.component.fxml.front.controller;
 
 import java.net.URL;
@@ -10,7 +9,7 @@ import javafx.fxml.Initializable;
  *
  * @author mac
  */
-public class RoomsPane implements Initializable {
+public class OutOfOrder implements Initializable {
 
     /**
      * Initializes the controller class.
