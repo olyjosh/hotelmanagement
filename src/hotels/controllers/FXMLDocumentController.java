@@ -21,13 +21,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.stage.Popup;
 import hotels.Hotels;
-import hotels.model.MongoDBInc;
+//import hotels.model.MongoDBInc;
 import hotels.model.entity.Record;
-import hotels.model.user.ClientM;
-import hotels.views.component.fxml.controller.AddPatienceRecord;
-import hotels.views.component.fxml.controller.NewPatience;
-import hotels.views.component.fxml.controller.PatienceDetails;
-import hotels.views.component.fxml.controller.PatienceRecordPane;
+//import hotels.model.user.ClientM;
+//import hotels.views.component.fxml.controller.AddPatienceRecord;
+//import hotels.views.component.fxml.controller.NewPatience;
+//import hotels.views.component.fxml.controller.PatienceDetails;
+//import hotels.views.component.fxml.controller.PatienceRecordPane;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -37,8 +37,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
+//import org.controlsfx.control.textfield.AutoCompletionBinding;
+//import org.controlsfx.control.textfield.TextFields;
 
 /**
  *
@@ -66,16 +66,16 @@ public class FXMLDocumentController implements Initializable {
     private double mouseDragOffsetY = 0;
 
     private Hotels app;
-    private MongoDBInc m;
-    private ClientM staff,patience;
-    
+//    private MongoDBInc m;
+//    private ClientM staff,patience;
+//    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //m=app.getDbInstance();
         //stage = (Stage) toolBar.getParent().getScene().getWindow();
         init();
-        searchField();
+//        searchField();
     }
 
     
@@ -88,9 +88,9 @@ public class FXMLDocumentController implements Initializable {
         this.app = app;
     }
 
-    public void setStaff(ClientM staff) {
-        this.staff = staff;
-    }
+//    public void setStaff(ClientM staff) {
+//        this.staff = staff;
+//    }
 
     private void init() {
         HBox.setHgrow(spacer1, Priority.ALWAYS);
@@ -149,87 +149,87 @@ public class FXMLDocumentController implements Initializable {
         progress.setVisible(false);
     }
     
-    private void findPatience(String id){
-        if(m==null)m=app.getDbInstance();
-        patience = m.patience(id);
-        if (patience != null) {
-            // Loadup interface base on staff type
-            short staffType = staff.getPost();
-            
-            Tooltip.install(imgView, new Tooltip(
-                    patience.getFirstName()+" "+patience.getLastName()+"\n"+
-                            patience.getSex()+"\n"+
-                            patience.getDob())
-            );
-            loadPatienceDetails();
-            switch (staffType) {
-                case ClientM.POST_DOCTOR:
-                    populatePatienceForDoc(patience);
-                case ClientM.POST_LABATTENDANT:
-                    populatePatienceForLabAtt(patience);
-                case ClientM.POST_NURSE:
-                    populatePatienceForNurse(patience);
-                case ClientM.POST_OPTICIAN:
-                    populatePatienceForOptician(patience);
-                case ClientM.POST_SURGEON:
-                    populatePatienceForSurgeon(patience);
-                default:
-                    populatePatienceForDoc(patience);
-                    //noPriviledge();
-            }
-        }else{
-            //report such patience not exist
-            System.out.println("report such patience not exist");
-            
-        }
-    }
-    
-    private void populatePatienceForDoc(ClientM pat){
-        imgView.setVisible(true);
-    }
-    
-    private void populatePatienceForLabAtt(ClientM pat){
-        imgView.setVisible(true);
-    }
-    
-    private void populatePatienceForNurse(ClientM pat){
-        imgView.setVisible(true);
-    }
-    
-    private void populatePatienceForPhamacy(ClientM pat){
-        imgView.setVisible(true);
-    }
-    
-    private void populatePatienceForOptician(ClientM pat){
-        imgView.setVisible(true);
-    }
-    
-    private void populatePatienceForSurgeon(ClientM pat){
-        imgView.setVisible(true);
-    }
+//    private void findPatience(String id){
+//        if(m==null)m=app.getDbInstance();
+//        patience = m.patience(id);
+//        if (patience != null) {
+//            // Loadup interface base on staff type
+//            short staffType = staff.getPost();
+//            
+//            Tooltip.install(imgView, new Tooltip(
+//                    patience.getFirstName()+" "+patience.getLastName()+"\n"+
+//                            patience.getSex()+"\n"+
+//                            patience.getDob())
+//            );
+//            loadPatienceDetails();
+//            switch (staffType) {
+//                case ClientM.POST_DOCTOR:
+//                    populatePatienceForDoc(patience);
+//                case ClientM.POST_LABATTENDANT:
+//                    populatePatienceForLabAtt(patience);
+//                case ClientM.POST_NURSE:
+//                    populatePatienceForNurse(patience);
+//                case ClientM.POST_OPTICIAN:
+//                    populatePatienceForOptician(patience);
+//                case ClientM.POST_SURGEON:
+//                    populatePatienceForSurgeon(patience);
+//                default:
+//                    populatePatienceForDoc(patience);
+//                    //noPriviledge();
+//            }
+//        }else{
+//            //report such patience not exist
+//            System.out.println("report such patience not exist");
+//            
+//        }
+//    }
+//    
+//    private void populatePatienceForDoc(ClientM pat){
+//        imgView.setVisible(true);
+//    }
+//    
+//    private void populatePatienceForLabAtt(ClientM pat){
+//        imgView.setVisible(true);
+//    }
+//    
+//    private void populatePatienceForNurse(ClientM pat){
+//        imgView.setVisible(true);
+//    }
+//    
+//    private void populatePatienceForPhamacy(ClientM pat){
+//        imgView.setVisible(true);
+//    }
+//    
+//    private void populatePatienceForOptician(ClientM pat){
+//        imgView.setVisible(true);
+//    }
+//    
+//    private void populatePatienceForSurgeon(ClientM pat){
+//        imgView.setVisible(true);
+//    }
     
     private void noPriviledge(){
     }
     
-    private void searchField(){
-        TextFields.bindAutoCompletion(patienceID, "","").
-                setOnAutoCompleted((AutoCompletionBinding.AutoCompletionEvent<String> event) -> {
-            findPatience(patienceID.getText());
-        });
-        
-        patienceID.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-            if(event.getCode()==KeyCode.ENTER){
-                String text = patienceID.getText();
-                if(!text.isEmpty()){
-                    //Try doing stuff on reporting ivalid id type
-                    findPatience(text);
-                    
-                }
-            }
-        });
-        
-        
-    }
+//    private void searchField(){
+//        TextFields.bindAutoCompletion(patienceID, "","").
+//                setOnAutoCompleted((AutoCompletionBinding.AutoCompletionEvent<String> event) -> {
+//            findPatience(patienceID.getText());
+//        });
+//        
+//        patienceID.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+//            if(event.getCode()==KeyCode.ENTER){
+//                String text = patienceID.getText();
+//                if(!text.isEmpty()){
+//                    //Try doing stuff on reporting ivalid id type
+//                    findPatience(text);
+//                    
+//                }
+//            }
+//        });
+//        
+//        
+//    }
     
     @FXML
     private void setting(ActionEvent event) {
@@ -274,83 +274,83 @@ public class FXMLDocumentController implements Initializable {
         bodypaneHBox.getChildren().add(t);
     }
    
-    public void loadRegNewPatience() {
-        try {
-            NewPatience logCont = new NewPatience();
-            logCont.setApp(this.getApp());
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/NewPatience.fxml"));
-            //Parent root = (Parent)fxmlLoader.load();
-            fxmlLoader.setController(logCont);
-            Object load = fxmlLoader.load();
-            change.getChildren().setAll((AnchorPane) load);
+//    public void loadRegNewPatience() {
+//        try {
+//            NewPatience logCont = new NewPatience();
+//            logCont.setApp(this.getApp());
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/NewPatience.fxml"));
+//            //Parent root = (Parent)fxmlLoader.load();
+//            fxmlLoader.setController(logCont);
+//            Object load = fxmlLoader.load();
+//            change.getChildren().setAll((AnchorPane) load);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
+//    @FXML private void loadAddRecord() {
+//        try {
+//            AddPatienceRecord cont = new AddPatienceRecord();
+//            cont.setApp(this.getApp());
+//            cont.setPatience(patience);
+//            cont.setHome(this);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/AddPatienceRecord.fxml"));
+//            //Parent root = (Parent)fxmlLoader.load();
+//            fxmlLoader.setController(cont);
+//            Object load = fxmlLoader.load();
+//            change.getChildren().setAll((AnchorPane) load);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @FXML private void loadPatienceRecordPane() {
+//        try {
+//            PatienceRecordPane cont = new PatienceRecordPane();
+//            cont.setPatience(patience);
+//            cont.setHome(this);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/PatienceRecordPane.fxml"));
+//            //Parent root = (Parent)fxmlLoader.load();
+//            fxmlLoader.setController(cont);
+//            Object load = fxmlLoader.load();
+//            change.getChildren().setAll((ScrollPane) load);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
-    @FXML private void loadAddRecord() {
-        try {
-            AddPatienceRecord cont = new AddPatienceRecord();
-            cont.setApp(this.getApp());
-            cont.setPatience(patience);
-            cont.setHome(this);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/AddPatienceRecord.fxml"));
-            //Parent root = (Parent)fxmlLoader.load();
-            fxmlLoader.setController(cont);
-            Object load = fxmlLoader.load();
-            change.getChildren().setAll((AnchorPane) load);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML private void loadPatienceRecordPane() {
-        try {
-            PatienceRecordPane cont = new PatienceRecordPane();
-            cont.setPatience(patience);
-            cont.setHome(this);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/PatienceRecordPane.fxml"));
-            //Parent root = (Parent)fxmlLoader.load();
-            fxmlLoader.setController(cont);
-            Object load = fxmlLoader.load();
-            change.getChildren().setAll((ScrollPane) load);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    @FXML private void loadPatienceDetails() {
-        try {
-            PatienceDetails cont = new PatienceDetails();
-            cont.setPatience(patience);
-            cont.setHome(this);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/PatienceDetails.fxml"));
-            //Parent root = (Parent)fxmlLoader.load();
-            fxmlLoader.setController(cont);
-            Object load = fxmlLoader.load();
-            change.getChildren().setAll((ScrollPane) load);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
-    @FXML private void searchButton(){
-        findPatience(patienceID.getText());
-    }
-    
-    //To be use for registering new patient
-    @FXML private void change(ActionEvent event){
-        loadRegNewPatience();
-    }
-
-    private void logout(){
-        try {
-            app.setStaff(null);
-            app.gotoLogin();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @FXML private void loadPatienceDetails() {
+//        try {
+//            PatienceDetails cont = new PatienceDetails();
+//            cont.setPatience(patience);
+//            cont.setHome(this);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/PatienceDetails.fxml"));
+//            //Parent root = (Parent)fxmlLoader.load();
+//            fxmlLoader.setController(cont);
+//            Object load = fxmlLoader.load();
+//            change.getChildren().setAll((ScrollPane) load);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
+//    
+//    @FXML private void searchButton(){
+//        findPatience(patienceID.getText());
+//    }
+//    
+//    //To be use for registering new patient
+//    @FXML private void change(ActionEvent event){
+//        loadRegNewPatience();
+//    }
+//
+//    private void logout(){
+//        try {
+//            app.setStaff(null);
+//            app.gotoLogin();
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }
