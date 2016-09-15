@@ -31,7 +31,7 @@ public class Hotels extends Application {
     public void startHomePage() throws IOException{
         this.stage.close();
         this.stage=new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/"+"FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/guestMessage.fxml"));
         Parent root = (Parent)loader.load();
 //        FXMLDocumentController controller = (FXMLDocumentController)loader.getController();
 //        controller.setApp(this);
@@ -79,10 +79,10 @@ public class Hotels extends Application {
     
     
     public void gotoLogin() throws IOException{
-        Login controller = new Login();
-        controller.setApp(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/"+"Login.fxml"));
-        loader.setController(controller);
+        //Login controller = new Login();
+        //controller.setApp(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/guestMessage.fxml"));
+        //loader.setController(controller);
         Parent root = (Parent)loader.load();
         System.out.println(stage);
         stage.setScene(new Scene(root));
