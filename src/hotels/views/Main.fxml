@@ -16,7 +16,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.controllers.FXMLDocumentController">
    <children>
-      <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="36.0" prefWidth="808.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="36.0" prefWidth="808.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Region prefHeight="26.0" prefWidth="1041.0" />
+            <Label prefHeight="26.0" prefWidth="162.0" text="Joshua Aroke" textFill="WHITE">
+               <graphic>
+                  <GlyphsStack>
+                     <children>
+                        <FontAwesomeIcon fill="#6382ff" glyphName="CIRCLE" size="2em" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                     </children>
+                  </GlyphsStack>
+               </graphic>
+            </Label>
+         </items></ToolBar>
       <TabPane layoutY="36.0" prefHeight="478.0" prefWidth="831.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
         <tabs>
           <Tab text="Front Office">
@@ -187,7 +200,65 @@
             </Tab>
             <Tab text="Laundry">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar prefHeight="102.0" prefWidth="1234.0">
+                           <items>
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="245.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Orders" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Laundry Service">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Price and Setting" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Add">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="List">
+                                             <graphic>
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="1.5em" styleClass="fontAwesomeIcon" text="" />
+                                                   </children>
+                                                </GlyphsStack>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </items>
+                        </ToolBar>
+                        <StackPane fx:id="frontContentStack11" layoutY="104.0" prefHeight="456.0" prefWidth="1234.0" />
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Banquet">
@@ -197,7 +268,88 @@
             </Tab>
             <Tab text="Minibar">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <StackPane fx:id="frontContentStack1" layoutY="104.0" prefHeight="456.0" prefWidth="1234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="103.0" />
+                        <ToolBar prefHeight="102.0" prefWidth="1234.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="186.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Orders" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Chek In">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="152.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Booking Operation" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Configuration" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Add">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="List">
+                                             <graphic>
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="1.5em" styleClass="fontAwesomeIcon" text="" />
+                                                   </children>
+                                                </GlyphsStack>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </items>
+                        </ToolBar>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="House Keeping">
@@ -225,7 +377,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="434.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="353.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
@@ -250,11 +402,6 @@
                                              </graphic>
                                           </Button>
                                           <Line endX="30.0" rotate="90.0" startX="-10.0" />
-                                          <Button contentDisplay="TOP" layoutX="33.0" layoutY="16.0" mnemonicParsing="false" text="Schedule Task">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#ff83d6" glyphName="CLOCK_O" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
                                           <Button contentDisplay="TOP" layoutX="56.0" layoutY="16.0" mnemonicParsing="false" text="Scheduled Task List">
                                              <graphic>
                                                 <GlyphsStack>
