@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="529.0" prefWidth="464.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <TitledPane collapsible="false" layoutX="13.0" layoutY="12.0" prefHeight="506.0" prefWidth="438.0" text="New Laundry">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="436.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="22.0" text="Linen No" />
+                  <TextField layoutX="148.0" layoutY="17.0" prefHeight="31.0" prefWidth="253.0" />
+                  <Label layoutX="24.0" layoutY="67.0" text="Date Issued" />
+                  <Label layoutX="24.0" layoutY="112.0" text="User" />
+                  <TextField layoutX="148.0" layoutY="107.0" prefHeight="31.0" prefWidth="253.0" />
+                  <Label layoutX="24.0" layoutY="154.0" text="Status" />
+                  <Label layoutX="24.0" layoutY="195.0" text="Recieved" />
+                  <Label layoutX="24.0" layoutY="236.0" text="Remark" />
+                  <DatePicker layoutX="149.0" layoutY="62.0" prefHeight="31.0" prefWidth="251.0" />
+                  <ComboBox layoutX="149.0" layoutY="149.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox layoutX="149.0" layoutY="190.0" prefHeight="31.0" prefWidth="250.0" />
+                  <TextArea layoutX="148.0" layoutY="237.0" prefHeight="151.0" prefWidth="255.0" />
+                  <Button layoutX="254.0" layoutY="414.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Add Laundry">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="SAVE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

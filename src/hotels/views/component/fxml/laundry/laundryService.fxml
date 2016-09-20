@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <Pane prefHeight="67.0" prefWidth="962.0" style="-fx-background-color: lightgrey;">
+         <children>
+            <Label layoutX="31.0" layoutY="10.0" text="Laundry Services">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Text layoutX="31.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can Create new Laundry Services using the New Button" />
+         </children>
+      </Pane>
+      <TableView layoutX="14.0" layoutY="80.0" prefHeight="276.0" prefWidth="933.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Alias" />
+          <TableColumn prefWidth="340.0" text="Laundry Service Name " />
+            <TableColumn prefWidth="513.0" text="Description" />
+        </columns>
+      </TableView>
+      <HBox layoutX="407.0" layoutY="385.0" spacing="5.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="New">
+               <graphic>
+                  <FontAwesomeIcon glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Edit">
+               <graphic>
+                  <FontAwesomeIcon glyphName="EDIT" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Delete">
+               <graphic>
+                  <FontAwesomeIcon glyphName="REMOVE" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Close">
+               <graphic>
+                  <FontAwesomeIcon glyphName="CLOSE" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <Pane prefHeight="65.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="22.0" layoutY="14.0" text="Daily Laundry">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Text layoutX="22.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of all in-house materials coming in Laundry" />
+         </children>
+      </Pane>
+      <Label layoutX="33.0" layoutY="77.0" text="Linen No " />
+      <TextField layoutX="116.0" layoutY="72.0" />
+      <Label layoutX="33.0" layoutY="116.0" text="User" />
+      <TextField layoutX="116.0" layoutY="111.0" />
+      <Label layoutX="334.0" layoutY="78.0" text="From Date" />
+      <Label layoutX="334.0" layoutY="117.0" text="To Date" />
+      <CheckBox layoutX="639.0" layoutY="77.0" mnemonicParsing="false" text="Show All" />
+      <CheckBox layoutX="639.0" layoutY="116.0" mnemonicParsing="false" text="Void" />
+      <CheckBox layoutX="751.0" layoutY="77.0" mnemonicParsing="false" text="Completed" />
+      <CheckBox layoutX="751.0" layoutY="117.0" mnemonicParsing="false" text="Pending" />
+      <TableView layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Linen #" />
+          <TableColumn prefWidth="141.0" text="Date Issued" />
+            <TableColumn prefWidth="173.0" text="User" />
+            <TableColumn minWidth="0.0" prefWidth="146.0" text="Status" />
+            <TableColumn prefWidth="121.0" text="Recieved" />
+            <TableColumn prefWidth="273.0" text="Remark" />
+        </columns>
+      </TableView>
+      <DatePicker layoutX="408.0" layoutY="73.0" />
+      <DatePicker layoutX="408.0" layoutY="112.0" />
+      <HBox layoutX="449.0" layoutY="412.0" spacing="5.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="New">
+               <graphic>
+                  <FontAwesomeIcon glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Edit">
+               <graphic>
+                  <FontAwesomeIcon glyphName="EDIT" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Close">
+               <graphic>
+                  <FontAwesomeIcon glyphName="REMOVE" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
