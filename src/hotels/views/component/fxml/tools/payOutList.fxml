@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="63.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="9.0" layoutY="8.0" text="Pay Out (Accounts Payable)">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Text layoutX="9.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Record all Miscellaneous Payouts here. This payout will reflect on Shift Report and Cashier Report. Use Payout Voucher for in-house Guests" />
+         </children>
+      </Pane>
+      <TitledPane collapsible="false" layoutX="6.0" layoutY="69.0" prefHeight="125.0" prefWidth="951.0" text="Search Criteria" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="69.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Payment Type" />
+                  <ComboBox layoutX="116.0" layoutY="9.0" prefWidth="150.0" />
+                  <Label layoutX="14.0" layoutY="52.0" text="Room No" />
+                  <ComboBox layoutX="116.0" layoutY="47.0" prefWidth="150.0" />
+                  <Label layoutX="289.0" layoutY="14.0" text="Voucher No" />
+                  <ComboBox layoutX="391.0" layoutY="9.0" prefWidth="150.0" />
+                  <Label layoutX="289.0" layoutY="52.0" text="Paid For" />
+                  <ComboBox layoutX="391.0" layoutY="47.0" prefWidth="150.0" />
+                  <Label layoutX="566.0" layoutY="18.0" text="Date From" />
+                  <Label layoutX="566.0" layoutY="56.0" text="Date To" />
+                  <DatePicker layoutX="648.0" layoutY="13.0" prefHeight="31.0" prefWidth="154.0" />
+                  <DatePicker layoutX="648.0" layoutY="51.0" prefHeight="31.0" prefWidth="154.0" />
+                  <Button layoutX="850.0" layoutY="47.0" mnemonicParsing="false" text="Search">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="SEARCH" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TableView layoutX="7.0" layoutY="202.0" prefHeight="199.0" prefWidth="951.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="202.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Date" />
+          <TableColumn prefWidth="198.0" text="Paid For" />
+            <TableColumn prefWidth="127.0" text="Payment Type" />
+            <TableColumn prefWidth="102.0" text="Room No" />
+            <TableColumn prefWidth="130.0" text="Voucher #" />
+            <TableColumn prefWidth="122.0" text="Amount" />
+            <TableColumn prefWidth="194.0" text="User" />
+        </columns>
+      </TableView>
+      <Pane layoutX="11.0" layoutY="417.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="8.0">
+         <children>
+            <Button layoutX="828.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Close">
+               <graphic>
+                  <FontAwesomeIcon glyphName="REMOVE" />
+               </graphic>
+            </Button>
+            <Button layoutX="702.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Edit">
+               <graphic>
+                  <FontAwesomeIcon glyphName="EDIT" />
+               </graphic>
+            </Button>
+            <Button layoutX="577.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="New">
+               <graphic>
+                  <FontAwesomeIcon glyphName="PLUS" />
+               </graphic>
+            </Button>
+            <Button layoutX="452.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Print">
+               <graphic>
+                  <FontAwesomeIcon glyphName="PRINT" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="161.0" text="Paid Out Voucher">
+               <graphic>
+                  <FontAwesomeIcon glyphName="MONEY" />
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

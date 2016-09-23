@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="701.0" prefWidth="819.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <TitledPane collapsible="false" layoutX="6.0" layoutY="5.0" prefHeight="367.0" prefWidth="394.0" text="Item Information">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="22.0" layoutY="14.0" text="Lost On" />
+                  <DatePicker layoutX="144.0" layoutY="9.0" />
+                  <Label layoutX="22.0" layoutY="92.0" text="Color" />
+                  <TextField layoutX="144.0" layoutY="87.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="132.0" text="Lost Location" />
+                  <TextField layoutX="144.0" layoutY="127.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="171.0" text="Item Value" />
+                  <TextField layoutX="144.0" layoutY="166.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="210.0" text="Room No" />
+                  <ComboBox layoutX="145.0" layoutY="205.0" prefHeight="31.0" prefWidth="215.0" promptText="Select Room" />
+                  <Label layoutX="22.0" layoutY="250.0" text="Current" />
+                  <TextField layoutX="144.0" layoutY="245.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="289.0" text="Founder" />
+                  <TextField layoutX="144.0" layoutY="284.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="23.0" layoutY="53.0" text="Item Name" />
+                  <TextField layoutX="145.0" layoutY="48.0" prefHeight="31.0" prefWidth="217.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="408.0" layoutY="5.0" prefHeight="367.0" prefWidth="405.0" text="Complained By">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="22.0" layoutY="14.0" text="Name" />
+                  <TextField layoutX="144.0" layoutY="9.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="53.0" text="Address" />
+                  <TextField layoutX="144.0" layoutY="48.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="91.0" text="City" />
+                  <TextField layoutX="144.0" layoutY="86.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="132.0" text="State" />
+                  <TextField layoutX="144.0" layoutY="127.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="175.0" text="Zip Code" />
+                  <TextField layoutX="144.0" layoutY="170.0" prefHeight="31.0" prefWidth="217.0" />
+                  <Label layoutX="22.0" layoutY="214.0" text="Country" />
+                  <Label layoutX="22.0" layoutY="256.0" text="Phone" />
+                  <TextField layoutX="144.0" layoutY="251.0" prefHeight="31.0" prefWidth="217.0" />
+                  <ComboBox layoutX="144.0" layoutY="209.0" prefHeight="31.0" prefWidth="218.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="6.0" layoutY="381.0" prefHeight="123.0" prefWidth="808.0" text="Resolved Information">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <RadioButton layoutX="20.0" layoutY="14.0" mnemonicParsing="false" text="Returned By" />
+                  <RadioButton layoutX="20.0" layoutY="49.0" mnemonicParsing="false" text="Discarded By" />
+                  <TextField layoutX="157.0" layoutY="9.0" prefHeight="31.0" prefWidth="308.0" />
+                  <TextField layoutX="157.0" layoutY="44.0" prefHeight="31.0" prefWidth="309.0" />
+                  <Label layoutX="511.0" layoutY="14.0" text="Return Date" />
+                  <Label layoutX="511.0" layoutY="49.0" text="Discard Date" />
+                  <DatePicker layoutX="622.0" layoutY="9.0" prefHeight="31.0" prefWidth="150.0" />
+                  <DatePicker layoutX="622.0" layoutY="44.0" prefHeight="31.0" prefWidth="150.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="7.0" layoutY="517.0" prefHeight="123.0" prefWidth="808.0" text="Remark">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="29.0" layoutY="14.0" text="Remark" />
+                  <TextArea layoutX="86.0" layoutY="16.0" prefHeight="64.0" prefWidth="700.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <Button layoutX="665.0" layoutY="656.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Close">
+         <graphic>
+            <FontAwesomeIcon glyphName="REMOVE" />
+         </graphic>
+      </Button>
+      <Button layoutX="511.0" layoutY="656.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Save">
+         <graphic>
+            <FontAwesomeIcon glyphName="SAVE" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
