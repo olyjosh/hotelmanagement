@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -11,10 +15,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="9.0" layoutY="7.0" prefHeight="358.0" prefWidth="331.0" text="Search Guest" />
-      <TitledPane collapsible="false" layoutX="349.0" layoutY="6.0" prefHeight="413.0" prefWidth="339.0" text="Guest Information">
+      <TitledPane collapsible="false" layoutX="9.0" layoutY="7.0" prefHeight="358.0" prefWidth="331.0" text="Search Guest" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="7.0" />
+      <TitledPane collapsible="false" layoutX="349.0" layoutY="6.0" prefHeight="445.0" prefWidth="339.0" text="Guest Information" AnchorPane.bottomAnchor="4.0" AnchorPane.topAnchor="6.0">
          <content>
             <AnchorPane prefHeight="345.0" prefWidth="337.0">
                <children>
@@ -40,55 +44,59 @@
             </AnchorPane>
          </content>
       </TitledPane>
-      <AnchorPane layoutX="17.0" layoutY="45.0" prefHeight="313.0" prefWidth="313.0">
+      <AnchorPane layoutX="17.0" layoutY="45.0" prefHeight="313.0" prefWidth="313.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="45.0">
          <children>
             <TextField layoutX="8.0" layoutY="8.0" prefHeight="31.0" prefWidth="295.0" promptText="Search by Guest Name or Room No." />
-            <ListView layoutX="14.0" layoutY="49.0" prefHeight="256.0" prefWidth="282.0" />
+            <ListView layoutX="14.0" layoutY="49.0" prefHeight="256.0" prefWidth="282.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="49.0" />
          </children>
       </AnchorPane>
-      <Pane layoutX="8.0" layoutY="375.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+      <Pane layoutX="8.0" layoutY="375.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="8.0">
          <children>
-            <Circle fill="WHITE" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="37.0" layoutY="6.0" text="All:" />
-            <Label layoutX="61.0" layoutY="6.0" text="13" />
+            <Pane layoutX="114.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle fill="DODGERBLUE" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="37.0" layoutY="6.0" text="Occu.:" />
+                  <Label layoutX="80.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
+            <Pane layoutX="114.0" layoutY="35.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle fill="#ff1f1f" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="30.0" layoutY="6.0" text="Out of O.:" />
+                  <Label layoutX="94.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
+            <Pane prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle fill="WHITE" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="37.0" layoutY="6.0" text="All:" />
+                  <Label layoutX="61.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
+            <Pane layoutX="227.0" layoutY="35.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="37.0" layoutY="6.0" text="Dirty : " />
+                  <Label layoutX="81.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
+            <Pane layoutY="35.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle fill="#86540d" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="32.0" layoutY="6.0" text="Due out:" />
+                  <Label layoutX="89.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
+            <Pane layoutX="227.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
+               <children>
+                  <Circle fill="#ff1ff7" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="37.0" layoutY="6.0" text="Resv." />
+                  <Label layoutX="79.0" layoutY="6.0" text="13" />
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Pane layoutX="122.0" layoutY="375.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
-         <children>
-            <Circle fill="DODGERBLUE" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="37.0" layoutY="6.0" text="Occu.:" />
-            <Label layoutX="80.0" layoutY="6.0" text="13" />
-         </children>
-      </Pane>
-      <Pane layoutX="235.0" layoutY="375.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
-         <children>
-            <Circle fill="#ff1ff7" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="37.0" layoutY="6.0" text="Resv." />
-            <Label layoutX="79.0" layoutY="6.0" text="13" />
-         </children>
-      </Pane>
-      <Pane layoutX="8.0" layoutY="410.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
-         <children>
-            <Circle fill="#86540d" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="32.0" layoutY="6.0" text="Due out:" />
-            <Label layoutX="89.0" layoutY="6.0" text="13" />
-         </children>
-      </Pane>
-      <Pane layoutX="122.0" layoutY="410.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
-         <children>
-            <Circle fill="#ff1f1f" layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="30.0" layoutY="6.0" text="Out of O.:" />
-            <Label layoutX="94.0" layoutY="6.0" text="13" />
-         </children>
-      </Pane>
-      <Pane layoutX="235.0" layoutY="410.0" prefHeight="31.0" prefWidth="107.0" style="-fx-border-color: orange;">
-         <children>
-            <Circle layoutX="17.0" layoutY="16.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="37.0" layoutY="6.0" text="Dirty : " />
-            <Label layoutX="81.0" layoutY="6.0" text="13" />
-         </children>
-      </Pane>
-      <TitledPane collapsible="false" layoutX="696.0" layoutY="7.0" prefHeight="375.0" prefWidth="532.0" text="Folio Operation">
+      <TitledPane collapsible="false" layoutX="696.0" layoutY="7.0" prefHeight="375.0" prefWidth="532.0" text="Folio Operation" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="696.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="530.0">
                <children>
@@ -111,9 +119,13 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <Button layoutX="696.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Booking" />
-      <Button layoutX="838.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Checkin" />
-      <Button layoutX="960.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" text="Reserve" />
-      <Button layoutX="1095.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" text="Out of Order" />
+      <HBox layoutX="696.0" layoutY="405.0" spacing="3.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="696.0" AnchorPane.rightAnchor="6.0">
+         <children>
+            <Button layoutX="696.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Booking" />
+            <Button layoutX="838.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Checkin" />
+            <Button layoutX="960.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" text="Reserve" />
+            <Button layoutX="1095.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" text="Out of Order" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

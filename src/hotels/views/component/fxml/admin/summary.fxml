@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="1033.0" stylesheets="@../../../../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.admin.Summary">
+   <children>
+      <Pane prefHeight="65.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="22.0" layoutY="14.0" text="Summary View">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <AnchorPane layoutY="65.0" prefHeight="553.0" prefWidth="1033.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+         <children>
+            <HBox alignment="CENTER" layoutY="65.0" prefHeight="470.0" prefWidth="1033.0" spacing="15.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+               <children>
+                  <VBox prefHeight="463.0" prefWidth="424.0" spacing="15.0">
+                     <children>
+                        <VBox id="toolBarMenu" alignment="TOP_CENTER" prefHeight="177.0" prefWidth="610.0">
+                           <children>
+                              <HBox id="title" alignment="BASELINE_CENTER">
+                                 <children>
+                                    <Label id="newLabel" text="Booking / Reservation" />
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="160.0" prefWidth="409.0">
+                                 <children>
+                                    <GridPane prefHeight="132.0" prefWidth="363.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="123.0" />
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="90.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="79.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="76.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="expArrival_Booking" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="noOfCancel_Booking" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label fx:id="noOfVoid_Booking" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label fx:id="bookednReserverd_Booking" layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label text="Booking" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="131.0" layoutY="16.0" text="Reservation" GridPane.columnIndex="2">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="220.0" layoutY="16.0" text="Total" GridPane.columnIndex="3">
+                                             <font>
+                                                <Font name="System Bold Italic" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="131.0" layoutY="16.0" text="Expected Arrivals" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="44.0" text="No of Void" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="100.0" text="No of Cancel" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="72.0" text="Book/Reserved" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="expArrival_Reserve" layoutX="133.0" layoutY="41.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label fx:id="noOfCancel_Reserve" layoutX="223.0" layoutY="41.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <Label layoutX="223.0" layoutY="67.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <Label layoutX="223.0" layoutY="93.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <Label layoutX="223.0" layoutY="120.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <Label layoutX="315.0" layoutY="41.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <Label fx:id="noOfVoid_Total" layoutX="315.0" layoutY="67.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <Label fx:id="booknReserved_Total" layoutX="315.0" layoutY="93.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="267.0" prefWidth="483.0" spacing="15.0">
+                           <children>
+                              <VBox id="toolBarMenu" alignment="TOP_CENTER" prefHeight="177.0" prefWidth="287.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Statistics" />
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="253.0" prefWidth="170.0" spacing="20.0">
+                                       <children>
+                                          <GridPane prefHeight="103.0" prefWidth="186.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="138.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="75.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label fx:id="stat_projected" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="stat_roomRevenue" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="stat_extra" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label fx:id="stat_tax" layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label fx:id="stat_current" text="0" GridPane.columnIndex="1" />
+                                                <Label layoutX="131.0" layoutY="16.0" text="Projected Revenue" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="44.0" text="Extra Charges" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="100.0" text="Room Revenue" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="72.0" text="Tax Collected" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="41.0" text="Current ADR">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                          <VBox>
+                                             <children>
+                                                <GridPane prefHeight="103.0" prefWidth="186.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="154.0" />
+                                                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="32.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label fx:id="stat_complimentary" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="stat_expectedCheckOut" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="stat_dayUseRoom" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="stat_pax" layoutX="10.0" layoutY="100.0" text="6/0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <Label fx:id="stat_soldRoom" text="0" GridPane.columnIndex="1" />
+                                                      <Label layoutX="131.0" layoutY="16.0" text="Compliementary Room" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="10.0" layoutY="44.0" text="Day Use Room" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="10.0" layoutY="100.0" text="Expected Check Out" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="10.0" layoutY="72.0" text="Pax (Adults / Child)" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="10.0" layoutY="41.0" text="Sold Room">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="TOP_CENTER" prefHeight="267.0" prefWidth="285.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Settlement Information" />
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="250.0" prefWidth="273.0">
+                                       <children>
+                                          <GridPane prefHeight="241.0" prefWidth="213.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="136.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="48.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label fx:id="settle_online" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="settle_pos" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="settle_bank" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label text="Cash collection">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="131.0" layoutY="16.0" text="Mobile/Online" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="44.0" text="Bank Transfer" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="100.0" text="POS/Card " GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="settle_paymentOnHold" layoutX="10.0" layoutY="72.0" text="Payment on Hold" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="settle_cash" layoutX="214.0" layoutY="41.0" text="0" GridPane.columnIndex="1" />
+                                                <Label fx:id="settle_void" layoutX="10.0" layoutY="101.0" text="Void" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="463.0" prefWidth="424.0" spacing="15.0">
+                     <children>
+                        <VBox id="toolBarMenu" alignment="TOP_CENTER" prefHeight="230.0" prefWidth="424.0">
+                           <children>
+                              <HBox id="title" alignment="BASELINE_CENTER">
+                                 <children>
+                                    <Label id="newLabel" text="Occupancy" />
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER" prefHeight="214.0" prefWidth="424.0">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                                 <children>
+                                    <BarChart fx:id="occup_barChart" prefHeight="185.0" prefWidth="404.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox id="toolBarMenu" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="214.0" prefWidth="424.0">
+                           <children>
+                              <HBox id="title" alignment="BASELINE_CENTER">
+                                 <children>
+                                    <Label id="newLabel" text="Availability" />
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER" prefHeight="198.0" prefWidth="424.0">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                                 <children>
+                                    <PieChart fx:id="avail_pieChart" prefWidth="422.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="962.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="View for :" />
+                  <ChoiceBox fx:id="viewFor" prefWidth="150.0">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              
+                          </FXCollections>
+                      </items>
+                  </ChoiceBox>
+                  <HBox fx:id="datePickerBox" alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <DatePicker fx:id="startDate" promptText="START FROM" />
+                        <DatePicker fx:id="endDate" promptText="END AT" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

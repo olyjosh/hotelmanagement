@@ -1,4 +1,4 @@
-package hotels.util.chatbubble;
+package hotels.views.component.chatBubble;
 
 public enum BubbleSpec {
 	

@@ -1,4 +1,4 @@
-package hotels.util.chatbubble;
+package hotels.views.component.chatBubble;
 
 import javafx.scene.shape.HLineTo;
 import javafx.scene.shape.LineTo;

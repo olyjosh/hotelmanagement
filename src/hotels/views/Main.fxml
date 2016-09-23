@@ -153,29 +153,6 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="787.0" layoutY="10.0" prefHeight="92.0" prefWidth="152.0">
-                                 <children>
-                                    <HBox id="title" alignment="BASELINE_CENTER">
-                                       <children>
-                                          <Label id="newLabel" text="Others" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
                            </items>
                         </ToolBar>
                         <StackPane fx:id="frontContentStack" layoutX="-1.0" layoutY="104.0" prefHeight="456.0" prefWidth="1234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0" />
@@ -449,11 +426,6 @@
                </content>
             </Tab>
             <Tab text="Payroll">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab text="Help">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

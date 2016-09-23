@@ -1,4 +1,4 @@
-package hotels.util.chatbubble;
+package hotels.views.component.chatBubble;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
