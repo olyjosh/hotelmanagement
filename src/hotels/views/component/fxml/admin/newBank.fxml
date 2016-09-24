@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="726.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="4.0" prefHeight="568.0" prefWidth="716.0" text="New Bank Information">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="21.0" text="Account Information" underline="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="56.0" text="Alias" />
+                  <TextField layoutX="111.0" layoutY="51.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="97.0" text="Bank Name" />
+                  <TextField layoutX="111.0" layoutY="92.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="137.0" text="Account No" />
+                  <TextField layoutX="111.0" layoutY="132.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="178.0" text="Address" />
+                  <TextField layoutX="111.0" layoutY="173.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="219.0" text="Phone" />
+                  <TextField layoutX="111.0" layoutY="214.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="263.0" text="Email" />
+                  <TextField layoutX="111.0" layoutY="258.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="305.0" text="City" />
+                  <TextField layoutX="111.0" layoutY="300.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="344.0" text="Zip" />
+                  <TextField layoutX="111.0" layoutY="339.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="384.0" text="State" />
+                  <TextField layoutX="111.0" layoutY="379.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="23.0" layoutY="425.0" text="Country" />
+                  <TextField layoutX="111.0" layoutY="420.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="364.0" layoutY="21.0" text="Account Information" underline="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="364.0" layoutY="56.0" text="Bank Code 1" />
+                  <TextField layoutX="465.0" layoutY="51.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="364.0" layoutY="97.0" text="Caption" />
+                  <TextField layoutX="465.0" layoutY="92.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="132.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="173.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="214.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="258.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="300.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="339.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="379.0" prefHeight="31.0" prefWidth="221.0" />
+                  <TextField layoutX="465.0" layoutY="420.0" prefHeight="31.0" prefWidth="221.0" />
+                  <Label layoutX="365.0" layoutY="137.0" text="Bank Code 2" />
+                  <Label layoutX="365.0" layoutY="178.0" text="Caption" />
+                  <Label layoutX="365.0" layoutY="219.0" text="Bank Code 3" />
+                  <Label layoutX="365.0" layoutY="263.0" text="Caption" />
+                  <Label layoutX="365.0" layoutY="305.0" text="Bank Code 4" />
+                  <Label layoutX="365.0" layoutY="344.0" text="Caption" />
+                  <Label layoutX="364.0" layoutY="384.0" text="Bank Code 5" />
+                  <Label layoutX="364.0" layoutY="425.0" text="Caption" />
+                  <Button layoutX="578.0" layoutY="484.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Cancel">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="REMOVE" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="465.0" layoutY="484.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Save">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="SAVE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>
