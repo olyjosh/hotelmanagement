@@ -33,6 +33,107 @@ public class Navigator {
     private HttpResponse response = null;
     private HttpClient httpClient = HttpClientBuilder.create().build(); 
     
+    private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
+    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //Production
+    
+    private final String OP_URL = BASE_URL+"op/";
+    
+    public JSONObject login(List data){
+         
+        try{
+            HttpPost post = new HttpPost(BASE_URL+"login");
+            post.setHeader("User-Agent", USER_AGENT);
+            post.setEntity(new UrlEncodedFormEntity(data));
+            HttpResponse response = httpClient.execute(post);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+            JSONObject jsonObject = new JSONObject(result);
+            if(jsonObject.getString("status").equals("1")){
+                Storage.setAuth_token(jsonObject.getString("token"));
+            }
+            return jsonObject;
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject registerUser(List data){
+         
+        try{
+            HttpPost post = new HttpPost(BASE_URL+"register");
+            post.setHeader("User-Agent", USER_AGENT);
+            post.setEntity(new UrlEncodedFormEntity(data));
+            HttpResponse response = httpClient.execute(post);
+            
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+            return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+    public JSONObject fetchRoom(){
+        String url = OP_URL+"fetch/room";
+        try{
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+         
+    public JSONObject createRoom(List data){
+        
+        String url = OP_URL+"fetch/room";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += param;
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public String postService(String url, JSONObject json){
         
         try {
