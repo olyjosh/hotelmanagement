@@ -36,11 +36,12 @@ public class Main implements Initializable{
     private void showCheckIn(ActionEvent e) throws IOException{
         //Login controller = new Login();
         //controller.setApp(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/walkInContainer.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/newBooking.fxml"));
         //loader.setController(controller);
         Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UTILITY);
+        Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));
+        
         stage.show();
     }
     
