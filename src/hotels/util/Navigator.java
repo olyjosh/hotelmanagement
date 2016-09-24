@@ -49,9 +49,11 @@ public class Navigator {
                 result = EntityUtils.toString(response.getEntity());
             }
             JSONObject jsonObject = new JSONObject(result);
-            if(jsonObject.getString("status").equals("1")){
+            if(jsonObject.getInt("status") == 1){
+                System.out.println("kjgkhglkjjkh");
                 Storage.setAuth_token(jsonObject.getString("token"));
             }
+            System.out.println(Storage.getAuth_token());
             return jsonObject;
         }
         catch(IOException |JSONException | ParseException e){
@@ -120,18 +122,26 @@ public class Navigator {
         return null;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public JSONObject booking(List data){
+        String url = OP_URL+"fetch/room";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += param;
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     
     public String postService(String url, JSONObject json){

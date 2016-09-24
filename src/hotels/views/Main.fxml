@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import de.jensd.fx.glyphs.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.effect.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.scene.text.*?>
-<?import java.net.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.GlyphsStack?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.controllers.Main">
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.controllers.Main">
    <children>
       <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="36.0" prefWidth="808.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -47,16 +47,16 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCheckIn" text="Chek In">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCheckIn" prefHeight="69.0" prefWidth="106.0" text="Chek In">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="69.0" prefWidth="161.0" text="New Reservation">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic></Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="63.0" prefWidth="110.0" text="New Booking">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="69.0" prefWidth="140.0" text="New Booking">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
                                              </graphic>
@@ -134,7 +134,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCustomerLedger" text="Ledger">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCustomerLedger" prefHeight="69.0" prefWidth="82.0" text="Ledger">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
@@ -144,12 +144,12 @@
                                                 </GlyphsStack>
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showGuestlist" text="Guest List">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showGuestlist" prefHeight="69.0" prefWidth="84.0" text="Guest List">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" onAction="#showGuestMessages" text="Messages">
+                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" onAction="#showGuestMessages" prefHeight="69.0" prefWidth="100.0" text="Messages">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>

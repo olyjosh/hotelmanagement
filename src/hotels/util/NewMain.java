@@ -26,8 +26,8 @@ public class NewMain {
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("username", "admin"));
         urlParameters.add(new BasicNameValuePair("password", "123456"));
-        navigator.login(urlParameters);
-        navigator.fetchRoom(urlParameters)
+        System.out.println(navigator.login(urlParameters));
+        System.out.println(navigator.fetchRoom());
     }
 
 }
