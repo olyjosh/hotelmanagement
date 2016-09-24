@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -8,8 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="818.0" layoutY="14.0" text="Customers Ledger" underline="true">
          <font>
@@ -24,17 +27,17 @@
          </font>
       </Label>
       <DatePicker layoutX="263.0" layoutY="37.0" />
-      <ListView layoutX="21.0" layoutY="107.0" prefHeight="325.0" prefWidth="198.0" />
+      <ListView layoutX="21.0" layoutY="107.0" prefHeight="325.0" prefWidth="198.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="21.0" />
       <Label layoutX="21.0" layoutY="81.0" text="Customers List" />
       <Label layoutX="234.0" layoutY="81.0" text="Customers Ledger Sheet" />
-      <TableView layoutX="234.0" layoutY="107.0" prefHeight="325.0" prefWidth="713.0">
+      <TableView layoutX="234.0" layoutY="107.0" prefHeight="325.0" prefWidth="976.0" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="107.0">
         <columns>
           <TableColumn prefWidth="97.0" text="Cust/Inv." />
           <TableColumn minWidth="8.0" prefWidth="89.0" text="Date" />
             <TableColumn prefWidth="77.0" text="Due/Ref" />
             <TableColumn prefWidth="61.0" text="Type" />
-            <TableColumn prefWidth="91.0" text="Invoice T" />
-            <TableColumn prefWidth="99.0" text="Applied" />
+            <TableColumn prefWidth="97.0" text="Invoice T" />
+            <TableColumn prefWidth="93.0" text="Applied" />
             <TableColumn prefWidth="114.0" text="Balance" />
             <TableColumn prefWidth="84.0" text="Discount" />
         </columns>

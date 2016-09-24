@@ -14,7 +14,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.controllers.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.controllers.Main">
    <children>
       <ToolBar id="mainToolBar" fx:id="toolBar" prefHeight="36.0" prefWidth="808.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -47,16 +47,16 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Chek In">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCheckIn" text="Chek In">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showRoomStayView" text="New Reservation">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic></Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Reservations">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showbookingCardLayoutView" text="Reservations">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST_OL" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic></Button>
@@ -124,7 +124,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Ledger">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCustomerLedger" text="Ledger">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
@@ -134,12 +134,12 @@
                                                 </GlyphsStack>
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Guest List">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showGuestlist" text="Guest List">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" text="Messages">
+                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" onAction="#showGuestMessages" text="Messages">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -7,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="58.0" layoutY="14.0" text="Guest Arrival Date" />
       <DatePicker editable="false" layoutX="60.0" layoutY="41.0" />
@@ -19,9 +22,9 @@
          </font>
       </Label>
       <Label layoutX="60.0" layoutY="83.0" text="List of Guests" />
-      <ListView layoutX="58.0" layoutY="111.0" prefHeight="319.0" prefWidth="328.0" />
+      <ListView layoutX="58.0" layoutY="111.0" prefHeight="319.0" prefWidth="486.0" />
       <Label layoutX="435.0" layoutY="83.0" text="Guest Details" />
-      <Pane layoutX="434.0" layoutY="111.0" prefHeight="319.0" prefWidth="419.0" style="-fx-border-color: lightgrey;">
+      <Pane layoutX="571.0" layoutY="111.0" prefHeight="319.0" prefWidth="419.0" style="-fx-border-color: lightgrey;">
          <children>
             <Label layoutX="25.0" layoutY="32.0" text="First Name" />
             <Label layoutX="25.0" layoutY="69.0" text="Last Name" />

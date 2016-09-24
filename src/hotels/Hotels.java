@@ -81,7 +81,7 @@ public class Hotels extends Application {
     public void gotoLogin() throws IOException{
         //Login controller = new Login();
         //controller.setApp(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/roomStayView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/Main.fxml"));
         //loader.setController(controller);
         Parent root = (Parent)loader.load();
         System.out.println(stage);

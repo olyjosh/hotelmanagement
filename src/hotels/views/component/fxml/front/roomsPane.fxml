@@ -50,5 +50,6 @@
             <Insets left="50.0" />
          </padding>
       </HBox>
+      <TabPane fx:id="floorTab" prefHeight="427.0" prefWidth="962.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

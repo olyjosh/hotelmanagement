@@ -21,7 +21,7 @@ public class RoomItem implements Initializable {
 
     @FXML private Button roomNo;
     @FXML private Label roomType, roomOccupant;
-    
+    private String jsonData;
     
     
     /**
