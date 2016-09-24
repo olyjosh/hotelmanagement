@@ -49,7 +49,9 @@ public class Navigator {
                 result = EntityUtils.toString(response.getEntity());
             }
             JSONObject jsonObject = new JSONObject(result);
-            if(jsonObject.getString("status").equals("1")){
+            if(jsonObject.getInt("status")==1){
+                System.out.println(jsonObject);
+                System.out.println(jsonObject.getString("token"));
                 Storage.setAuth_token(jsonObject.getString("token"));
             }
             return jsonObject;
