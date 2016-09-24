@@ -38,11 +38,11 @@
                      <children>
                         <ToolBar prefHeight="102.0" prefWidth="1234.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <items>
-                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="276.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="464.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="CheckIn / Reservation" />
+                                          <Label id="newLabel" text="Check In / Reservations / Bookings" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -52,11 +52,16 @@
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showRoomStayView" text="New Reservation">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic></Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showbookingCardLayoutView" text="Reservations">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="63.0" prefWidth="110.0" text="New Booking">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showReserve" text="Reservations/Booking List">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST_OL" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic></Button>
@@ -64,23 +69,28 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="152.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="416.0" layoutY="10.0" prefHeight="92.0" prefWidth="221.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="Booking Operation" />
+                                          <Label id="newLabel" text="Room Views" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showbookingCardLayoutView" prefHeight="63.0" prefWidth="91.0" text="Room View">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
+                                                <FontAwesomeIcon fx:id="hotel" fill="#3bb8f2" glyphName="HOTEL" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showRoomStayView" text="Room Stay View">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="HOTEL" size="1.5em" styleClass="fontAwesomeIcon" />
+                                                   </children>
+                                                </GlyphsStack>
                                              </graphic>
                                           </Button>
                                        </children>
@@ -101,7 +111,7 @@
                                                 <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="List">
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showOutOfOrder" text="List">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>

@@ -128,4 +128,28 @@ public class Main implements Initializable{
         
     }
     
+    @FXML
+    private void showOutOfOrder() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/outOfOrder.fxml"));
+        //loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = frontContentStack.getChildren();
+        if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+        
+    }
+    
+        
+    @FXML
+    private void showReserve() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/reserveList.fxml"));
+        //loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = frontContentStack.getChildren();
+        if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+        
+    }
+    
+    
 }
