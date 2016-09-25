@@ -1,6 +1,9 @@
 package hotels.util;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
 
 /**
  *
@@ -10,42 +13,35 @@ import java.time.format.DateTimeFormatter;
 public class Util
 {
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    public static String passwordHash(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-//        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//        byte[] hash = digest.digest(pass.getBytes("UTF-8"));
-//        return new BASE64Encoder().encode(hash);
-//    }
-// 
-//    public static String[] initSuggestion = {"Abdominal Pain",
-//        "Back Pain",
-//        "Blood In Stool",
-//        "Chest Pain",
-//        "Cough",
-//        "Dark Urine",
-//        "Diarrhea",
-//        "Dizziness",
-//        "Fatigue",
-//        "Fever",
-//        "Frequent Urination",
-//        "Gas",
-//        "Headache",
-//        "Joint Pain",
-//        "Loss of Appetite",
-//        "Low Grade Fever",
-//        "Nausea",
-//        "Rash",
-//        "Swollen Feet",
-//        "Vaginal Discharge",
-//        "Vertigo"};
-// 
+    private static void formatDatePicker(DatePicker datePicker) {
+        String pattern = "dd-MM-yyyy";
+        String pattern2 = "yyyy-MM-dd";
+        
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
+                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern2);
+            
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter2.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+
+    }
+
+
 }
