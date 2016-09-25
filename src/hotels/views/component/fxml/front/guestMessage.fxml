@@ -32,6 +32,6 @@
          </graphic>-->
       </Button>
       <Label layoutX="35.0" layoutY="7.0" text="Guest List" />
-      <ListView layoutX="35.0" layoutY="34.0" prefHeight="390.0" prefWidth="317.0" />
+      <ListView fx:id="list" layoutX="35.0" layoutY="34.0" prefHeight="390.0" prefWidth="317.0" />
    </children>
 </AnchorPane>

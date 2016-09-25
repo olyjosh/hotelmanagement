@@ -6,11 +6,13 @@
 package hotels.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static org.apache.http.HttpHeaders.USER_AGENT;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -19,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -179,6 +182,71 @@ public class Navigator2 {
         return null;
     }
     
+    
+    public JSONObject fetchCustomers(){
+        String url = OP_URL+"fetch/customers";
+        try{
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+     public JSONObject fetchMessage(String phone){
+        String url = OP_URL+"fetch/messsage";
+        try{
+            List <NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("phone", phone));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += param;
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+      public JSONObject sendMessage(String to, String from, String message) {
+        String url = OP_URL + "create/messsage";
+
+        try {
+            List<NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("to", to));
+            data.add(new BasicNameValuePair("from", from));
+            data.add(new BasicNameValuePair("message", message));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += param;
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token", Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if (response != null) {
+                result = EntityUtils.toString(response.getEntity());
+            }
+            return new JSONObject(result);
+        } catch (IOException | JSONException | ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
     public static Map<String,String> parse(JSONObject json , Map<String,String> out) throws JSONException{
         Iterator<String> keys = json.keys();
         while(keys.hasNext()){
