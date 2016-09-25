@@ -13,8 +13,6 @@ import javafx.util.StringConverter;
 public class Util
 {
     
-    
-    
     private static void formatDatePicker(DatePicker datePicker) {
         String pattern = "dd-MM-yyyy";
         String pattern2 = "yyyy-MM-dd";
@@ -45,6 +43,5 @@ public class Util
 
     }
 
-    
 
 }

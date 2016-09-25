@@ -50,8 +50,10 @@ public class Navigator {
             }
             JSONObject jsonObject = new JSONObject(result);
             if(jsonObject.getInt("status") == 1){
-                System.out.println("kjgkhglkjjkh");
                 Storage.setAuth_token(jsonObject.getString("token"));
+                JSONObject id = jsonObject.getJSONObject("user");
+                Storage.setId(id.getString("_id"));
+                System.out.println("Printing Logged In User ID : " + id.getString("_id"));
             }
             System.out.println(Storage.getAuth_token());
             return jsonObject;
@@ -122,11 +124,12 @@ public class Navigator {
     }
     
     public JSONObject booking(List data){
-        String url = OP_URL+"fetch/room";
+
+        String url = OP_URL+"create/book";
         
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             request.setHeader("User-Agent", USER_AGENT);
             request.setHeader("token",Storage.auth_token);
