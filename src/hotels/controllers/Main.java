@@ -42,7 +42,7 @@ public class Main implements Initializable{
         Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));
         
-        stage.show();
+        stage.showAndWait();
     }
     
     private void showDashBoard(){

@@ -32,4 +32,14 @@ public class State {
     public static String channel_Mobile = "mobile";
 
     public static String channel_FRONT = "front";
+    
+    //=============Notification Constants=======
+    
+    public static String NOTIFY_SUCCESS = "Operation Successful";
+    public static String NOTIFY_ERROR = "Error in Operation, process Aborted";
+    public static String NOTIFY_WARNING = "Processing.....Continue";
+    public static String NOTIFY_BOOKING = "Booking Notification";
+    public static String NOTIFY_CHECKIN = "Checkin Notification";
+    public static String NOTIFY_RESERVE = "Reservation Notification";
+    
 }

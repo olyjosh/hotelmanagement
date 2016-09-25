@@ -7,24 +7,21 @@ package hotels.views.component.fxml.front.controller;
 
 import hotels.util.Navigator;
 import hotels.util.State;
-import hotels.util.Storage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -100,7 +97,7 @@ public class NewBookingController implements Initializable {
         try {
             JSONObject roomType = nav.fetchRoomType();
             JSONObject rooms = nav.fetchRoom();
-            
+        
             System.out.println(roomType);
             System.out.println(rooms);
             
@@ -135,7 +132,7 @@ public class NewBookingController implements Initializable {
     private void bookMe(){
         
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("checkin", checkIn.getValue().toString()));
+        param.add(new BasicNameValuePair("checkIn", checkIn.getValue().toString()));
         param.add(new BasicNameValuePair("checkOut", checkOut.getValue().toString()));
         param.add(new BasicNameValuePair("firstName", firstName.getText()));
         param.add(new BasicNameValuePair("lastName", lastName.getText()));
@@ -143,7 +140,6 @@ public class NewBookingController implements Initializable {
         param.add(new BasicNameValuePair("email", email.getText()));
         param.add(new BasicNameValuePair("address", address.getText()));
         param.add(new BasicNameValuePair("room", roomid));
-        param.add(new BasicNameValuePair("amount", amount.getText()));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));//Storage.getId()));
         param.add(new BasicNameValuePair("amount", amount.getText()));
         param.add(new BasicNameValuePair("status", State.RM_BOOKED));
@@ -151,6 +147,11 @@ public class NewBookingController implements Initializable {
         
         response = nav.booking(param);
         System.out.println("Booking a Room : " + response);
+        
+        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, State.NOTIFY_SUCCESS + firstName.getText() + " " +
+                lastName.getText() + "is Successfully Booked on Room " + 
+                room.getSelectionModel().getSelectedItem(), 100,450);
     }
+    
     
 }
