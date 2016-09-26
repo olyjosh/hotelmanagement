@@ -15,23 +15,30 @@
 
 <AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.GuestMessage">
    <children>
-      <ScrollPane layoutX="394.0" layoutY="34.0" pannable="true" prefHeight="317.0" prefWidth="526.0">
+      <ScrollPane fx:id="sc" layoutX="394.0" layoutY="34.0" pannable="true" prefHeight="317.0" prefWidth="544.0" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="34.0">
          <content>
-            <VBox fx:id="msg_pane" prefHeight="311.0" prefWidth="523.0" />
+            <VBox fx:id="msg_pane" alignment="BASELINE_CENTER" prefHeight="317.0" prefWidth="542.0" />
          </content>
       </ScrollPane>
-      <Label layoutX="814.0" layoutY="7.0" text="Message Board" underline="true">
+      <Label layoutX="821.0" layoutY="5.0" text="Message Board" underline="true" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextArea fx:id="txt_field" layoutX="394.0" layoutY="375.0" prefHeight="35.0" prefWidth="418.0" />
-      <Button fx:id="send_btn" layoutX="824.0" layoutY="375.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="47.0" prefWidth="98.0" text="Send">
+      <HBox alignment="CENTER_LEFT" layoutX="394.0" layoutY="375.0" prefHeight="47.0" prefWidth="544.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="24.0">
+         <children>
+            <TextArea fx:id="txt_field" layoutX="394.0" layoutY="375.0" prefHeight="47.0" prefWidth="433.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="send_btn" layoutX="824.0" layoutY="375.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="43.0" prefWidth="110.0" text="Send">
 <!--         <graphic>
             <FontAwesomeIcon glyphName="SEND" />
          </graphic>-->
       </Button>
-      <Label layoutX="35.0" layoutY="7.0" text="Guest List" />
-      <ListView fx:id="list" layoutX="35.0" layoutY="34.0" prefHeight="390.0" prefWidth="317.0" />
+         </children>
+      </HBox>
+      <TitledPane collapsible="false" layoutX="35.0" layoutY="19.0" text="Guest List" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="19.0">
+         <content>
+            <ListView fx:id="list" layoutX="35.0" layoutY="34.0" prefHeight="390.0" prefWidth="317.0" />
+         </content>
+      </TitledPane>
    </children>
 </AnchorPane>

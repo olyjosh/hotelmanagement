@@ -16,12 +16,16 @@ import hotels.views.component.chatBubble.BubbleSpec;
 import hotels.views.component.chatBubble.BubbledLabel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -31,6 +35,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -55,6 +60,8 @@ import org.json.JSONObject;
 public class GuestMessage implements Initializable {
 
     @FXML
+    private ScrollPane sc;
+    @FXML
     private VBox msg_pane;
     @FXML
     private TextArea txt_field;
@@ -77,14 +84,40 @@ public class GuestMessage implements Initializable {
         Insets in = new Insets(20,30,10,20);
         msg_pane.setSpacing(10);
         msg_pane.setPadding(in);
+        sc.setFitToHeight(true);
+        sc.setFitToWidth(true);
+        
         nav = new Navigator2();
-        dodo();
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                ;
+//            }
+//        });
+        tasking();
+        addListAction();
     }    
     
-    @FXML 
-    private void postMessage(String text){// sender 1 = staff, sender 0 = guest
         
-        String msg = text;
+    private void tasking() {
+        Task task = new Task<Object>(){
+            @Override
+            protected Object call() throws Exception {
+                dodo();
+                return null;
+            }
+        
+        };
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
+    }
+    
+    
+    @FXML 
+    private void postMessage(){// sender 1 = staff, sender 0 = guest
+        
+        String msg = "efjshdksa";
         
         BubbledLabel bl2 = new BubbledLabel(BubbleSpec.FACE_LEFT_CENTER);
         bl2.relocate(310, 100);
@@ -100,6 +133,9 @@ public class GuestMessage implements Initializable {
         
         
     }
+    
+    
+   
     
     private void sendMessage(String text){
         String msg = text;
@@ -135,13 +171,52 @@ public class GuestMessage implements Initializable {
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                HBox h = (HBox) newValue;
-                String phone = (String) h.getProperties().get("phone");
-                
+                msg_pane.getChildren().clear();
+
+                listTask(newValue);
+
             }
         });
     }
     
+    
+    private void listTask(Object newValue){
+//        Task task = new Task<Object>(){
+//            @Override
+//            protected Object call() throws Exception {
+                        HBox h = (HBox) newValue;
+                        String phone = (String) h.getProperties().get("phone");
+                        JSONObject fetchMessage = nav.fetchMessage(phone);
+                        if (fetchMessage != null) {
+                            //fetchMessage.get("status")
+                            h = (HBox) list.getSelectionModel().getSelectedItem();
+                            if (phone.equals((String) h.getProperties().get("phone"))) {
+                                try {
+                                    JSONArray jsonArray = fetchMessage.getJSONArray("message");
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject j = jsonArray.getJSONObject(i);
+                                        String msg = j.getString("message");
+                                        if (j.getString("to").equals(phone)) {
+                                            //my meesage
+                                            sendMessage(msg);
+                                        } else {
+                                            recMessage(msg);
+                                            
+                                        }
+                                    }
+                                } catch (JSONException ex) {
+                                    Logger.getLogger(GuestMessage.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
+//                return null;
+//            }
+//        
+//        };
+//        Thread th = new Thread(task);
+//        th.setDaemon(true);
+//        th.start();
+    }
     
     private ObservableList<HBox> guestData;
     
@@ -161,11 +236,6 @@ public class GuestMessage implements Initializable {
                 Logger.getLogger(GuestMessage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-//        for (int i = 0; i < 10; i++) {
-//            Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.ALIGN_CENTER,"2em");
-//            guestData.add(new HBox(new Button("THe majgs u"),createIcon));
-//        }
         
         list.setItems(guestData);
         
@@ -225,5 +295,5 @@ public class GuestMessage implements Initializable {
         }
     }
     
-    
+
 }

@@ -39,6 +39,8 @@ public class RoomStayView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         roomStayContainer.setContent(spreadsheetView());
+        roomStayContainer.setFitToHeight(true);
+        roomStayContainer.setFitToWidth(true);
     }    
     
     

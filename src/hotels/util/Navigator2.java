@@ -202,12 +202,12 @@ public class Navigator2 {
     }
     
      public JSONObject fetchMessage(String phone){
-        String url = OP_URL+"fetch/messsage";
+        String url = OP_URL+"fetch/message";
         try{
             List <NameValuePair> data = new ArrayList<>();
             data.add(new BasicNameValuePair("phone", phone));
             String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             request.setHeader("User-Agent", USER_AGENT);
             request.setHeader("token",Storage.auth_token);
@@ -224,7 +224,7 @@ public class Navigator2 {
     }
     
       public JSONObject sendMessage(String to, String from, String message) {
-        String url = OP_URL + "create/messsage";
+        String url = OP_URL + "create/message";
 
         try {
             List<NameValuePair> data = new ArrayList<>();
@@ -232,7 +232,7 @@ public class Navigator2 {
             data.add(new BasicNameValuePair("from", from));
             data.add(new BasicNameValuePair("message", message));
             String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             request.setHeader("User-Agent", USER_AGENT);
             request.setHeader("token", Storage.auth_token);
