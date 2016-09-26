@@ -5,10 +5,13 @@
  */
 package hotels.util;
 
+import eu.hansolo.enzo.notification.Notification;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javafx.geometry.Pos;
+import javafx.stage.Stage;
 import static org.apache.http.HttpHeaders.USER_AGENT;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -163,6 +166,24 @@ public class Navigator {
         return null;
     }
     
+    public JSONObject fetchGuest(){
+        String url = OP_URL+"fetch/customers";
+        try{
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public String postService(String url, JSONObject json){
         
         try {
@@ -252,6 +273,14 @@ public class Navigator {
             e.printStackTrace();
         }
         return result;
+    }
+    
+    public void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
+        
+        Notification.Notifier.setPopupLocation(stage, pos);
+        Notification.Notifier.setWidth(w);
+        Notification.Notifier.setHeight(h);
+        Notification.Notifier.INSTANCE.notifySuccess(title, message);
     }
     
     public static Map<String,String> parse(JSONObject json , Map<String,String> out) throws JSONException{
