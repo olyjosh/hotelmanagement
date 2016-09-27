@@ -1,6 +1,7 @@
 
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Codes;
 import hotels.util.Navigator2;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -41,13 +43,23 @@ public class RoomsPane implements Initializable {
     private ScrollPane cardScrollPane;
     
     Navigator2 nav;
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        nav = new Navigator2();
+        nav = new Navigator2(getApp().getMain());
 
         
         floorTab.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -60,19 +72,34 @@ public class RoomsPane implements Initializable {
             }
         });
         
-        retrieveFloors();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                retrieveFloors();
+            }
+        });
+        
+        
     }    
     
     private void addCardHolder(Tab t){
         cardHolder = new FlowPane();
         cardScrollPane = new ScrollPane(cardHolder);
+        cardScrollPane.setFitToHeight(true);
+        cardScrollPane.setFitToWidth(true);
         cardHolder.setMinWidth(960);
 //        cardScrollPane.setMinSize(t.getTabPane().getMinWidth(), t.getTabPane().getMinWidth());
         cardHolder.setPadding(new Insets(15));
         cardHolder.setVgap(5);
         cardHolder.setHgap(5);
         t.setContent(cardScrollPane);
-        fetchResource(cardHolder);
+        
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                fetchResource(cardHolder);
+            }
+        }); 
         
     }
     

@@ -1,5 +1,7 @@
 package hotels.controllers;
 
+import hotels.Hotels;
+import hotels.views.component.fxml.front.controller.GuestMessage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,8 +15,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -25,13 +31,89 @@ import javafx.stage.StageStyle;
 public class Main implements Initializable{
 
     @FXML private StackPane frontContentStack;
-
+    @FXML private HBox progHbox;
+    @FXML private ProgressIndicator prog;
+    @FXML private Label progLabel;
+    
+    private Hotels app;
+    
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showDashBoard();
+        getApp().setMain(this);
+    }
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public HBox getProgHbox() {
+        return progHbox;
+    }
+
+    public void setProgHbox(HBox progHbox) {
+        this.progHbox = progHbox;
+    }
+
+    public ProgressIndicator getProg() {
+        return prog;
+    }
+
+    public void setProg(ProgressIndicator prog) {
+        this.prog = prog;
+    }
+
+    public Label getProgLabel() {
+        return progLabel;
+    }
+
+    public void setProgLabel(Label progLabel) {
+        this.progLabel = progLabel;
     }
     
+    public Label responseInfo(String message){
+        message = message==null? "Having a good business I guess!" : message;
+        progLabel.setText(message);
+        progLabel.setStyle("-fx-text-fill : #ffffff;");//#85ffaf;
+        progLabel.setVisible(true);
+        prog.setVisible(false);
+        return progLabel;
+    }
+    
+    public Label responseWarning(String message){
+        message = message==null? "that operation is error prone" : message;
+        progLabel.setText(message);
+        progLabel.setStyle("-fx-text-fill-color : #ffc487;");//#85ffaf;
+        progLabel.setTextFill(Paint.valueOf("#ffa1b5"));
+        progLabel.setVisible(true);
+        prog.setVisible(false);
+        return progLabel;
+    }
+    
+    public Label responseError(String message){
+        message = message==null? "Oops! Unexpected error" : message;
+        progLabel.setText(message);
+        progLabel.setStyle("-fx-text-fill : #ffa1b5;");//#85ffaf;
+//        progLabel.setTextFill(Paint.valueOf("#ffa1b5"));
+        progLabel.setVisible(true);
+        prog.setVisible(false);
+        return progLabel;
+    } 
+    
+    public Label responseProcessing(String message){
+        message = message==null? "processing request..." : message;
+        progLabel.setText(message);
+        progLabel.setStyle("-fx-text-fill: #85ffaf;");//#85ffaf;
+        progLabel.setVisible(true);
+        prog.setVisible(true);
+        return progLabel;
+    }
+
     @FXML 
     private void showCheckIn(ActionEvent e) throws IOException{
         //Login controller = new Login();
@@ -120,8 +202,12 @@ public class Main implements Initializable{
     
     @FXML
     private void showGuestMessages() throws IOException{
+        
+        GuestMessage controller = new GuestMessage(this.getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/guestMessage.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
+//        loader.setApp(this);
+//        loader.setStaff(getStaff());
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
@@ -151,6 +237,8 @@ public class Main implements Initializable{
         children.add(content);
         
     }
+    
+    
     
     
 }

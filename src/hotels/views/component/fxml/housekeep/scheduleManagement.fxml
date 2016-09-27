@@ -82,8 +82,9 @@
                                     <Label text="Hours" />
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="260.0" text="Schedule Task" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="288.0" text="Schedule Task" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label layoutX="10.0" layoutY="153.0" text="Maids:" GridPane.rowIndex="5" />
+                              <ChoiceBox fx:id="hour111" layoutX="122.0" layoutY="131.0" prefHeight="27.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                      </children>

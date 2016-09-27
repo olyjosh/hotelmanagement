@@ -760,9 +760,22 @@
     -fx-background-color: null;
 }
 
+#toolBarMenu .button:hover {
+    -fx-font-size: 1em;
+    -fx-text-fill: #3bb8f2;
+    /*-fx-background-color: null;*/
+    -fx-background-color: rgba(255, 255, 255, 0.5)
+}
 
-#arrow_box {
-	/*-fx-position: relative;*/
+#toolBarMenu .button:pressed {
+    -fx-font-size: 1em;
+    -fx-text-fill: #3bb8f2;
+    /*-fx-background-color: null;*/
+    -fx-background-color: rgba(255, 255, 255, 0.7)
+}
+
+/*#arrow_box {
+	-fx-position: relative;
 	-fx-background: #88b7d5;
 	-fx-border: 4px solid #c2e1f5;
         
@@ -790,6 +803,6 @@
 	-fx-border-left-color: #c2e1f5;
 	-fx-border-width: 96px;
 	-fx-margin-top: -96px;
-}
+}*/
 
 
