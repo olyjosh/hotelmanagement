@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import hotels.controllers.Login;
+import hotels.controllers.Main;
 
 
 /**
@@ -19,7 +20,10 @@ import hotels.controllers.Login;
 public class Hotels extends Application {
     
     private Stage stage;
+    private Main m;
 
+    
+    
     @Override
     public void start(Stage stage) throws IOException  {
         this.stage=stage;
@@ -41,6 +45,7 @@ public class Hotels extends Application {
         this.stage.show();
     }
 
+    
     
     public Stage getStage() {
         return stage;
@@ -79,16 +84,31 @@ public class Hotels extends Application {
     
     
     public void gotoLogin() throws IOException{
-        //Login controller = new Login();
-        //controller.setApp(this);
+
+        Main m = new Main();
+        m.setApp(this);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/Main.fxml"));
-        //loader.setController(controller);
+        loader.setController(m);
+        //Main m =(Main)loader.getController();
+        
+        //setMain(m);
+        //loader.setController(controller);  // Joshua this is use when u need to specify controller by your self. You must in this case remove the controller from fml file
         Parent root = (Parent)loader.load();
         System.out.println(stage);
         stage.setScene(new Scene(root));
     }
+
+    public void setMain(Main m) {
+        this.m = m;
+    }
+
+    public Main getMain() {
+        return m;
+    }
     
   
+    
+    
     /**
      * @param args the command line arguments
      */

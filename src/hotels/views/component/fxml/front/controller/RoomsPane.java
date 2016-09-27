@@ -1,6 +1,7 @@
 
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Codes;
 import hotels.util.Navigator2;
 import java.io.IOException;
@@ -42,13 +43,23 @@ public class RoomsPane implements Initializable {
     private ScrollPane cardScrollPane;
     
     Navigator2 nav;
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        nav = new Navigator2();
+        nav = new Navigator2(getApp().getMain());
 
         
         floorTab.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {

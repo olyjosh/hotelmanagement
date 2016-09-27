@@ -5,23 +5,32 @@
  */
 package hotels.util;
 
+import hotels.controllers.Main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import org.apache.http.HttpException;
 import static org.apache.http.HttpHeaders.USER_AGENT;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.fluent.Response;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,32 +43,125 @@ public class Navigator2 {
 
     private String result;
     private HttpResponse response = null;
-    private HttpClient httpClient = HttpClientBuilder.create().build(); 
-    
+    private JSONObject res;
+    private HttpClient httpClient;
+
     private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //Production
+    //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
+
+    private final String OP_URL = BASE_URL + "op/";
+
+    public Navigator2(Main main) {
+        this.httpClient = HttpClientBuilder.create()
+                .addInterceptorFirst(new HttpRequestInterceptor() {
+                    @Override
+                    public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
+                        main.responseProcessing(null);
+                        hr.setHeader("User-Agent", USER_AGENT);
+                        hr.setHeader("token", Storage.auth_token);
+                    }
+                }).addInterceptorFirst(new HttpResponseInterceptor() {
+            @Override
+            public void process(HttpResponse hr, HttpContext hc) throws HttpException, IOException {
+                if (hr != null) {
+                    try {
+                        result = EntityUtils.toString(hr.getEntity());
+                        int status = hr.getStatusLine().getStatusCode();
+                        if (status == HttpStatus.SC_OK) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseInfo("DONE");
+                                }
+                            });
+                            res = new JSONObject(result);
+                        } else if (status == HttpStatus.SC_UNAUTHORIZED) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseWarning("Invalid authentication, Please login");
+                                }
+                            });
+
+                        } else if (status == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseError("Internal Server Error");
+                                }
+                            });
+
+                        }
+
+                    } catch (JSONException | IOException ex) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                main.responseError("Invalid server response");
+                            }
+                        });
+
+                        Logger.getLogger(Navigator2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            main.responseError("Network problem");
+                        }
+                    });
+
+                }
+
+//                Platform.runLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        
+//                    }
+//                });
+            }
+        }).build();
+    }
+
     
-    private final String OP_URL = BASE_URL+"op/";
+//    
+//    public JSONObject login(List data){
+//        
+//        try{
+//            HttpPost post = new HttpPost(BASE_URL+"login");
+//            post.setHeader("User-Agent", USER_AGENT);
+//            post.setEntity(new UrlEncodedFormEntity(data));
+//            HttpResponse response = httpClient.execute(post);
+//            if(response != null){
+//                result = EntityUtils.toString(response.getEntity());
+//                
+//            }
+//            JSONObject jsonObject = new JSONObject(result);
+//            if(jsonObject.getInt("status") == 1){
+//                Storage.setAuth_token(jsonObject.getString("token"));
+//            }
+//            System.out.println(Storage.getAuth_token());
+//            return jsonObject;
+//        }
+//        catch(IOException |JSONException | ParseException e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//    
+    
     
     public JSONObject login(List data){
-         
+        
         try{
             HttpPost post = new HttpPost(BASE_URL+"login");
-            post.setHeader("User-Agent", USER_AGENT);
             post.setEntity(new UrlEncodedFormEntity(data));
-            HttpResponse response = httpClient.execute(post);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
+            httpClient.execute(post);
+            if(res.getInt("status") == 1){
+                Storage.setAuth_token(res.getString("token"));
             }
-            JSONObject jsonObject = new JSONObject(result);
-            if(jsonObject.getInt("status") == 1){
-                System.out.println("kjgkhglkjjkh");
-                Storage.setAuth_token(jsonObject.getString("token"));
-            }
-            System.out.println(Storage.getAuth_token());
-            return jsonObject;
-        }
-        catch(IOException |JSONException | ParseException e){
+            return res;
+        } catch (IOException |JSONException e) {
             e.printStackTrace();
         }
         return null;
@@ -69,16 +171,10 @@ public class Navigator2 {
          
         try{
             HttpPost post = new HttpPost(BASE_URL+"register");
-            post.setHeader("User-Agent", USER_AGENT);
             post.setEntity(new UrlEncodedFormEntity(data));
-            HttpResponse response = httpClient.execute(post);
-            
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-            return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(post);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -88,15 +184,9 @@ public class Navigator2 {
         String url = OP_URL+"fetch/room";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -110,15 +200,9 @@ public class Navigator2 {
             String param = URLEncodedUtils.format(data, "utf-8");
             url += param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -131,52 +215,34 @@ public class Navigator2 {
             String param = URLEncodedUtils.format(data, "utf-8");
             url += param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+    
     
     public JSONObject fetchRoomType(){
         String url = OP_URL+"fetch/roomtype";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
 
     public JSONObject fetchFloors(){
         String url = OP_URL+"fetch/floor";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -187,15 +253,9 @@ public class Navigator2 {
         String url = OP_URL+"fetch/customers";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -209,20 +269,14 @@ public class Navigator2 {
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+     
       public JSONObject sendMessage(String to, String from, String message) {
         String url = OP_URL + "create/message";
 
@@ -234,35 +288,31 @@ public class Navigator2 {
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token", Storage.auth_token);
             HttpResponse response = httpClient.execute(request);
-            if (response != null) {
-                result = EntityUtils.toString(response.getEntity());
-            }
-            return new JSONObject(result);
-        } catch (IOException | JSONException | ParseException e) {
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
      
-    public static Map<String,String> parse(JSONObject json , Map<String,String> out) throws JSONException{
+    public static Map<String, String> parse(JSONObject json, Map<String, String> out) throws JSONException {
         Iterator<String> keys = json.keys();
-        while(keys.hasNext()){
+        while (keys.hasNext()) {
             String key = keys.next();
             String val = null;
-            try{
-                 JSONObject value = json.getJSONObject(key);
-                 parse(value,out);
-            }catch(Exception e){
+            try {
+                JSONObject value = json.getJSONObject(key);
+                parse(value, out);
+            } catch (Exception e) {
                 val = json.getString(key);
             }
 
-            if(val != null){
-                out.put(key,val);
+            if (val != null) {
+                out.put(key, val);
             }
         }
         return out;
-}
+    }
+    
 }

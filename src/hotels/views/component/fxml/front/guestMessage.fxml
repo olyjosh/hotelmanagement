@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.GuestMessage">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane fx:id="sc" layoutX="394.0" layoutY="34.0" pannable="true" prefHeight="317.0" prefWidth="544.0" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="34.0">
          <content>
@@ -28,7 +28,7 @@
       <HBox alignment="CENTER_LEFT" layoutX="394.0" layoutY="375.0" prefHeight="47.0" prefWidth="544.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="24.0">
          <children>
             <TextArea fx:id="txt_field" layoutX="394.0" layoutY="375.0" prefHeight="47.0" prefWidth="433.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="send_btn" layoutX="824.0" layoutY="375.0" mnemonicParsing="false" onAction="#postMessage" prefHeight="43.0" prefWidth="110.0" text="Send">
+            <Button fx:id="send_btn" layoutX="824.0" layoutY="375.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="43.0" prefWidth="110.0" text="Send">
 <!--         <graphic>
             <FontAwesomeIcon glyphName="SEND" />
          </graphic>-->
