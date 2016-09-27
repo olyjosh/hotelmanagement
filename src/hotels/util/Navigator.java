@@ -37,7 +37,7 @@ public class Navigator {
     private HttpClient httpClient = HttpClientBuilder.create().build(); 
     
     private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //Production
+    //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
     private final String OP_URL = BASE_URL+"op/";
     
@@ -126,7 +126,7 @@ public class Navigator {
         return null;
     }
     
-    public JSONObject booking(List data){
+    public JSONObject createBooking(List data){
 
         String url = OP_URL+"create/book";
         
@@ -168,6 +168,24 @@ public class Navigator {
     
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
+        try{
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token",Storage.auth_token);
+            HttpResponse response = httpClient.execute(request);
+            if(response != null){
+                result = EntityUtils.toString(response.getEntity());
+            }
+          return new JSONObject(result);
+        }
+        catch(IOException |JSONException | ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject fetchBooking(){
+        String url = OP_URL+"fetch/book";
         try{
             HttpGet request = new HttpGet(url);
             request.setHeader("User-Agent", USER_AGENT);
@@ -300,5 +318,10 @@ public class Navigator {
             }
         }
         return out;
-}
+    }   
+    
+    public String stripDate(String rawdate){
+        String [] date = rawdate.split("T");
+        return date[0];
+    }
 }
