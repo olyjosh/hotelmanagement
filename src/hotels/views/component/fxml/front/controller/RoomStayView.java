@@ -58,6 +58,7 @@ public class RoomStayView implements Initializable {
                         ViewItem t = new ViewItem("John Doe Dosa ");
                         //t.setStyle("-fx-background-color : "+Codes.COLOR_RESERVED);
                         cell.setGraphic(t);
+                        
                         list.add(cell);
             }
             rows.add(list);

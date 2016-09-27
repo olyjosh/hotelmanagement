@@ -146,7 +146,7 @@ public class NewBookingController implements Initializable {
         param.add(new BasicNameValuePair("status", State.RM_BOOKED));
         param.add(new BasicNameValuePair("channel", State.channel_FRONT));
         
-        response = nav.booking(param);
+        response = nav.createBooking(param);
         System.out.println("Booking a Room : " + response);
         
         nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, State.NOTIFY_SUCCESS + firstName.getText() + " " +
