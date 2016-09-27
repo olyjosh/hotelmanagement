@@ -88,8 +88,9 @@ public class ReserveListController implements Initializable {
             booking = nav.fetchBooking();
             bookArray = booking.getJSONArray("message");
             
-            cons.add("book");
-            cons.add("Reservations");
+            cons.add("Show All");
+            cons.add(State.RM_BOOKED);
+            cons.add(State.RM_RESERVED);
             statusCombo.setItems(cons);
             
             getReservation();
@@ -139,6 +140,10 @@ public class ReserveListController implements Initializable {
         @Override
         public void invalidated(Observable observable) {
             if(statusCombo.getSelectionModel().selectedItemProperty().get().toString().isEmpty()) {
+                table.setItems(reserv);
+                return;
+            }
+            if(statusCombo.getSelectionModel().getSelectedItem().toString().equals("Show All")){
                 table.setItems(reserv);
                 return;
             }

@@ -9,6 +9,7 @@ package hotels.views.component.fxml.front.controller;
 import hotels.util.Navigator;
 import hotels.util.State;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -64,6 +66,10 @@ public class NewBookingController implements Initializable {
     private ComboBox room;
     @FXML
     private TextField amount;
+    @FXML
+    private ComboBox isBooking;
+    @FXML
+    private CheckBox checkinNow;
 
     /**
      * Initializes the controller class.
@@ -73,6 +79,26 @@ public class NewBookingController implements Initializable {
         
         //Load default room settings
         this.onLoad();
+        checkinNow.setDisable(true);
+        
+        ObservableList booking = FXCollections.observableArrayList();
+        booking.add(State.RM_BOOKED);
+        booking.add(State.RM_RESERVED);
+        isBooking.setItems(booking);
+        
+        isBooking.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    int index = isBooking.getSelectionModel().getSelectedIndex();
+                    System.out.println("Selected Index : " + index);
+                    if(index == 0){
+                        checkinNow.setDisable(false);
+                    }else{
+                        checkinNow.setDisable(true);
+                    }
+                }
+           });
         
         suite.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -92,6 +118,27 @@ public class NewBookingController implements Initializable {
                     roomid = roomID.get(index).toString();
                 }
            });
+        
+        checkIn.getEditor().textProperty().addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                
+                LocalDate date = checkIn.getValue();
+                if(date.isEqual(LocalDate.now())){
+                    isBooking.getSelectionModel().selectFirst();
+                    isBooking.setDisable(true);
+                    
+                    checkinNow.setSelected(true);
+                    checkinNow.setDisable(true);
+                }else{
+                    isBooking.getSelectionModel().clearSelection();
+                    isBooking.setDisable(false);
+                    
+                    checkinNow.setSelected(false);
+                }
+            }
+        });
     }
     
     private void onLoad(){
@@ -143,15 +190,21 @@ public class NewBookingController implements Initializable {
         param.add(new BasicNameValuePair("room", roomid));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));//Storage.getId()));
         param.add(new BasicNameValuePair("amount", amount.getText()));
-        param.add(new BasicNameValuePair("status", State.RM_BOOKED));
+        param.add(new BasicNameValuePair("status", isBooking.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("channel", State.channel_FRONT));
+        
+        if(checkinNow.isSelected()){
+            param.add(new BasicNameValuePair("isCheckIn", "true"));
+        }else{
+            param.add(new BasicNameValuePair("isCheckIn", "false"));
+        }
         
         response = nav.createBooking(param);
         System.out.println("Booking a Room : " + response);
         
-        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, State.NOTIFY_SUCCESS + firstName.getText() + " " +
+        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, State.NOTIFY_SUCCESS + " "+ firstName.getText() + " " +
                 lastName.getText() + "is Successfully Booked on Room " + 
-                room.getSelectionModel().getSelectedItem(), 100,450);
+                room.getSelectionModel().getSelectedItem().toString(), 100,500);
     }
     
     
