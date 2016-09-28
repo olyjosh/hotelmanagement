@@ -6,10 +6,12 @@
  */
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,9 +24,12 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -38,7 +43,24 @@ import org.json.JSONObject;
  */
 public class NewBookingController implements Initializable {
 
-    private Navigator nav = new Navigator();
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public NewBookingController(Hotels app) {
+        this.app = app;
+        nav  = new Navigator(getApp().getMain());
+    }
+    
+    
+    
+    private Navigator nav;
     private JSONObject response;
     private ObservableList suiteList = FXCollections.observableArrayList();
     private ObservableList roomList = FXCollections.observableArrayList();
@@ -96,6 +118,7 @@ public class NewBookingController implements Initializable {
                         checkinNow.setDisable(false);
                     }else{
                         checkinNow.setDisable(true);
+                        checkinNow.setSelected(false);
                     }
                 }
            });
@@ -139,6 +162,32 @@ public class NewBookingController implements Initializable {
                 }
             }
         });
+        
+        final Callback<DatePicker, DateCell> dayCellFactory = 
+            new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (item.isBefore(
+                                    checkIn.getValue().plusDays(1))
+                                ) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                            }
+                            long p = ChronoUnit.DAYS.between(
+                                    checkIn.getValue(), item
+                            );
+                            setTooltip(new Tooltip(
+                                "You're about to stay for " + p + " days")
+                            );
+                    }
+                };
+            }
+        };
+        checkOut.setDayCellFactory(dayCellFactory);
     }
     
     private void onLoad(){

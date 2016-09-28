@@ -1,7 +1,10 @@
 package hotels.controllers;
 
 import hotels.Hotels;
+import hotels.views.component.fxml.front.ReserveListController;
+import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
+import hotels.views.component.fxml.front.controller.NewBookingController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -116,10 +119,11 @@ public class Main implements Initializable{
 
     @FXML 
     private void showCheckIn(ActionEvent e) throws IOException{
-        //Login controller = new Login();
-        //controller.setApp(this);
+      
+        NewBookingController controller = new NewBookingController(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/newBooking.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));
@@ -190,8 +194,10 @@ public class Main implements Initializable{
     
     @FXML
     private void showGuestlist() throws IOException{
+        GuestListController controller = new GuestListController(this.getApp());
+        controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/guestList.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
@@ -229,8 +235,10 @@ public class Main implements Initializable{
         
     @FXML
     private void showReserve() throws IOException{
+        ReserveListController controller = new ReserveListController(this.getApp());
+        controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/reserveList.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());

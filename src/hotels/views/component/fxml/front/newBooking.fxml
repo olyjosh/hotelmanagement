@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.NewBookingController">
+<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="500.0" prefWidth="579.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation">
         <content>

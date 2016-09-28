@@ -15,7 +15,7 @@ public class State {
 
     public static String RM_BOOKED = "Booking";
 
-    public static String RM_OCCUPIED = "occup";
+    public static String RM_OCCUPIED = "Occupied";
 
     public static String RM_RESERVED = "Reservation";
 

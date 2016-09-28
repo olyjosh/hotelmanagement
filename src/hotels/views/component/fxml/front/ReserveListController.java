@@ -5,6 +5,7 @@
  */
 package hotels.views.component.fxml.front;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.views.component.fxml.front.model.Reserve;
@@ -44,8 +45,24 @@ import org.json.JSONObject;
  */
 public class ReserveListController implements Initializable {
 
+     private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public ReserveListController(Hotels app) {
+        this.app =app;
+        nav = new Navigator(getApp().getMain());
+    }
     
-    private Navigator nav = new Navigator();
+    
+    
+    private Navigator nav;
     private ObservableList<Reserve> reserv = FXCollections.observableArrayList();
     private ObservableList cons = FXCollections.observableArrayList();
     private JSONObject booking;

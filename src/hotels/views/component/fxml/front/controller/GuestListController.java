@@ -5,6 +5,7 @@
  */
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
 import java.net.URL;
 import java.time.LocalDate;
@@ -35,7 +36,23 @@ public class GuestListController implements Initializable {
 
     private static JSONObject oj, oj2, guests;
     private static JSONArray guestArray;
-    private Navigator nav = new Navigator();
+     private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+    private Navigator nav;
+
+    public GuestListController(Hotels app) {
+        this.app=app;
+        nav = new Navigator(app.getMain());
+    }
+    
+    
     private ObservableList guestList = FXCollections.observableArrayList();
     private ObservableList mirror = FXCollections.observableArrayList();
     private static ObservableMap<String, String> detail = FXCollections.observableHashMap();

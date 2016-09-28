@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.GuestListController">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <TitledPane collapsible="false" layoutX="5.0" layoutY="102.0" prefHeight="344.0" prefWidth="488.0" text="Guest Lists" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="102.0">
          <content>

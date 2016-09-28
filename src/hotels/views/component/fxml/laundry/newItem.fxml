@@ -5,8 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -15,10 +13,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="587.0" prefWidth="682.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="14.0" layoutY="14.0" prefHeight="243.0" prefWidth="657.0" text="New Item Information">
+      <TitledPane collapsible="false" layoutX="5.0" layoutY="3.0" prefHeight="513.0" prefWidth="338.0" text="New Item Information">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -33,41 +30,26 @@
                   <ComboBox layoutX="109.0" layoutY="117.0" prefHeight="31.0" prefWidth="189.0" />
                   <RadioButton layoutX="123.0" layoutY="160.0" mnemonicParsing="false" text="Hotel" />
                   <RadioButton layoutX="218.0" layoutY="160.0" mnemonicParsing="false" text="Guest" />
-                  <Pane layoutX="428.0" layoutY="20.0" style="-fx-border-color: brown;">
+                  <Pane layoutX="111.0" layoutY="200.0" prefHeight="115.0" prefWidth="191.0" style="-fx-border-color: brown;">
                      <children>
                         <ImageView fitHeight="113.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Label layoutX="339.0" layoutY="14.0" text="Item Image" />
-                  <Label layoutX="339.0" layoutY="143.0" text="Description" />
-                  <TextArea layoutX="427.0" layoutY="147.0" prefHeight="50.0" prefWidth="200.0" />
+                  <Label layoutX="18.0" layoutY="195.0" text="Item Image" />
+                  <Label layoutX="18.0" layoutY="324.0" text="Description" />
+                  <TextArea layoutX="110.0" layoutY="327.0" prefHeight="50.0" prefWidth="200.0" />
                   <FontAwesomeIcon glyphName="PLUS" layoutX="307.0" layoutY="102.0" />
+                  <Button layoutX="187.0" layoutY="404.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane collapsible="false" layoutX="14.0" layoutY="266.0" prefHeight="252.0" prefWidth="657.0" text="Service information">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView layoutX="9.0" layoutY="6.0" prefHeight="200.0" prefWidth="635.0">
-                    <columns>
-                      <TableColumn prefWidth="373.0" text="Service Name" />
-                      <TableColumn prefWidth="138.0" text="Cost to Hotel" />
-                        <TableColumn prefWidth="121.0" text="Cost to Guest" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-      <Button layoutX="536.0" layoutY="531.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
-         <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
-         </graphic>
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
