@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.controller.NewBookingController">
+<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="475.0" prefWidth="579.0" text="New  Checkin/Booking/Reservation">
+      <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="500.0" prefWidth="579.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="577.0">
                <children>
                   <VBox layoutX="308.0" layoutY="51.0">
                      <children>
@@ -62,7 +63,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="306.0" layoutY="185.0">
+                  <VBox layoutX="306.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
                         <Label text="Suite Type" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -114,7 +115,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="306.0" layoutY="250.0">
+                  <VBox layoutX="434.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
                         <Label text="Room Type" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -125,21 +126,33 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="306.0" layoutY="312.0">
+                  <VBox layoutX="307.0" layoutY="312.0" prefHeight="52.0" prefWidth="249.0">
                      <children>
                         <Label text="Total Amount" />
                         <HBox alignment="CENTER" spacing="3.0">
                            <children>
-                              <TextField fx:id="amount" prefHeight="27.0" prefWidth="229.0" />
+                              <TextField fx:id="amount" prefHeight="31.0" prefWidth="249.0" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <Button layoutX="425.0" layoutY="392.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
+                  <Button layoutX="451.0" layoutY="403.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
                      <graphic>
-                        <FontAwesomeIcon glyphName="BOOK" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                      </graphic>
                   </Button>
+                  <VBox layoutX="308.0" layoutY="250.0" prefHeight="52.0" prefWidth="125.0">
+                     <children>
+                        <Label text="Book or Reserve ?" />
+                        <HBox alignment="CENTER" spacing="3.0">
+                           <children>
+                              <ComboBox fx:id="isBooking" prefHeight="31.0" prefWidth="229.0" />
+                              <FontAwesomeIcon fill="#aea6a6" glyphName="ASTERISK" size="0.6em" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <CheckBox fx:id="checkinNow" layoutX="434.0" layoutY="276.0" mnemonicParsing="false" text="Checkin Now" />
                </children>
             </AnchorPane>
         </content>

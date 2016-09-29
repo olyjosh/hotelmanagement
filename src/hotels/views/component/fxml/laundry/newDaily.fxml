@@ -10,30 +10,43 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="529.0" prefWidth="464.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="13.0" layoutY="12.0" prefHeight="506.0" prefWidth="438.0" text="New Laundry">
+      <TitledPane collapsible="false" layoutX="6.0" layoutY="4.0" prefHeight="389.0" prefWidth="833.0" text="New Laundry">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="436.0">
                <children>
-                  <Label layoutX="24.0" layoutY="22.0" text="Linen No" />
+                  <Label layoutX="24.0" layoutY="22.0" text="Serial No" />
                   <TextField layoutX="148.0" layoutY="17.0" prefHeight="31.0" prefWidth="253.0" />
                   <Label layoutX="24.0" layoutY="67.0" text="Date Issued" />
-                  <Label layoutX="24.0" layoutY="112.0" text="User" />
-                  <TextField layoutX="148.0" layoutY="107.0" prefHeight="31.0" prefWidth="253.0" />
-                  <Label layoutX="24.0" layoutY="154.0" text="Status" />
-                  <Label layoutX="24.0" layoutY="195.0" text="Recieved" />
-                  <Label layoutX="24.0" layoutY="236.0" text="Remark" />
+                  <Label layoutX="24.0" layoutY="147.0" text="Laundry User" />
+                  <Label layoutX="24.0" layoutY="189.0" text="Laundry Status" />
+                  <Label layoutX="427.0" layoutY="20.0" text="Return In" />
+                  <Label layoutX="427.0" layoutY="225.0" text="Remark" />
                   <DatePicker layoutX="149.0" layoutY="62.0" prefHeight="31.0" prefWidth="251.0" />
-                  <ComboBox layoutX="149.0" layoutY="149.0" prefHeight="31.0" prefWidth="250.0" />
-                  <ComboBox layoutX="149.0" layoutY="190.0" prefHeight="31.0" prefWidth="250.0" />
-                  <TextArea layoutX="148.0" layoutY="237.0" prefHeight="151.0" prefWidth="255.0" />
-                  <Button layoutX="254.0" layoutY="414.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Add Laundry">
+                  <ComboBox layoutX="149.0" layoutY="184.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox layoutX="552.0" layoutY="15.0" prefHeight="31.0" prefWidth="250.0" />
+                  <TextArea layoutX="551.0" layoutY="226.0" prefHeight="66.0" prefWidth="255.0" />
+                  <Button layoutX="661.0" layoutY="311.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Add Laundry">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
                   </Button>
+                  <ComboBox layoutX="149.0" layoutY="142.0" prefHeight="31.0" prefWidth="250.0" />
+                  <Label layoutX="24.0" layoutY="230.0" text="Laundry Service" />
+                  <ComboBox layoutX="149.0" layoutY="225.0" prefHeight="31.0" prefWidth="250.0" />
+                  <Label layoutX="24.0" layoutY="271.0" text="Hotel Service" />
+                  <ComboBox layoutX="149.0" layoutY="266.0" prefHeight="31.0" prefWidth="250.0" />
+                  <Label layoutX="427.0" layoutY="63.0" text="Returned" />
+                  <DatePicker layoutX="552.0" layoutY="58.0" prefHeight="31.0" prefWidth="251.0" />
+                  <Label layoutX="24.0" layoutY="107.0" text="Laundry Item" />
+                  <ComboBox layoutX="149.0" layoutY="102.0" prefHeight="31.0" prefWidth="250.0" />
+                  <Label layoutX="427.0" layoutY="104.0" text="Total Bill" />
+                  <TextField layoutX="551.0" layoutY="99.0" prefHeight="31.0" prefWidth="253.0" />
+                  <Label layoutX="427.0" layoutY="144.0" text="Amount Paid" />
+                  <TextField layoutX="551.0" layoutY="139.0" prefHeight="31.0" prefWidth="253.0" />
+                  <Label layoutX="427.0" layoutY="187.0" text="Total Balance" />
+                  <TextField layoutX="551.0" layoutY="182.0" prefHeight="31.0" prefWidth="253.0" />
                </children>
             </AnchorPane>
         </content>

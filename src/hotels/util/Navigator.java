@@ -6,14 +6,23 @@
 package hotels.util;
 
 import eu.hansolo.enzo.notification.Notification;
+import hotels.controllers.Main;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import org.apache.http.HttpException;
 import static org.apache.http.HttpHeaders.USER_AGENT;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
+import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,6 +31,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,12 +44,86 @@ public class Navigator {
 
     private String result;
     private HttpResponse response = null;
-    private HttpClient httpClient = HttpClientBuilder.create().build(); 
-    
+    private HttpClient httpClient ;//= HttpClientBuilder.create().build(); 
+    private JSONObject res;
     private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
     //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
     private final String OP_URL = BASE_URL+"op/";
+    
+     public Navigator(Main main) {
+        this.httpClient = HttpClientBuilder.create()
+                .addInterceptorFirst(new HttpRequestInterceptor() {
+                    @Override
+                    public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
+                        main.responseProcessing(null);
+                        hr.setHeader("User-Agent", USER_AGENT);
+                        hr.setHeader("token", Storage.auth_token);
+                    }
+                }).addInterceptorFirst(new HttpResponseInterceptor() {
+            @Override
+            public void process(HttpResponse hr, HttpContext hc) throws HttpException, IOException {
+                if (hr != null) {
+                    try {
+                        result = EntityUtils.toString(hr.getEntity());
+                        int status = hr.getStatusLine().getStatusCode();
+                        if (status == HttpStatus.SC_OK) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseInfo("DONE");
+                                }
+                            });
+                            res = new JSONObject(result);
+                        } else if (status == HttpStatus.SC_UNAUTHORIZED) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseWarning("Invalid authentication, Please login");
+                                }
+                            });
+
+                        } else if (status == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    main.responseError("Internal Server Error");
+                                }
+                            });
+
+                        }
+
+                    } catch (JSONException | IOException ex) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                main.responseError("Invalid server response");
+                            }
+                        });
+
+                        Logger.getLogger(Navigator2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            main.responseError("Network problem");
+                        }
+                    });
+
+                }
+
+//                Platform.runLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        
+//                    }
+//                });
+            }
+        }).build();
+    }
+
+    
     
     public JSONObject login(List data){
          
@@ -90,20 +174,14 @@ public class Navigator {
         String url = OP_URL+"fetch/room";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
-        
+    }        
     public JSONObject createRoom(List data){
         
         String url = OP_URL+"fetch/room";
@@ -112,15 +190,10 @@ public class Navigator {
             String param = URLEncodedUtils.format(data, "utf-8");
             url += param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -134,15 +207,9 @@ public class Navigator {
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -152,147 +219,42 @@ public class Navigator {
         String url = OP_URL+"fetch/roomtype";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
+    }   
     
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+    
     
     public JSONObject fetchBooking(){
         String url = OP_URL+"fetch/book";
         try{
             HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token",Storage.auth_token);
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-          return new JSONObject(result);
-        }
-        catch(IOException |JSONException | ParseException e){
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    public String postService(String url, JSONObject json){
-        
-        try {
-            HttpPost request = new HttpPost(url);
-            StringEntity params = new StringEntity(json.toString());
-            request.addHeader("content-type", "application/json");
-            request.addHeader("Accept","application/json");
-            request.setEntity(params);
-            response = httpClient.execute(request);
-            System.out.println("Passing through httpClient.execute()");
-            
-            // handle response here...lng
-            if (response != null) {
-                
-                // CONVERT RESPONSE TO STRING
-                result = EntityUtils.toString(response.getEntity());
-                System.out.println("result " + result);
-            }
-        } catch (IOException | ParseException ex){
-                ex.printStackTrace();
-            }
-        return result;
-    }
-    
-    public String getService(String url){
-        
-        try {
-            
-            HttpClient client = HttpClientBuilder.create().build();
-            HttpGet request = new HttpGet(url);
-            
-            // add request header
-            request.addHeader("User-Agent", USER_AGENT);
-            HttpResponse response = client.execute(request);
-            
-            result = EntityUtils.toString(response.getEntity());
-                System.out.println("result " + result);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
-    
-    public String postEncode(String url, List data) {
-        
-        String base = "http://192.168.0.197:9016/api/";
-        
-        try{
-            HttpPost post = new HttpPost(base+url);
-
-            // add header
-            post.setHeader("User-Agent", USER_AGENT);
-
-            //List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-            //urlParameters.add(new BasicNameValuePair("sn", "C02G8416DRJM"));
-
-            post.setEntity(new UrlEncodedFormEntity(data));
-            HttpResponse response = httpClient.execute(post);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-        }
-        catch(IOException | ParseException e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-    
-    public String getEncode(String url, List data){
-        
-        String base = "http://192.168.0.197:9016/api/register";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
-            HttpGet request = new HttpGet(base+url);
-
-            // add header
-            request.setHeader("User-Agent", USER_AGENT);
-            
-            HttpResponse response = httpClient.execute(request);
-            if(response != null){
-                result = EntityUtils.toString(response.getEntity());
-            }
-        }
-        catch(IOException | ParseException e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-    
+  
     public void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
         
         Notification.Notifier.setPopupLocation(stage, pos);

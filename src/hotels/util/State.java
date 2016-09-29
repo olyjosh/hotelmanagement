@@ -13,11 +13,11 @@ public class State {
     
     public static String RM_VACANT = "vacant";
 
-    public static String RM_BOOKED = "book";
+    public static String RM_BOOKED = "Booking";
 
-    public static String RM_OCCUPIED = "occup";
+    public static String RM_OCCUPIED = "Occupied";
 
-    public static String RM_RESERVED = "reser";
+    public static String RM_RESERVED = "Reservation";
 
     public static String RM_DUEOUT = "due";
 

@@ -5,25 +5,12 @@
  */
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
-import hotels.views.component.fxml.front.model.Reserve;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ValueRange;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,7 +23,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
 import javafx.scene.input.MouseEvent;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +36,23 @@ public class GuestListController implements Initializable {
 
     private static JSONObject oj, oj2, guests;
     private static JSONArray guestArray;
-    private Navigator nav = new Navigator();
+     private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+    private Navigator nav;
+
+    public GuestListController(Hotels app) {
+        this.app=app;
+        nav = new Navigator(app.getMain());
+    }
+    
+    
     private ObservableList guestList = FXCollections.observableArrayList();
     private ObservableList mirror = FXCollections.observableArrayList();
     private static ObservableMap<String, String> detail = FXCollections.observableHashMap();
