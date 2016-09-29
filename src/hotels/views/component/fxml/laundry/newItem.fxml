@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.laundry.NewItemController">
    <children>
       <TitledPane collapsible="false" layoutX="5.0" layoutY="3.0" prefHeight="513.0" prefWidth="338.0" text="New Item Information">
         <content>
@@ -24,22 +24,22 @@
                   <Label layoutX="18.0" layoutY="86.0" text="Code" />
                   <Label layoutX="17.0" layoutY="122.0" text="Category" />
                   <Label layoutX="17.0" layoutY="160.0" text="Visibility" />
-                  <TextField layoutX="110.0" layoutY="9.0" />
-                  <TextField layoutX="110.0" layoutY="45.0" />
-                  <TextField layoutX="110.0" layoutY="81.0" />
-                  <ComboBox layoutX="109.0" layoutY="117.0" prefHeight="31.0" prefWidth="189.0" />
-                  <RadioButton layoutX="123.0" layoutY="160.0" mnemonicParsing="false" text="Hotel" />
-                  <RadioButton layoutX="218.0" layoutY="160.0" mnemonicParsing="false" text="Guest" />
+                  <TextField fx:id="alias" layoutX="110.0" layoutY="9.0" />
+                  <TextField fx:id="name" layoutX="110.0" layoutY="45.0" />
+                  <TextField fx:id="code" layoutX="110.0" layoutY="81.0" />
+                  <ComboBox fx:id="category" layoutX="109.0" layoutY="117.0" prefHeight="31.0" prefWidth="189.0" />
+                  <RadioButton fx:id="vhotel" layoutX="123.0" layoutY="160.0" mnemonicParsing="false" text="Hotel" />
+                  <RadioButton fx:id="vguest" layoutX="218.0" layoutY="160.0" mnemonicParsing="false" text="Guest" />
                   <Pane layoutX="111.0" layoutY="200.0" prefHeight="115.0" prefWidth="191.0" style="-fx-border-color: brown;">
                      <children>
-                        <ImageView fitHeight="113.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="image" fitHeight="113.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                   <Label layoutX="18.0" layoutY="195.0" text="Item Image" />
                   <Label layoutX="18.0" layoutY="324.0" text="Description" />
-                  <TextArea layoutX="110.0" layoutY="327.0" prefHeight="50.0" prefWidth="200.0" />
+                  <TextArea fx:id="desc" layoutX="110.0" layoutY="327.0" prefHeight="50.0" prefWidth="200.0" />
                   <FontAwesomeIcon glyphName="PLUS" layoutX="307.0" layoutY="102.0" />
-                  <Button layoutX="187.0" layoutY="404.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
+                  <Button layoutX="187.0" layoutY="404.0" mnemonicParsing="false" onAction="#createItem" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
                      </graphic>

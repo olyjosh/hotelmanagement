@@ -6,31 +6,32 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.laundry.ReturnInController">
    <children>
-      <TitledPane collapsible="false" layoutX="3.0" layoutY="3.0" prefHeight="468.0" prefWidth="396.0" text="New Laundry Returns">
+      <TitledPane collapsible="false" layoutX="5.0" layoutY="3.0" prefHeight="412.0" prefWidth="338.0" text="New Laundry Returns">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="379.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="17.0" layoutY="23.0" text="Alias" />
-                  <TextField layoutX="165.0" layoutY="16.0" />
-                  <Label layoutX="16.0" layoutY="63.0" text="Name" />
-                  <TextField layoutX="165.0" layoutY="56.0" />
-                  <Label layoutX="16.0" layoutY="149.0" text="Description" />
-                  <TextArea layoutX="165.0" layoutY="144.0" prefHeight="57.0" prefWidth="190.0" />
-                  <Label layoutX="16.0" layoutY="220.0" text="Service Image" />
-                  <Pane layoutX="163.0" layoutY="218.0" style="-fx-border-color: brown;">
+                  <Label layoutX="14.0" layoutY="14.0" text="Alias" />
+                  <Label layoutX="16.0" layoutY="50.0" text="Name" />
+                  <Label layoutX="18.0" layoutY="86.0" text="Extra Charge" />
+                  <TextField fx:id="alias" layoutX="110.0" layoutY="9.0" />
+                  <TextField fx:id="name" layoutX="110.0" layoutY="45.0" />
+                  <TextField fx:id="charge" layoutX="110.0" layoutY="81.0" />
+                  <Pane layoutX="111.0" layoutY="119.0" prefHeight="115.0" prefWidth="191.0" style="-fx-border-color: brown;">
                      <children>
-                        <ImageView fitHeight="129.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="image" fitHeight="113.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Button layoutX="220.0" layoutY="392.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: green;" text="Add Service" textFill="WHITE">
+                  <Label layoutX="18.0" layoutY="114.0" text="Item Image" />
+                  <Label layoutX="18.0" layoutY="243.0" text="Description" />
+                  <TextArea fx:id="desc" layoutX="110.0" layoutY="246.0" prefHeight="50.0" prefWidth="193.0" />
+                  <Button layoutX="182.0" layoutY="317.0" mnemonicParsing="false" onAction="#createItem" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
                      </graphic>
@@ -38,14 +39,9 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Label layoutX="17.0" layoutY="105.0" text="Extra Charge" />
-                  <TextField layoutX="166.0" layoutY="98.0" />
                </children>
             </AnchorPane>
         </content>
-         <tooltip>
-            <Tooltip text="pklbihbugyfvuhnj" />
-         </tooltip>
       </TitledPane>
    </children>
 </AnchorPane>

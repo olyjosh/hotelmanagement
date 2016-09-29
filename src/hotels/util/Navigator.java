@@ -46,8 +46,8 @@ public class Navigator {
     private HttpResponse response = null;
     private HttpClient httpClient ;//= HttpClientBuilder.create().build(); 
     private JSONObject res;
-    private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-    //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
+    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
+    private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
     private final String OP_URL = BASE_URL+"op/";
     
@@ -182,9 +182,10 @@ public class Navigator {
         }
         return null;
     }        
+    
     public JSONObject createRoom(List data){
         
-        String url = OP_URL+"fetch/room";
+        String url = OP_URL+"create/room";
         
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
@@ -226,7 +227,24 @@ public class Navigator {
             e.printStackTrace();
         }
         return null;
-    }   
+    }  
+    
+    public JSONObject createRoomType(List data){
+        
+        String url = OP_URL+"create/roomtype";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
@@ -241,7 +259,6 @@ public class Navigator {
         return null;
     }
     
-    
     public JSONObject fetchBooking(){
         String url = OP_URL+"fetch/book";
         try{
@@ -254,7 +271,74 @@ public class Navigator {
         }
         return null;
     }
+    
+    public JSONObject createLaundryService(List data){
+        System.out.println("Laundry Service Event Processing.....");
+        String url = OP_URL+"create/service";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }  
+    
+    public JSONObject createDailyLaundry(List data){
+        System.out.println("Daily Laundry Event Processing.....");
+        String url = OP_URL+"create/dailyLaundry";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject createLaundryItem(List data){
+        String url = OP_URL+"create/laundryitem";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
   
+    public JSONObject createReturn(List data){
+        String url = OP_URL+"create/returnIn";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject createHotelService(List data){
+        String url = OP_URL+"create/service";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
         
         Notification.Notifier.setPopupLocation(stage, pos);
@@ -262,26 +346,7 @@ public class Navigator {
         Notification.Notifier.setHeight(h);
         Notification.Notifier.INSTANCE.notifySuccess(title, message);
     }
-    
-    public static Map<String,String> parse(JSONObject json , Map<String,String> out) throws JSONException{
-        Iterator<String> keys = json.keys();
-        while(keys.hasNext()){
-            String key = keys.next();
-            String val = null;
-            try{
-                 JSONObject value = json.getJSONObject(key);
-                 parse(value,out);
-            }catch(Exception e){
-                val = json.getString(key);
-            }
-
-            if(val != null){
-                out.put(key,val);
-            }
-        }
-        return out;
-    }   
-    
+        
     public String stripDate(String rawdate){
         String [] date = rawdate.split("T");
         return date[0];

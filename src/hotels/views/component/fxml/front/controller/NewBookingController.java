@@ -132,6 +132,7 @@ public class NewBookingController implements Initializable {
                     amount.setText(rateList.get(index).toString());
                 }
            });
+        
         room.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
             @Override
@@ -251,7 +252,7 @@ public class NewBookingController implements Initializable {
         response = nav.createBooking(param);
         System.out.println("Booking a Room : " + response);
         
-        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, State.NOTIFY_SUCCESS + " "+ firstName.getText() + " " +
+        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, firstName.getText() + " " +
                 lastName.getText() + "is Successfully Booked on Room " + 
                 room.getSelectionModel().getSelectedItem().toString(), 100,500);
     }
