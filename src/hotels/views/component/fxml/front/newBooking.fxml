@@ -65,7 +65,7 @@
                   </VBox>
                   <VBox layoutX="306.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
-                        <Label text="Suite Type" />
+                        <Label text="Room Type" />
                         <HBox alignment="CENTER" spacing="3.0">
                            <children>
                               <ComboBox fx:id="suite" prefHeight="31.0" prefWidth="227.0" />
@@ -117,7 +117,7 @@
                   </Label>
                   <VBox layoutX="434.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
-                        <Label text="Room Type" />
+                        <Label text="Room No" />
                         <HBox alignment="CENTER" spacing="3.0">
                            <children>
                               <ComboBox fx:id="room" prefHeight="31.0" prefWidth="229.0" />

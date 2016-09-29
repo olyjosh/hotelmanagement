@@ -17,17 +17,17 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="27.0" layoutY="23.0" text="Alias" />
-                  <TextField layoutX="134.0" layoutY="18.0" prefHeight="31.0" prefWidth="172.0" />
+                  <TextField fx:id="alias" layoutX="134.0" layoutY="18.0" prefHeight="31.0" prefWidth="172.0" />
                   <Label layoutX="27.0" layoutY="65.0" text="Name" />
-                  <TextField layoutX="133.0" layoutY="60.0" prefHeight="31.0" prefWidth="173.0" />
+                  <TextField fx:id="name" layoutX="133.0" layoutY="60.0" prefHeight="31.0" prefWidth="173.0" />
                   <Label layoutX="27.0" layoutY="106.0" text="Extra Charge" />
-                  <TextField layoutX="132.0" layoutY="101.0" prefHeight="31.0" prefWidth="175.0" />
+                  <TextField fx:id="charge" layoutX="132.0" layoutY="101.0" prefHeight="31.0" prefWidth="175.0" />
                   <Label layoutX="27.0" layoutY="138.0" text="Description" />
-                  <TextArea layoutX="132.0" layoutY="144.0" prefHeight="103.0" prefWidth="174.0" />
+                  <TextArea fx:id="desc" layoutX="132.0" layoutY="144.0" prefHeight="103.0" prefWidth="174.0" />
                   <Label layoutX="334.0" layoutY="23.0" text="Image" />
                   <Pane layoutX="396.0" layoutY="18.0" style="-fx-border-color: brown;">
                      <children>
-                        <ImageView fitHeight="114.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="image" fitHeight="114.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                   <Button layoutX="392.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Close">
@@ -35,7 +35,7 @@
                         <FontAwesomeIcon glyphName="REMOVE" />
                      </graphic>
                   </Button>
-                  <Button layoutX="220.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
+                  <Button layoutX="220.0" layoutY="283.0" mnemonicParsing="false" onAction="#newHotelService" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
