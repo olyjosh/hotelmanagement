@@ -3,6 +3,7 @@ package hotels.views.component.fxml.front.controller;
 
 import hotels.Hotels;
 import hotels.util.Codes;
+import hotels.util.Navigator;
 import hotels.util.Navigator2;
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,12 @@ public class RoomsPane implements Initializable {
     public void setApp(Hotels app) {
         this.app = app;
     }
+
+    public RoomsPane(Hotels app) {
+        this.app=app;
+        nav = new Navigator2(app.getMain());
+    }
+    
     
     /**
      * Initializes the controller class.
@@ -110,6 +117,7 @@ public class RoomsPane implements Initializable {
                 JSONArray jsonArray = fetchRoom.getJSONArray("message");
                 for (int i = 0; i < jsonArray.length(); i++) {
 //                    addRoomItem(jsonArray.getJSONObject(i), f);
+//                    jsonArray.getJSONObject(i);
                     f.getChildren().add(roomItem(jsonArray.getJSONObject(i)));
                 }
             } catch (JSONException ex) {

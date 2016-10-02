@@ -6,7 +6,7 @@
 package hotels.views.component.fxml.laundry;
 
 import hotels.Hotels;
-import hotels.util.Navigator2;
+import hotels.util.Navigator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -20,7 +20,7 @@ public class LaundryItemsController implements Initializable {
 
       
          private Hotels app;
-         private Navigator2 nav;
+         private Navigator nav;
     public Hotels getApp() {
         return app;
     }
@@ -31,7 +31,7 @@ public class LaundryItemsController implements Initializable {
 
     public LaundryItemsController(Hotels app) {
         this.app =app;
-        nav = new Navigator2(getApp().getMain());
+        nav = new Navigator(getApp().getMain());
     }
     
     

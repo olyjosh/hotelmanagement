@@ -1,15 +1,27 @@
 package hotels.controllers;
 
 import hotels.Hotels;
+import hotels.util.Navigator2;
 import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
+import hotels.views.component.fxml.front.controller.RoomsPane;
+import hotels.views.component.fxml.housekeep.controller.HouseKeep;
 import hotels.views.component.fxml.laundry.DailyLaundryController;
 import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
 import hotels.views.component.fxml.laundry.LaundryListController;
 import hotels.views.component.fxml.laundry.LaundryServiceController;
+import hotels.views.component.fxml.tools.AccountListController;
+import hotels.views.component.fxml.tools.BusinessSourceController;
+import hotels.views.component.fxml.tools.HotelServiceListController;
+import hotels.views.component.fxml.tools.LostFoundController;
+import hotels.views.component.fxml.tools.MiscSaleListController;
+import hotels.views.component.fxml.tools.PayOutListController;
+import hotels.views.component.fxml.tools.PhoneListController;
+import hotels.views.component.fxml.tools.ReminderListController;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,20 +29,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.control.PopOver;
+import org.json.JSONObject;
 
 /**
  *
@@ -38,10 +55,11 @@ import javafx.stage.StageStyle;
  */
 public class Main implements Initializable{
 
-    @FXML private StackPane frontContentStack, laundryContentStack;//laundryContentStack,laundryContentStack
+    @FXML private StackPane frontContentStack, laundryContentStack,houseContentStack,toolContentStack;
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
-    @FXML private Label progLabel;
+    @FXML private Label userButton, progLabel;
+    PopOver p ;
     
     private Hotels app;
     
@@ -49,6 +67,20 @@ public class Main implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showDashBoard();
+        userButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Button b = new Button("Logout");
+                
+                if(p==null){
+                    p = new PopOver(b);
+                    p.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
+                }
+                p.show(userButton);
+            }
+        });
+        
+        
         getApp().setMain(this);
     }
 
@@ -154,6 +186,7 @@ public class Main implements Initializable{
     }
 
     private void addContentPane() throws IOException{
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/content.fxml"));
         //loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
@@ -176,8 +209,10 @@ public class Main implements Initializable{
     
     @FXML
     private void showbookingCardLayoutView() throws IOException{
+        RoomsPane controller = new RoomsPane(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/roomsPane.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
@@ -322,6 +357,172 @@ public class Main implements Initializable{
 
     }
 
+   
     
+
+    //houseContentStack
+    @FXML
+    private void showHouseKeep() throws IOException {
+        HouseKeep controller = new HouseKeep(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/houseKeep.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = houseContentStack.getChildren();
+        if (children.size() > 0) {
+            houseContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+
+    }
     
+    @FXML
+     private void showMaidList() throws IOException {
+        HouseKeep controller = new HouseKeep(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/maidManagement.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = houseContentStack.getChildren();
+        if (children.size() > 0) {
+            houseContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+
+    }
+    
+     @FXML
+     private void showSchedule() throws IOException {
+        HouseKeep controller = new HouseKeep(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/scheduleManagement.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = houseContentStack.getChildren();
+        if (children.size() > 0) {
+            houseContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+
+    }
+
+     
+     //Tool and Utility
+         
+     @FXML
+     private void showAccountList() throws IOException {
+         AccountListController controller = new AccountListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/accountList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+              
+     @FXML
+     private void showBusiness() throws IOException {
+         BusinessSourceController controller = new BusinessSourceController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/businessSources.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showMisc() throws IOException {
+         MiscSaleListController controller = new MiscSaleListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/misc.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
+     @FXML
+     private void showLostFound() throws IOException {
+         LostFoundController controller = new LostFoundController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/lostFound.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showHotelService() throws IOException {
+         HotelServiceListController controller = new HotelServiceListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/hotelServiceList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showPhoneList() throws IOException {
+         PhoneListController controller = new PhoneListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/phoneList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
+      @FXML
+     private void showPayOutList() throws IOException {
+          PayOutListController controller = new PayOutListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+          @FXML
+     private void showReminderList() throws IOException {
+              ReminderListController controller = new ReminderListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
 }
