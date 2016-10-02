@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.laundry;
+package hotels.views.component.fxml.tools;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
@@ -16,9 +16,10 @@ import javafx.fxml.Initializable;
  *
  * @author mac
  */
-public class LaundryServiceController implements Initializable {
+public class HotelServiceListController implements Initializable {
 
-      
+    
+              
     private Hotels app;
     private Navigator nav;
     public Hotels getApp() {
@@ -29,10 +30,14 @@ public class LaundryServiceController implements Initializable {
         this.app = app;
     }
 
-    public LaundryServiceController(Hotels app) {
+    public HotelServiceListController(Hotels app) {
         this.app =app;
         nav = new Navigator(getApp().getMain());
     }
+    
+    
+    
+    
     
     
     /**

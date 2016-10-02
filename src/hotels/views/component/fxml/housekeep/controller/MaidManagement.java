@@ -1,5 +1,7 @@
 package hotels.views.component.fxml.housekeep.controller;
 
+import hotels.Hotels;
+import hotels.util.Navigator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -22,6 +24,24 @@ public class MaidManagement implements Initializable {
     @FXML private Label firstName, lastName, email,phone;
     @FXML private TextArea comment;
     @FXML private VBox commentPane;
+    
+    
+        
+    private Hotels app;
+    private Navigator nav;
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public MaidManagement(Hotels app) {
+        this.app =app;
+        nav = new Navigator(getApp().getMain());
+    }
+    
     
     
     /**

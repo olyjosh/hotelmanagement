@@ -4,7 +4,6 @@ package hotels.views.component.fxml.front.controller;
 import hotels.Hotels;
 import hotels.util.Codes;
 import hotels.util.Navigator;
-import hotels.util.Navigator2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,10 +20,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
@@ -53,6 +50,12 @@ public class RoomsPane implements Initializable {
     public void setApp(Hotels app) {
         this.app = app;
     }
+
+    public RoomsPane(Hotels app) {
+        this.app=app;
+        nav = new Navigator(app.getMain());
+    }
+    
     
     /**
      * Initializes the controller class.
@@ -111,6 +114,7 @@ public class RoomsPane implements Initializable {
                 JSONArray jsonArray = fetchRoom.getJSONArray("message");
                 for (int i = 0; i < jsonArray.length(); i++) {
 //                    addRoomItem(jsonArray.getJSONObject(i), f);
+//                    jsonArray.getJSONObject(i);
                     f.getChildren().add(roomItem(jsonArray.getJSONObject(i)));
                 }
             } catch (JSONException ex) {

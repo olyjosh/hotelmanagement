@@ -20,7 +20,7 @@ import javafx.fxml.Initializable;
 public class DailyLaundryController implements Initializable {
 
          private Hotels app;
-         private Navigator2 nav;
+         private Navigator nav;
     public Hotels getApp() {
         return app;
     }
@@ -31,7 +31,7 @@ public class DailyLaundryController implements Initializable {
 
     public DailyLaundryController(Hotels app) {
         this.app =app;
-        nav = new Navigator2(getApp().getMain());
+        nav = new Navigator(getApp().getMain());
     }
     
     

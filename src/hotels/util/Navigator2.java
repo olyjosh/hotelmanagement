@@ -6,6 +6,7 @@
 package hotels.util;
 
 import hotels.controllers.Main;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,10 +25,11 @@ import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.fluent.Response;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
@@ -46,7 +48,8 @@ public class Navigator2 {
     private JSONObject res;
     private HttpClient httpClient;
 
-    private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
+    private final String BASE_URL = "http://127.0.0.1:9016/api/"; 
+    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
     //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
 
     private final String OP_URL = BASE_URL + "op/";
@@ -191,10 +194,11 @@ public class Navigator2 {
         }
         return null;
     }
+    
         
     public JSONObject createRoom(List data){
         
-        String url = OP_URL+"fetch/room";
+        String url = OP_URL+"create/room";
         
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
@@ -208,34 +212,6 @@ public class Navigator2 {
         return null;
     }
     
-    public JSONObject booking(List data){
-        String url = OP_URL+"fetch/room";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
-            HttpGet request = new HttpGet(url);
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    
-    public JSONObject fetchRoomType(){
-        String url = OP_URL+"fetch/roomtype";
-        try{
-            HttpGet request = new HttpGet(url);
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public JSONObject fetchFloors(){
         String url = OP_URL+"fetch/floor";
         try{
@@ -247,7 +223,6 @@ public class Navigator2 {
         }
         return null;
     }
-    
     
     public JSONObject fetchCustomers(){
         String url = OP_URL+"fetch/customers";
@@ -296,6 +271,23 @@ public class Navigator2 {
         return null;
     }
      
+      
+      public JSONObject upload(File file){
+        try{
+            HttpPost post = new HttpPost(OP_URL+"static/upload");
+            MultipartEntityBuilder mpEntity = MultipartEntityBuilder.create();
+            mpEntity.addBinaryBody("file", file, ContentType.create("image/jpeg"), file.getName());
+            post.setEntity(mpEntity.build());
+            httpClient.execute(post);
+            return res;
+        } catch (IOException e) {
+            res=null;
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+      
     public static Map<String, String> parse(JSONObject json, Map<String, String> out) throws JSONException {
         Iterator<String> keys = json.keys();
         while (keys.hasNext()) {
