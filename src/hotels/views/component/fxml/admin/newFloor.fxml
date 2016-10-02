@@ -14,21 +14,21 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="25.0" layoutY="35.0" text="Alias " />
-                  <TextField layoutX="115.0" layoutY="30.0" prefHeight="31.0" prefWidth="229.0" />
+                  <TextField fx:id="alias" layoutX="115.0" layoutY="30.0" prefHeight="31.0" prefWidth="229.0" />
                   <Label layoutX="25.0" layoutY="82.0" text="Floor Name" />
-                  <TextField layoutX="115.0" layoutY="77.0" prefHeight="31.0" prefWidth="229.0" />
+                  <TextField fx:id="name" layoutX="115.0" layoutY="77.0" prefHeight="31.0" prefWidth="229.0" />
                   <Button layoutX="246.0" layoutY="175.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" text="Cancel">
                      <graphic>
                         <FontAwesomeIcon glyphName="REMOVE" />
                      </graphic>
                   </Button>
-                  <Button layoutX="115.0" layoutY="175.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" text="Save">
+                  <Button layoutX="115.0" layoutY="175.0" mnemonicParsing="false" onAction="#newFloor" prefHeight="31.0" prefWidth="101.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
                   </Button>
                   <Label layoutX="25.0" layoutY="125.0" text="Description" />
-                  <TextField layoutX="115.0" layoutY="120.0" prefHeight="31.0" prefWidth="229.0" />
+                  <TextField fx:id="desc" layoutX="115.0" layoutY="120.0" prefHeight="31.0" prefWidth="229.0" />
                </children>
             </AnchorPane>
         </content>

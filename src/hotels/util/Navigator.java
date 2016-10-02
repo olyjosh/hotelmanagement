@@ -8,9 +8,7 @@ package hotels.util;
 import eu.hansolo.enzo.notification.Notification;
 import hotels.controllers.Main;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -24,12 +22,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -44,14 +41,22 @@ public class Navigator {
 
     private String result;
     private HttpResponse response = null;
-    private HttpClient httpClient ;//= HttpClientBuilder.create().build(); 
+    private CloseableHttpClient httpClient ;//= HttpClientBuilder.create().build(); 
+    //private HttpHost proxy;//FOR THE SAKE OF PROXY REMOVE WHEN YOU ARE DONE
     private JSONObject res;
     //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
     private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
     private final String OP_URL = BASE_URL+"op/";
     
-     public Navigator(Main main) {
+    public Navigator(Main main) {
+        //NEW CODE FOR THE SAKE OF PROXY
+//        proxy = new HttpHost("10.71.170.5",8080, "http");
+//        DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+//        this.httpClient = HttpClients.custom()
+//                    .setRoutePlanner(routePlanner)
+//                    .build();
+        //OLD CODE WITHOUT PROXY
         this.httpClient = HttpClientBuilder.create()
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
@@ -101,7 +106,7 @@ public class Navigator {
                             }
                         });
 
-                        Logger.getLogger(Navigator2.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Navigator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     Platform.runLater(new Runnable() {
@@ -121,6 +126,7 @@ public class Navigator {
 //                });
             }
         }).build();
+        
     }
 
     
@@ -189,7 +195,8 @@ public class Navigator {
         
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
+            url +="?"+ param;
+            System.out.println("Printing URL : " + url);
             HttpGet request = new HttpGet(url);
             
             httpClient.execute(request);
@@ -228,6 +235,18 @@ public class Navigator {
         }
         return null;
     }  
+    public JSONObject fetchFloor(){
+        String url = OP_URL+"fetch/floor";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public JSONObject createRoomType(List data){
         
@@ -235,7 +254,24 @@ public class Navigator {
         
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
-            url += param;
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject createFloor(List data){
+        
+        String url = OP_URL+"create/floor";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
             httpClient.execute(request);
@@ -276,6 +312,8 @@ public class Navigator {
         System.out.println("Laundry Service Event Processing.....");
         String url = OP_URL+"create/service";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
            httpClient.execute(request);
@@ -290,6 +328,8 @@ public class Navigator {
         System.out.println("Daily Laundry Event Processing.....");
         String url = OP_URL+"create/dailyLaundry";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
            httpClient.execute(request);
@@ -303,6 +343,8 @@ public class Navigator {
     public JSONObject createLaundryItem(List data){
         String url = OP_URL+"create/laundryitem";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
            httpClient.execute(request);
@@ -316,6 +358,8 @@ public class Navigator {
     public JSONObject createReturn(List data){
         String url = OP_URL+"create/returnIn";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
            httpClient.execute(request);
@@ -329,6 +373,8 @@ public class Navigator {
     public JSONObject createHotelService(List data){
         String url = OP_URL+"create/service";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
            httpClient.execute(request);

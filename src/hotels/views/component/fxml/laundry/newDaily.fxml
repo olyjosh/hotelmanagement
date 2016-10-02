@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.laundry.NewServiceController">
+<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="6.0" layoutY="4.0" prefHeight="389.0" prefWidth="833.0" text="New Laundry">
         <content>

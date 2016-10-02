@@ -5,6 +5,7 @@
  */
 package hotels.views.component.fxml.tools;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import java.net.URL;
@@ -29,6 +30,23 @@ import org.json.JSONObject;
  */
 public class NewHotelServiceController implements Initializable {
 
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public NewHotelServiceController(Hotels app) {
+        this.app = app;
+        nav  = new Navigator(getApp().getMain());
+    }
+    
+    
+    
     private Navigator nav;
     private JSONObject response;
     

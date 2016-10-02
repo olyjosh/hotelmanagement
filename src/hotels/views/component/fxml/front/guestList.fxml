@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="5.0" layoutY="102.0" prefHeight="344.0" prefWidth="488.0" text="Guest Lists" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="102.0">
          <content>
@@ -47,31 +47,31 @@
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="fname" layoutX="175.0" layoutY="24.0" prefHeight="21.0" prefWidth="384.0" text="X">
+                  <Label fx:id="fname" layoutX="175.0" layoutY="24.0" prefHeight="21.0" prefWidth="384.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="lname" layoutX="175.0" layoutY="61.0" prefHeight="21.0" prefWidth="405.0" text="X">
+                  <Label fx:id="lname" layoutX="175.0" layoutY="61.0" prefHeight="21.0" prefWidth="405.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="phone" layoutX="175.0" layoutY="95.0" prefHeight="21.0" prefWidth="415.0" text="X">
+                  <Label fx:id="phone" layoutX="175.0" layoutY="95.0" prefHeight="21.0" prefWidth="415.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="email" layoutX="175.0" layoutY="132.0" prefHeight="21.0" prefWidth="433.0" text="X">
+                  <Label fx:id="email" layoutX="175.0" layoutY="132.0" prefHeight="21.0" prefWidth="433.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="address" layoutX="175.0" layoutY="168.0" prefHeight="21.0" prefWidth="453.0" text="X">
+                  <Label fx:id="address" layoutX="175.0" layoutY="168.0" prefHeight="21.0" prefWidth="453.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="roomType" layoutX="175.0" layoutY="207.0" prefHeight="21.0" prefWidth="471.0" text="X">
+                  <Label fx:id="roomType" layoutX="175.0" layoutY="207.0" prefHeight="21.0" prefWidth="471.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label fx:id="roomNo" layoutX="175.0" layoutY="244.0" prefHeight="21.0" prefWidth="449.0" text="X">
+                  <Label fx:id="roomNo" layoutX="175.0" layoutY="244.0" prefHeight="21.0" prefWidth="449.0">
                      <font>
                         <Font size="21.0" />
                      </font></Label>

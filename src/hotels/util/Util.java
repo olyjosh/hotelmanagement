@@ -44,4 +44,8 @@ public class Util
     }
 
 
+    public static String random(){
+        String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));
+        return rand;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package hotels.views.component.fxml.laundry;
 
+import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import java.net.URL;
@@ -63,6 +64,20 @@ public class NewDailyController implements Initializable {
     private Navigator nav;
     private JSONObject response;
     
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public NewDailyController(Hotels app) {
+        this.app = app;
+        nav  = new Navigator(getApp().getMain());
+    }
     
     /**
      * Initializes the controller class.
@@ -75,7 +90,9 @@ public class NewDailyController implements Initializable {
        
     }    
     
-    
+    private void onLoad(){
+        
+    }
     
     @FXML
     private void newDailyLaundry(){

@@ -6,40 +6,42 @@
 package hotels.util;
 
 import hotels.Hotels;
+import hotels.controllers.Main;
 import hotels.views.component.fxml.laundry.NewDailyController;
 import hotels.views.component.fxml.tools.NewHotelServiceController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.json.JSONObject;
 
 /**
  *
  * @author NOVA
  */
-public class UITest extends Application{
+public class UITest {
+//    
+//  
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//          
+//        //NewHotelServiceController controller = new NewHotelServiceController();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("hotels/views/component/fxml/tools/newHotelService.fxml"));
+//       //loader.setController(controller);
+//        Parent root = (Parent)loader.load();
+//        stage = new Stage(StageStyle.UNIFIED);
+//        stage.setScene(new Scene(root));
+//        
+//        stage.showAndWait();
+//    }
     
-    private static Stage window;
-    private Hotels app;
-    @Override
-    public void start(Stage stage) throws Exception {
-        stage = new Stage(StageStyle.UNDECORATED);
-        window = stage;
-        
-        NewHotelServiceController controller = new NewHotelServiceController();
-        //controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newHotelService.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-//        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-        
-        stage.show();
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        //launch(args);
+        Navigator nav = new Navigator(Main.class.newInstance());
+        JSONObject res = nav.fetchRoomType();
+        System.out.println(res);
     }
 }

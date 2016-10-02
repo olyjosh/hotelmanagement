@@ -3,6 +3,7 @@ package hotels.views.component.fxml.front.controller;
 
 import hotels.Hotels;
 import hotels.util.Codes;
+import hotels.util.Navigator;
 import hotels.util.Navigator2;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ public class RoomsPane implements Initializable {
     @FXML private FlowPane cardHolder;
     private ScrollPane cardScrollPane;
     
-    Navigator2 nav;
+    Navigator nav;
     private Hotels app;
 
     public Hotels getApp() {
@@ -59,7 +60,7 @@ public class RoomsPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        nav = new Navigator2(getApp().getMain());
+        nav = new Navigator(getApp().getMain());
 
         
         floorTab.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -132,7 +133,7 @@ public class RoomsPane implements Initializable {
     }
     
     private void retrieveFloors() {
-        JSONObject fetchFloors = nav.fetchFloors();
+        JSONObject fetchFloors = nav.fetchFloor();
         if (fetchFloors != null) {
             try {
                 JSONArray jsonArray = fetchFloors.getJSONArray("message");

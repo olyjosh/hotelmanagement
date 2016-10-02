@@ -15,6 +15,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -58,14 +60,15 @@ public class NewBookingController implements Initializable {
         nav  = new Navigator(getApp().getMain());
     }
     
-    
-    
     private Navigator nav;
     private JSONObject response;
+    private static JSONObject roomType;
+    private static JSONObject rooms;
     private ObservableList suiteList = FXCollections.observableArrayList();
     private ObservableList roomList = FXCollections.observableArrayList();
     private List rateList = new ArrayList();
     private List roomID = new ArrayList();
+    private static String roomTypeId = "";
     private static String roomid = "";
     
     @FXML
@@ -130,6 +133,11 @@ public class NewBookingController implements Initializable {
                     int index = suite.getSelectionModel().getSelectedIndex();
                     System.out.println("Selected Index : " + index);
                     amount.setText(rateList.get(index).toString());
+                    
+                    getRoomTypeId();
+                    System.out.println("Selected Room Type ID : " + roomTypeId);
+                    roomList.clear();   fillRooms();
+                     
                 }
            });
         
@@ -193,38 +201,71 @@ public class NewBookingController implements Initializable {
     
     private void onLoad(){
         try {
-            JSONObject roomType = nav.fetchRoomType();
-            JSONObject rooms = nav.fetchRoom();
+            
+            roomType = nav.fetchRoomType();
+            rooms = nav.fetchRoom();
         
             System.out.println(roomType);
-            System.out.println(rooms);
             
             JSONArray roomTypeArray = roomType.getJSONArray("message");
             System.out.println("Printing JSON Array : " +  roomTypeArray);
             
-            JSONArray roomArray = rooms.getJSONArray("message");
-            System.out.println("Printing JSON Array : " +  roomArray);
-            
             for(int i = 0; i < roomTypeArray.length(); i++){
                 JSONObject oj = roomTypeArray.getJSONObject(i);
                 suiteList.add(oj.getString("name"));
+                
                 JSONObject oj2 = oj.getJSONObject("rate");
                 rateList.add(oj2.get("rate"));
                 
             }
             
-            for(int i = 0; i < roomArray.length(); i++){
-                JSONObject oj = roomArray.getJSONObject(i);
-                roomList.add(oj.getString("name"));
-                roomID.add(oj.get("_id"));
-                System.out.println("Printing room ID : " + roomID);
-            }
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
         suite.setItems(suiteList);
-        room.setItems(roomList);
+        
     } 
+    
+    private void getRoomTypeId(){
+        try {
+            
+            JSONArray roomTypeArray = roomType.getJSONArray("message");
+            
+            for(int i = 0; i < roomTypeArray.length(); i++){
+                JSONObject oj = roomTypeArray.getJSONObject(i);
+                if(suite.getSelectionModel().getSelectedItem().toString().equals(oj.getString("name"))){
+                    roomTypeId = oj.getString("_id");break;
+                }
+            }
+            
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void fillRooms(){
+        
+        JSONArray roomArray;
+        try {
+            roomArray = rooms.getJSONArray("message");
+            System.out.println("Printing Array of Rooms : " +  roomArray);
+            
+            for(int i = 0; i < roomArray.length(); i++){
+                JSONObject oj = roomArray.getJSONObject(i);
+                if(oj.getString("roomType").equals(roomTypeId)){
+                    
+                    roomList.add(oj.getString("name"));
+                    roomID.add(oj.get("_id"));
+                    //System.out.println("Printing room ID : " + roomID);
+                }
+                
+            }
+            
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        room.setItems(roomList);
+    }
     
     @FXML
     private void bookMe(){
@@ -254,7 +295,7 @@ public class NewBookingController implements Initializable {
         
         nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, firstName.getText() + " " +
                 lastName.getText() + "is Successfully Booked on Room " + 
-                room.getSelectionModel().getSelectedItem().toString(), 100,500);
+                room.getSelectionModel().getSelectedItem().toString(), 100,600);
     }
     
     

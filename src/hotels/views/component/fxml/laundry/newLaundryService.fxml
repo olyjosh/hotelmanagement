@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.laundry.NewServiceController">
+<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="3.0" layoutY="3.0" prefHeight="468.0" prefWidth="396.0" text="New Laundry Service Information">
         <content>
@@ -30,7 +30,7 @@
                         <ImageView fx:id="image" fitHeight="129.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Button layoutX="220.0" layoutY="392.0" mnemonicParsing="false" onAction="#newService" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: green;" text="Add Service" textFill="WHITE">
+                  <Button layoutX="220.0" layoutY="392.0" mnemonicParsing="false" onAction="#newLaundryService" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: green;" text="Add Service" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
                      </graphic>

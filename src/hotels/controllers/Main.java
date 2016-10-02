@@ -1,10 +1,19 @@
 package hotels.controllers;
 
 import hotels.Hotels;
+import hotels.views.component.fxml.admin.NewFloorController;
+import hotels.views.component.fxml.admin.NewRoomController;
+import hotels.views.component.fxml.admin.NewRoomTypeController;
+import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
+import hotels.views.component.fxml.laundry.NewDailyController;
+import hotels.views.component.fxml.laundry.NewItemController;
+import hotels.views.component.fxml.laundry.NewLaundryServiceController;
+import hotels.views.component.fxml.laundry.ReturnInController;
+import hotels.views.component.fxml.tools.NewHotelServiceController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -247,6 +256,18 @@ public class Main implements Initializable{
     }
     
     
-    
+    @FXML 
+    private void showLaundry(ActionEvent e) throws IOException{
+      
+        NewUserController controller = new NewUserController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
     
 }

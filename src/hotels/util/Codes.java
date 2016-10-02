@@ -17,4 +17,6 @@ public class Codes {
     public static final String COLOR_OUT_ORDER = "#f23838";
     public static final String COLOR_RESERVED = "#386fdd";
     public static final String COLOR_DUE_OUT = "#c900b5";
+    
+    
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.laundry.ReturnInController">
+<AnchorPane id="AnchorPane" prefHeight="420.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="5.0" layoutY="3.0" prefHeight="412.0" prefWidth="338.0" text="New Laundry Returns">
         <content>
@@ -31,7 +31,7 @@
                   <Label layoutX="18.0" layoutY="114.0" text="Item Image" />
                   <Label layoutX="18.0" layoutY="243.0" text="Description" />
                   <TextArea fx:id="desc" layoutX="110.0" layoutY="246.0" prefHeight="50.0" prefWidth="193.0" />
-                  <Button layoutX="182.0" layoutY="317.0" mnemonicParsing="false" onAction="#createItem" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
+                  <Button layoutX="182.0" layoutY="317.0" mnemonicParsing="false" onAction="#createReturn" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add Item" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="PLUS" />
                      </graphic>

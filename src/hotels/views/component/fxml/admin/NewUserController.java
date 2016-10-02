@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.laundry;
+package hotels.views.component.fxml.admin;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
@@ -12,15 +12,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,20 +30,21 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class ReturnInController implements Initializable {
+public class NewUserController implements Initializable {
 
     @FXML
-    private TextField alias;
+    private TextField username;
     @FXML
-    private TextField name;
+    private TextField password;
     @FXML
-    private TextField charge;
+    private TextField confirm;
     @FXML
-    private ImageView image;
+    private TextField phone;
     @FXML
-    private TextArea desc;
+    private TextField email;
+    @FXML
+    private ComboBox<?> role;
 
-    
     private Hotels app;
 
     public Hotels getApp() {
@@ -55,12 +55,10 @@ public class ReturnInController implements Initializable {
         this.app = app;
     }
 
-    public ReturnInController(Hotels app) {
+    public NewUserController(Hotels app) {
         this.app = app;
         nav  = new Navigator(getApp().getMain());
     }
-    
-    
     
     private Navigator nav;
     private JSONObject response;
@@ -71,25 +69,28 @@ public class ReturnInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList roles = FXCollections.observableArrayList();
+        roles.add("Admin");
+        roles.add("Frontdesk");
+        roles.add("Laundry");
+        roles.add("Mini-Bar");
+        
+        role.setItems(roles);
     }    
 
     @FXML
-    private void createReturn(ActionEvent event) {
-        
+    private void newUser(ActionEvent event) {
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("alias", alias.getText()));
-        param.add(new BasicNameValuePair("name", name.getText()));
-        param.add(new BasicNameValuePair("extraCharge", charge.getText()));
-        param.add(new BasicNameValuePair("desc", desc.getText()));
-        param.add(new BasicNameValuePair("image", "image"));
-        param.add(new BasicNameValuePair("service", "hotel"));
-        param.add(new BasicNameValuePair("performedBy", "id"));
-      
-        System.out.println("New Laundry Service Event Fired");
-        response = nav.createReturn(param);
-        System.out.println("Creating Hotel Service : " + response);
+        param.add(new BasicNameValuePair("username", username.getText()));
+        param.add(new BasicNameValuePair("password", password.getText()));
+        param.add(new BasicNameValuePair("role", role.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("phone", phone.getText()));
+        param.add(new BasicNameValuePair("email", email.getText()));
+                             
+        response = nav.registerUser(param);
+        System.out.println("Registering User : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, "Hotel Service Created and Saved", 100,300);
+        nav.notify((Stage) role.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, "New User Created", 100,500);
     }
     
 }
