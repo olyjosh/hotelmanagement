@@ -280,7 +280,7 @@ public class Navigator {
             e.printStackTrace();
         }
         return null;
-    }
+    }   
     
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
@@ -294,6 +294,7 @@ public class Navigator {
         }
         return null;
     }
+    
     
     public JSONObject fetchBooking(){
         String url = OP_URL+"fetch/book";

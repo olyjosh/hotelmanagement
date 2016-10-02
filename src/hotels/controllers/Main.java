@@ -1,19 +1,19 @@
 package hotels.controllers;
 
 import hotels.Hotels;
-import hotels.views.component.fxml.admin.NewFloorController;
-import hotels.views.component.fxml.admin.NewRoomController;
-import hotels.views.component.fxml.admin.NewRoomTypeController;
 import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
-import hotels.views.component.fxml.laundry.NewDailyController;
-import hotels.views.component.fxml.laundry.NewItemController;
-import hotels.views.component.fxml.laundry.NewLaundryServiceController;
-import hotels.views.component.fxml.laundry.ReturnInController;
-import hotels.views.component.fxml.tools.NewHotelServiceController;
+
+
+import hotels.views.component.fxml.laundry.DailyLaundryController;
+import hotels.views.component.fxml.laundry.LaundryDetailController;
+import hotels.views.component.fxml.laundry.LaundryItemsController;
+import hotels.views.component.fxml.laundry.LaundryListController;
+import hotels.views.component.fxml.laundry.LaundryServiceController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,7 +42,7 @@ import javafx.stage.StageStyle;
  */
 public class Main implements Initializable{
 
-    @FXML private StackPane frontContentStack;
+    @FXML private StackPane frontContentStack, laundryContentStack;//laundryContentStack,laundryContentStack
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
     @FXML private Label progLabel;
@@ -240,7 +240,7 @@ public class Main implements Initializable{
         children.add(content);
         
     }
-    
+
         
     @FXML
     private void showReserve() throws IOException{
@@ -255,7 +255,21 @@ public class Main implements Initializable{
         
     }
     
+    //House keeping
+    @FXML
+    private void showDailyLaundry() throws IOException{
+        DailyLaundryController controller = new DailyLaundryController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/dailyLaundry.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = laundryContentStack.getChildren();
+        if(children.size()>0)laundryContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+        
+    }
     
+
     @FXML 
     private void showLaundry(ActionEvent e) throws IOException{
       
@@ -268,6 +282,63 @@ public class Main implements Initializable{
         stage.setScene(new Scene(root));
         
         stage.showAndWait();
+    }
+
+    @FXML
+    private void showLaundryDetail() throws IOException{
+        LaundryDetailController controller = new LaundryDetailController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/laundryDetail.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = laundryContentStack.getChildren();
+        if(children.size()>0)laundryContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+        
+    }
+    
+            
+    @FXML
+    private void showLaundryItem() throws IOException{
+                
+        LaundryItemsController controller = new LaundryItemsController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/laundryItems.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = laundryContentStack.getChildren();
+        if(children.size()>0)laundryContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+        
+    }
+    
+            
+    @FXML
+    private void showLaundryList() throws IOException{
+                
+        LaundryListController controller = new LaundryListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/laundryList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane)loader.load();
+        ObservableList<Node> children = laundryContentStack.getChildren();
+        if(children.size()>0)laundryContentStack.getChildren().remove(0, children.size());
+        children.add(content);
+    }
+
+    @FXML
+    private void showLaundryService() throws IOException {
+        LaundryServiceController controller = new LaundryServiceController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/laundryService.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = laundryContentStack.getChildren();
+        if (children.size() > 0) {
+            laundryContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+
     }
     
 }
