@@ -224,6 +224,20 @@ public class Navigator2 {
         return null;
     }
     
+        
+    public JSONObject fetchRoomStay(){
+        String url = OP_URL+"fetch/roomstay";
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     public JSONObject fetchCustomers(){
         String url = OP_URL+"fetch/customers";
         try{
@@ -272,7 +286,7 @@ public class Navigator2 {
     }
      
       
-      public JSONObject upload(File file){
+    public JSONObject upload(File file){
         try{
             HttpPost post = new HttpPost(OP_URL+"static/upload");
             MultipartEntityBuilder mpEntity = MultipartEntityBuilder.create();

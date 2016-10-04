@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import hotels.controllers.Login;
 import hotels.controllers.Main;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -21,7 +23,7 @@ public class Hotels extends Application {
     
     private Stage stage;
     private Main m;
-
+    public ExecutorService e = Executors.newFixedThreadPool(3);
     
     
     @Override

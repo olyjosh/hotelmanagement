@@ -6,6 +6,7 @@ import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
+import hotels.views.component.fxml.front.controller.RoomStayView;
 import hotels.views.component.fxml.front.controller.RoomsPane;
 import hotels.views.component.fxml.housekeep.controller.HouseKeep;
 import hotels.views.component.fxml.laundry.DailyLaundryController;
@@ -198,8 +199,10 @@ public class Main implements Initializable{
     
     @FXML
     private void showRoomStayView() throws IOException{
+        RoomStayView controller = new RoomStayView(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/roomStayView.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
@@ -382,7 +385,7 @@ public class Main implements Initializable{
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/houseKeep.fxml"));
         loader.setController(controller);
-        AnchorPane content = (AnchorPane) loader.load();
+        HBox content = (HBox) loader.load();
         ObservableList<Node> children = houseContentStack.getChildren();
         if (children.size() > 0) {
             houseContentStack.getChildren().remove(0, children.size());
@@ -468,9 +471,9 @@ public class Main implements Initializable{
     }
      
      
-     @FXML
-     private void showLostFound() throws IOException {
-         LostFoundController controller = new LostFoundController(this.getApp());
+    @FXML
+    private void showLostFound() throws IOException {
+        LostFoundController controller = new LostFoundController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/lostFound.fxml"));
         loader.setController(controller);
@@ -525,9 +528,9 @@ public class Main implements Initializable{
         children.add(content);
     }
      
-          @FXML
+     @FXML
      private void showReminderList() throws IOException {
-              ReminderListController controller = new ReminderListController(this.getApp());
+        ReminderListController controller = new ReminderListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
         loader.setController(controller);

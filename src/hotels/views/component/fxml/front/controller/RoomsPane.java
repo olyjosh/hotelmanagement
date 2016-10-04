@@ -4,6 +4,7 @@ package hotels.views.component.fxml.front.controller;
 import hotels.Hotels;
 import hotels.util.Codes;
 import hotels.util.Navigator;
+import hotels.util.State;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,15 +77,22 @@ public class RoomsPane implements Initializable {
             }
         });
         
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                retrieveFloors();
-            }
-        });
-        
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                retrieveFloors();
+//            }
+//        });
+        startTask();
         
     }    
+    
+    
+    private void fillTabs(JSONArray rooms){
+        for (int i = 0; i < rooms.length(); i++) {
+            
+        }
+    }
     
     private void addCardHolder(Tab t){
         cardHolder = new FlowPane();
@@ -110,6 +118,7 @@ public class RoomsPane implements Initializable {
     private void fetchResource (FlowPane f){
         JSONObject fetchRoom = nav.fetchRoom();
         if(fetchRoom!=null){
+            System.out.println(fetchRoom);
             try {
                 JSONArray jsonArray = fetchRoom.getJSONArray("message");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -137,13 +146,17 @@ public class RoomsPane implements Initializable {
     }
     
     private void retrieveFloors() {
+        
         JSONObject fetchFloors = nav.fetchFloor();
         if (fetchFloors != null) {
             try {
                 JSONArray jsonArray = fetchFloors.getJSONArray("message");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject j = jsonArray.getJSONObject(i);
-                    addFloors(j.getString("alias"),j.getString("_id") );
+                    if(j.has("alias")){
+                        addFloors(j.getString("alias"),j.getString("_id"));
+                    }
+                    //addFloors(j.getString("alias"),j.getString("_id") );
                 }
             } catch (JSONException ex) {
                 Logger.getLogger(RoomsPane.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,12 +164,29 @@ public class RoomsPane implements Initializable {
         }
     }
     
+    public void startTask() {
+        // Create a Runnable
+        Runnable task = new Runnable() {
+            public void run() {
+                retrieveFloors();
+            }
+        };
+
+        // Run the task in a background thread
+        Thread back = new Thread(task);
+        back.setDaemon(true);
+        back.start();
+    }	
+    
     private void addFloors(String floor, String floorId){
-        Tab tab = new Tab(floor);
-        tab.getProperties().put("id", floorId);
-        
-        floorTab.getTabs().add(tab);
-       
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Tab tab = new Tab(floor);
+                tab.getProperties().put("id", floorId);
+                floorTab.getTabs().add(tab);
+            }
+        });
     }
     
     private void addFloors(String floor, Node content){
@@ -171,17 +201,39 @@ public class RoomsPane implements Initializable {
         v.setPadding(new Insets(5));
         v.setMinSize(100, 100);
         
-        
         try {
             
             Label roomOccupant = new Label(), roomNo=new Label(), roomType= new Label();
             roomNo.setText(j.getString("alias"));//guest
-            roomType.setText("STANDARD");//roomType
+            roomType.setText(j.getJSONObject("roomType").getString("name"));//roomType
             roomOccupant.setText("Joshua Aroke");
 //            roomOccupant.setText(j.getJSONObject("guest").getString("firstName")+ " " + j.getJSONObject("guest").getString("lastName"));
             v.getChildren().addAll(roomNo, roomType, roomOccupant);
+            String string = j.getJSONObject("roomStatus").getString("bookedStatus");
+            switch (string) {
+                default:{
+                    v.setStyle("-fx-background-color :"+Codes.COLOR_ALL);
+                }break;
+                case State.RM_RESERVED: {
+                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
+                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+                    roomType.setStyle("-fx-text-fill : #ffffff;");
+                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+                }break;
+                case State.RM_BOOKED: {
+                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
+                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+                    roomType.setStyle("-fx-text-fill : #ffffff;");
+                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+                }break;
+                case State.RM_DUEOUT: {
+                    v.setStyle("-fx-background-color :" + Codes.COLOR_DUE_OUT);
+                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+                    roomType.setStyle("-fx-text-fill : #ffffff;");
+                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+                }break;
+            }
             
-            v.setStyle("-fx-background-color :"+Codes.COLOR_RESERVED);
         } catch (JSONException ex) {
             Logger.getLogger(RoomsPane.class.getName()).log(Level.SEVERE, null, ex);
         }

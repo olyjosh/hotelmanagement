@@ -11,35 +11,35 @@ package hotels.util;
  */
 public class State {
     
-    public static String RM_VACANT = "vacant";
+    public final static String RM_VACANT = "vacant";
 
-    public static String RM_BOOKED = "Booking";
+    public final static String RM_BOOKED = "Booking";
 
-    public static String RM_OCCUPIED = "Occupied";
+    public final static String RM_OCCUPIED = "Occupied";
 
-    public static String RM_RESERVED = "Reservation";
+    public final static String RM_RESERVED = "Reservation";
 
-    public static String RM_DUEOUT = "due";
+    public final static String RM_DUEOUT = "due";
 
-    public static String RM_DIRTY = "dirty";
+    public final static String RM_DIRTY = "dirty";
 
-    public static String RM_DISORDER = "disOrd";
+    public final static String RM_DISORDER = "disOrd";
 
-    public static String RM_GOOD = "ok";
+    public final static String RM_GOOD = "ok";
     
-    public static String channel_ONLINE = "online";
+    public final static String channel_ONLINE = "online";
 
-    public static String channel_Mobile = "mobile";
+    public final static String channel_Mobile = "mobile";
 
-    public static String channel_FRONT = "front";
+    public final static String channel_FRONT = "front";
     
     //=============Notification Constants=======
     
-    public static String NOTIFY_SUCCESS = "Operation Successful";
-    public static String NOTIFY_ERROR = "Error in Operation, process Aborted";
-    public static String NOTIFY_WARNING = "Processing.....Continue";
-    public static String NOTIFY_BOOKING = "Booking Notification";
-    public static String NOTIFY_CHECKIN = "Checkin Notification";
-    public static String NOTIFY_RESERVE = "Reservation Notification";
+    public final static String NOTIFY_SUCCESS = "Operation Successful";
+    public final static String NOTIFY_ERROR = "Error in Operation, process Aborted";
+    public final static String NOTIFY_WARNING = "Processing.....Continue";
+    public final static String NOTIFY_BOOKING = "Booking Notification";
+    public final static String NOTIFY_CHECKIN = "Checkin Notification";
+    public final static String NOTIFY_RESERVE = "Reservation Notification";
     
 }

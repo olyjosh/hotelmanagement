@@ -1,13 +1,19 @@
 
 package hotels.views.component.fxml.front.controller;
 
+import hotels.Hotels;
 import hotels.util.Codes;
+import hotels.util.Navigator;
+import hotels.util.Navigator2;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +26,9 @@ import org.controlsfx.control.spreadsheet.GridBase;
 import org.controlsfx.control.spreadsheet.SpreadsheetCell;
 import org.controlsfx.control.spreadsheet.SpreadsheetCellBase;
 import org.controlsfx.control.spreadsheet.SpreadsheetView;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * FXML Controller class
@@ -32,25 +41,91 @@ public class RoomStayView implements Initializable {
     @FXML
     private ScrollPane roomStayContainer;
     
+    
+//    private String headers[];
+    
+     Navigator2 nav;
+    private Hotels app;
+
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public RoomStayView(Hotels app) {
+        this.app=app;
+        nav = new Navigator2(app.getMain());
+        
+    }
+    
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        roomStayContainer.setContent(spreadsheetView());
-        roomStayContainer.setFitToHeight(true);
-        roomStayContainer.setFitToWidth(true);
+        dooData();
+        
+        
     }    
+    
+    private void dooData(){
+        String[] rowHeaders = rowHeaders();
+        if(rowHeaders!=null){
+            JSONObject fetchRoomStay = nav.fetchRoomStay();
+            if(fetchRoomStay!=null){
+                try {
+                    JSONArray jsonArray = fetchRoomStay.getJSONArray("message");
+                    SpreadsheetView spreadsheetView = spreadsheetView(rowHeaders, jsonArray);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            roomStayContainer.setContent(spreadsheetView);
+                            roomStayContainer.setFitToHeight(true);
+                            roomStayContainer.setFitToWidth(true);
+                        }
+                    });
+                } catch (JSONException ex) {
+                    Logger.getLogger(RoomStayView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }
+    
+    private String[] rowHeaders(){
+        String headers[] = null;
+        JSONObject fetchRoom = nav.fetchRoom();
+        if(fetchRoom!=null){
+            try {
+                JSONArray jsonArray = fetchRoom.getJSONArray("message");
+                headers = new String[jsonArray.length()];
+                for (int i = 0; i < headers.length; i++) {
+                    headers[i] = jsonArray.getJSONObject(i).getString("alias");
+                }
+            } catch (JSONException ex) {
+                Logger.getLogger(RoomStayView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return  headers;
+    }
+    
     
     
         
-    private SpreadsheetView spreadsheetView() {
-        int rowCount = 15;
+    private SpreadsheetView spreadsheetView(String[] headers , JSONArray a) {
+        rowHeaders();
+        int rowCount =headers.length;
         int columnCount = 30;
         GridBase grid = new GridBase(rowCount, columnCount);
         grid.getColumnHeaders().addAll(columnHeaders(9,2016));
-        grid.getRowHeaders().addAll(rowHeaders(""));
+        
+        grid.getRowHeaders().addAll(headers);
         
         ObservableList<ObservableList<SpreadsheetCell>> rows = FXCollections.observableArrayList();
         for (int row = 0; row < grid.getRowCount(); ++row) {
@@ -74,13 +149,13 @@ public class RoomStayView implements Initializable {
     private String[] columnHeaders(int month,int year){
         return  daysOfMonth(month, year);
     }
-    
-    private String[] rowHeaders(String json){
-        
-        // you can retrive a url to list this
-        String a[] = {"101","102","101","102","101","102","101","102","101","102","101","102"};
-        return a;
-    }
+//    
+//    private String[] rowHeaders(String json){
+//        
+//        // you can retrive a url to list this
+//        String a[] = {"101","102","101","102","101","102","101","102","101","102","101","102"};
+//        return a;
+//    }
          
     private static String[] daysOfMonth(int month, int year) {
         Calendar cal = Calendar.getInstance();
