@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -22,6 +24,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -88,6 +92,9 @@ public class NewLostFoundController implements Initializable {
     
     private Navigator nav;
     private JSONObject response;
+    private static JSONObject rooms;
+    private ObservableList roomList = FXCollections.observableArrayList();
+    private List roomID = new ArrayList();
 
     /**
      * Initializes the controller class.
@@ -95,6 +102,22 @@ public class NewLostFoundController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        rooms = nav.fetchRoom();
+        JSONArray roomArray;
+        try {
+            roomArray = rooms.getJSONArray("message");
+            System.out.println("Printing Array of Rooms : " +  roomArray);
+            
+            for(int i = 0; i < roomArray.length(); i++){
+                JSONObject oj = roomArray.getJSONObject(i);
+                roomList.add(oj.getString("name"));
+            }
+            
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        room.setItems(roomList);
     }    
     
     @FXML
@@ -105,7 +128,13 @@ public class NewLostFoundController implements Initializable {
         param.add(new BasicNameValuePair("name", itemName.getText()));
         param.add(new BasicNameValuePair("color", color.getText()));
         param.add(new BasicNameValuePair("location", location.getText()));
-        param.add(new BasicNameValuePair("roomNo", room.getSelectionModel().getSelectedItem().toString()));
+        
+        if(room.getSelectionModel().getSelectedItem() == null){
+            param.add(new BasicNameValuePair("roomNo", ""));
+        }else{
+            param.add(new BasicNameValuePair("roomNo", room.getSelectionModel().getSelectedItem().toString()));//Storage.getId()));
+        }
+        
         param.add(new BasicNameValuePair("founder", founder.getText()));
         param.add(new BasicNameValuePair("comp_name", name.getText()));
         param.add(new BasicNameValuePair("comp_address", address.getText()));
@@ -116,8 +145,19 @@ public class NewLostFoundController implements Initializable {
         param.add(new BasicNameValuePair("comp_phone", phone.getText()));
         param.add(new BasicNameValuePair("reso_returnBy", returnBy.getText()));
         param.add(new BasicNameValuePair("reso_discardBy", discardBy.getText()));
-        param.add(new BasicNameValuePair("reso_returnDate", returnDate.getValue().toString()));
-        param.add(new BasicNameValuePair("reso_discardDate", discardDate.getValue().toString()));
+        
+        if(returnDate.getValue() == null){
+            param.add(new BasicNameValuePair("reso_returnDate", ""));
+        }else{
+            param.add(new BasicNameValuePair("reso_returnDate", returnDate.getValue().toString()));
+        }
+        
+        if(discardDate.getValue() == null){
+            param.add(new BasicNameValuePair("reso_discardDate", ""));
+        }else{
+            param.add(new BasicNameValuePair("reso_discardDate", discardDate.getValue().toString()));
+        }
+        
         param.add(new BasicNameValuePair("remark", remark.getText()));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
 

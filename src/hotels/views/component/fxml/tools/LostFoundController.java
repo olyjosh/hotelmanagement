@@ -57,10 +57,10 @@ public class LostFoundController implements Initializable {
     
     @FXML 
     private void showNewLostFound(ActionEvent e) throws IOException{
-        //NewLostFoundController controller = new NewLostFoundController();
-        //controller.setApp(this);
+        NewLostFoundController controller = new NewLostFoundController(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newLostFound.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));

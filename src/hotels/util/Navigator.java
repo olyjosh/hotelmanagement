@@ -448,7 +448,7 @@ public class Navigator {
     }
     
     public JSONObject createLostFound(List data){
-        String url = OP_URL+"create/service";
+        String url = OP_URL+"create/lostfound";
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;
@@ -463,7 +463,7 @@ public class Navigator {
     }
     
     public JSONObject fetchLostFound(){
-        String url = OP_URL+"fetch/returnIn";
+        String url = OP_URL+"fetch/lostfound";
         try{
             HttpGet request = new HttpGet(url);
             
