@@ -210,23 +210,18 @@ public class ReserveListController implements Initializable {
         }
     }
     
+    //STILL TESTING SOME CRAZY CODES
     private void tableCellToolTip(){
             col2.setCellFactory(param -> {  
                 TableCell<Reserve, String> cell = new TableCell<Reserve, String>() {  
                     @Override  
                     protected void updateItem(String item, boolean empty) {  
                         // calling super here is very important - don't  
-                        // skip this!  
+                        // skip this!  ok i don hear
                         super.updateItem(item, empty);  
-                        super.updateItem(item, empty);  
-                        if (empty) {  
-                            setGraphic(null);  
+                        if (empty) {    
                             setTooltip(null);  
-                        } else {  
-                            //Label color = new Label(item.getColore());  
-                            //color.setStyle("-fx-background-color:" + item.getColore() + "; -fx-padding:0 ");  
-                            //setGraphic(color);  
-
+                        } else { 
                             if (getTableRow() != null) {  
                                 Reserve rs = getTableView().getItems().get(getTableRow().getIndex());  
                                 Tooltip tooltip = new Tooltip("xkggjgbjfbfjhbfhjasbf");  

@@ -10,6 +10,7 @@ package hotels.views.component.fxml.front.controller;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -293,10 +294,12 @@ public class NewBookingController implements Initializable {
         
         response = nav.createBooking(param);
         System.out.println("Booking a Room : " + response);
-        
-        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, firstName.getText() + " " +
+        if(response != null){
+            
+        }
+        Util.notify( State.NOTIFY_BOOKING, firstName.getText() + " " +
                 lastName.getText() + "is Successfully Booked on Room " + 
-                room.getSelectionModel().getSelectedItem().toString(), 100,600);
+                room.getSelectionModel().getSelectedItem().toString(), Pos.CENTER);
     }
     
     

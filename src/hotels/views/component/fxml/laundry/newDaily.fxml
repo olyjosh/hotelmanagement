@@ -47,21 +47,21 @@
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
                   </Button>
-                  <ComboBox layoutX="149.0" layoutY="142.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox fx:id="laundryUser" layoutX="149.0" layoutY="142.0" prefHeight="31.0" prefWidth="250.0" />
                   <Label layoutX="24.0" layoutY="230.0" text="Laundry Service" />
-                  <ComboBox layoutX="149.0" layoutY="225.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox fx:id="laundryService" layoutX="149.0" layoutY="225.0" prefHeight="31.0" prefWidth="250.0" />
                   <Label layoutX="24.0" layoutY="271.0" text="Hotel Service" />
-                  <ComboBox layoutX="149.0" layoutY="266.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox fx:id="hotelService" layoutX="149.0" layoutY="266.0" prefHeight="31.0" prefWidth="250.0" />
                   <Label layoutX="427.0" layoutY="63.0" text="Returned" />
-                  <DatePicker layoutX="552.0" layoutY="58.0" prefHeight="31.0" prefWidth="251.0" />
+                  <DatePicker fx:id="returnDate" layoutX="552.0" layoutY="58.0" prefHeight="31.0" prefWidth="251.0" />
                   <Label layoutX="24.0" layoutY="107.0" text="Laundry Item" />
-                  <ComboBox layoutX="149.0" layoutY="102.0" prefHeight="31.0" prefWidth="250.0" />
+                  <ComboBox fx:id="laundryItem" layoutX="149.0" layoutY="102.0" prefHeight="31.0" prefWidth="250.0" />
                   <Label layoutX="427.0" layoutY="104.0" text="Total Bill" />
-                  <TextField layoutX="551.0" layoutY="99.0" prefHeight="31.0" prefWidth="253.0" />
+                  <TextField fx:id="totalBill" layoutX="551.0" layoutY="99.0" prefHeight="31.0" prefWidth="253.0" />
                   <Label layoutX="427.0" layoutY="144.0" text="Amount Paid" />
-                  <TextField layoutX="551.0" layoutY="139.0" prefHeight="31.0" prefWidth="253.0" />
+                  <TextField fx:id="amountPaid" layoutX="551.0" layoutY="139.0" prefHeight="31.0" prefWidth="253.0" />
                   <Label layoutX="427.0" layoutY="187.0" text="Total Balance" />
-                  <TextField layoutX="551.0" layoutY="182.0" prefHeight="31.0" prefWidth="253.0" />
+                  <TextField fx:id="totalBalance" layoutX="551.0" layoutY="182.0" prefHeight="31.0" prefWidth="253.0" />
                </children>
             </AnchorPane>
         </content>

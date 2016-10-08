@@ -106,6 +106,6 @@ public class NewItemController implements Initializable {
         response = nav.createLaundryItem(param);
         System.out.println("Creating Laundry Item : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, "Laundry Item Created and Saved", 100,300);
+        Util.notify(State.NOTIFY_SUCCESS, "New Laundry Item "+name.getText()+" Created and Saved", Pos.CENTER);
     }
 }

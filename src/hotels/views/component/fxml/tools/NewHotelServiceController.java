@@ -8,6 +8,7 @@ package hotels.views.component.fxml.tools;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class NewHotelServiceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        System.out.println("New Laundry Service Controller Invoked");
+        System.out.println("New Hotel Service Controller Invoked");
     }    
     
     @FXML
@@ -81,14 +82,14 @@ public class NewHotelServiceController implements Initializable {
         param.add(new BasicNameValuePair("extraCharge", charge.getText()));
         param.add(new BasicNameValuePair("desc", desc.getText()));
         param.add(new BasicNameValuePair("image", "image"));
-        param.add(new BasicNameValuePair("service", "hotel"));
-        param.add(new BasicNameValuePair("performedBy", "id"));
+        param.add(new BasicNameValuePair("servive", "hotel"));
+        param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
       
         System.out.println("New Hotel Service Event Fired");
         response = nav.createHotelService(param);
         System.out.println("Creating Hotel Service : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, "Hotel Service Created and Saved", 100,300);
+        Util.notify(State.NOTIFY_SUCCESS, "New Hotel Service Created and Saved", Pos.CENTER);
     }
     
 }

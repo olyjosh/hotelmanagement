@@ -7,9 +7,17 @@ package hotels.views.component.fxml.tools;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -47,4 +55,16 @@ public class LostFoundController implements Initializable {
         // TODO
     }    
     
+    @FXML 
+    private void showNewLostFound(ActionEvent e) throws IOException{
+        //NewLostFoundController controller = new NewLostFoundController();
+        //controller.setApp(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newLostFound.fxml"));
+        //loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
 }

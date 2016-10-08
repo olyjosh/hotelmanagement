@@ -8,6 +8,7 @@ package hotels.views.component.fxml.laundry;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,14 +83,13 @@ public class ReturnInController implements Initializable {
         param.add(new BasicNameValuePair("extraCharge", charge.getText()));
         param.add(new BasicNameValuePair("desc", desc.getText()));
         param.add(new BasicNameValuePair("image", "image"));
-        param.add(new BasicNameValuePair("service", "hotel"));
-        param.add(new BasicNameValuePair("performedBy", "id"));
+        param.add(new BasicNameValuePair("performedByString", "57deca5d35fb9a487bdeb70f"));
       
-        System.out.println("New Laundry Service Event Fired");
+        System.out.println("New Return Service Event Fired");
         response = nav.createReturn(param);
-        System.out.println("Creating Hotel Service : " + response);
+        System.out.println("Creating Return Service : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, "Hotel Service Created and Saved", 100,300);
+        Util.notify(State.NOTIFY_SUCCESS, "New Return Service Created and Saved", Pos.CENTER);
     }
     
 }
