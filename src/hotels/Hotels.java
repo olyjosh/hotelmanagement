@@ -92,11 +92,10 @@ public class Hotels extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/Main.fxml"));
         loader.setController(m);
         //Main m =(Main)loader.getController();
-        
         //setMain(m);
         //loader.setController(controller);  // Joshua this is use when u need to specify controller by your self. You must in this case remove the controller from fml file
         Parent root = (Parent)loader.load();
-        System.out.println(stage);
+//        System.out.println(stage);
         stage.setScene(new Scene(root));
     }
 

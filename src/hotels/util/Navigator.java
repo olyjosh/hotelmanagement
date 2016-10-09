@@ -62,7 +62,12 @@ public class Navigator {
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
                     public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
-                        main.responseProcessing(null);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                main.responseProcessing(null);
+                            }
+                        });
                         hr.setHeader("User-Agent", USER_AGENT);
                         hr.setHeader("token", Storage.auth_token);
                     }
@@ -240,7 +245,6 @@ public class Navigator {
         String url = OP_URL+"fetch/floor";
         try{
             HttpGet request = new HttpGet(url);
-            
            httpClient.execute(request);
             return res;
         } catch (IOException e) {

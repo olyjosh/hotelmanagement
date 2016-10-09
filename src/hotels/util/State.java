@@ -42,4 +42,17 @@ public class State {
     public final static String NOTIFY_CHECKIN = "Checkin Notification";
     public final static String NOTIFY_RESERVE = "Reservation Notification";
     
+    
+    //USERS PRIVILEDGES
+    public final static int USER_SUPER_ADMIN = 0;
+    public final static int USER_ADMIN = 1;
+    public final static int USER_ADMIN_2 = 2;
+    public final static int USER_FRONT = 3;
+    public final static int USER_HOUSEKEEP = 4;
+    public final static int USER_LAUNDRY = 5;
+    public final static int USER_KITCHEN = 6;
+    public final static int USER_MINIBAR = 7;
+    public final static int USER_MAINTENANCE = 8;
+    public final static int USER_MAID = 9;
+    public final static int USER_BARTENDER = 10;
 }

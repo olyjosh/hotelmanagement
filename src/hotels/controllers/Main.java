@@ -9,6 +9,8 @@ import hotels.views.component.fxml.front.controller.NewBookingController;
 import hotels.views.component.fxml.front.controller.RoomStayView;
 import hotels.views.component.fxml.front.controller.RoomsPane;
 import hotels.views.component.fxml.housekeep.controller.HouseKeep;
+import hotels.views.component.fxml.housekeep.controller.MaidManagement;
+import hotels.views.component.fxml.housekeep.controller.ScheduleManagement;
 import hotels.views.component.fxml.laundry.DailyLaundryController;
 import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
@@ -396,7 +398,7 @@ public class Main implements Initializable{
     
     @FXML
      private void showMaidList() throws IOException {
-        HouseKeep controller = new HouseKeep(this.getApp());
+        MaidManagement controller = new MaidManagement(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/maidManagement.fxml"));
         loader.setController(controller);
@@ -411,7 +413,7 @@ public class Main implements Initializable{
     
      @FXML
      private void showSchedule() throws IOException {
-        HouseKeep controller = new HouseKeep(this.getApp());
+         ScheduleManagement controller = new ScheduleManagement(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/scheduleManagement.fxml"));
         loader.setController(controller);

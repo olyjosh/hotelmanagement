@@ -1,8 +1,11 @@
 package hotels.util;
 
+import eu.hansolo.enzo.notification.Notification;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 /**
@@ -13,9 +16,9 @@ import javafx.util.StringConverter;
 public class Util
 {
     
-    private static void formatDatePicker(DatePicker datePicker) {
-        String pattern = "dd-MM-yyyy";
-        String pattern2 = "yyyy-MM-dd";
+    public static void formatDatePicker(DatePicker datePicker) {
+        String pattern = "yyyy-MM-dd";
+        String pattern2 = "MMM dd, yyyy";
         
         datePicker.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
@@ -43,7 +46,14 @@ public class Util
 
     }
 
-
+    public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
+        
+        Notification.Notifier.setPopupLocation(stage, pos);
+        Notification.Notifier.setWidth(w);
+        Notification.Notifier.setHeight(h);
+        Notification.Notifier.INSTANCE.notifySuccess(title, message);
+    }
+    
     public static String random(){
         String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));
         return rand;

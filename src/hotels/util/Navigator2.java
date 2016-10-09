@@ -59,7 +59,12 @@ public class Navigator2 {
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
                     public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
-                        main.responseProcessing(null);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                main.responseProcessing(null);
+                            }
+                        });
                         hr.setHeader("User-Agent", USER_AGENT);
                         hr.setHeader("token", Storage.auth_token);
                     }
@@ -85,7 +90,7 @@ public class Navigator2 {
                                     main.responseWarning("Invalid authentication, Please login");
                                 }
                             });
-
+                            res=null;
                         } else if (status == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
                             Platform.runLater(new Runnable() {
                                 @Override
@@ -93,7 +98,7 @@ public class Navigator2 {
                                     main.responseError("Internal Server Error");
                                 }
                             });
-
+                            res=null;
                         }
 
                     } catch (JSONException | IOException ex) {
@@ -103,7 +108,7 @@ public class Navigator2 {
                                 main.responseError("Invalid server response");
                             }
                         });
-
+                        res=null;
                         Logger.getLogger(Navigator2.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
@@ -113,7 +118,7 @@ public class Navigator2 {
                             main.responseError("Network problem");
                         }
                     });
-
+                    res=null;
                 }
 
 //                Platform.runLater(new Runnable() {
@@ -124,6 +129,7 @@ public class Navigator2 {
 //                });
             }
         }).build();
+        
     }
 
     
@@ -225,18 +231,6 @@ public class Navigator2 {
     }
     
         
-    public JSONObject fetchRoomStay(){
-        String url = OP_URL+"fetch/roomstay";
-        try{
-            HttpGet request = new HttpGet(url);
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
     
     public JSONObject fetchCustomers(){
         String url = OP_URL+"fetch/customers";
@@ -286,6 +280,218 @@ public class Navigator2 {
     }
      
       
+      public JSONObject fetchRoomStay(String d1, String d2){
+        
+        //2016-09-22
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("d1", d1));
+        data.add(new BasicNameValuePair("d2", d2));
+        String url = OP_URL+"fetch/roomstay";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject createHouseKeepTasks(String ...x){
+        
+        //2016-09-22
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("date", x[0]));
+        data.add(new BasicNameValuePair("endDate", x[1]));
+        data.add(new BasicNameValuePair("desc", x[2]));
+        data.add(new BasicNameValuePair("room", x[3]));
+        data.add(new BasicNameValuePair("interval", x[4]));
+        data.add(new BasicNameValuePair("reminder", x[5]));
+        data.add(new BasicNameValuePair("maids", x[6]));
+        data.add(new BasicNameValuePair("performedBy", x[7]));
+        String url = OP_URL+"create/housekeeptask";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    
+    public JSONObject fetchHouseKeepTasks(){
+        
+        //2016-09-22
+        
+        
+        String url = OP_URL+"fetch/housekeeptask";
+        //String param = URLEncodedUtils.format(data, "utf-8");
+        //url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editHouseKeepTasks(String ...x){
+        //2016-09-22
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("date", x[0]));
+        data.add(new BasicNameValuePair("endDate", x[1]));
+        data.add(new BasicNameValuePair("desc", x[2]));
+        data.add(new BasicNameValuePair("room", x[3]));
+        data.add(new BasicNameValuePair("interval", x[4]));
+        data.add(new BasicNameValuePair("reminder", x[5]));
+        data.add(new BasicNameValuePair("maids", x[6]));
+        data.add(new BasicNameValuePair("performedBy", x[7]));
+        data.add(new BasicNameValuePair("id", x[8]));
+        
+        String url = OP_URL+"edit/housekeeptask";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteHouseKeepTasks(String id){
+        //2016-09-22
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("id", id));
+        
+        String url = OP_URL+"edit/housekeeptask";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject maidTasks(String id) {
+        
+        String url = OP_URL + "fetch/housekeeptask";
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("id", id));
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+       public JSONObject fetchStaffAll() {
+        String url = OP_URL + "fetch/staff";
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    
+    public JSONObject fetchStaff(String id){
+        String url = OP_URL+"fetch/staff";
+        if (id != null) {
+            List<NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("id", id));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += "?" + param;
+        }
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+         
+    public JSONObject fetchStaff(int privi){
+        String url = OP_URL+"fetch/staff";
+            List<NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("privilege", ""+privi));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += "?" + param;
+        
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject fetchStaffCommnet(String id){
+        String url = OP_URL+"fetch/staffcomments";
+            List<NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("id", id));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += "?" + param;
+        
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject postStaffCommnet(String staffId, String com){
+        String url = OP_URL+"fetch/staffcomments";
+            List<NameValuePair> data = new ArrayList<>();
+            data.add(new BasicNameValuePair("staff", staffId));
+            data.add(new BasicNameValuePair("comment", com));
+            data.add(new BasicNameValuePair("performedBy", Storage.getId()));
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url += "?" + param;
+        
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     public JSONObject upload(File file){
         try{
             HttpPost post = new HttpPost(OP_URL+"static/upload");
