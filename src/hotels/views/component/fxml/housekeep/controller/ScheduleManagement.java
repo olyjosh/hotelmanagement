@@ -4,17 +4,14 @@ import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import hotels.util.Navigator2;
-import hotels.util.State;
 import hotels.util.Storage;
 import hotels.util.Util;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -226,9 +223,10 @@ public class ScheduleManagement implements Initializable {
                     if(item!=null){
                         String text = "";
                         System.out.println(item.getEndDateC());
-                        if(!item.getEndDateC().isEmpty())text = "This ends on "+fromISO(item.getEndDateC())+"\n";
-                            text+="To be done at "+item.getSuiteC()+"\n"
-                            +"by : ";
+                        if(!item.getEndDateC().isEmpty())
+                            text = "This ends on "+toLocalDate(item.getEndDateC())+"\n";
+                            text+="To be done at "+item.getSuiteC()+"\n";
+//                            +"by : ";
                         row.setTooltip(new Tooltip(text));
                     }
                 });
@@ -238,11 +236,13 @@ public class ScheduleManagement implements Initializable {
 //        
                 ContextMenu con = new ContextMenu(detail, edit, delete);
                 delete.setOnAction((ActionEvent event) -> {
-                    table.getItems().remove(row.getItem());
+                    delete(row.getItem());
                 });
+                
                 edit.setOnAction((ActionEvent event) -> {
                     newOrEdit.set(false);
                 });
+                
                 detail.setOnAction((ActionEvent event) -> {
                 });
                 
@@ -256,6 +256,26 @@ public class ScheduleManagement implements Initializable {
             }
         });
         
+    }
+    
+    private void delete(ScheduleModel x){
+        int i = table.getItems().indexOf(x);
+        table.getItems().remove(x);
+       JSONObject del = nav.deleteHouseKeepTasks(x.getId());
+       if(del!=null){
+            try {
+                if(del.getInt("status")==1){
+                    
+                }else{
+                    //allert problem while deleting
+                }
+            } catch (JSONException ex) {
+                Logger.getLogger(ScheduleManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }else{
+           //alert that it could not be deleted
+           table.getItems().add(i, x);
+       }
     }
     
     private void populatetable(){
@@ -283,15 +303,15 @@ public class ScheduleManagement implements Initializable {
            Logger.getLogger(ScheduleManagement.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
-    
-    
+     
     private void add1ToTable(JSONObject o) throws JSONException{
         ScheduleModel tm = new ScheduleModel();
+        tm.setId(o.getString("_id"));
         tm.setDateC(o.getString("date"));
         tm.setDescC(o.getString("desc"));
         tm.setIntC(""+o.getInt("interval"));
         tm.setRemC(""+o.getInt("reminder"));
-        
+        tm.setEndDateC(o.getString("endDate"));
         JSONObject oo = o.getJSONObject("room");
         tm.setSuiteC(oo.getString("alias"));
         list.add(tm);
@@ -384,10 +404,11 @@ public class ScheduleManagement implements Initializable {
         String remin = reminder.getText();
         String maid = null ;
         ObservableList c = maids.getCheckModel().getCheckedItems();
+//        System.out.println("The LIST :"+c);
         for (int i = 0; i < c.size(); i++) {
             if(maid==null)maid="";
             SimpleIdTitle get = (SimpleIdTitle) c.get(i);
-            maid=get.getId()+",";
+            maid+=get.getId()+",";
         }
         maid=maid.substring(0, maid.length()-2);
         if(valids(datetime,endDAte,descr, suite,inter,remin,maid)){
@@ -423,8 +444,18 @@ public class ScheduleManagement implements Initializable {
         return null;
     }
     
-    private LocalDate fromISO(String t){
-        return LocalDate.parse(t, DateTimeFormatter.ISO_DATE_TIME);
+    private LocalDate toLocalDate(String t){
+       try {
+           
+           SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mma");
+           SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+           Date d = sdf.parse(t);
+
+//        return LocalDate.parse(t, DateTimeFormatter.ISO_DATE_TIME);
+       } catch (ParseException ex) {
+           Logger.getLogger(ScheduleManagement.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return null;
     }
     
     private void setEditMode() {
@@ -433,8 +464,8 @@ public class ScheduleManagement implements Initializable {
         createTitledPane.setText("Edit Schedule");
         fadeAndStroke(createPane);
         ScheduleModel s = table.getSelectionModel().getSelectedItem();
-        date.setValue(fromISO(s.getDateC()));
-        date1.setValue(fromISO(s.getEndDateC()));
+        date.setValue(toLocalDate(s.getDateC()));
+        date1.setValue(toLocalDate(s.getEndDateC()));
         desc.setText(s.getDescC());
     }
     
@@ -510,6 +541,4 @@ class SimpleIdTitle{
         return this.name;
     }
     
-    
 }
-

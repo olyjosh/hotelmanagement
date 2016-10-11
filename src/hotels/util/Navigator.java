@@ -111,7 +111,7 @@ public class Navigator {
                                 main.responseError("Invalid server response");
                             }
                         });
-
+                        main.responseError("Network problem...");
                         Logger.getLogger(Navigator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
@@ -310,7 +310,9 @@ public class Navigator {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
+            
             e.printStackTrace();
+            
         }
         return null;
     }

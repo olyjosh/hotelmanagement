@@ -55,7 +55,8 @@ public class MaidManagement implements Initializable {
 
     @FXML private ListView<HBox> maidList;
     @FXML private TableView<ScheduleModel> recentMaidTaskTable;
-    @FXML private TableColumn<ScheduleModel, String> suite, time;//status;
+    @FXML private TableColumn<ScheduleModel, String> suite, time;
+    @FXML private TableColumn<ScheduleModel, Label> status;
     @FXML private Label firstName, lastName, email,phone, sex;
     @FXML private TextArea comment;
     @FXML private VBox commentPane;
@@ -190,6 +191,7 @@ public class MaidManagement implements Initializable {
                 if (maidTasks != null) {
                     try {
                         JSONArray ja = maidTasks.getJSONArray("message");
+                        list.clear();
                         for (int i = 0; i < ja.length(); i++) {
                             add1ToTable(ja.getJSONObject(i));
                         }
@@ -214,7 +216,7 @@ public class MaidManagement implements Initializable {
         tm.setDescC(o.getString("desc"));
         tm.setIntC(""+o.getInt("interval"));
         tm.setRemC(""+o.getInt("reminder"));
-                
+        tm.setEndDateC(o.getString("endDate"));       
         JSONObject oo = o.getJSONObject("room");
         tm.setSuiteC(oo.getString("alias"));
         list.add(tm);
@@ -244,16 +246,29 @@ public class MaidManagement implements Initializable {
                 public void run() {
                     HBox sel = maidList.getSelectionModel().getSelectedItem();
                     String id = sel.getProperties().get("id").toString();
-                    JSONObject postStaffCommnet = nav.postStaffCommnet(id, text);
-                    
+                    JSONObject po = nav.postStaffCommnet(id, text);
+                    if(po!=null){
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            commentButton.setText("Add Comment");
-                            comment.clear();
-                            Util.notify(getApp().getStage(), Pos.CENTER, "Comment posted", "The comment has been posted!", 100, 400);
+                            try {
+                                JSONObject msg = po.getJSONObject("message");
+                                if (msg.getString("staff").equals(id)) {
+                                    myMessageBubble(msg.getString("comment"));
+                                }
+                                commentButton.setText("Add Comment");
+                                comment.clear();
+                                error.setVisible(false);
+                                Util.notify(getApp().getStage(), Pos.CENTER, "Comment posted", "The comment has been posted!", 100, 400);
+
+                            } catch (JSONException ex) {
+                                Logger.getLogger(MaidManagement.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
+                    }else{
+                        commentButton.setText("Add Comment");
+                    }
                 }
             };
             // Run the task in a background thread

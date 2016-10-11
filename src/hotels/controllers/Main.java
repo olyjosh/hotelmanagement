@@ -16,6 +16,9 @@ import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
 import hotels.views.component.fxml.laundry.LaundryListController;
 import hotels.views.component.fxml.laundry.LaundryServiceController;
+import hotels.views.component.fxml.restaurant.controller.FoodOrder;
+import hotels.views.component.fxml.restaurant.controller.NewFood;
+import hotels.views.component.fxml.restaurant.controller.OnlineFoodOrder;
 import hotels.views.component.fxml.tools.AccountListController;
 import hotels.views.component.fxml.tools.BusinessSourceController;
 import hotels.views.component.fxml.tools.HotelServiceListController;
@@ -58,7 +61,8 @@ import org.json.JSONObject;
  */
 public class Main implements Initializable{
 
-    @FXML private StackPane frontContentStack, laundryContentStack,houseContentStack,toolContentStack;
+    @FXML private StackPane frontContentStack, laundryContentStack,
+            houseContentStack,toolContentStack,restaurantContentStack;
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
     @FXML private Label userButton, progLabel;
@@ -543,6 +547,53 @@ public class Main implements Initializable{
         }
         children.add(content);
     }
+     
+     
+     //Restaurant 
+     @FXML
+     private void showFoodOrder() throws IOException {
+        FoodOrder controller = new FoodOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/foodOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+         
+     @FXML
+     private void showOnlineFoodOrder() throws IOException {
+        OnlineFoodOrder controller = new OnlineFoodOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/onlineFoodOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showNewFood() throws IOException {
+        NewFood controller = new NewFood(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/newFood.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
      
      
 }

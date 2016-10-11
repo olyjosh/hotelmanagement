@@ -28,7 +28,7 @@ public class ScheduleModel {
    private final SimpleStringProperty remC = new SimpleStringProperty("");
 
     public ScheduleModel() {
-//        this("","","","","");
+
     }
 
       public String getEndDateC() {
@@ -65,7 +65,16 @@ public class ScheduleModel {
     }
    
     public void setEndDateC(String x) {
-        endDateC.set(x);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat output = new SimpleDateFormat("MMM dd, yyyy HH:mma");
+            Date d = sdf.parse(x);
+            String formattedTime = output.format(d);
+            endDateC.set(formattedTime);
+        } catch (ParseException ex) {
+            Logger.getLogger(ScheduleModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        endDateC.set(x);
     }
  
     
@@ -80,7 +89,7 @@ public class ScheduleModel {
     public void setDateC(String x) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            SimpleDateFormat output = new SimpleDateFormat("MMM dd,yyyy HH:mma");
+            SimpleDateFormat output = new SimpleDateFormat("MMM dd, yyyy HH:mma");
             Date d = sdf.parse(x);
             String formattedTime = output.format(d);
             dateC.set(formattedTime);

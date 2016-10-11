@@ -375,7 +375,7 @@ public class Navigator2 {
         List<NameValuePair> data = new ArrayList<>();
         data.add(new BasicNameValuePair("id", id));
         
-        String url = OP_URL+"edit/housekeeptask";
+        String url = OP_URL+"delete/housekeeptask";
         String param = URLEncodedUtils.format(data, "utf-8");
         url +="?"+ param;
         try{
@@ -473,7 +473,7 @@ public class Navigator2 {
     }
     
     public JSONObject postStaffCommnet(String staffId, String com){
-        String url = OP_URL+"fetch/staffcomments";
+        String url = OP_URL+"create/staffcomments";
             List<NameValuePair> data = new ArrayList<>();
             data.add(new BasicNameValuePair("staff", staffId));
             data.add(new BasicNameValuePair("comment", com));
@@ -491,6 +491,25 @@ public class Navigator2 {
         return null;
     }
     
+     public JSONObject createFood(String name, String desc, String price, String img) {
+        String url = OP_URL + "create/food";
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("name", name));
+        data.add(new BasicNameValuePair("desc", desc));
+        data.add(new BasicNameValuePair("img", img));
+        data.add(new BasicNameValuePair("price", price));
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public JSONObject upload(File file){
         try{
