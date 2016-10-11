@@ -75,7 +75,7 @@
                         </HBox>
                         <StackPane fx:id="imgStack" style="-fx-background-color: gray;">
                            <children>
-                              <ImageView fx:id="imgV" fitHeight="115.0" fitWidth="228.0" onDragDetected="#dragDetected" onDragDone="#dragDone" onDragDropped="#dragDropped" onDragEntered="#dragEnter" onDragExited="#dragExited" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imgV" fitHeight="115.0" fitWidth="228.0" onDragDetected="#dragDetected" onDragDone="#dragDone" onDragDropped="#dragDropped" onDragEntered="#dragEnter" onDragExited="#dragExited" onMouseDragOver="#mouseDragOver" onMouseDragReleased="#mouseDragDropped" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="dragText" strokeType="OUTSIDE" strokeWidth="0.0" text="Drag and drop image or" />
                            </children>
                         </StackPane>
