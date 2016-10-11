@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.LostFound;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,38 @@ public class NewLostFoundController implements Initializable {
         nav  = new Navigator(getApp().getMain());
     }
     
+    public NewLostFoundController(Hotels app, ObservableList <LostFound> service, String id) {
+        this.app = app;
+        this.service = service;
+        nav  = new Navigator(getApp().getMain());
+        
+        for (int i = 0; i < service.size(); i++){
+            if(service.get(i).getId().equals(id)){
+                System.out.println("Populating data to New Lost Found UI: "+service.get(i).getItemName());
+            }
+            
+        }
+    }
+    
+    private ObservableList <LostFound> service;
+
+    public ObservableList<LostFound> getService() {
+        return service;
+    }
+
+    public void setService(ObservableList<LostFound> service) {
+        this.service = service;
+    }
+    
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     
     
     private Navigator nav;
@@ -118,6 +151,7 @@ public class NewLostFoundController implements Initializable {
             ex.printStackTrace();
         }
         room.setItems(roomList);
+
     }    
     
     @FXML
@@ -167,4 +201,6 @@ public class NewLostFoundController implements Initializable {
         
         Util.notify(State.NOTIFY_SUCCESS, "A Lost Item has been Rgistered", Pos.CENTER);
     }
+    
+    
 }

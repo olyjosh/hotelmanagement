@@ -29,7 +29,7 @@ import org.json.JSONObject;
 public class LaundryListController implements Initializable {
 
     
-    private TableView<LaundryList> table;
+    private TableView table;
     private TableColumn room;
     private TableColumn guest;
     private TableColumn date;
@@ -74,17 +74,16 @@ public class LaundryListController implements Initializable {
             dailyArray = daily.getJSONArray("message");
             
             getLaundryList();
-            System.out.println("printing service : " + service);
-            table.setItems(service);
             
-            room.setCellValueFactory(new PropertyValueFactory<>("room"));
-            guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
+            
+            //room.setCellValueFactory(new PropertyValueFactory<>("room"));
+            //guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             items.setCellValueFactory(new PropertyValueFactory<>("items"));
             total.setCellValueFactory(new PropertyValueFactory<>("total"));
-            posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
+            //posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
             balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-            status.setCellValueFactory(new PropertyValueFactory<>("status"));
+            //status.setCellValueFactory(new PropertyValueFactory<>("status"));
             user.setCellValueFactory(new PropertyValueFactory<>("user"));
             
             table.getColumns().setAll(room, guest, date, items, total, posted, balance, status, user);
@@ -98,7 +97,7 @@ public class LaundryListController implements Initializable {
             for(int i = 0; i < dailyArray.length(); i++){
                 ls = new LaundryList();
                 JSONObject oj = dailyArray.getJSONObject(i);
-                
+                System.out.println("printing daily array : " + dailyArray);
                 //ls.setRoom(oj.getString("room"));
                 //ls.setGuest(String.valueOf(oj.get("guest")));
                 ls.setDate(oj.getString("date"));
@@ -109,7 +108,11 @@ public class LaundryListController implements Initializable {
                 //ls.setStatus(oj.getString("status"));
                 ls.setUser(oj.getString("user"));
                 
+                System.out.println("printing LAundry List Object : " + ls);
                 service.addAll(ls);
+                
+             
+                table.setItems(service);
             }
            
         }catch(Exception e){
