@@ -3,8 +3,10 @@ package hotels.util;
 import eu.hansolo.enzo.notification.Notification;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -45,7 +47,20 @@ public class Util
         });
 
     }
+    
+    private static HashMap<String, Image> imageCache = new HashMap<String, Image>();
+    public static Image getImage(String imgId) {
+        boolean backload = true; //background downloads
+        Image image = imageCache.get(imgId);
+        if (image == null) {
+            System.out.println(Navigator2.getIMG_URL() + imgId);
+            image = new Image(Navigator2.getIMG_URL() + imgId, backload);
 
+            imageCache.put(imgId, image);
+        }
+        return image;
+    }
+    
     public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
         
         Notification.Notifier.setPopupLocation(stage, pos);

@@ -48,7 +48,7 @@ public class Navigator {
     //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
     private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
-    private final String OP_URL = BASE_URL+"op/";
+    public final String OP_URL = BASE_URL+"op/";
     
     public Navigator(Main main) {
         //NEW CODE FOR THE SAKE OF PROXY

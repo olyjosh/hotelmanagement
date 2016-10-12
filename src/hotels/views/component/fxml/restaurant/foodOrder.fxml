@@ -33,12 +33,12 @@
       </Text>
       <HBox layoutX="20.0" layoutY="5.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Text layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders withing the Restaurant" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
+            <Text fontSmoothingType="LCD" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders withing the Restaurant" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="247.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-   Record Orders that are from withing the hotel" />
+            <Text fontSmoothingType="LCD" layoutX="247.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-   Record Orders that are from withing the hotel" />
          </children>
       </HBox>
       <TitledPane animated="false" collapsible="false" layoutX="628.0" layoutY="44.0" prefHeight="349.0" prefWidth="353.0" text="Details" AnchorPane.bottomAnchor="62.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="44.0">
@@ -103,7 +103,7 @@
          </content>
       </TitledPane>
       <Button layoutX="597.0" layoutY="411.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="161.0" text="Print Invoice" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="204.0" />
-      <Button layoutX="887.0" layoutY="411.0" mnemonicParsing="false" text="Decline" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="14.0" />
+      <Button layoutX="887.0" layoutY="411.0" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="14.0" />
       <Button layoutX="20.0" layoutY="411.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="161.0" text="New Order Entry" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="20.0" />
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="44.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="44.0">
          <children>
