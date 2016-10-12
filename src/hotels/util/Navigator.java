@@ -56,7 +56,12 @@ public class Navigator {
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
                     public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
-                        main.responseProcessing(null);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                main.responseProcessing(null);
+                            }
+                        });
                         hr.setHeader("User-Agent", USER_AGENT);
                         hr.setHeader("token", Storage.auth_token);
                     }
@@ -100,7 +105,7 @@ public class Navigator {
                                 main.responseError("Invalid server response");
                             }
                         });
-
+                        main.responseError("Network problem...");
                         Logger.getLogger(Navigator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
@@ -232,7 +237,6 @@ public class Navigator {
         String url = OP_URL+"fetch/floor";
         try{
             HttpGet request = new HttpGet(url);
-            
            httpClient.execute(request);
             return res;
         } catch (IOException e) {
@@ -298,7 +302,9 @@ public class Navigator {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
+            
             e.printStackTrace();
+            
         }
         return null;
     }
@@ -461,7 +467,7 @@ public class Navigator {
         }
         return null;
     }
-    
+        
     public JSONObject fetchLostFound(){
         String url = OP_URL+"fetch/lostfound";
         try{
@@ -475,9 +481,19 @@ public class Navigator {
         return null;
     }
     
-       
-    public String stripDate(String rawdate){
-        String [] date = rawdate.split("T");
-        return date[0];
+    public JSONObject editLostFound(List data){
+        String url = OP_URL+"edit/lostfound";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+      
 }

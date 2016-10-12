@@ -69,7 +69,7 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button layoutX="584.0" mnemonicParsing="false" onAction="#showEditLostFound" prefHeight="31.0" prefWidth="108.0" text="Edit">
+            <Button layoutX="584.0" mnemonicParsing="false" onAction="#showNewLostFound" prefHeight="31.0" prefWidth="108.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>

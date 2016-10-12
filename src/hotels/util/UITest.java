@@ -6,7 +6,11 @@
 package hotels.util;
 
 import hotels.Hotels;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javafx.application.Application;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +38,20 @@ public class UITest extends Application{
 //        Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));
         stage.show();
+        
+        
+        
+    }
+    
+    private void v(){
+        Service<Object> service = new Service<Object>() {
+            @Override
+            protected Task<Object> createTask() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+        
+        service.start();
     }
     
     public static void main(String[] args) {

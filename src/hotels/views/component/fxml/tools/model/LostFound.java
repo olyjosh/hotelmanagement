@@ -21,6 +21,16 @@ public class LostFound {
     private String discardDate;
     private String discardBy;
     private String id;
+    private String founder;
+    private String remark;
+    private String name;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+    private String country;
+    private String phone;
+    
 
     public String getEntryDate() {
         return entryDate;
@@ -103,10 +113,83 @@ public class LostFound {
         this.discardBy = discardBy;
     }
 
-    @Override
-    public String toString() {
-        return "LostFound{" + "entryDate=" + entryDate + ", itemName=" + itemName + ", whereLost=" + whereLost + ", itemColour=" + itemColour + ", roomNo=" + roomNo + ", returnDate=" + returnDate + ", returnBy=" + returnBy + ", discardDate=" + discardDate + ", discardBy=" + discardBy + ", id=" + id + '}';
+    public String getFounder() {
+        return founder;
     }
 
-   
+    public void setFounder(String founder) {
+        this.founder = founder;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "LostFound{" + "entryDate=" + entryDate + ", itemName=" + itemName + ", whereLost=" + whereLost + ", itemColour=" + itemColour + ", roomNo=" + roomNo + ", returnDate=" + returnDate + ", returnBy=" + returnBy + ", discardDate=" + discardDate + ", discardBy=" + discardBy + ", id=" + id + ", founder=" + founder + ", remark=" + remark + ", name=" + name + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", country=" + country + ", phone=" + phone + '}';
+    }
+    
+    
+    
 }

@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import hotels.controllers.Login;
 import hotels.controllers.Main;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -21,7 +23,7 @@ public class Hotels extends Application {
     
     private Stage stage;
     private Main m;
-
+    public ExecutorService e = Executors.newFixedThreadPool(3);
     
     
     @Override
@@ -90,11 +92,10 @@ public class Hotels extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/Main.fxml"));
         loader.setController(m);
         //Main m =(Main)loader.getController();
-        
         //setMain(m);
         //loader.setController(controller);  // Joshua this is use when u need to specify controller by your self. You must in this case remove the controller from fml file
         Parent root = (Parent)loader.load();
-        System.out.println(stage);
+//        System.out.println(stage);
         stage.setScene(new Scene(root));
     }
 

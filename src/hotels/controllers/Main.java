@@ -6,8 +6,11 @@ import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
+import hotels.views.component.fxml.front.controller.RoomStayView;
 import hotels.views.component.fxml.front.controller.RoomsPane;
 import hotels.views.component.fxml.housekeep.controller.HouseKeep;
+import hotels.views.component.fxml.housekeep.controller.MaidManagement;
+import hotels.views.component.fxml.housekeep.controller.ScheduleManagement;
 import hotels.views.component.fxml.laundry.DailyLaundryController;
 import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
@@ -17,6 +20,9 @@ import hotels.views.component.fxml.laundry.NewDailyController;
 import hotels.views.component.fxml.laundry.NewItemController;
 import hotels.views.component.fxml.laundry.NewLaundryServiceController;
 import hotels.views.component.fxml.laundry.ReturnInController;
+import hotels.views.component.fxml.restaurant.controller.FoodOrder;
+import hotels.views.component.fxml.restaurant.controller.NewFood;
+import hotels.views.component.fxml.restaurant.controller.OnlineFoodOrder;
 import hotels.views.component.fxml.tools.AccountListController;
 import hotels.views.component.fxml.tools.BusinessSourceController;
 import hotels.views.component.fxml.tools.HotelServiceListController;
@@ -60,7 +66,8 @@ import org.json.JSONObject;
  */
 public class Main implements Initializable{
 
-    @FXML private StackPane frontContentStack, laundryContentStack,houseContentStack,toolContentStack;
+    @FXML private StackPane frontContentStack, laundryContentStack,
+            houseContentStack,toolContentStack,restaurantContentStack;
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
     @FXML private Label userButton, progLabel;
@@ -203,8 +210,10 @@ public class Main implements Initializable{
     
     @FXML
     private void showRoomStayView() throws IOException{
+        RoomStayView controller = new RoomStayView(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/roomStayView.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane)loader.load();
         ObservableList<Node> children = frontContentStack.getChildren();
         if(children.size()>0)frontContentStack.getChildren().remove(0, children.size());
@@ -428,7 +437,7 @@ public class Main implements Initializable{
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/houseKeep.fxml"));
         loader.setController(controller);
-        AnchorPane content = (AnchorPane) loader.load();
+        HBox content = (HBox) loader.load();
         ObservableList<Node> children = houseContentStack.getChildren();
         if (children.size() > 0) {
             houseContentStack.getChildren().remove(0, children.size());
@@ -439,7 +448,7 @@ public class Main implements Initializable{
     
     @FXML
      private void showMaidList() throws IOException {
-        HouseKeep controller = new HouseKeep(this.getApp());
+        MaidManagement controller = new MaidManagement(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/maidManagement.fxml"));
         loader.setController(controller);
@@ -454,7 +463,7 @@ public class Main implements Initializable{
     
      @FXML
      private void showSchedule() throws IOException {
-        HouseKeep controller = new HouseKeep(this.getApp());
+         ScheduleManagement controller = new ScheduleManagement(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/housekeep/scheduleManagement.fxml"));
         loader.setController(controller);
@@ -571,9 +580,9 @@ public class Main implements Initializable{
         children.add(content);
     }
      
-          @FXML
+     @FXML
      private void showReminderList() throws IOException {
-              ReminderListController controller = new ReminderListController(this.getApp());
+        ReminderListController controller = new ReminderListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
         loader.setController(controller);
@@ -584,6 +593,54 @@ public class Main implements Initializable{
         }
         children.add(content);
     }
+     
+     
+     //Restaurant 
+     @FXML
+     private void showFoodOrder() throws IOException {
+        FoodOrder controller = new FoodOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/foodOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+         
+     @FXML
+     private void showOnlineFoodOrder() throws IOException {
+        OnlineFoodOrder controller = new OnlineFoodOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/onlineFoodOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showNewFood() throws IOException {
+        NewFood controller = new NewFood(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/newFood.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = restaurantContentStack.getChildren();
+        if (children.size() > 0) {
+            restaurantContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
+     
      
      //Testing creation of Users.
      @FXML 

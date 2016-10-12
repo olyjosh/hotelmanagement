@@ -25,32 +25,27 @@ public class State {
     public static String channel_Mobile = "mobile";
     public static String channel_FRONT = "front";
     
-    //=============Notification Constants=======
     
-    public static String NOTIFY_SUCCESS = "Operation Successful";
-    public static String NOTIFY_ERROR = "Error in Operation, process Aborted";
-    public static String NOTIFY_WARNING = "Processing.....Continue";
-    public static String NOTIFY_BOOKING = "Booking Notification";
-    public static String NOTIFY_CHECKIN = "Checkin Notification";
-    public static String NOTIFY_RESERVE = "Reservation Notification";
+    public final static String NOTIFY_SUCCESS = "Operation Successful";
+    public final static String NOTIFY_ERROR = "Error in Operation, process Aborted";
+    public final static String NOTIFY_WARNING = "Processing.....Continue";
+    public final static String NOTIFY_BOOKING = "Booking Notification";
+    public final static String NOTIFY_CHECKIN = "Checkin Notification";
+    public final static String NOTIFY_RESERVE = "Reservation Notification";
     
-    //============User Role Constants=================
     
-    public static int USER_SUPER_ADMIN = 0;
-    public static int USER_ADMIN = 1;
-    public static int USER_ADMIN_2 = 2;
-    public static int USER_FRONT = 3;
-    public static int USER_HOUSEKEEP = 4;
-    public static int USER_LAUNDRY = 5;
-    public static int USER_KITCHEN = 6;
-    public static int USER_MINIBAR = 7;
-    public static int USER_MAINTENANCE = 8;
-    
-    //============Status Constants=====================
-    
-    public static String STATUS_P = "Pending";
-    public static String STATUS_C = "Completed";
-    public static String STATUS_R = "Returned";
-    public static String STATUS_N = "Not yet Returned";
-    
+    //USERS PRIVILEDGES
+    public final static int USER_SUPER_ADMIN = 0;
+    public final static int USER_ADMIN = 1;
+    public final static int USER_ADMIN_2 = 2;
+    public final static int USER_FRONT = 3;
+    public final static int USER_HOUSEKEEP = 4;
+    public final static int USER_LAUNDRY = 5;
+    public final static int USER_KITCHEN = 6;
+    public final static int USER_MINIBAR = 7;
+    public final static int USER_MAINTENANCE = 8;
+    public final static int USER_MAID = 9;
+    public final static int USER_BARTENDER = 10;
 }
+    
+

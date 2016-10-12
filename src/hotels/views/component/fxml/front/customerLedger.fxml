@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -9,19 +13,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="1086.0" layoutY="14.0" text="Customers Ledger" underline="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
+      <Label layoutX="1174.0" layoutY="14.0" text="Customers Ledger" underline="true" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TitledPane collapsible="false" layoutX="8.0" layoutY="107.0" prefHeight="339.0" prefWidth="319.0" text="Customer List" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="107.0">
+      <TitledPane collapsible="false" layoutX="8.0" layoutY="89.0" prefHeight="357.0" prefWidth="319.0" text="Customer List" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="89.0">
          <content>
             <ListView prefHeight="325.0" prefWidth="198.0" />
          </content>
       </TitledPane>
-      <TitledPane collapsible="false" layoutX="336.0" layoutY="107.0" prefHeight="339.0" prefWidth="892.0" text="Customers Ledger Sheet" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="336.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="107.0">
+      <TitledPane collapsible="false" layoutX="336.0" layoutY="89.0" prefHeight="357.0" prefWidth="978.0" text="Customers Ledger Sheet" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="336.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="89.0">
          <content>
             <TableView prefHeight="325.0" prefWidth="976.0">
               <columns>
@@ -40,9 +44,9 @@
             </TableView>
          </content>
       </TitledPane>
-      <TitledPane collapsible="false" layoutX="7.0" layoutY="5.0" prefHeight="97.0" prefWidth="1070.0" text="Select Date Range" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="5.0">
+      <TitledPane collapsible="false" layoutX="7.0" layoutY="5.0" prefHeight="81.0" prefWidth="1156.0" text="Select Date Range" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="5.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="1154.0">
                <children>
                   <DatePicker layoutX="13.0" layoutY="14.0" />
                   <Label layoutX="237.0" layoutY="5.0" text="-">

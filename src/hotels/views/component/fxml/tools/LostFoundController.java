@@ -7,10 +7,13 @@ package hotels.views.component.fxml.tools;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
+import hotels.util.Util;
 import hotels.views.component.fxml.tools.model.LostFound;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,13 +103,30 @@ public class LostFoundController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        try {
-            // TODO
-            lost = nav.fetchLostFound();
-            System.out.println("printing lost Items : " + lost);
-            lostArray = lost.getJSONArray("message");
-            
-            getLostList();
+        onLoad();
+    }    
+    
+    private void onLoad(){
+        
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    lost = nav.fetchLostFound();
+                    System.out.println("printing lost Items : " + lost);
+                    lostArray = lost.getJSONArray("message");
+                    getLostList();
+                } catch (JSONException ex) {
+                    Logger.getLogger(LostFoundController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+           
             
             entryDate.setCellValueFactory(new PropertyValueFactory<>("entryDate"));
             itemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -119,18 +139,16 @@ public class LostFoundController implements Initializable {
             discardBy.setCellValueFactory(new PropertyValueFactory<>("discardBy"));
             
             table.getColumns().setAll(entryDate, itemName, whereLost, itemColour, roomNo, returnDate, returnBy, discardDate, discardBy);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+       
         
         table.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) -> {
             //Check whether item is selected and print value of selected item
             if (table.getSelectionModel().getSelectedItem() != null) {
-                System.out.println("Printing Selected value ID : "+ newValue.getId());
+                //System.out.println("Printing Selected value ID : "+ newValue.getId());
                 selectedID = newValue.getId();
             }
         });
-    }    
+    }
     
     private void getLostList(){
         try {
@@ -142,16 +160,25 @@ public class LostFoundController implements Initializable {
                 
                 ls.setId(oj.getString("_id"));
                 ls.setDiscardBy(oj2.getString("discardBy"));
-                ls.setDiscardDate(String.valueOf(oj2.get("discardDate")));
-                ls.setEntryDate(oj.getString("onDate"));
+                ls.setDiscardDate(Util.stripDate(String.valueOf(oj2.get("discardDate"))));
+                ls.setEntryDate(Util.stripDate(oj.getString("onDate")));
                 ls.setItemColour(oj.getString("color"));
                 ls.setItemName(oj.getString("name"));
                 ls.setReturnBy(oj2.getString("returnBy"));
-                ls.setReturnDate(String.valueOf(oj2.get("returnDate")));
+                ls.setReturnDate(Util.stripDate(String.valueOf(oj2.get("returnDate"))));
                 ls.setRoomNo(oj.getString("roomNo"));
                 ls.setWhereLost(oj.getString("location"));
+                ls.setFounder(oj.getString("founder"));
+                ls.setRemark(oj.getString("remark"));
+                ls.setName(oj.getJSONObject("comp").getString("name"));
+                ls.setName(oj.getJSONObject("comp").getString("address"));
+                ls.setName(oj.getJSONObject("comp").getString("city"));
+                ls.setName(oj.getJSONObject("comp").getString("state"));
+                ls.setName(oj.getJSONObject("comp").getString("zip"));
+                ls.setName(oj.getJSONObject("comp").getString("country"));
+                ls.setName(oj.getJSONObject("comp").getString("phone"));
                 
-                System.out.println("printing LostFound Object : " + ls);
+                
                 service.addAll(ls);
                 
                 System.out.println("printing service : " + service);

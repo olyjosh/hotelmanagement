@@ -8,6 +8,7 @@ package hotels.views.component.fxml.front;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import hotels.views.component.fxml.front.model.Reserve;
 import java.io.IOException;
 import java.net.URL;
@@ -191,8 +192,8 @@ public class ReserveListController implements Initializable {
                 rs = new Reserve();
                 JSONObject oj = bookArray.getJSONObject(i);
                 rs.setId(oj.getString("_id"));
-                rs.setArrival(nav.stripDate(oj.getString("arrival")));
-                rs.setCreatedAt(nav.stripDate(oj.getString("createdAt")));
+                rs.setArrival(Util.stripDate(oj.getString("arrival")));
+                rs.setCreatedAt(Util.stripDate(oj.getString("createdAt")));
                 rs.setChannel(oj.getString("channel"));
                 rs.setStatus(oj.getString("status"));
                 

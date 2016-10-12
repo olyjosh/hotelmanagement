@@ -41,9 +41,9 @@ public class Util
         nav = new Navigator(getApp().getMain());
     }
     
-    private static void formatDatePicker(DatePicker datePicker) {
-        String pattern = "dd-MM-yyyy";
-        String pattern2 = "yyyy-MM-dd";
+    public static void formatDatePicker(DatePicker datePicker) {
+        String pattern = "yyyy-MM-dd";
+        String pattern2 = "MMM dd, yyyy";
         
         datePicker.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
@@ -107,4 +107,8 @@ public class Util
         return test;
     }
          
+    public static String stripDate(String rawdate){
+        String [] date = rawdate.split("T");
+        return date[0];
+    }
 }

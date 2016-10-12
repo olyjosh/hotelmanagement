@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -49,16 +50,13 @@
                         </HBox>
                         <TableView fx:id="table" layoutX="14.0" layoutY="113.0" prefHeight="341.0" prefWidth="880.0" AnchorPane.bottomAnchor="67.79999999999995" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="368.8000000000002" AnchorPane.topAnchor="113.0">
                           <columns>
-                            <TableColumn prefWidth="38.999998450279236" />
-                            <TableColumn prefWidth="63.0" text="Suite No" />
+                            <TableColumn prefWidth="63.0" text="Suite" />
                               <TableColumn prefWidth="102.00003814697266" text="Type" />
                               <TableColumn prefWidth="132.0" text="Guest Name" />
-                              <TableColumn prefWidth="90.0" text="Arrival Date" />
-                              <TableColumn prefWidth="111.99996948242188" text="Departure Date" />
-                              <TableColumn prefWidth="44.0" text="Maid" />
-                              <TableColumn prefWidth="72.0" text="Pax(A/C)" />
-                              <TableColumn prefWidth="101.0" text="FO Comments" />
-                              <TableColumn prefWidth="118.0" text="HK Comments" />
+                              <TableColumn prefWidth="147.00003051757812" text="Arrival Date" />
+                              <TableColumn prefWidth="140.99996948242188" text="Departure Date" />
+                              <TableColumn prefWidth="127.0" text="Maid" />
+                              <TableColumn prefWidth="105.0" text="Pax(A/C)" />
                           </columns>
                         </TableView>
                      </children>
@@ -86,7 +84,15 @@
                                                             <VBox layoutX="10.0" layoutY="10.0">
                                                                <children>
                                                                   <Label layoutX="21.0" layoutY="5.0" text="House Keepers Comment" />
-                                                                  <TextArea fx:id="hkComment" editable="false" layoutX="21.0" layoutY="22.0" prefHeight="76.0" prefWidth="275.0" />
+                                                                  <TextArea fx:id="hkComment" editable="false" layoutX="21.0" layoutY="22.0" prefHeight="76.0" prefWidth="275.0">
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="5.0" />
+                                                                     </VBox.margin></TextArea>
+                                                                  <HBox alignment="CENTER">
+                                                                     <children>
+                                                                        <Button mnemonicParsing="false" text="Save" />
+                                                                     </children>
+                                                                  </HBox>
                                                                </children>
                                                             </VBox>
                                                          </children>

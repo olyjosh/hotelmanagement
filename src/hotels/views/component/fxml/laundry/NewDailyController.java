@@ -101,10 +101,10 @@ public class NewDailyController implements Initializable {
         System.out.println("New daily Controller coming up");
         //Setting Laundry status
         ObservableList status = FXCollections.observableArrayList();
-        status.add(State.STATUS_C);
-        status.add(State.STATUS_P);
-        status.add(State.STATUS_R);
-        status.add(State.STATUS_N);
+        //status.add(State.STATUS_C);
+        //status.add(State.STATUS_P);
+        //status.add(State.STATUS_R);
+        //status.add(State.STATUS_N);
         laundryStatus.setItems(status);
         
         itemList = FXCollections.observableArrayList();
