@@ -13,15 +13,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -62,6 +67,7 @@ public class NewHotelServiceController implements Initializable {
     private ImageView image;
     @FXML
     private TextField charge;
+    @FXML private Button button;
 
     /**
      * Initializes the controller class.
@@ -71,9 +77,11 @@ public class NewHotelServiceController implements Initializable {
         // TODO
         
         System.out.println("New Hotel Service Controller Invoked");
+        button.setOnAction((e) ->{
+            newHotelService();
+        });
     }    
     
-    @FXML
     private void newHotelService(){
         
         List <NameValuePair> param = new ArrayList<>();
@@ -85,11 +93,36 @@ public class NewHotelServiceController implements Initializable {
         param.add(new BasicNameValuePair("servive", "hotel"));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
       
-        System.out.println("New Hotel Service Event Fired");
-        response = nav.createHotelService(param);
-        System.out.println("Creating Hotel Service : " + response);
-        
-        Util.notify(State.NOTIFY_SUCCESS, "New Hotel Service Created and Saved", Pos.CENTER);
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    response = nav.createHotelService(param);
+                    if(response != null && response.getInt("status") == 200){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "New Hotel Service Created and Saved", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "New Hotel Service Creation Failed", Pos.CENTER);
+                            }
+                        });
+                    }   
+                } catch (JSONException ex) {
+                    Logger.getLogger(NewHotelServiceController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
     }
     
 }

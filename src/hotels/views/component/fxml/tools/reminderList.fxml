@@ -14,12 +14,12 @@
    <children>
       <Pane prefHeight="63.0" prefWidth="965.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="9.0" layoutY="8.0" text="Pay Out (Accounts Payable)">
+            <Label layoutX="9.0" layoutY="8.0" text="Reminders ">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Text layoutX="9.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Record all Miscellaneous Payouts here. This payout will reflect on Shift Report and Cashier Report. Use Payout Voucher for in-house Guests" />
+            <Text layoutX="9.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a List of all Reminders Past and Present" />
          </children>
       </Pane>
       <TableView layoutX="7.0" layoutY="73.0" prefHeight="331.0" prefWidth="951.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="73.0">
@@ -36,11 +36,6 @@
       </TableView>
       <Pane layoutX="460.0" layoutY="414.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="7.0">
          <children>
-            <Button layoutX="380.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Close">
-               <graphic>
-                  <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
             <Button layoutX="127.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />

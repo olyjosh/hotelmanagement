@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="36.0" prefHeight="478.0" prefWidth="831.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
         <tabs>
@@ -167,7 +167,7 @@
                            </children>
                         </VBox>
                         <StackPane fx:id="toolContentStack" layoutX="217.0" layoutY="104.0" prefHeight="456.0" prefWidth="1017.0" />
-                        <ToolBar prefHeight="102.0" prefWidth="1234.0">
+                        <ToolBar prefHeight="102.0" prefWidth="1234.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
                               <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="467.0">
                                  <children>
@@ -225,14 +225,14 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="245.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="243.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
                                           <Label id="newLabel" text="Others" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox alignment="CENTER" prefHeight="71.0" prefWidth="267.0">
                                        <children>
                                           <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showHotelService" text="Hotel services">
                                              <graphic>

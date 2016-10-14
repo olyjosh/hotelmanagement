@@ -35,7 +35,7 @@
                         <FontAwesomeIcon glyphName="REMOVE" />
                      </graphic>
                   </Button>
-                  <Button layoutX="220.0" layoutY="283.0" mnemonicParsing="false" onAction="#newHotelService" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
+                  <Button fx:id="button" layoutX="220.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

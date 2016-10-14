@@ -29,6 +29,7 @@ import hotels.views.component.fxml.tools.HotelServiceListController;
 import hotels.views.component.fxml.tools.LostFoundController;
 import hotels.views.component.fxml.tools.MiscSaleListController;
 import hotels.views.component.fxml.tools.NewHotelServiceController;
+import hotels.views.component.fxml.tools.NewReminderController;
 import hotels.views.component.fxml.tools.PayOutListController;
 import hotels.views.component.fxml.tools.PhoneListController;
 import hotels.views.component.fxml.tools.ReminderListController;
@@ -584,7 +585,7 @@ public class Main implements Initializable{
      private void showReminderList() throws IOException {
         ReminderListController controller = new ReminderListController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/reminderList.fxml"));
         loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = toolContentStack.getChildren();
@@ -642,13 +643,27 @@ public class Main implements Initializable{
      
      
      
-     //Testing creation of Users.
-     @FXML 
+     //Testing Codes down here.
+    @FXML 
     private void showNewUser(ActionEvent e) throws IOException{
       
         NewUserController controller = new NewUserController(this.getApp());
         controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    @FXML 
+    private void showNewReminder(ActionEvent e) throws IOException{
+      
+        NewReminderController controller = new NewReminderController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newReminder.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);

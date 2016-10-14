@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.geometry.Pos;
-import javafx.stage.Stage;
 import org.apache.http.HttpException;
 import static org.apache.http.HttpHeaders.USER_AGENT;
 import org.apache.http.HttpRequest;
@@ -21,13 +19,11 @@ import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.HttpStatus;
-import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -48,7 +44,7 @@ public class Navigator {
     //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
     private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
-    private final String OP_URL = BASE_URL+"op/";
+    public final String OP_URL = BASE_URL+"op/";
     
     public Navigator(Main main) {
 
@@ -453,6 +449,36 @@ public class Navigator {
         return null;
     }
     
+    public JSONObject editHotelService(List data){
+        String url = OP_URL+"edit/service";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deleteHotelService(List data){
+        String url = OP_URL+"delete/service";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public JSONObject createLostFound(List data){
         String url = OP_URL+"create/lostfound";
         try{
@@ -496,4 +522,79 @@ public class Navigator {
         return null;
     }
       
+    public JSONObject deleteLostFound(List data){
+        String url = OP_URL+"delete/lostfound";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    //==============REMINDERS===============//
+    
+    public JSONObject createNewReminder(List data){
+        String url = OP_URL+"create/reminder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchReminder(){
+        String url = OP_URL+"fetch/reminder";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editReminder(List data){
+        String url = OP_URL+"edit/reminder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteRemider(List data){
+        String url = OP_URL+"delete/reminder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

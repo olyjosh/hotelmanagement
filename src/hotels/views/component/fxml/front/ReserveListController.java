@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,9 +18,11 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
@@ -101,17 +104,37 @@ public class ReserveListController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
+        
             // TODO
-            booking = nav.fetchBooking();
-            bookArray = booking.getJSONArray("message");
+            Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        booking = nav.fetchBooking();
+                        if(booking != null){
+                            bookArray = booking.getJSONArray("message");
+                            getReservation();
+                        }else{
+                            Util.notify(State.NOTIFY_ERROR, "Error Fetching Reservations and Booking", Pos.CENTER);
+                        }
+                    } catch (JSONException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+            
             
             cons.add("Show All");
             cons.add(State.RM_BOOKED);
             cons.add(State.RM_RESERVED);
             statusCombo.setItems(cons);
             
-            getReservation();
+            
             table.setItems(reserv);
 
             col1.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -123,9 +146,7 @@ public class ReserveListController implements Initializable {
             col7.setCellValueFactory(new PropertyValueFactory<>("status"));
             
             table.getColumns().setAll(col1, col2, col3, col4, col5, col6, col7);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+         
         
         searchField.textProperty().addListener(new InvalidationListener() {
 
@@ -183,7 +204,27 @@ public class ReserveListController implements Initializable {
         }
     });
         
-        
+        table.setRowFactory(new Callback<TableView<Reserve>, TableRow<Reserve>>() {
+            @Override
+            public TableRow<Reserve> call(TableView<Reserve> param) {
+                final TableRow<Reserve> row = new TableRow<>();
+               
+                row.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        Reserve item = row.getItem();
+                        if(item !=null){
+                            row.setTooltip(new Tooltip("Guest Name : "+item.getGuestName() + "\n" 
+                                    +"Room No : " + item.getRoom() + "\n" 
+                                    +"Phone No : " + item.getPhone() + "\n" 
+                                    +"Guest Status : " + item.getStatus()));
+                        }
+                    }
+                });
+                return row;
+                
+            }
+        });
     }    
     
     private void getReservation(){
@@ -211,30 +252,7 @@ public class ReserveListController implements Initializable {
         }
     }
     
-    //STILL TESTING SOME CRAZY CODES
-    private void tableCellToolTip(){
-            col2.setCellFactory(param -> {  
-                TableCell<Reserve, String> cell = new TableCell<Reserve, String>() {  
-                    @Override  
-                    protected void updateItem(String item, boolean empty) {  
-                        // calling super here is very important - don't  
-                        // skip this!  ok i don hear
-                        super.updateItem(item, empty);  
-                        if (empty) {    
-                            setTooltip(null);  
-                        } else { 
-                            if (getTableRow() != null) {  
-                                Reserve rs = getTableView().getItems().get(getTableRow().getIndex());  
-                                Tooltip tooltip = new Tooltip("xkggjgbjfbfjhbfhjasbf");  
-                                tooltip.setWrapText(true);  
-                                setTooltip(tooltip);  
-                            }  
-                        }  
-                    }        
-                };
-                return null;
-            });
-    }
+    
     
     @FXML 
     private void showCheckIn(ActionEvent e) throws IOException{

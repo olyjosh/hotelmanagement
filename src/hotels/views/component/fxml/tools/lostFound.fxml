@@ -59,7 +59,7 @@
       </TableView>
       <Pane layoutX="12.0" layoutY="413.0" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="12.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Print">
+            <Button mnemonicParsing="false" onAction="#print" prefHeight="31.0" prefWidth="108.0" text="Print">
                <graphic>
                   <FontAwesomeIcon glyphName="PRINT" />
                </graphic>
@@ -69,12 +69,12 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button layoutX="584.0" mnemonicParsing="false" onAction="#showNewLostFound" prefHeight="31.0" prefWidth="108.0" text="Edit">
+            <Button layoutX="584.0" mnemonicParsing="false" onAction="#showEditLostFound" prefHeight="31.0" prefWidth="108.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button layoutX="707.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Delete">
+            <Button layoutX="707.0" mnemonicParsing="false" onAction="#deleteLostFound" prefHeight="31.0" prefWidth="108.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>

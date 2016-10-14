@@ -226,7 +226,7 @@ public class RoomsPane implements Initializable {
 //                    roomType.setStyle("-fx-text-fill : #ffffff;");
 //                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
 //                }break;
-//                case State.RM_DUEOUT : {
+//                case State.RM_DUEOUT: {
 //                    v.setStyle("-fx-background-color :" + Codes.COLOR_DUE_OUT);
 //                    roomNo.setStyle("-fx-text-fill : #ffffff;");
 //                    roomType.setStyle("-fx-text-fill : #ffffff;");

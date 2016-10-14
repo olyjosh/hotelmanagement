@@ -11,6 +11,7 @@ package hotels.util;
  */
 public class State {
     
+
     //========Front Desk Constants===========
     
     public static String RM_VACANT = "vacant";
@@ -49,3 +50,5 @@ public class State {
 }
     
 
+
+    

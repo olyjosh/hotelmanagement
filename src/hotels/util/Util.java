@@ -5,15 +5,12 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.glyphfont.FontAwesome;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +44,7 @@ public class Util
         
         datePicker.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
-                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern2);
+                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern);
             
 
             @Override
@@ -70,7 +67,18 @@ public class Util
         });
 
     }
-
+    
+    private static HashMap<String, Image> imageCache = new HashMap<String, Image>();
+    public static Image getImage(String imgId) {
+        boolean backload = true; //background downloads
+        Image image = imageCache.get(imgId);
+        if (image == null) {
+            System.out.println(Navigator2.getIMG_URL() + imgId);
+            image = new Image(Navigator2.getIMG_URL() + imgId, backload);
+            return image;
+        }
+        return null;
+    }
     public static JSONArray getUserList(){
                 
         try {
