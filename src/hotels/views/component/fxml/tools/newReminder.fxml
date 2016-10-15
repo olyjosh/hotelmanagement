@@ -36,7 +36,7 @@
                      </font>
                   </Label>
                   <CheckBox fx:id="stopCheck" layoutX="53.0" layoutY="433.0" mnemonicParsing="false" text="Stop Reminder After" />
-                  <DatePicker fx:id="stopDate" layoutX="229.0" layoutY="428.0" prefHeight="31.0" prefWidth="124.0" />
+                  <DatePicker fx:id="stopDate" layoutX="229.0" layoutY="428.0" prefHeight="31.0" prefWidth="142.0" />
                   <Button fx:id="button" layoutX="517.0" layoutY="484.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
@@ -55,7 +55,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="102.0" layoutY="382.0" prefHeight="31.0" prefWidth="256.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="102.0" layoutY="382.0" prefHeight="31.0" prefWidth="269.0">
                      <children>
                         <TextField fx:id="intervalF" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="342.0" text="0" />
                         <ChoiceBox fx:id="interval" layoutX="119.0" layoutY="87.0" prefHeight="27.0" prefWidth="326.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />

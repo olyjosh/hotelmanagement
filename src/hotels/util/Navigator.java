@@ -597,4 +597,64 @@ public class Navigator {
         }
         return null;
     }
+    
+    //==============Phone Directory===============//
+    
+    public JSONObject createNewPhone(List data){
+        String url = OP_URL+"create/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchPhone(){
+        String url = OP_URL+"fetch/phone";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editPhone(List data){
+        String url = OP_URL+"edit/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deletePhone(List data){
+        String url = OP_URL+"delete/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

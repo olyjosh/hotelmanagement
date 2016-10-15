@@ -49,7 +49,7 @@ public class EditLostFoundController implements Initializable {
     @FXML
     private TextField location;
     @FXML
-    private ComboBox<?> room;
+    private ComboBox room;
     @FXML
     private TextField founder;
     @FXML
@@ -134,7 +134,7 @@ public class EditLostFoundController implements Initializable {
         itemName.setText(data.getItemName());
         color.setText(data.getItemColour());
         location.setText(data.getWhereLost());
-        //room.getSelectionModel().getClass().cast(data.getRoomNo());
+        room.getSelectionModel().select(data.getRoomNo());
         founder.setText(data.getFounder());
         remark.setText(data.getRemark());
         name.setText(data.getName());

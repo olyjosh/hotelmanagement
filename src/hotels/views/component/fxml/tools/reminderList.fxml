@@ -22,13 +22,13 @@
             <Text layoutX="9.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a List of all Reminders Past and Present" />
          </children>
       </Pane>
-      <TableView layoutX="7.0" layoutY="73.0" prefHeight="331.0" prefWidth="951.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="73.0">
+      <TableView fx:id="table" layoutX="7.0" layoutY="73.0" prefHeight="331.0" prefWidth="951.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="73.0">
          <columns>
-            <TableColumn prefWidth="123.0" text="Date" />
-            <TableColumn prefWidth="215.0" text="Name" />
-            <TableColumn prefWidth="383.0" text="Message" />
-            <TableColumn prefWidth="119.0" text="Priority" />
-            <TableColumn prefWidth="108.0" text="Status" />
+            <TableColumn fx:id="startDate" prefWidth="123.0" text="Start Date" />
+            <TableColumn fx:id="name" prefWidth="215.0" text="Name" />
+            <TableColumn fx:id="message" prefWidth="383.0" text="Message" />
+            <TableColumn fx:id="priority" prefWidth="119.0" text="Priority" />
+            <TableColumn fx:id="status" prefWidth="108.0" text="End Date" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -36,17 +36,17 @@
       </TableView>
       <Pane layoutX="460.0" layoutY="414.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="7.0">
          <children>
-            <Button layoutX="127.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Edit">
+            <Button layoutX="127.0" mnemonicParsing="false" onAction="#showEditLostFound" prefHeight="31.0" prefWidth="115.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="New">
+            <Button mnemonicParsing="false" onAction="#showNewReminder" prefHeight="31.0" prefWidth="115.0" text="New">
                <graphic>
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button layoutX="253.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Delete">
+            <Button layoutX="253.0" mnemonicParsing="false" onAction="#deleteReminder" prefHeight="31.0" prefWidth="115.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>

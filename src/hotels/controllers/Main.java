@@ -658,17 +658,5 @@ public class Main implements Initializable{
         stage.showAndWait();
     }
     
-    @FXML 
-    private void showNewReminder(ActionEvent e) throws IOException{
-      
-        NewReminderController controller = new NewReminderController(this.getApp());
-        controller.setApp(getApp());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newReminder.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-        
-        stage.showAndWait();
-    }
+    
 }
