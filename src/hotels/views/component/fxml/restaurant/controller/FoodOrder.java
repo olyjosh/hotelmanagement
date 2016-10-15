@@ -2,11 +2,16 @@ package hotels.views.component.fxml.restaurant.controller;
 
 import hotels.Hotels;
 import hotels.util.Navigator2;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -33,10 +38,7 @@ public class FoodOrder implements Initializable {
         nav = new Navigator2(getApp().getMain());
         
     }
-    
-    
-
-
+ 
     /**
      * Initializes the controller class.
      */
@@ -55,6 +57,28 @@ public class FoodOrder implements Initializable {
 //            foodlist.add(new Label("item"), 2, i);
 //        }
     }
+      
+    @FXML private void showSample() throws IOException{
+        // Retrieve the seleted row that you want to pass to the new controller for editing
+        FoodModel selectedItem = null ;
+//                table.getSelectionModel().getSelectedItem();
+        if (selectedItem!=null) {
             
-            
+            NewOrder controller = new NewOrder(this.getApp());
+            controller.setApp(app);
+//            controller.setParsedData(selectedItem);  // the additional line for parsing data to new controller. 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/newOrder.fxml"));
+            loader.setController(controller);
+            AnchorPane content = (AnchorPane) loader.load();
+            Scene sc = new Scene(content);
+            Stage st = new Stage();
+            st.setScene(sc);
+            st.show();
+        }else {
+            System.out.println("NO SELECTED ITEM");
+        }
+
+    }
+    
+    
 }

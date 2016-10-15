@@ -9,7 +9,6 @@ import hotels.util.Util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,23 +17,18 @@ import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -49,7 +43,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -57,7 +51,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.json.JSONArray;
@@ -81,11 +74,13 @@ public class NewFood implements Initializable {
     @FXML private TableView<FoodModel> table;
     @FXML private TableColumn<FoodModel, String> nameCol, priceCol;
     @FXML private TableColumn statusCol;
-    @FXML private ObservableList<FoodModel> list;
     @FXML private TitledPane createTitledPane;
     @FXML private Hyperlink exitEdit;
     @FXML private StackPane paneStack;
+    @FXML private HBox priceBox;
     
+    
+    private ObservableList<FoodModel> list;
     final private Text AVAIL = GlyphsDude.createIcon(FontAwesomeIcons.CIRCLE);
     final private Text NOT_AVAIL = GlyphsDude.createIcon(FontAwesomeIcons.CIRCLE);
     
@@ -250,7 +245,6 @@ public class NewFood implements Initializable {
         fadeTransition.setToValue(0.3);
         fadeTransition.setCycleCount(Timeline.INDEFINITE);
         fadeTransition.setAutoReverse(true);
-        
         fadeTransition.play();
     }
 
@@ -430,7 +424,8 @@ public class NewFood implements Initializable {
                                 @Override
                                 public void run() {
                                     clear();
-                                    Util.notify(app.getStage(), Pos.CENTER, "Edited", "Food Menu Edited Successfully", 100, 400);
+                                    
+                                    Util.notify("Edited", "Food Menu Edited Successfully", Pos.CENTER);
                                 }
                             });
                         }
@@ -452,7 +447,7 @@ public class NewFood implements Initializable {
                                 @Override
                                 public void run() {
                                     clear();
-                                    Util.notify(app.getStage(), Pos.CENTER, "Food Created", "Food Menu Created Successfully", 100, 400);
+                                    Util.notify( "Food Created", "Food Menu Created Successfully", Pos.CENTER);
                                 }
                             });
                         }
@@ -523,34 +518,7 @@ public class NewFood implements Initializable {
         
     }
     
-    
-    @FXML private void showSample() throws IOException{
-        
-        // Retrieve the seleted row that you want to pass to the new controller for editing
-        FoodModel selectedItem = table.getSelectionModel().getSelectedItem();
-        if (selectedItem!=null) {
-            
-            // The below code is the usual way we have being passing app to every controller 
-            Sample controller = new Sample(this.getApp());
-            controller.setApp(app);
-            controller.setParsedData(selectedItem);  // the additional line for parsing data to new controller. 
-            // You can pass any data thos way. Without making them static
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/restaurant/sample.fxml"));
-            loader.setController(controller);
-            AnchorPane content = (AnchorPane) loader.load();
-            Scene sc = new Scene(content);
-            Stage st = new Stage();
-            st.setScene(sc);
-            st.show();
-        }else {
-            
-            // Do alert that no item is selected in the table 
-            System.out.println("NO SELECTED ITEM");
-        }
-
-    }
-    
-    
+  
 //    private class ButtonCell extends TableCell<FoodModel, FoodModel> {
 //
 //

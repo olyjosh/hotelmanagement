@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotels.util;
 
 import hotels.controllers.Main;
@@ -49,8 +44,8 @@ public class Navigator2 {
     private HttpClient httpClient;
 
     private final static String BASE_URL = "http://127.0.0.1:9016/api/"; 
-    //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-    //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
+//    private final static String BASE_URL = "http://192.168.0.197:9016/api/";   //development
+    //private final static String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
 
     private final static String OP_URL = BASE_URL + "op/";
     public final static String IMG_URL = BASE_URL+"static/image?id=";
@@ -60,6 +55,7 @@ public class Navigator2 {
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
                     public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
+                        res=null;
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -75,6 +71,7 @@ public class Navigator2 {
                 if (hr != null) {
                     try {
                         result = EntityUtils.toString(hr.getEntity());
+                        System.out.println("RESULT: "+result);
                         int status = hr.getStatusLine().getStatusCode();
                         if (status == HttpStatus.SC_OK) {
                             Platform.runLater(new Runnable() {
@@ -547,15 +544,104 @@ public class Navigator2 {
         }
         return null;
     }
-    
-         public JSONObject deleteFood(String id){
+
+    public JSONObject deleteFood(String id) {
         List<NameValuePair> data = new ArrayList<>();
         data.add(new BasicNameValuePair("id", id));
-        
-        String url = OP_URL+"delete/food";
+
+        String url = OP_URL + "delete/food";
         String param = URLEncodedUtils.format(data, "utf-8");
-        url +="?"+ param;
-        try{
+        url += "?" + param;
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+  
+        
+    public JSONObject createFoodOrder(String ...x) throws JSONException {
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("channel", State.channel_FRONT));
+        data.add(new BasicNameValuePair("orders", x[0]));
+        data.add(new BasicNameValuePair("guest_firstName", x[1]));
+        data.add(new BasicNameValuePair("guest_lastName", x[2]));
+        data.add(new BasicNameValuePair("guest_phone", x[3]));
+        data.add(new BasicNameValuePair("performedBy", Storage.getId()));
+
+        String url = OP_URL + "create/foodorders";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+        try {
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token", Storage.auth_token);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpResponse execute = httpClient.execute(request);
+            String toString = EntityUtils.toString(execute.getEntity());
+            System.out.println(toString);
+            return new JSONObject(toString);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }     
+     
+         
+     public JSONObject fetchFoodsOrders(String channel, String d1,String d2) {
+        String url = OP_URL + "fetch/foodorders";
+        List<NameValuePair> data = new ArrayList<>();
+
+        if(d1!=null){
+            data.add(new BasicNameValuePair("d1", d1));
+            data.add(new BasicNameValuePair("d2", d2));
+        }
+        if(channel!=null){
+            data.add(new BasicNameValuePair("channel", channel));
+        }
+
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+             
+     public JSONObject approveFoodsOrders(String id) {
+        String url = OP_URL + "approve/foodorders";
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("id", id));
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject cancelFoodsOrders(String id) {
+        String url = OP_URL + "cancel/foodorders";
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("id", id));
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+        try {
             HttpGet request = new HttpGet(url);
             httpClient.execute(request);
             return res;
@@ -566,12 +652,32 @@ public class Navigator2 {
     }
      
         
-             
+    public JSONObject doneFoodsOrders(String id) {
+        String url = OP_URL + "done/foodorders";
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("id", id));
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+     
     public static JSONObject rawTest(String array) throws JSONException {
         //2016-09-22
         List<NameValuePair> data = new ArrayList<>();
 //        data.add(new BasicNameValuePair("id", id));
-        data.add(new BasicNameValuePair("array", array));
+        data.add(new BasicNameValuePair("orders", array));
+        data.add(new BasicNameValuePair("guest_firstName", array));
+        data.add(new BasicNameValuePair("guest_lastName", array));
+        data.add(new BasicNameValuePair("guest_phone", array));
+
         String url = OP_URL + "create/orders";
         String param = URLEncodedUtils.format(data, "utf-8");
         url += "?" + param;

@@ -1,5 +1,7 @@
 package hotels.util;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import eu.hansolo.enzo.notification.Notification;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +9,11 @@ import java.util.HashMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -60,14 +65,26 @@ public class Util
         }
         return image;
     }
-    
-    public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
-        
-        Notification.Notifier.setPopupLocation(stage, pos);
-        Notification.Notifier.setWidth(w);
-        Notification.Notifier.setHeight(h);
-        Notification.Notifier.INSTANCE.notifySuccess(title, message);
-    }
+//    
+//    public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
+//        
+//        Notification.Notifier.setPopupLocation(stage, pos);
+//        Notification.Notifier.setWidth(w);
+//        Notification.Notifier.setHeight(h);
+//        Notification.Notifier.INSTANCE.notifySuccess(title, message);
+//    }
+//    
+    public static void notify(String title, String msg, Pos pos){
+        Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "35px");
+        createIcon.setFill(Paint.valueOf("#ffffff"));
+        Notifications.create()
+             .title(title)
+             .text(msg)
+             .graphic(createIcon)
+             .position(pos)
+             .darkStyle()
+             .show();
+   }
     
     public static String random(){
         String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));

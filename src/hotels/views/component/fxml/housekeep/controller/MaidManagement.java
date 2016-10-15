@@ -259,7 +259,7 @@ public class MaidManagement implements Initializable {
                                 commentButton.setText("Add Comment");
                                 comment.clear();
                                 error.setVisible(false);
-                                Util.notify(getApp().getStage(), Pos.CENTER, "Comment posted", "The comment has been posted!", 100, 400);
+                                Util.notify("Comment posted", "The comment has been posted!",Pos.CENTER);
 
                             } catch (JSONException ex) {
                                 Logger.getLogger(MaidManagement.class.getName()).log(Level.SEVERE, null, ex);

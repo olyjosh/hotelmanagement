@@ -43,6 +43,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.input.MouseEvent;
@@ -593,7 +594,23 @@ public class Main implements Initializable{
         children.add(content);
     }
      
-     
+    
+    public void showAdminComfirmation() throws IOException {
+
+//        NewOrder controller = new NewOrder(this.getApp());
+//        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/confirmation.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        Scene sc = new Scene(content);
+        Stage st = new Stage();
+        st.setScene(sc);
+        Dialog d = new Dialog();
+        
+        st.show();
+
+    }
+    
      
      
 }

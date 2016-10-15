@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hotels.util;
 
 /**
@@ -12,26 +8,18 @@ package hotels.util;
 public class State {
     
     public final static String RM_VACANT = "vacant";
-
     public final static String RM_BOOKED = "Booking";
-
     public final static String RM_OCCUPIED = "Occupied";
-
     public final static String RM_RESERVED = "Reservation";
-
     public final static String RM_DUEOUT = "due";
-
     public final static String RM_DIRTY = "dirty";
-
     public final static String RM_DISORDER = "disOrd";
-
     public final static String RM_GOOD = "ok";
     
     public final static String channel_ONLINE = "online";
-
     public final static String channel_Mobile = "mobile";
-
     public final static String channel_FRONT = "front";
+    public final static String channel_POS = "pos";
     
     //=============Notification Constants=======
     
@@ -55,4 +43,10 @@ public class State {
     public final static int USER_MAINTENANCE = 8;
     public final static int USER_MAID = 9;
     public final static int USER_BARTENDER = 10;
+    
+    //ORder status for bar and restaurant
+    public final static int ORDER_PENDING = 0;
+    public final static int ORDER_CANCEL = 1;
+    public final static int ORDER_PREPARING = 2;
+    public final static int ORDER_DONE = 3;
 }

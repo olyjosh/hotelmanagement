@@ -62,6 +62,7 @@ public class Navigator {
                 .addInterceptorFirst(new HttpRequestInterceptor() {
                     @Override
                     public void process(HttpRequest hr, HttpContext hc) throws HttpException, IOException {
+                        res=null;
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {

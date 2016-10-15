@@ -338,7 +338,7 @@
                            <children>
                               <VBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="HOTEL" size="7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="NEWSPAPER" size="7em" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry">
                                        <font>
                                           <Font name="System Bold" size="16.0" />

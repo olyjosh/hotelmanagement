@@ -66,6 +66,7 @@ public class BubbledLabel extends Label {
 	}
 
 	private void init(){
+            setWrapText(true);
 		DropShadow ds = new DropShadow();
 		ds.setOffsetX(1.3);
 		ds.setOffsetY(1.3);
