@@ -16,6 +16,10 @@ import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
 import hotels.views.component.fxml.laundry.LaundryListController;
 import hotels.views.component.fxml.laundry.LaundryServiceController;
+import hotels.views.component.fxml.laundry.NewDailyController;
+import hotels.views.component.fxml.laundry.NewItemController;
+import hotels.views.component.fxml.laundry.NewLaundryServiceController;
+import hotels.views.component.fxml.laundry.ReturnInController;
 import hotels.views.component.fxml.restaurant.controller.FoodOrder;
 import hotels.views.component.fxml.restaurant.controller.NewFood;
 import hotels.views.component.fxml.restaurant.controller.OnlineFoodOrder;
@@ -24,6 +28,8 @@ import hotels.views.component.fxml.tools.BusinessSourceController;
 import hotels.views.component.fxml.tools.HotelServiceListController;
 import hotels.views.component.fxml.tools.LostFoundController;
 import hotels.views.component.fxml.tools.MiscSaleListController;
+import hotels.views.component.fxml.tools.NewHotelServiceController;
+import hotels.views.component.fxml.tools.NewReminderController;
 import hotels.views.component.fxml.tools.PayOutListController;
 import hotels.views.component.fxml.tools.PhoneListController;
 import hotels.views.component.fxml.tools.ReminderListController;
@@ -311,20 +317,6 @@ public class Main implements Initializable{
     }
     
 
-    @FXML 
-    private void showLaundry(ActionEvent e) throws IOException{
-      
-        NewUserController controller = new NewUserController(this.getApp());
-        controller.setApp(getApp());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-        
-        stage.showAndWait();
-    }
-
     @FXML
     private void showLaundryDetail() throws IOException{
         LaundryDetailController controller = new LaundryDetailController(this.getApp());
@@ -382,9 +374,64 @@ public class Main implements Initializable{
 
     }
 
-   
+    @FXML 
+    private void showNewLaundryService(ActionEvent e) throws IOException{
+      
+        NewLaundryServiceController controller = new NewLaundryServiceController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/newLaundryService.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
     
-
+    @FXML 
+    private void showNewReturnIn(ActionEvent e) throws IOException{
+      
+        ReturnInController controller = new ReturnInController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/returnIn.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    @FXML 
+    private void showNewLaundryItem(ActionEvent e) throws IOException{
+      
+        NewItemController controller = new NewItemController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/newItem.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    @FXML 
+    private void showNewHotelService(ActionEvent e) throws IOException{
+      
+        NewHotelServiceController controller = new NewHotelServiceController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newHotelService.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    
+    
     //houseContentStack
     @FXML
     private void showHouseKeep() throws IOException {
@@ -478,8 +525,8 @@ public class Main implements Initializable{
     }
      
      
-    @FXML
-    private void showLostFound() throws IOException {
+     @FXML
+     private void showLostFound() throws IOException {
         LostFoundController controller = new LostFoundController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/lostFound.fxml"));
@@ -494,7 +541,7 @@ public class Main implements Initializable{
      
      @FXML
      private void showHotelService() throws IOException {
-         HotelServiceListController controller = new HotelServiceListController(this.getApp());
+        HotelServiceListController controller = new HotelServiceListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/hotelServiceList.fxml"));
         loader.setController(controller);
@@ -539,7 +586,7 @@ public class Main implements Initializable{
      private void showReminderList() throws IOException {
         ReminderListController controller = new ReminderListController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/reminderList.fxml"));
         loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = toolContentStack.getChildren();
@@ -613,4 +660,20 @@ public class Main implements Initializable{
     
      
      
+     //Testing Codes down here.
+    @FXML 
+    private void showNewUser(ActionEvent e) throws IOException{
+      
+        NewUserController controller = new NewUserController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    
 }

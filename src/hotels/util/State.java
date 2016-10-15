@@ -21,7 +21,6 @@ public class State {
     public final static String channel_FRONT = "front";
     public final static String channel_POS = "pos";
     
-    //=============Notification Constants=======
     
     public final static String NOTIFY_SUCCESS = "Operation Successful";
     public final static String NOTIFY_ERROR = "Error in Operation, process Aborted";
@@ -50,3 +49,7 @@ public class State {
     public final static int ORDER_PREPARING = 2;
     public final static int ORDER_DONE = 3;
 }
+    
+
+
+    

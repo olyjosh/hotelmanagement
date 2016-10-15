@@ -10,6 +10,8 @@ package hotels.views.component.fxml.front.controller;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
+import hotels.views.component.fxml.tools.LostFoundController;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -104,7 +107,7 @@ public class NewBookingController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         //Load default room settings
-        this.onLoad();
+        onLoad();
         checkinNow.setDisable(true);
         
         ObservableList booking = FXCollections.observableArrayList();
@@ -201,28 +204,44 @@ public class NewBookingController implements Initializable {
     }
     
     private void onLoad(){
-        try {
-            
-            roomType = nav.fetchRoomType();
-            rooms = nav.fetchRoom();
         
-            System.out.println(roomType);
-            
-            JSONArray roomTypeArray = roomType.getJSONArray("message");
-            System.out.println("Printing JSON Array : " +  roomTypeArray);
-            
-            for(int i = 0; i < roomTypeArray.length(); i++){
-                JSONObject oj = roomTypeArray.getJSONObject(i);
-                suiteList.add(oj.getString("name"));
-                
-                JSONObject oj2 = oj.getJSONObject("rate");
-                rateList.add(oj2.get("rate"));
-                
+            Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    roomType = nav.fetchRoomType();
+                    rooms = nav.fetchRoom();
+                    if(roomType != null && rooms != null ){
+                        JSONArray roomTypeArray = roomType.getJSONArray("message");
+                        System.out.println("Printing JSON Array : " +  roomTypeArray);
+
+                        for(int i = 0; i < roomTypeArray.length(); i++){
+                            JSONObject oj = roomTypeArray.getJSONObject(i);
+                            suiteList.add(oj.getString("name"));
+
+                            JSONObject oj2 = oj.getJSONObject("rate");
+                            rateList.add(oj2.get("rate"));
+
+                        }
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Error Fetching Rooms and Room Type", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
             }
-            
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+         
         suite.setItems(suiteList);
         
     } 
@@ -291,12 +310,38 @@ public class NewBookingController implements Initializable {
             param.add(new BasicNameValuePair("isCheckIn", "false"));
         }
         
-        response = nav.createBooking(param);
-        System.out.println("Booking a Room : " + response);
-        
-        nav.notify((Stage) room.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, firstName.getText() + " " +
-                lastName.getText() + "is Successfully Booked on Room " + 
-                room.getSelectionModel().getSelectedItem().toString(), 100,600);
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    response = nav.createBooking(param);
+                    if(response != null && response.getInt("status") == 200){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify( State.NOTIFY_BOOKING, firstName.getText() + " " +
+                                    lastName.getText() + "is Successfully Booked on Room " + 
+                                    room.getSelectionModel().getSelectedItem().toString(), Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Booking Operation Failed", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
     }
     
     

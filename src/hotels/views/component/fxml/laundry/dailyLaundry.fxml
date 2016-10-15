@@ -27,27 +27,26 @@
          </children>
       </Pane>
       <Label layoutX="33.0" layoutY="77.0" text="Linen No " />
-      <TextField layoutX="116.0" layoutY="72.0" />
+      <TextField fx:id="linenText" layoutX="116.0" layoutY="72.0" />
       <Label layoutX="33.0" layoutY="116.0" text="User" />
-      <TextField layoutX="116.0" layoutY="111.0" />
-      <Label layoutX="334.0" layoutY="79.0" text="To Date" />
-      <TableView layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
+      <Label layoutX="334.0" layoutY="79.0" text="Date" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Linen #" />
-          <TableColumn prefWidth="141.0" text="Date Issued" />
-            <TableColumn prefWidth="173.0" text="User" />
-            <TableColumn minWidth="0.0" prefWidth="146.0" text="Status" />
-            <TableColumn prefWidth="121.0" text="Returned" />
-            <TableColumn prefWidth="273.0" text="Remark" />
+          <TableColumn fx:id="linen" prefWidth="75.0" text="Linen #" />
+          <TableColumn fx:id="date" prefWidth="141.0" text="Date Issued" />
+            <TableColumn fx:id="user" prefWidth="173.0" text="User" />
+            <TableColumn fx:id="status" minWidth="0.0" prefWidth="146.0" text="Status" />
+            <TableColumn fx:id="returned" prefWidth="121.0" text="Returned" />
+            <TableColumn fx:id="remark" prefWidth="273.0" text="Remark" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <DatePicker layoutX="408.0" layoutY="74.0" />
+      <DatePicker fx:id="datePicker" layoutX="408.0" layoutY="74.0" />
       <HBox layoutX="449.0" layoutY="412.0" spacing="5.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="New">
+            <Button mnemonicParsing="false" onAction="#showNewDailyLaundry" prefHeight="31.0" prefWidth="163.0" text="New">
                <graphic>
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
@@ -64,7 +63,8 @@
             </Button>
          </children>
       </HBox>
-      <ComboBox layoutX="408.0" layoutY="111.0" prefHeight="31.0" prefWidth="218.0" />
+      <ComboBox fx:id="statusCombo" layoutX="408.0" layoutY="111.0" prefHeight="31.0" prefWidth="218.0" />
       <Label layoutX="334.0" layoutY="116.0" text="Status" />
+      <ComboBox fx:id="userCombo" layoutX="116.0" layoutY="111.0" prefHeight="31.0" prefWidth="187.0" />
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ package hotels.views.component.fxml.admin;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -44,6 +48,21 @@ public class NewUserController implements Initializable {
     private TextField email;
     @FXML
     private ComboBox<?> role;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField country;
+    @FXML
+    private ComboBox<?> sex;
+    @FXML
+    private DatePicker dob;
+    @FXML
+    private RadioButton staff;
+    @FXML
+    private RadioButton nonStaff;
+    
 
     private Hotels app;
 
@@ -62,6 +81,8 @@ public class NewUserController implements Initializable {
     
     private Navigator nav;
     private JSONObject response;
+    private static String [] userRole = {"USER_SUPER_ADMIN","USER_ADMIN","USER_ADMIN_2","USER_FRONT","USER_HOUSEKEEP",
+            "USER_LAUNDRY","USER_KITCHEN","USER_MINIBAR","USER_MAINTENANCE"};
     
     /**
      * Initializes the controller class.
@@ -69,13 +90,21 @@ public class NewUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        System.out.println("New User Controller Loaded");
         ObservableList roles = FXCollections.observableArrayList();
-        roles.add("Admin");
-        roles.add("Frontdesk");
-        roles.add("Laundry");
-        roles.add("Mini-Bar");
-        
+        for(int i = 0; i<userRole.length; i++){
+            roles.add(userRole[i]);
+        }
         role.setItems(roles);
+        
+        ObservableList gender = FXCollections.observableArrayList();
+        gender.add("Male");
+        gender.add("Female");
+        sex.setItems(gender);
+        
+        ToggleGroup tg = new ToggleGroup();
+        staff.setToggleGroup(tg);
+        nonStaff.setToggleGroup(tg);
     }    
 
     @FXML
@@ -83,14 +112,29 @@ public class NewUserController implements Initializable {
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("username", username.getText()));
         param.add(new BasicNameValuePair("password", password.getText()));
-        param.add(new BasicNameValuePair("role", role.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("privilege", String.valueOf(role.getSelectionModel().getSelectedIndex())));
         param.add(new BasicNameValuePair("phone", phone.getText()));
         param.add(new BasicNameValuePair("email", email.getText()));
-                             
+        
+        param.add(new BasicNameValuePair("firstName", firstName.getText()));
+        param.add(new BasicNameValuePair("lastName", lastName.getText()));
+        param.add(new BasicNameValuePair("sex", sex.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("dob", dob.getValue().toString()));
+        param.add(new BasicNameValuePair("country", country.getText()));
+        
+        boolean status;
+        if(staff.isSelected()){
+            status = true;
+        }else{
+            status = false;
+        }
+        
+        param.add(new BasicNameValuePair("country", String.valueOf(status)));
+                            
         response = nav.registerUser(param);
         System.out.println("Registering User : " + response);
         
-        nav.notify((Stage) role.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, "New User Created", 100,500);
+        Util.notify(State.NOTIFY_SUCCESS, "New User "+firstName.getText() +" "+lastName.getText() +" Created", Pos.CENTER);
     }
     
 }

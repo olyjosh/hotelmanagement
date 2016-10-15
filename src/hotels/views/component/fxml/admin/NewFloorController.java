@@ -8,6 +8,7 @@ package hotels.views.component.fxml.admin;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class NewFloorController implements Initializable {
         response = nav.createFloor(param);
         System.out.println("Creating Floor : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, name.getText() + " Has been Created", 100,500);
+        Util.notify(State.NOTIFY_SUCCESS, name.getText() + " Has been Created", Pos.CENTER);
     }
     
 }

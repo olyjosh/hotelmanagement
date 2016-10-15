@@ -8,6 +8,7 @@ package hotels.views.component.fxml.admin;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +123,7 @@ public class NewRoomController implements Initializable {
         response = nav.createRoom(param);
         System.out.println("Creating a Room : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_BOOKING, "New Room has been Created", 100,500);
+        Util.notify(State.NOTIFY_SUCCESS, "New Room has been Created", Pos.CENTER);
     }
     
 }

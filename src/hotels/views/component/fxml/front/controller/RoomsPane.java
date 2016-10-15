@@ -210,29 +210,29 @@ public class RoomsPane implements Initializable {
 //            roomOccupant.setText(j.getJSONObject("guest").getString("firstName")+ " " + j.getJSONObject("guest").getString("lastName"));
             v.getChildren().addAll(roomNo, roomType, roomOccupant);
             String string = j.getJSONObject("roomStatus").getString("bookedStatus");
-            switch (string) {
-                default:{
-                    v.setStyle("-fx-background-color :"+Codes.COLOR_ALL);
-                }break;
-                case State.RM_RESERVED: {
-                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
-                    roomNo.setStyle("-fx-text-fill : #ffffff;");
-                    roomType.setStyle("-fx-text-fill : #ffffff;");
-                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
-                }break;
-                case State.RM_BOOKED: {
-                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
-                    roomNo.setStyle("-fx-text-fill : #ffffff;");
-                    roomType.setStyle("-fx-text-fill : #ffffff;");
-                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
-                }break;
-                case State.RM_DUEOUT: {
-                    v.setStyle("-fx-background-color :" + Codes.COLOR_DUE_OUT);
-                    roomNo.setStyle("-fx-text-fill : #ffffff;");
-                    roomType.setStyle("-fx-text-fill : #ffffff;");
-                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
-                }break;
-            }
+//            switch (string) {
+//                default:{
+//                    v.setStyle("-fx-background-color :"+Codes.COLOR_ALL);
+//                }break;
+//                case State.RM_RESERVED: {
+//                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
+//                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+//                    roomType.setStyle("-fx-text-fill : #ffffff;");
+//                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+//                }break;
+//                case State.RM_BOOKED: {
+//                    v.setStyle("-fx-background-color :" + Codes.COLOR_RESERVED);
+//                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+//                    roomType.setStyle("-fx-text-fill : #ffffff;");
+//                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+//                }break;
+//                case State.RM_DUEOUT: {
+//                    v.setStyle("-fx-background-color :" + Codes.COLOR_DUE_OUT);
+//                    roomNo.setStyle("-fx-text-fill : #ffffff;");
+//                    roomType.setStyle("-fx-text-fill : #ffffff;");
+//                    roomOccupant.setStyle("-fx-text-fill : #ffffff;");
+//                }break;
+//            }
             
         } catch (JSONException ex) {
             Logger.getLogger(RoomsPane.class.getName()).log(Level.SEVERE, null, ex);

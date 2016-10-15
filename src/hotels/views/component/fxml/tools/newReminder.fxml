@@ -3,56 +3,71 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="708.0" prefWidth="678.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="586.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="7.0" layoutY="7.0" prefHeight="695.0" prefWidth="662.0" text="New Reminder Details">
+      <TitledPane collapsible="false" layoutX="7.0" layoutY="7.0" prefHeight="570.0" prefWidth="662.0" text="New Reminder Details">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="32.0" layoutY="19.0" text="Name" />
-                  <TextField layoutX="131.0" layoutY="14.0" prefHeight="31.0" prefWidth="494.0" />
-                  <Label layoutX="270.0" layoutY="62.0" text="Start Time" />
-                  <DatePicker layoutX="131.0" layoutY="57.0" prefHeight="31.0" prefWidth="125.0" />
+                  <TextField fx:id="name" layoutX="110.0" layoutY="14.0" prefHeight="31.0" prefWidth="520.0" />
+                  <DatePicker fx:id="startDate" layoutX="110.0" layoutY="57.0" prefHeight="31.0" prefWidth="138.0" />
                   <Label layoutX="32.0" layoutY="62.0" text="Start Date" />
-                  <Label layoutX="480.0" layoutY="62.0" text="Priority" />
-                  <ComboBox layoutX="536.0" layoutY="57.0" prefHeight="31.0" prefWidth="88.0" />
+                  <Label layoutX="493.0" layoutY="65.0" text="Priority" />
+                  <ComboBox fx:id="priority" layoutX="546.0" layoutY="60.0" prefHeight="31.0" prefWidth="84.0" />
                   <Label layoutX="32.0" layoutY="101.0" text="Message" />
-                  <TextArea layoutX="33.0" layoutY="126.0" prefHeight="200.0" prefWidth="592.0" />
+                  <TextArea fx:id="message" layoutX="33.0" layoutY="126.0" prefHeight="200.0" prefWidth="592.0" />
                   <Label layoutX="32.0" layoutY="346.0" text="Interval and Recurrence">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="125.0" layoutY="378.0" prefHeight="31.0" prefWidth="225.0" />
-                  <Label layoutX="52.0" layoutY="383.0" text="Interval" />
-                  <CheckBox layoutX="53.0" layoutY="433.0" mnemonicParsing="false" text="Stop Reminder After" />
-                  <DatePicker layoutX="229.0" layoutY="428.0" prefHeight="31.0" prefWidth="124.0" />
-                  <TitledPane collapsible="false" layoutX="367.0" layoutY="353.0" prefHeight="212.0" prefWidth="257.0" text="Users to Recieve Alerts">
-                     <content>
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                  </TitledPane>
-                  <Button layoutX="501.0" layoutY="610.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" text="Close">
-                     <graphic>
-                        <FontAwesomeIcon glyphName="REMOVE" />
-                     </graphic>
-                  </Button>
-                  <Button layoutX="366.0" layoutY="610.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Save">
+                  <CheckBox fx:id="stopCheck" layoutX="53.0" layoutY="433.0" mnemonicParsing="false" text="Stop Reminder After" />
+                  <DatePicker fx:id="stopDate" layoutX="229.0" layoutY="428.0" prefHeight="31.0" prefWidth="142.0" />
+                  <Button fx:id="button" layoutX="517.0" layoutY="484.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
                   </Button>
+                  <HBox alignment="CENTER" layoutX="255.0" layoutY="53.0" prefHeight="39.0" prefWidth="229.0" spacing="10.0">
+                     <children>
+                        <Label layoutX="23.0" layoutY="35.0" prefHeight="21.0" prefWidth="90.0" text="Start Time" />
+                        <HBox alignment="CENTER" prefHeight="39.0" prefWidth="170.0">
+                           <children>
+                              <ChoiceBox fx:id="hour" prefHeight="27.0" prefWidth="47.0" />
+                              <Label layoutX="10.0" layoutY="15.0" text=":" />
+                              <ChoiceBox fx:id="min" layoutX="51.0" layoutY="10.0" prefHeight="27.0" prefWidth="48.0" />
+                              <ChoiceBox fx:id="am_pm" layoutX="101.0" layoutY="10.0" prefHeight="27.0" prefWidth="53.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="102.0" layoutY="382.0" prefHeight="31.0" prefWidth="269.0">
+                     <children>
+                        <TextField fx:id="intervalF" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="342.0" text="0" />
+                        <ChoiceBox fx:id="interval" layoutX="119.0" layoutY="87.0" prefHeight="27.0" prefWidth="326.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="36.0" layoutY="387.0" prefHeight="21.0" prefWidth="88.0" text="Interval" />
+                  <Label layoutX="395.0" layoutY="346.0" text="Select Users to Recieve Alerts">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="userPane" layoutX="392.0" layoutY="367.0" prefHeight="51.0" prefWidth="233.0" />
                </children>
             </AnchorPane>
         </content>

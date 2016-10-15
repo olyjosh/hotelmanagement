@@ -2,7 +2,7 @@ package hotels.util;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
-import eu.hansolo.enzo.notification.Notification;
+import hotels.Hotels;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -22,6 +22,21 @@ import org.controlsfx.control.Notifications;
 
 public class Util
 {
+    private Hotels app;
+    private static Navigator nav;
+    
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public Util(Hotels app) {
+        this.app =app;
+        nav = new Navigator(getApp().getMain());
+    }
     
     public static void formatDatePicker(DatePicker datePicker) {
         String pattern = "yyyy-MM-dd";
@@ -29,7 +44,7 @@ public class Util
         
         datePicker.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
-                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern2);
+                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern);
             
 
             @Override
@@ -60,10 +75,9 @@ public class Util
         if (image == null) {
             System.out.println(Navigator2.getIMG_URL() + imgId);
             image = new Image(Navigator2.getIMG_URL() + imgId, backload);
-
-            imageCache.put(imgId, image);
+            return image;
         }
-        return image;
+        return null;
     }
 //    
 //    public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
@@ -89,5 +103,27 @@ public class Util
     public static String random(){
         String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));
         return rand;
+    }
+    
+//    public static void notify(String title, String msg, Pos pos){
+//         Notifications.create()
+//              .title(title)
+//              .text(msg)
+//              .graphic(GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "40px"))
+//              .position(pos)
+//              .darkStyle()
+//              .show();
+// 
+//    }
+    
+    public static String [] splitter(String text, char regex){
+        
+        String [] test = text.split(String.valueOf(regex));
+        return test;
+    }
+         
+    public static String stripDate(String rawdate){
+        String [] date = rawdate.split("T");
+        return date[0];
     }
 }

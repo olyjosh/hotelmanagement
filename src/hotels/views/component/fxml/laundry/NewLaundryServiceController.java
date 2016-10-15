@@ -8,6 +8,7 @@ package hotels.views.component.fxml.laundry;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,6 @@ public class NewLaundryServiceController implements Initializable {
         response = nav.createLaundryService(param);
         System.out.println("Creating Laundry Service : " + response);
         
-        nav.notify((Stage) alias.getScene().getWindow(), Pos.CENTER, State.NOTIFY_SUCCESS, "Laundry Service Created and Saved", 100,300);
+        Util.notify(State.NOTIFY_SUCCESS, "Laundry Service "+name.getText()+" Created and Saved", Pos.CENTER);
     }
 }

@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.HotelService;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class NewHotelServiceController implements Initializable {
+public class EditHotelServiceController implements Initializable {
 
     private Hotels app;
 
@@ -46,11 +47,20 @@ public class NewHotelServiceController implements Initializable {
         this.app = app;
     }
 
-    public NewHotelServiceController(Hotels app) {
+    public EditHotelServiceController(Hotels app) {
         this.app = app;
         nav  = new Navigator(getApp().getMain());
     }
     
+    private HotelService data;
+
+    public HotelService getData() {
+        return data;
+    }
+
+    public void setData(HotelService data) {
+        this.data = data;
+    }
     
     
     private Navigator nav;
@@ -77,14 +87,25 @@ public class NewHotelServiceController implements Initializable {
         // TODO
         
         System.out.println("New Hotel Service Controller Invoked");
+        popEdit();
+        
         button.setOnAction((e) ->{
-            newHotelService();
+            editHotelService();
         });
     }    
     
-    private void newHotelService(){
+    private void popEdit(){
+        alias.setText(data.getAlias());
+        name.setText(data.getName());
+        desc.setText(data.getDesc());
+        charge.setText(data.getCharge());
+        //image.set
+    }
+    
+    private void editHotelService(){
         
         List <NameValuePair> param = new ArrayList<>();
+        param.add(new BasicNameValuePair("_id", data.getId()));
         param.add(new BasicNameValuePair("alias", alias.getText()));
         param.add(new BasicNameValuePair("name", name.getText()));
         param.add(new BasicNameValuePair("extraCharge", charge.getText()));
@@ -92,17 +113,17 @@ public class NewHotelServiceController implements Initializable {
         param.add(new BasicNameValuePair("image", "image"));
         param.add(new BasicNameValuePair("servive", "hotel"));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
-      
+              
         Runnable task = new Runnable() {
             @Override
             public void run() {
                 try {
-                    response = nav.createHotelService(param);
+                    response = nav.editHotelService(param);
                     if(response != null && response.getInt("status") == 200){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_SUCCESS, "New Hotel Service Created and Saved", Pos.CENTER);
+                                Util.notify(State.NOTIFY_SUCCESS, "Hotel Service has been Updated", Pos.CENTER);
                             }
                         });
                     }else{
@@ -110,12 +131,12 @@ public class NewHotelServiceController implements Initializable {
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_ERROR, "New Hotel Service Creation Failed", Pos.CENTER);
+                                Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Update", Pos.CENTER);
                             }
                         });
                     }   
                 } catch (JSONException ex) {
-                    Logger.getLogger(NewHotelServiceController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EditHotelServiceController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
