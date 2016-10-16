@@ -47,6 +47,13 @@ public class State {
     public final static int USER_MAINTENANCE = 8;
     public final static int USER_MAID = 9;
     public final static int USER_BARTENDER = 10;
+    
+    
+    //STATUS 
+    public final static String STATUS_C = "Complete";
+    public final static String STATUS_P = "Pending";
+    public final static String STATUS_R = "Returned";
+    public final static String STATUS_N = "Not Completed";
 }
     
 

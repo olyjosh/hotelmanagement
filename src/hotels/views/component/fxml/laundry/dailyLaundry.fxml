@@ -51,12 +51,12 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Edit">
+            <Button mnemonicParsing="false" onAction="#showEditDaily" prefHeight="31.0" prefWidth="163.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Close">
+            <Button mnemonicParsing="false" onAction="#deleteLaundry" prefHeight="31.0" prefWidth="163.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>

@@ -225,7 +225,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="243.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="383.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
@@ -242,6 +242,11 @@
                                           <Button contentDisplay="TOP" layoutX="105.0" layoutY="16.0" mnemonicParsing="false" onAction="#showLostFound" text="Lost and Found">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="JOOMLA" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="127.0" layoutY="11.0" mnemonicParsing="false" onAction="#showLostFound" text="Work Order">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="GEAR" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>

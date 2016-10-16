@@ -6,7 +6,7 @@ package hotels.util;
  */
 public class Storage {
     
-    public static String auth_token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2ZhM2Q5NGZkZjEzYjFiMTQzZDJiOGMiLCJlbWFpbCI6ImZkZ2ZkZ2RmIiwibmFtZSI6eyJ1c2VybmFtZSI6ImhhbGVlbWFoIiwiZmlyc3ROYW1lIjoiaGFsZWVtYWgiLCJsYXN0TmFtZSI6Im11c3RhcGhhIn0sImV4cCI6MTQ3NjYyMjM1NiwiaWF0IjoxNDc2MDE3NTU2fQ.Ztr1noCiho05sHqf33O3jRJieCzxW-W0NtlIUBaEpU4";
+    public static String auth_token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODAzNzhhN2E3YTZiOTZjNjVhNjg1MjQiLCJlbWFpbCI6ImhqaGpnamciLCJuYW1lIjp7InVzZXJuYW1lIjoiYWJ1IiwiZmlyc3ROYW1lIjoiZ2hqZ2hqZ2hqaiIsImxhc3ROYW1lIjoiamdqZ2pmamZnaiJ9LCJleHAiOjE0NzcyMjczMDMsImlhdCI6MTQ3NjYyMjUwNH0.sAXTszvmAmUNqGPBpWWRl_wnHQWfTaP3iP2Bl1FyQTg";
     private static String id = "";
     
     public static String getAuth_token() {

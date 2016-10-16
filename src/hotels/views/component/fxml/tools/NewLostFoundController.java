@@ -48,7 +48,7 @@ public class NewLostFoundController implements Initializable {
     @FXML
     private TextField location;
     @FXML
-    private ComboBox<?> room;
+    private ComboBox room;
     @FXML
     private TextField founder;
     @FXML
@@ -87,6 +87,7 @@ public class NewLostFoundController implements Initializable {
     private List roomID = new ArrayList();
     private Hotels app;
     private LostFound data;
+    private boolean editMode;
     
 
     public Hotels getApp() {
@@ -118,13 +119,49 @@ public class NewLostFoundController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Util.formatDatePicker(returnDate);
+        Util.formatDatePicker(lostOn);
+        Util.formatDatePicker(discardDate);
+        
         onLoad();
-        button.setOnAction((e) ->{
-            newLostFound();
-        });
+        if(isEditMode()){
+            popEdit();
+        }
         
     }    
+    
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
         
+    private void popEdit(){
+
+        if(data != null){
+            lostOn.getEditor().setText(data.getEntryDate().replace('-', '/'));
+            itemName.setText(data.getItemName());
+            color.setText(data.getItemColour());
+            location.setText(data.getWhereLost());
+            room.getSelectionModel().select(data.getRoomNo());
+            founder.setText(data.getFounder());
+            remark.setText(data.getRemark());
+            name.setText(data.getName());
+            address.setText(data.getAddress());
+            city.setText(data.getCity());
+            state.setText(data.getState());
+            zip.setText(data.getZip());
+            country.setText(data.getCountry());
+            phone.setText(data.getPhone());
+            returnBy.setText(data.getReturnBy());
+            returnDate.getEditor().setText(data.getReturnDate().replace('-', '/'));
+            discardBy.setText(data.getDiscardBy());
+            discardDate.getEditor().setText(data.getDiscardDate().replace('-', '/'));
+        }
+    }
+    
     private void onLoad(){
         Runnable task = new Runnable() {
             @Override
@@ -153,8 +190,7 @@ public class NewLostFoundController implements Initializable {
             back.start();
     }
     
-    
-    private void newLostFound(){
+    @FXML private void newLostFound(){
         
         List <NameValuePair> param = new ArrayList<>();
         
@@ -169,6 +205,7 @@ public class NewLostFoundController implements Initializable {
             param.add(new BasicNameValuePair("roomNo", room.getSelectionModel().getSelectedItem().toString()));//Storage.getId()));
         }
         
+        //param.add(new BasicNameValuePair("current", ""));
         param.add(new BasicNameValuePair("founder", founder.getText()));
         param.add(new BasicNameValuePair("comp_name", name.getText()));
         param.add(new BasicNameValuePair("comp_address", address.getText()));
@@ -195,18 +232,18 @@ public class NewLostFoundController implements Initializable {
         param.add(new BasicNameValuePair("remark", remark.getText()));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
 
-        Util.notify(State.NOTIFY_SUCCESS, "A Lost Item has been Registered", Pos.CENTER);
-        Runnable task = new Runnable() {
+        if(!isEditMode()){
+            
+            Runnable task = new Runnable() {
             @Override
             public void run() {
                 try {
                     response = nav.createLostFound(param);
-                    System.out.println("Deleting Lost & Found : " + response);
-                    if(response != null && response.getInt("status") == 200){
+                    if(response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_SUCCESS, "Lost Item Information Deleted", Pos.CENTER);
+                                Util.notify(State.NOTIFY_SUCCESS, "A Lost Item has been Registered", Pos.CENTER);
                             }
                         });
                     }else{
@@ -214,12 +251,12 @@ public class NewLostFoundController implements Initializable {
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_ERROR, "Lost Item Failed to Delete", Pos.CENTER);
+                                Util.notify(State.NOTIFY_ERROR, "Lost Item Failed to Register", Pos.CENTER);
                             }
                         });
                     }
                 } catch (JSONException ex) {
-                    Logger.getLogger(LostFoundController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         };
@@ -227,6 +264,39 @@ public class NewLostFoundController implements Initializable {
         back.setPriority(Thread.MAX_PRIORITY);
         back.setDaemon(true);
         back.start();
+    }else{
+            
+        Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                param.add(new BasicNameValuePair("id", data.getId()));
+                response = nav.editLaundryService(param);
+                    if(response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "A Lost Item has been Updated", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "A Lost Item Failed to Update", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        }
     }
-    
 }

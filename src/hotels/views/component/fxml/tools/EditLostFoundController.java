@@ -128,27 +128,27 @@ public class EditLostFoundController implements Initializable {
     }    
     
     private void popEdit(){
-        System.out.println("printing data : " + data.getCountry());
 
-        lostOn.getEditor().setText(data.getEntryDate().replace('-', '/'));
-        itemName.setText(data.getItemName());
-        color.setText(data.getItemColour());
-        location.setText(data.getWhereLost());
-        room.getSelectionModel().select(data.getRoomNo());
-        founder.setText(data.getFounder());
-        remark.setText(data.getRemark());
-        name.setText(data.getName());
-        address.setText(data.getAddress());
-        city.setText(data.getCity());
-        state.setText(data.getState());
-        zip.setText(data.getZip());
-        country.setText(data.getCountry());
-        phone.setText(data.getPhone());
-        returnBy.setText(data.getReturnBy());
-        returnDate.getEditor().setText(data.getReturnDate().replace('-', '/'));
-        discardBy.setText(data.getDiscardBy());
-        discardDate.getEditor().setText(data.getDiscardDate().replace('-', '/'));
-
+        if(data != null){
+            lostOn.getEditor().setText(data.getEntryDate().replace('-', '/'));
+            itemName.setText(data.getItemName());
+            color.setText(data.getItemColour());
+            location.setText(data.getWhereLost());
+            room.getSelectionModel().select(data.getRoomNo());
+            founder.setText(data.getFounder());
+            remark.setText(data.getRemark());
+            name.setText(data.getName());
+            address.setText(data.getAddress());
+            city.setText(data.getCity());
+            state.setText(data.getState());
+            zip.setText(data.getZip());
+            country.setText(data.getCountry());
+            phone.setText(data.getPhone());
+            returnBy.setText(data.getReturnBy());
+            returnDate.getEditor().setText(data.getReturnDate().replace('-', '/'));
+            discardBy.setText(data.getDiscardBy());
+            discardDate.getEditor().setText(data.getDiscardDate().replace('-', '/'));
+        }
     }
     
     private void onLoad(){
@@ -182,7 +182,7 @@ public class EditLostFoundController implements Initializable {
     private void editLostFound(){
         
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("_id", data.getId()));
+        param.add(new BasicNameValuePair("id", data.getId()));
         param.add(new BasicNameValuePair("on", lostOn.getEditor().getText()));
         param.add(new BasicNameValuePair("name", itemName.getText()));
         param.add(new BasicNameValuePair("color", color.getText()));
@@ -193,17 +193,17 @@ public class EditLostFoundController implements Initializable {
         }else{
             param.add(new BasicNameValuePair("roomNo", room.getSelectionModel().getSelectedItem().toString()));//Storage.getId()));
         }
-        
+        param.add(new BasicNameValuePair("current", ""));
         param.add(new BasicNameValuePair("founder", founder.getText()));
-        param.add(new BasicNameValuePair("name", name.getText()));
-        param.add(new BasicNameValuePair("address", address.getText()));
-        param.add(new BasicNameValuePair("city", city.getText()));
-        param.add(new BasicNameValuePair("state", state.getText()));
-        param.add(new BasicNameValuePair("zip", zip.getText()));
-        param.add(new BasicNameValuePair("country", country.getText()));
-        param.add(new BasicNameValuePair("phone", phone.getText()));
-        param.add(new BasicNameValuePair("returnBy", returnBy.getText()));
-        param.add(new BasicNameValuePair("discardBy", discardBy.getText()));
+        param.add(new BasicNameValuePair("comp_name", name.getText()));
+        param.add(new BasicNameValuePair("comp_address", address.getText()));
+        param.add(new BasicNameValuePair("comp_city", city.getText()));
+        param.add(new BasicNameValuePair("comp_state", state.getText()));
+        param.add(new BasicNameValuePair("comp_zip", zip.getText()));
+        param.add(new BasicNameValuePair("comp_country", country.getText()));
+        param.add(new BasicNameValuePair("comp_phone", phone.getText()));
+        param.add(new BasicNameValuePair("reso_returnBy", returnBy.getText()));
+        param.add(new BasicNameValuePair("reso_discardBy", discardBy.getText()));
         
         if(returnDate.getValue() == null){
             param.add(new BasicNameValuePair("reso_returnDate", ""));
@@ -227,7 +227,7 @@ public class EditLostFoundController implements Initializable {
                     System.out.println("Edit Lost & Found Event Fired");
                     response = nav.editLostFound(param);
                     System.out.println("Editing Lost & Found : " + response);
-                    if(response != null && response.getInt("status") == 200){
+                    if(response != null && response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {

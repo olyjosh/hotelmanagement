@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="6.0" layoutY="4.0" prefHeight="389.0" prefWidth="833.0" text="New Laundry">
+      <TitledPane collapsible="false" layoutX="7.0" layoutY="7.0" prefHeight="389.0" prefWidth="833.0" text="New Laundry">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="436.0">
                <children>
@@ -42,7 +42,7 @@
                   <TextField fx:id="amountPaid" layoutX="551.0" layoutY="139.0" prefHeight="31.0" prefWidth="253.0" />
                   <Label layoutX="427.0" layoutY="187.0" text="Total Balance" />
                   <TextField fx:id="totalBalance" layoutX="551.0" layoutY="182.0" prefHeight="31.0" prefWidth="253.0" />
-                  <Button fx:id="addBtn" layoutX="683.0" layoutY="313.0" mnemonicParsing="false" onAction="#newDailyLaundry" prefHeight="31.0" prefWidth="123.0" text="Add Laundry">
+                  <Button fx:id="addBtn" layoutX="683.0" layoutY="313.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" text="Add Laundry">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

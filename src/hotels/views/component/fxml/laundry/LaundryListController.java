@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,16 +30,16 @@ import org.json.JSONObject;
 public class LaundryListController implements Initializable {
 
     
-    private TableView table;
-    private TableColumn room;
-    private TableColumn guest;
-    private TableColumn date;
-    private TableColumn items;
-    private TableColumn total;
-    private TableColumn posted;
-    private TableColumn balance;
-    private TableColumn status;
-    private TableColumn user;
+    @FXML private TableView table;
+    @FXML private TableColumn room;
+    @FXML private TableColumn guest;
+    @FXML private TableColumn date;
+    @FXML private TableColumn items;
+    @FXML private TableColumn total;
+    @FXML private TableColumn posted;
+    @FXML private TableColumn balance;
+    @FXML private TableColumn status;
+    @FXML private TableColumn user;
       
     private Hotels app;
     private Navigator nav;
@@ -76,14 +77,14 @@ public class LaundryListController implements Initializable {
             getLaundryList();
             
             
-            //room.setCellValueFactory(new PropertyValueFactory<>("room"));
-            //guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
+            room.setCellValueFactory(new PropertyValueFactory<>("room"));
+            guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             items.setCellValueFactory(new PropertyValueFactory<>("items"));
             total.setCellValueFactory(new PropertyValueFactory<>("total"));
-            //posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
+            posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
             balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-            //status.setCellValueFactory(new PropertyValueFactory<>("status"));
+            status.setCellValueFactory(new PropertyValueFactory<>("status"));
             user.setCellValueFactory(new PropertyValueFactory<>("user"));
             
             table.getColumns().setAll(room, guest, date, items, total, posted, balance, status, user);

@@ -33,26 +33,21 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox layoutX="407.0" layoutY="385.0" spacing="5.0">
+      <HBox layoutX="547.0" layoutY="385.0" spacing="5.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="New">
+            <Button mnemonicParsing="false" onAction="#showNewLaundryService" prefHeight="31.0" prefWidth="130.0" text="New">
                <graphic>
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Edit">
+            <Button mnemonicParsing="false" onAction="#showEditLaundryService" prefHeight="31.0" prefWidth="130.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Delete">
+            <Button mnemonicParsing="false" onAction="#deleteLaundryService" prefHeight="31.0" prefWidth="130.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Close">
-               <graphic>
-                  <FontAwesomeIcon glyphName="CLOSE" />
                </graphic>
             </Button>
          </children>

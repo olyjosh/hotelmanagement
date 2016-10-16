@@ -321,6 +321,22 @@ public class Navigator {
         return null;
     } 
     
+    public JSONObject editLaundryService(List data){
+        System.out.println("Laundry Service Event Processing.....");
+        String url = OP_URL+"edit/service";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public JSONObject fetchLaundryService(List data){
         String url = OP_URL+"fetch/service";
         try{
@@ -329,6 +345,21 @@ public class Navigator {
             HttpGet request = new HttpGet(url);
             
             httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deleteLaundryService(List data){
+        String url = OP_URL+"delete/service";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
             return res;
         } catch (IOException e) {
             e.printStackTrace();
@@ -358,6 +389,36 @@ public class Navigator {
             HttpGet request = new HttpGet(url);
             
             httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editDailyLaundry(List data){
+        String url = OP_URL+"edit/dailyLaundry";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deleteDailyLaundry(List data){
+        String url = OP_URL+"delet/dailyLaundry";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

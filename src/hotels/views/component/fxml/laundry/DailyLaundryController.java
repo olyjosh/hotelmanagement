@@ -7,22 +7,24 @@ package hotels.views.component.fxml.laundry;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
-import hotels.util.Navigator2;
-import hotels.views.component.fxml.front.model.Reserve;
+import hotels.util.State;
+import hotels.util.Util;
 import hotels.views.component.fxml.laundry.model.DailyLaundry;
+import hotels.views.component.fxml.tools.EditReminderController;
+import hotels.views.component.fxml.tools.model.Reminder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -55,7 +57,7 @@ public class DailyLaundryController implements Initializable {
     @FXML
     private ComboBox statusCombo;
     @FXML
-    private TableView table;
+    private TableView<DailyLaundry> table;
     @FXML
     private TableColumn linen;
     @FXML
@@ -98,28 +100,41 @@ public class DailyLaundryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
+        onLoad();
+    }    
+    
+    private void onLoad(){
+       
+            Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    daily = nav.fetchDailyLaundry();
+                    System.out.println("printing daily : " + daily);
+                    dailyArray = daily.getJSONArray("message");
+                    getDailyLaundry();
             
-            daily = nav.fetchDailyLaundry();
-            System.out.println("printing daily : " + daily);
-            dailyArray = daily.getJSONArray("message");
-            
-            getDailyLaundry();
-            table.setItems(service);
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
             
             linen.setCellValueFactory(new PropertyValueFactory<>("linen"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             user.setCellValueFactory(new PropertyValueFactory<>("user"));
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
-            returned.setCellValueFactory(new PropertyValueFactory<>("returns"));
+            returned.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
             remark.setCellValueFactory(new PropertyValueFactory<>("remark"));
             
             table.getColumns().setAll(linen, date, user, status, returned, remark );
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
-    }    
+       
+    }
     
     private void getDailyLaundry(){
         try {
@@ -130,11 +145,19 @@ public class DailyLaundryController implements Initializable {
                 ls.setDate(oj.getString("date"));
                 ls.setLinen(String.valueOf(oj.get("sn")));
                 ls.setRemark(oj.getString("remark"));
-                ls.setReturns(oj.getString("returned"));
                //ls.setStatus(oj.getString("status"));
                 ls.setUser(oj.getString("user"));
+                ls.setTotalBill(String.valueOf(oj.get("bill")));
+                ls.setPaid(String.valueOf(oj.get("amonunt")));
+                ls.setBalance(String.valueOf(oj.get("balance")));
+                ls.setItem(oj.getString("item"));
+                ls.setLaundryService(oj.getString("laundryService"));
+                ls.setHotelService(oj.getString("hotelService"));
+                ls.setReturns(oj.getString("returnIn"));
+                ls.setReturnDate(oj.getString("returned"));
                 
                 service.addAll(ls);
+                table.setItems(service);
             }
            
         }catch(Exception e){
@@ -154,5 +177,59 @@ public class DailyLaundryController implements Initializable {
         stage.setScene(new Scene(root));
         
         stage.showAndWait();
+    }
+    
+    @FXML 
+    private void showEditDaily(ActionEvent e) throws IOException{
+       
+        DailyLaundry item = table.getSelectionModel().getSelectedItem();
+        EditDailyLaundryController controller = new EditDailyLaundryController(this.getApp());
+        controller.setApp(app);
+        controller.setLs(item);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/newDaily.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+
+        stage.showAndWait();
+        
+    }
+    
+    @FXML
+    private void deleteLaundry(){
+        DailyLaundry item = table.getSelectionModel().getSelectedItem();
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+               
+                List <NameValuePair> param = new ArrayList<>();
+                param.add(new BasicNameValuePair("id", item.getId()));
+                JSONObject response = nav.deleteDailyLaundry(param);
+                if(response != null){
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            Util.notify(State.NOTIFY_SUCCESS, "A Laundry has been Deleted", Pos.CENTER);
+                            service.clear();
+                            onLoad();
+                        }
+                    });
+                }else{
+
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            Util.notify(State.NOTIFY_ERROR, "Laundry Failed to Delete", Pos.CENTER);
+                        }
+                    });
+                }
+                
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
     }
 }

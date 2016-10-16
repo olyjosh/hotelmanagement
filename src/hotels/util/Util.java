@@ -3,6 +3,7 @@ package hotels.util;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -69,6 +70,7 @@ public class Util
     }
     
     private static HashMap<String, Image> imageCache = new HashMap<String, Image>();
+    
     public static Image getImage(String imgId) {
         boolean backload = true; //background downloads
         Image image = imageCache.get(imgId);
@@ -119,4 +121,18 @@ public class Util
         String [] date = rawdate.split("T");
         return date[0];
     }
+    
+    
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";//abcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
+    public static String randomString( int len ){
+       StringBuilder sb = new StringBuilder( len );
+       for( int i = 0; i < len; i++ ) 
+          sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+       return sb.toString();
+    }
+
+
 }
