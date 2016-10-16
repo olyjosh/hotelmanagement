@@ -13,6 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -126,4 +127,14 @@ public class Util
         String [] date = rawdate.split("T");
         return date[0];
     }
+    
+    public static MaskerPane mp(){
+        MaskerPane mp = new MaskerPane();
+        mp.setPrefHeight(100);
+        mp.setPrefWidth(400);
+        return mp;
+    }
+    
+    
+    
 }

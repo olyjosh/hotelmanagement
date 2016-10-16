@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import de.jensd.fx.glyphs.GlyphsStack?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1234.0" stylesheets="@../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="36.0" prefHeight="478.0" prefWidth="831.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
         <tabs>
@@ -498,7 +504,7 @@
                      <children>
                         <ToolBar prefHeight="102.0" prefWidth="1234.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <items>
-                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="213.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="267.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
@@ -507,63 +513,35 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Chek In">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showDrinkOrder" prefHeight="63.0" prefWidth="120.0" text="Bartender Order">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BEER" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="New Reservation">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showOnlineDrinkOrder" text="Mobile/Online Order">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="180.0">
-                                 <children>
-                                    <HBox id="title" alignment="BASELINE_CENTER">
-                                       <children>
-                                          <Label id="newLabel" text="Booking Operation" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showNewUser" text="New">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="MOBILE" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="233.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
-                                          <Label id="newLabel" text="Configuration" />
+                                          <Label id="newLabel" text="Setting" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Add">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" text="List">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showNewDrink" text="List of Drinks / Add New Drinks">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
-                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" opacity="0.44" size="2.5em" styleClass="fontAwesomeIcon" />
-                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="1.5em" styleClass="fontAwesomeIcon" text="" />
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" size="3em" />
+                                                      <FontAwesomeIcon fill="#ff83d6" glyphName="PLUS" size="2.5em" styleClass="icons" />
                                                    </children>
                                                 </GlyphsStack>
                                              </graphic>
@@ -588,7 +566,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <StackPane fx:id="laundryContentStack1" layoutX="217.0" layoutY="103.0" prefHeight="456.0" prefWidth="1017.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="103.0" />
+                        <StackPane fx:id="barContentStack" layoutX="217.0" layoutY="103.0" prefHeight="456.0" prefWidth="1017.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="103.0" />
                      </children></AnchorPane>
                </content>
             </Tab>

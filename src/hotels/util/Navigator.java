@@ -40,9 +40,9 @@ public class Navigator {
     private HttpResponse response = null;
     private HttpClient httpClient ;//= HttpClientBuilder.create().build(); 
     private JSONObject res;
-    //private final String BASE_URL = "http://127.0.0.1:9016/api/"; //development
+    private final String BASE_URL = "http://127.0.0.1:9016/api/"; //development
     //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-    private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
+    //private final String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
     
     public final String OP_URL = BASE_URL+"op/";
     

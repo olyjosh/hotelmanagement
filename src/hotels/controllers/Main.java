@@ -2,6 +2,9 @@ package hotels.controllers;
 
 import hotels.Hotels;
 import hotels.views.component.fxml.admin.NewUserController;
+import hotels.views.component.fxml.bar.controller.DrinkOrder;
+import hotels.views.component.fxml.bar.controller.NewDrink;
+import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
 import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
@@ -16,7 +19,6 @@ import hotels.views.component.fxml.laundry.LaundryDetailController;
 import hotels.views.component.fxml.laundry.LaundryItemsController;
 import hotels.views.component.fxml.laundry.LaundryListController;
 import hotels.views.component.fxml.laundry.LaundryServiceController;
-import hotels.views.component.fxml.laundry.NewDailyController;
 import hotels.views.component.fxml.laundry.NewItemController;
 import hotels.views.component.fxml.laundry.NewLaundryServiceController;
 import hotels.views.component.fxml.laundry.ReturnInController;
@@ -29,38 +31,44 @@ import hotels.views.component.fxml.tools.HotelServiceListController;
 import hotels.views.component.fxml.tools.LostFoundController;
 import hotels.views.component.fxml.tools.MiscSaleListController;
 import hotels.views.component.fxml.tools.NewHotelServiceController;
-import hotels.views.component.fxml.tools.NewReminderController;
 import hotels.views.component.fxml.tools.PayOutListController;
 import hotels.views.component.fxml.tools.PhoneListController;
 import hotels.views.component.fxml.tools.ReminderListController;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Pair;
 import org.controlsfx.control.PopOver;
-import org.json.JSONObject;
 
 /**
  *
@@ -68,8 +76,8 @@ import org.json.JSONObject;
  */
 public class Main implements Initializable{
 
-    @FXML private StackPane frontContentStack, laundryContentStack,
-            houseContentStack,toolContentStack,restaurantContentStack;
+    @FXML public StackPane frontContentStack, laundryContentStack,
+            houseContentStack,toolContentStack,restaurantContentStack,barContentStack;
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
     @FXML private Label userButton, progLabel;
@@ -555,7 +563,7 @@ public class Main implements Initializable{
      
      @FXML
      private void showPhoneList() throws IOException {
-         PhoneListController controller = new PhoneListController(this.getApp());
+        PhoneListController controller = new PhoneListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/phoneList.fxml"));
         loader.setController(controller);
@@ -641,23 +649,52 @@ public class Main implements Initializable{
         children.add(content);
     }
      
-    
-    public void showAdminComfirmation() throws IOException {
 
-//        NewOrder controller = new NewOrder(this.getApp());
-//        controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/confirmation.fxml"));
-//        loader.setController(controller);
+     //Bar 
+     @FXML
+     private void showDrinkOrder() throws IOException {
+        DrinkOrder controller = new DrinkOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/bar/drinkOrder.fxml"));
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
-        Scene sc = new Scene(content);
-        Stage st = new Stage();
-        st.setScene(sc);
-        Dialog d = new Dialog();
-        
-        st.show();
-
+        ObservableList<Node> children = barContentStack.getChildren();
+        if (children.size() > 0) {
+            barContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
     }
-    
+     
+         
+     @FXML
+     private void showOnlineDrinkOrder() throws IOException {
+        OnlineDrinkOrder controller = new OnlineDrinkOrder(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/bar/onlineDrinkOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = barContentStack.getChildren();
+        if (children.size() > 0) {
+            barContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showNewDrink() throws IOException {
+        NewDrink controller = new NewDrink(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/bar/newDrink.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = barContentStack.getChildren();
+        if (children.size() > 0) {
+            barContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
      
      
      //Testing Codes down here.
@@ -674,6 +711,74 @@ public class Main implements Initializable{
         
         stage.showAndWait();
     }
+    
+    
+    
+    
+    //User
+    public String[]  showAdminComfirmation() throws IOException {
+        // Create the custom dialog.
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Permission Required");
+        dialog.setHeaderText("Asdministrative authorisation is required to complete this transaction");
+
+// Set the icon (must be included in the project).
+//        dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
+
+// Set the button types.
+        ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+// Create the username and password labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        PasswordField password = new PasswordField();
+        password.setPromptText("Password");
+
+        grid.add(new Label("Username:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(new Label("Password:"), 0, 1);
+        grid.add(password, 1, 1);
+
+// Enable/Disable login button depending on whether a username was entered.
+        Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+        loginButton.setDisable(true);
+
+// Do some validation (using the Java 8 lambda syntax).
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            loginButton.setDisable(newValue.trim().isEmpty());
+        });
+
+        dialog.getDialogPane().setContent(grid);
+
+// Request focus on the username field by default.
+        Platform.runLater(() -> username.requestFocus());
+
+// Convert the result to a username-password-pair when the login button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == loginButtonType) {
+                return new Pair<>(username.getText(), password.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+        String [] x = new String[2];
+        final Pair<String, String> pair;
+        result.ifPresent((Pair<String, String> usernamePassword) -> {
+            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+            x[0]=usernamePassword.getKey();
+            x[1]=usernamePassword.getValue();
+        });
+        return x;
+    }
+
+
     
     
 }

@@ -42,14 +42,14 @@
             </TableView>
          </content>
       </TitledPane>
-      <Text layoutX="793.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordered Food List" AnchorPane.rightAnchor="29.9296875" AnchorPane.topAnchor="23.0">
+      <Text layoutX="793.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordered Drink List" AnchorPane.rightAnchor="29.9296875" AnchorPane.topAnchor="23.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
       <HBox layoutX="20.0" layoutY="5.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Text fontSmoothingType="LCD" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders within the Restaurant" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
+            <Text fontSmoothingType="LCD" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders within the bar" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

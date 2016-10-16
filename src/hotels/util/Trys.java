@@ -37,7 +37,7 @@ public class Trys {
             a.add(new JSONObject(hashMap));
         }
         JSONArray array = new JSONArray(a);
-//        JSONObject rawTest = Navigator2.createFoodOrder(array.toString(),"Joshua","Aroke","08061662025");
-//        System.out.println(rawTest);
+        JSONObject rawTest = Navigator2.createFoodOrderTest(array.toString(),"Joshua","Aroke","08061662025");
+        System.out.println(rawTest);
     }
 }

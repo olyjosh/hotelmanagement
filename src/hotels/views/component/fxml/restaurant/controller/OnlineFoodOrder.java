@@ -5,20 +5,21 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import hotels.util.Navigator2;
 import hotels.util.State;
+import hotels.util.Util;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContextMenu;
@@ -27,12 +28,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
+import org.controlsfx.control.MaskerPane;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -293,52 +293,90 @@ public final class OnlineFoodOrder implements Initializable {
         
     }
     
+    
+    private int counter;
     @FXML private void cancelOrder() {
-        FoodOderModel item = table.getSelectionModel().getSelectedItem();
-        int index = table.getSelectionModel().getSelectedIndex();
-        Runnable task = () -> {
-            try {
-                JSONObject o = nav.cancelFoodsOrders(item.getId());
-                if (o.getInt("status") == 1) {
-                    item.setStatus(CANCELED);
-                    list.set(index, item);
-                    print();
-                } else {
+               String[] a = null;
+        try {
+            a = app.getMain().showAdminComfirmation();
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(a == null )return;
+        if(a[0]==null || a[1]==null)return;
+        
+        final MaskerPane mp = Util.mp();
+        mp.setText("please wait...");
+        mp.setProgress(-1);
+        app.getMain().restaurantContentStack.getChildren().add(mp);
+        mp.setVisible(true);
 
+        boolean admin = nav.verifyAdmin(a);
+        if (admin) {
+            FoodOderModel item = table.getSelectionModel().getSelectedItem();
+            int index = table.getSelectionModel().getSelectedIndex();
+            mp.setText("Canceling order...");
+            Runnable task = () -> {
+                try {
+                    JSONObject o = nav.cancelFoodsOrders(item.getId());
+                    if (o.getInt("status") == 1) {
+                        item.setStatus(CANCELED);
+                        list.set(index, item);
+                        print();
+                        mp.setVisible(false);
+                        app.getMain().restaurantContentStack.getChildren().remove(mp);
+                    } else {
+                        mp.setVisible(false);
+                        app.getMain().restaurantContentStack.getChildren().remove(mp);
+                    }
+                } catch (JSONException ex) {
+                    Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (JSONException ex) {
-                Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        };
-        // Run the task in a background thread
-        Thread back = new Thread(task);
-        back.setPriority(Thread.MAX_PRIORITY);
-        back.setDaemon(true);
-        back.start();
+            };
+            // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+
+        } else {
+            mp.setVisible(false);
+            app.getMain().restaurantContentStack.getChildren().remove(mp);
+//            mp = null;
+            Util.notify("Invalid Authentication", "Admin username or password not valid", Pos.CENTER);
+            counter++;
+            if(counter<=3)cancelOrder();
+        }
     }
 
     @FXML private void setDoneOrder(){
-        FoodOderModel item = table.getSelectionModel().getSelectedItem();
-        final int index = table.getSelectionModel().getSelectedIndex();
-        Runnable task = () -> {
-            try {
-                JSONObject o = nav.doneFoodsOrders(item.getId());
-                if (o.getInt("status") == 1) {
-                    item.setStatus(DONE);
-                    list.set(index, item);
-                    print();
-                } else {
+        
 
+            FoodOderModel item = table.getSelectionModel().getSelectedItem();
+            final int index = table.getSelectionModel().getSelectedIndex();
+            Runnable task = () -> {
+                try {
+                    JSONObject o = nav.doneFoodsOrders(item.getId());
+                    if (o.getInt("status") == 1) {
+                        item.setStatus(DONE);
+                        list.set(index, item);
+                        print();
+                    } else {
+
+                    }
+                } catch (JSONException ex) {
+                    Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (JSONException ex) {
-                Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        };
-        // Run the task in a background thread
-        Thread back = new Thread(task);
-        back.setPriority(Thread.MAX_PRIORITY);
-        back.setDaemon(true);
-        back.start();
+            };
+            // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+
     }
      
     private void componentStates(String status){
@@ -359,4 +397,7 @@ public final class OnlineFoodOrder implements Initializable {
                 approve.setVisible(true);
             }
     }
+    
+
+    
 }

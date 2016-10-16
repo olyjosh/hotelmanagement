@@ -1,5 +1,6 @@
-package hotels.views.component.fxml.restaurant.controller;
+package hotels.views.component.fxml.bar.controller;
 
+import hotels.views.component.fxml.restaurant.controller.*;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
@@ -23,7 +24,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -43,16 +43,15 @@ import org.json.JSONObject;
  *
  * @author mac
  */
-public final class FoodOrder implements Initializable {
+public final class OnlineDrinkOrder implements Initializable {
 
     @FXML private GridPane foodlist;
-    @FXML private TableView<FoodOderModel> table;
-    @FXML private TableColumn<FoodOderModel , String> nameCol,orderIdCol,amountCol,paymentCol,statusCol;
+    @FXML private TableView<DrinkOderModel> table;
+    @FXML private TableColumn<DrinkOderModel , String> nameCol,orderIdCol,amountCol,paymentCol,statusCol;
     @FXML private Label name;
     @FXML private Button approve, cancel;
-    @FXML private DatePicker from, to;
     
-    private ObservableList<FoodOderModel> list;
+    private ObservableList<DrinkOderModel> list;
     private final String PENDING = "PENDING";
     private final String PREPARING = "PREPARING";
     private final String CANCELED ="CANCELED";
@@ -68,7 +67,7 @@ public final class FoodOrder implements Initializable {
         this.app = app;
     }
 
-    public FoodOrder(Hotels app) {
+    public OnlineDrinkOrder(Hotels app) {
         this.app =app;
         nav = new Navigator2(getApp().getMain());
     }
@@ -96,7 +95,7 @@ public final class FoodOrder implements Initializable {
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 //        orderIdCol.setCellValueFactory(new PropertyValueFactory<>("guestName"));
         
-        table.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends FoodOderModel> observable, FoodOderModel oldValue, FoodOderModel newValue) -> {
+        table.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends DrinkOderModel> observable, DrinkOderModel oldValue, DrinkOderModel newValue) -> {
             if(newValue==null)return;
             name.setText(newValue.getGuestName());
             JSONArray arr = newValue.getOrdersArray();
@@ -127,7 +126,7 @@ public final class FoodOrder implements Initializable {
                     foodlist.add(qtyL, 2, i+1);
                     foodlist.add(amtL, 3, i+1);
                 } catch (JSONException ex) {
-                    Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OnlineDrinkOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
@@ -135,10 +134,10 @@ public final class FoodOrder implements Initializable {
         });
         
         
-        table.setRowFactory(new Callback<TableView<FoodOderModel>, TableRow<FoodOderModel>>() {
+        table.setRowFactory(new Callback<TableView<DrinkOderModel>, TableRow<DrinkOderModel>>() {
             @Override
-            public TableRow<FoodOderModel> call(TableView<FoodOderModel> param) {
-                final TableRow<FoodOderModel> row = new TableRow<>();
+            public TableRow<DrinkOderModel> call(TableView<DrinkOderModel> param) {
+                final TableRow<DrinkOderModel> row = new TableRow<>();
                 MenuItem cancle = new MenuItem("Cancel", GlyphsDude.createIcon(FontAwesomeIcons.REMOVE)),
                         done = new MenuItem("Report Food is Ready", GlyphsDude.createIcon(FontAwesomeIcons.CHECK)),
                         approvePrint = new MenuItem("Approve and Print", GlyphsDude.createIcon(FontAwesomeIcons.PRINT));//        
@@ -149,7 +148,7 @@ public final class FoodOrder implements Initializable {
                 con.showingProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
 
                     if (newValue) {
-                        FoodOderModel item = row.getItem();
+                        DrinkOderModel item = row.getItem();
                         if (!item.getStatus().equalsIgnoreCase(CANCELED)) {
                             con.getItems().add(approvePrint);
                             if (!item.getStatus().equalsIgnoreCase(PENDING)) {
@@ -190,7 +189,7 @@ public final class FoodOrder implements Initializable {
 //                row.setOnMouseEntered(new EventHandler<MouseEvent>() {
 //                    @Override
 //                    public void handle(MouseEvent mouseEvent) {
-//                        FoodOderModel item = row.getItem();
+//                        DrinkOderModel item = row.getItem();
 //                        if(item !=null){
 //                            if(Double.parseDouble(""+item.getPrice())==0)
 //                            row.setTooltip(new Tooltip("Needs Admin's price approval"));
@@ -217,7 +216,7 @@ public final class FoodOrder implements Initializable {
     }
     
     private void orders(){
-        JSONObject foods = nav.fetchFoodsOrders(State.channel_FRONT, null, null);
+        JSONObject foods = nav.fetchDrinksOrders(State.channel_Mobile, null, null);
         if(foods!=null){
             try {
                 JSONArray a = foods.getJSONArray("message");
@@ -227,14 +226,14 @@ public final class FoodOrder implements Initializable {
                     add1ToTable(o);
                 }
             } catch (JSONException ex) {
-                Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     private void add1ToTable(JSONObject o){
         try {
-            FoodOderModel m = new FoodOderModel();
+            DrinkOderModel m = new DrinkOderModel();
             m.setId(o.getString("_id"));
             m.setAmount(""+o.getDouble("amount"));
             JSONObject ob = o.getJSONObject("guest");
@@ -255,19 +254,19 @@ public final class FoodOrder implements Initializable {
 //            m.setRoom(x);
             list.add(m);
         } catch (JSONException ex) {
-            Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
     @FXML private void approveAndPrint() {
-        FoodOderModel item = table.getSelectionModel().getSelectedItem();
+        DrinkOderModel item = table.getSelectionModel().getSelectedItem();
         int index = table.getSelectionModel().getSelectedIndex();
 
         if (item.getStatus().equalsIgnoreCase(PENDING)) {
             Runnable task = () -> {
                 try {
-                    JSONObject o = nav.approveFoodsOrders(item.getId());
+                    JSONObject o = nav.approveDrinksOrders(item.getId());
                     if(o.getInt("status")==1){
                         
                         item.setStatus(PREPARING);
@@ -277,7 +276,7 @@ public final class FoodOrder implements Initializable {
                         
                     }
                 } catch (JSONException ex) {
-                    Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OnlineDrinkOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
             // Run the task in a background thread
@@ -298,20 +297,18 @@ public final class FoodOrder implements Initializable {
     
     private int counter;
     @FXML private void cancelOrder() {
-        String[] a = null;
+               String[] a = null;
         try {
             a = app.getMain().showAdminComfirmation();
-
+            
+            
         } catch (IOException ex) {
-            Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OnlineDrinkOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (a == null) {
-            return;
-        }
-        if (a[0] == null || a[1] == null) {
-            return;
-        }
-
+        
+        if(a == null )return;
+        if(a[0]==null || a[1]==null)return;
+        
         final MaskerPane mp = Util.mp();
         mp.setText("please wait...");
         mp.setProgress(-1);
@@ -320,33 +317,32 @@ public final class FoodOrder implements Initializable {
 
         boolean admin = nav.verifyAdmin(a);
         if (admin) {
-            
-        FoodOderModel item = table.getSelectionModel().getSelectedItem();
-        int index = table.getSelectionModel().getSelectedIndex();
-        mp.setText("Canceling order...");
-        Runnable task = () -> {
-            try {
-                JSONObject o = nav.cancelFoodsOrders(item.getId());
-                if (o.getInt("status") == 1) {
-                    item.setStatus(CANCELED);
-                    list.set(index, item);
-                    print();
-                    mp.setVisible(false);
-                    app.getMain().restaurantContentStack.getChildren().remove(mp);
-                } else {
-                    mp.setVisible(false);
-                    app.getMain().restaurantContentStack.getChildren().remove(mp);
+            DrinkOderModel item = table.getSelectionModel().getSelectedItem();
+            int index = table.getSelectionModel().getSelectedIndex();
+            mp.setText("Canceling order...");
+            Runnable task = () -> {
+                try {
+                    JSONObject o = nav.cancelDrinksOrders(item.getId());
+                    if (o.getInt("status") == 1) {
+                        item.setStatus(CANCELED);
+                        list.set(index, item);
+                        print();
+                        mp.setVisible(false);
+                        app.getMain().restaurantContentStack.getChildren().remove(mp);
+                    } else {
+                        mp.setVisible(false);
+                        app.getMain().restaurantContentStack.getChildren().remove(mp);
+                    }
+                } catch (JSONException ex) {
+                    Logger.getLogger(OnlineDrinkOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (JSONException ex) {
-                Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        };
-        // Run the task in a background thread
-        Thread back = new Thread(task);
-        back.setPriority(Thread.MAX_PRIORITY);
-        back.setDaemon(true);
-        back.start();
-        
+            };
+            // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+
         } else {
             mp.setVisible(false);
             app.getMain().restaurantContentStack.getChildren().remove(mp);
@@ -358,11 +354,13 @@ public final class FoodOrder implements Initializable {
     }
 
     @FXML private void setDoneOrder(){
-            FoodOderModel item = table.getSelectionModel().getSelectedItem();
+        
+
+            DrinkOderModel item = table.getSelectionModel().getSelectedItem();
             final int index = table.getSelectionModel().getSelectedIndex();
             Runnable task = () -> {
                 try {
-                    JSONObject o = nav.doneFoodsOrders(item.getId());
+                    JSONObject o = nav.doneDrinksOrders(item.getId());
                     if (o.getInt("status") == 1) {
                         item.setStatus(DONE);
                         list.set(index, item);
@@ -371,7 +369,7 @@ public final class FoodOrder implements Initializable {
 
                     }
                 } catch (JSONException ex) {
-                    Logger.getLogger(OnlineFoodOrder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OnlineDrinkOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
             // Run the task in a background thread
@@ -400,5 +398,7 @@ public final class FoodOrder implements Initializable {
                 approve.setVisible(true);
             }
     }
+    
+
     
 }
