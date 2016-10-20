@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.HotelService;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,13 +77,43 @@ public class NewHotelServiceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        System.out.println("New Hotel Service Controller Invoked");
-        button.setOnAction((e) ->{
-            newHotelService();
-        });
+        onLoad();
     }    
     
-    private void newHotelService(){
+    private boolean editMode;
+    private HotelService data;
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+    public HotelService getData() {
+        return data;
+    }
+
+    public void setData(HotelService data) {
+        this.data = data;
+    }
+    
+    private void onLoad(){
+        if(isEditMode()){
+            popEdit();
+        }
+    }
+    
+    private void popEdit(){
+        alias.setText(data.getAlias());
+        name.setText(data.getName());
+        charge.setText(data.getCharge());
+        desc.setText(data.getDesc());
+    }
+    
+    
+    @FXML private void newHotelService(){
         
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("alias", alias.getText()));
@@ -93,16 +124,19 @@ public class NewHotelServiceController implements Initializable {
         param.add(new BasicNameValuePair("servive", "hotel"));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
       
-        Runnable task = new Runnable() {
+        if(!isEditMode()){
+            
+            Runnable task = new Runnable() {
             @Override
             public void run() {
                 try {
+                    System.out.println("New Hotel Service Event Fired");
                     response = nav.createHotelService(param);
-                    if(response != null && response.getInt("status") == 200){
+                    if(response != null && response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_SUCCESS, "New Hotel Service Created and Saved", Pos.CENTER);
+                                Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Created and Saved", Pos.CENTER);
                             }
                         });
                     }else{
@@ -110,12 +144,12 @@ public class NewHotelServiceController implements Initializable {
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_ERROR, "New Hotel Service Creation Failed", Pos.CENTER);
+                                Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Create", Pos.CENTER);
                             }
                         });
-                    }   
+                    }
                 } catch (JSONException ex) {
-                    Logger.getLogger(NewHotelServiceController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         };
@@ -123,6 +157,40 @@ public class NewHotelServiceController implements Initializable {
         back.setPriority(Thread.MAX_PRIORITY);
         back.setDaemon(true);
         back.start();
+    }else{
+            
+        Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                param.add(new BasicNameValuePair("id", data.getId()));
+                response = nav.editLaundryService(param);
+                    if(response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Updated", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Update", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        }
     }
     
 }

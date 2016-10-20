@@ -1,6 +1,5 @@
-package hotels.views.component.fxml.bar.controller;
+package hotels.views.component.fxml.restaurant.model;
 
-import hotels.views.component.fxml.restaurant.controller.*;
 import javafx.beans.property.SimpleStringProperty;
 import org.json.JSONArray;
 import org.json.JSONObject;

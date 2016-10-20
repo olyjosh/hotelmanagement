@@ -27,7 +27,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="1033.0" stylesheets="@../../../../ensemble2.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.front.admin.Summary">
    <children>
-      <Pane prefHeight="65.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="46.0" prefWidth="1033.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="22.0" layoutY="14.0" text="Summary View">
                <font>
@@ -36,9 +36,9 @@
             </Label>
          </children>
       </Pane>
-      <AnchorPane layoutY="65.0" prefHeight="553.0" prefWidth="1033.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+      <AnchorPane layoutY="46.0" prefHeight="572.0" prefWidth="1033.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
          <children>
-            <HBox alignment="CENTER" layoutY="65.0" prefHeight="470.0" prefWidth="1033.0" spacing="15.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+            <HBox alignment="CENTER" layoutY="53.0" prefHeight="520.0" prefWidth="1033.0" spacing="15.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                <children>
                   <VBox prefHeight="463.0" prefWidth="424.0" spacing="15.0">
                      <children>

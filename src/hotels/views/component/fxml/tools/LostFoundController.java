@@ -113,6 +113,12 @@ public class LostFoundController implements Initializable {
         // TODO
         
         onLoad();
+        defaults();
+        
+        
+    }    
+    
+    private void defaults(){
         
         Util.formatDatePicker(dateText);
         
@@ -219,7 +225,7 @@ public class LostFoundController implements Initializable {
             table.setItems(tableItems);
         }
     });
-    }    
+    }
     
     private void onLoad(){
         
@@ -229,6 +235,7 @@ public class LostFoundController implements Initializable {
                 try {
                     lost = nav.fetchLostFound();
                     lostArray = lost.getJSONArray("message");
+                    System.out.println(lostArray);
                     getLostList();
                 } catch (JSONException ex) {
                     ex.printStackTrace();
@@ -271,8 +278,11 @@ public class LostFoundController implements Initializable {
                 JSONObject oj = lostArray.getJSONObject(i);
                 
                 ls.setId(oj.getString("_id"));
-                ls.setDiscardBy(oj.getJSONObject("reso").getString("discardBy"));
-                
+                if(oj.getJSONObject("reso").getString("discardBy") == null){
+                    ls.setDiscardBy("");
+                }else{
+                    ls.setDiscardBy(oj.getJSONObject("reso").getString("discardBy"));
+                }
                 if(oj.getJSONObject("reso").get("discardDate") == null){
                     ls.setDiscardDate("");
                 }else{
@@ -283,8 +293,12 @@ public class LostFoundController implements Initializable {
                 ls.setEntryDate(Util.stripDate(oj.getString("onDate")));
                 ls.setItemColour(oj.getString("color"));
                 ls.setItemName(oj.getString("name"));
-                ls.setReturnBy(oj.getJSONObject("reso").getString("returnBy"));
                 
+                if(oj.getJSONObject("reso").get("returnBy") == null){
+                    ls.setReturnBy("");
+                }else{
+                    ls.setReturnBy(oj.getJSONObject("reso").getString("returnBy")); 
+                }
                 if(oj.getJSONObject("reso").get("returnDate") == null){
                     ls.setReturnDate("");
                 }else{
@@ -295,14 +309,43 @@ public class LostFoundController implements Initializable {
                 ls.setWhereLost(oj.getString("location"));
                 ls.setFounder(oj.getString("founder"));
                 ls.setRemark(oj.getString("remark"));
-                ls.setName(oj.getJSONObject("comp").getString("name"));
-                ls.setName(oj.getJSONObject("comp").getString("address"));
-                ls.setName(oj.getJSONObject("comp").getString("city"));
-                ls.setName(oj.getJSONObject("comp").getString("state"));
-                ls.setName(oj.getJSONObject("comp").getString("zip"));
-                ls.setName(oj.getJSONObject("comp").getString("country"));
-                ls.setName(oj.getJSONObject("comp").getString("phone"));
                 
+                
+                if(oj.getJSONObject("comp").getString("name") == null){
+                    ls.setName(""); 
+                }else{
+                    ls.setName(oj.getJSONObject("comp").getString("name")); 
+                }
+                if(oj.getJSONObject("comp").getString("address") == null){
+                    ls.setAddress("");
+                }else{
+                    ls.setAddress(oj.getJSONObject("comp").getString("address"));
+                }
+                if(oj.getJSONObject("comp").getString("city") == null){
+                    ls.setCity("");
+                }else{
+                    ls.setCity(oj.getJSONObject("comp").getString("city"));
+                }
+                if(oj.getJSONObject("comp").getString("state") == null){
+                    ls.setState("");
+                }else{
+                    ls.setState(oj.getJSONObject("comp").getString("state"));
+                }
+                if(oj.getJSONObject("comp").getString("zip") == null){
+                    ls.setZip("");
+                }else{
+                    ls.setZip(oj.getJSONObject("comp").getString("zip"));
+                }
+                if(oj.getJSONObject("comp").getString("country") == null){
+                    ls.setCountry("");
+                }else{
+                    ls.setCountry(oj.getJSONObject("comp").getString("country"));
+                }
+                if(oj.getJSONObject("comp").getString("phone") == null){
+                    ls.setPhone("");
+                }else{
+                    ls.setPhone(oj.getJSONObject("comp").getString("phone"));
+                }
                 
                 service.addAll(ls);
                 
@@ -320,6 +363,7 @@ public class LostFoundController implements Initializable {
     private void showNewLostFound(ActionEvent e) throws IOException{
         NewLostFoundController controller = new NewLostFoundController(this.getApp());
         controller.setApp(getApp());
+        controller.setEditMode(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newLostFound.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
@@ -333,8 +377,9 @@ public class LostFoundController implements Initializable {
     private void showEditLostFound(ActionEvent e) throws IOException{
        
         LostFound item = table.getSelectionModel().getSelectedItem();
-        EditLostFoundController controller = new EditLostFoundController(this.getApp());
+        NewLostFoundController controller = new NewLostFoundController(this.getApp());
         controller.setApp(app);
+        controller.setEditMode(true);
         controller.setData(item);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newLostFound.fxml"));
         loader.setController(controller);
@@ -356,12 +401,13 @@ public class LostFoundController implements Initializable {
                     List <NameValuePair> param = new ArrayList<>();
                     param.add(new BasicNameValuePair("id", item.getId()));
                     JSONObject response = nav.deleteLostFound(param);
-                    System.out.println("Deleting Lost & Found : " + response);
-                    if(response != null && response.getInt("status") == 200){
+                    if(response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
                                 Util.notify(State.NOTIFY_SUCCESS, "Lost Item Information Deleted", Pos.CENTER);
+                                service.clear();
+                                onLoad();
                             }
                         });
                     }else{

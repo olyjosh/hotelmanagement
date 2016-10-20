@@ -36,11 +36,6 @@
                   <TextField layoutX="132.0" layoutY="44.0" prefHeight="31.0" prefWidth="248.0" />
                   <Label layoutX="400.0" layoutY="12.0" text="Phone" />
                   <Label layoutX="402.0" layoutY="50.0" text="Rep" />
-                  <Button alignment="BASELINE_LEFT" layoutX="898.0" layoutY="42.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="23.0" AnchorPane.rightAnchor="14.0">
-                     <graphic>
-                        <FontAwesomeIcon glyphName="SEARCH" />
-                     </graphic>
-                  </Button>
                   <TextField layoutX="475.0" layoutY="6.0" prefHeight="31.0" prefWidth="236.0" />
                   <ComboBox layoutX="476.0" layoutY="45.0" prefHeight="31.0" prefWidth="235.0" />
                </children>
@@ -75,11 +70,6 @@
                </graphic>
             </Button>
             <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Delete">
-               <graphic>
-                  <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
-            <Button layoutX="336.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Close">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>

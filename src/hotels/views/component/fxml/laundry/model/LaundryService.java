@@ -11,6 +11,8 @@ package hotels.views.component.fxml.laundry.model;
  */
 public class LaundryService {
     
+    private String id;
+    private String alias;
     private String name;
     private String charge;
     private String desc;
@@ -40,11 +42,25 @@ public class LaundryService {
         this.desc = desc;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     @Override
     public String toString() {
-        return "LaundryService{" + "name=" + name + ", charge=" + charge + ", desc=" + desc + '}';
+        return "LaundryService{" + "id=" + id + ", alias=" + alias + ", name=" + name + ", charge=" + charge + ", desc=" + desc + '}';
     }
-    
-    
     
 }

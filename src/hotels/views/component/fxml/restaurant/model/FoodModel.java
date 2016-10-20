@@ -1,6 +1,5 @@
-package hotels.views.component.fxml.bar.controller;
+package hotels.views.component.fxml.restaurant.model;
 
-import hotels.views.component.fxml.restaurant.controller.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -8,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Olyjosh
  */
-public class DrinkModel {
+public class FoodModel {
     private final SimpleStringProperty id = new SimpleStringProperty("");
     private final SimpleStringProperty name = new SimpleStringProperty("");
     private final SimpleStringProperty desc = new SimpleStringProperty("");

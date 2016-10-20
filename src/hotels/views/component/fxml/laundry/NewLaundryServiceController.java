@@ -9,10 +9,14 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.laundry.model.LaundryService;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -22,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -66,10 +71,43 @@ public class NewLaundryServiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        System.out.println("New Laundry Service Controller Invoked");
-        //System.out.println(nav.fetchRoomType());
+        onLoad();
     }    
+    
+    private boolean editMode;
+    private LaundryService data;
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+    public LaundryService getData() {
+        return data;
+    }
+
+    public void setData(LaundryService data) {
+        this.data = data;
+    }
+    
+    private void onLoad(){
+        if(isEditMode()){
+            popEdit();
+        }
+    }
+    
+    private void popEdit(){
+        if(data != null){
+            alias.setText(data.getAlias());
+            name.setText(data.getName());
+            charge.setText(data.getCharge());
+            desc.setText(data.getDesc());
+        }
+        
+    }
     
     @FXML
     private void newLaundryService(){
@@ -82,11 +120,78 @@ public class NewLaundryServiceController implements Initializable {
         param.add(new BasicNameValuePair("image", "image"));
         param.add(new BasicNameValuePair("servive", "laundry"));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
-      
-        System.out.println("New Laundry Service Event Fired");
-        response = nav.createLaundryService(param);
-        System.out.println("Creating Laundry Service : " + response);
         
-        Util.notify(State.NOTIFY_SUCCESS, "Laundry Service "+name.getText()+" Created and Saved", Pos.CENTER);
+        if(!isEditMode()){
+            
+            Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("New Laundry Service Event Fired");
+                    response = nav.createLaundryService(param);
+                    System.out.println("Creating Laundry Service : " + response);
+                    if(response != null && response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "Laundry Service "+name.getText()+" Created and Saved", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Laundry Service Failed to Create", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+    }else{
+            
+        Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                param.add(new BasicNameValuePair("id", data.getId()));
+                System.out.println("Edit Laundry Service Event Fired");
+                response = nav.editLaundryService(param);
+                System.out.println("Editing Laundry Service : " + response);
+                    if(response != null && response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "Laundry Service "+name.getText()+" Updated", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Lost Item Failed to Update", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        }
+      
     }
+        
 }

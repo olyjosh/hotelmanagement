@@ -104,7 +104,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="817.0" layoutY="10.0" prefHeight="92.0" prefWidth="353.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="817.0" layoutY="10.0" prefHeight="92.0" prefWidth="339.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
@@ -141,6 +141,24 @@
                                           <Button contentDisplay="TOP" layoutX="146.0" layoutY="13.0" mnemonicParsing="false" onAction="#showGuestMessages" prefHeight="69.0" prefWidth="100.0" text="Group List" visible="false">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="GROUP" size="2.5em" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="565.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Home" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showDashBoard" text="DashBoard">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="DASHBOARD" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>
@@ -231,7 +249,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="243.0">
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="92.0" prefWidth="383.0">
                                  <children>
                                     <HBox id="title" alignment="BASELINE_CENTER">
                                        <children>
@@ -248,6 +266,11 @@
                                           <Button contentDisplay="TOP" layoutX="105.0" layoutY="16.0" mnemonicParsing="false" onAction="#showLostFound" text="Lost and Found">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="JOOMLA" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="127.0" layoutY="11.0" mnemonicParsing="false" onAction="#showLostFound" text="Work Order">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="GEAR" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>

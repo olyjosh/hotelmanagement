@@ -1,5 +1,6 @@
 package hotels.views.component.fxml.restaurant.controller;
 
+import hotels.views.component.fxml.restaurant.model.FoodModel;
 import hotels.Hotels;
 import hotels.util.Navigator2;
 import java.net.URL;

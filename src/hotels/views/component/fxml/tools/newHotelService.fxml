@@ -30,12 +30,7 @@
                         <ImageView fx:id="image" fitHeight="114.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Button layoutX="392.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Close">
-                     <graphic>
-                        <FontAwesomeIcon glyphName="REMOVE" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="button" layoutX="220.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
+                  <Button fx:id="button" layoutX="396.0" layoutY="289.0" mnemonicParsing="false" onAction="#newHotelService" prefHeight="31.0" prefWidth="155.0" text="Add this Service">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

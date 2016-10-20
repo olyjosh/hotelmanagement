@@ -6,6 +6,7 @@ import hotels.views.component.fxml.bar.controller.DrinkOrder;
 import hotels.views.component.fxml.bar.controller.NewDrink;
 import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
 import hotels.views.component.fxml.front.ReserveListController;
+import hotels.views.component.fxml.front.controller.Dashboard;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
 import hotels.views.component.fxml.front.controller.NewBookingController;
@@ -190,10 +191,13 @@ public class Main implements Initializable{
         stage.showAndWait();
     }
     
-    private void showDashBoard(){
+    @FXML private void showDashBoard(){
         try {
+                    
+            Dashboard controller = new Dashboard(this.getApp());
+            controller.setApp(getApp());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/Dashboard.fxml"));
-            //loader.setController(controller);
+            loader.setController(controller);
             AnchorPane dashBoard = (AnchorPane)loader.load();
             ObservableList<Node> children = frontContentStack.getChildren();
             if (children.size() > 0) {
@@ -749,6 +753,7 @@ public class Main implements Initializable{
         Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
         loginButton.setDisable(true);
 
+        
 // Do some validation (using the Java 8 lambda syntax).
         username.textProperty().addListener((observable, oldValue, newValue) -> {
             loginButton.setDisable(newValue.trim().isEmpty());
@@ -771,14 +776,10 @@ public class Main implements Initializable{
         String [] x = new String[2];
         final Pair<String, String> pair;
         result.ifPresent((Pair<String, String> usernamePassword) -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
             x[0]=usernamePassword.getKey();
             x[1]=usernamePassword.getValue();
         });
         return x;
     }
-
-
-    
     
 }

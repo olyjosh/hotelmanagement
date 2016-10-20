@@ -258,7 +258,7 @@ public class Navigator2 {
         return null;
     }
      
-      public JSONObject sendMessage(String to, String from, String message) {
+    public JSONObject sendMessage(String to, String from, String message) {
         String url = OP_URL + "create/message";
 
         try {
@@ -267,7 +267,7 @@ public class Navigator2 {
             data.add(new BasicNameValuePair("from", from));
             data.add(new BasicNameValuePair("message", message));
             String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
+            url += "?" + param;
             HttpGet request = new HttpGet(url);
             HttpResponse response = httpClient.execute(request);
             return res;
@@ -284,7 +284,7 @@ public class Navigator2 {
         List<NameValuePair> data = new ArrayList<>();
         data.add(new BasicNameValuePair("d1", d1));
         data.add(new BasicNameValuePair("d2", d2));
-        String url = OP_URL+"fetch/roomstay";
+        String url = OP_URL+"fetch/roomstay2";
         String param = URLEncodedUtils.format(data, "utf-8");
         url +="?"+ param;
         try{
@@ -969,7 +969,51 @@ public class Navigator2 {
         return null;
     }
      
+          
+      public JSONObject fetchCutomersDetails(){
+        
+        //2016-09-22
+        List<NameValuePair> data = new ArrayList<>();
+//        data.add(new BasicNameValuePair("d1", d1));
+//        data.add(new BasicNameValuePair("d2", d2));
+        String url = OP_URL+"fetch/customerdetail";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url +="?"+ param;
+        try{
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
          
+             
+     public JSONObject fetchFolio( String d1,String d2) {
+        String url = OP_URL + "fetch/folio";
+        List<NameValuePair> data = new ArrayList<>();
+
+        if(d1!=null){
+            data.add(new BasicNameValuePair("d1", d1));
+            data.add(new BasicNameValuePair("d2", d2));
+        }
+
+
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+     
+      
          
     public JSONObject upload(File file){
         try{
@@ -1008,8 +1052,5 @@ public class Navigator2 {
         }
         return out;
     }
-    
-    
-    
     
 }

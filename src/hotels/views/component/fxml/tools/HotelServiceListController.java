@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.laundry.model.LaundryService;
 import hotels.views.component.fxml.tools.model.HotelService;
 import hotels.views.component.fxml.tools.model.LostFound;
 import java.io.IOException;
@@ -92,7 +93,6 @@ public class HotelServiceListController implements Initializable {
         onLoad();
     }    
     
-    
     private void onLoad(){
         
         Runnable task = new Runnable() {
@@ -161,6 +161,7 @@ public class HotelServiceListController implements Initializable {
     private void showNewHotelService(ActionEvent e) throws IOException{
         NewHotelServiceController controller = new NewHotelServiceController(this.getApp());
         controller.setApp(getApp());
+        controller.setEditMode(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newHotelService.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
@@ -174,8 +175,9 @@ public class HotelServiceListController implements Initializable {
     private void showEditHotelService(ActionEvent e) throws IOException{
        
         HotelService item = table.getSelectionModel().getSelectedItem();
-        EditHotelServiceController controller = new EditHotelServiceController(this.getApp());
+        NewHotelServiceController controller = new NewHotelServiceController(this.getApp());
         controller.setApp(app);
+        controller.setEditMode(true);
         controller.setData(item);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newHotelService.fxml"));
         loader.setController(controller);
@@ -196,14 +198,16 @@ public class HotelServiceListController implements Initializable {
                 try {
                     List <NameValuePair> param = new ArrayList<>();
                     param.add(new BasicNameValuePair("id", item.getId()));
+                    //param.add(new BasicNameValuePair("servive", "hotel"));
                     JSONObject response = nav.deleteHotelService(param);
-                    System.out.println("Deleting Lost & Found : " + response);
                     
-                    if(response != null && response.getInt("status") == 200){
+                    if(response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
                                 Util.notify(State.NOTIFY_SUCCESS, "Hotel Service Information Deleted", Pos.CENTER);
+                                service.clear();
+                                onLoad();
                             }
                         });
                     }else{

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -98,25 +99,31 @@ public class NewDailyController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
-        System.out.println("New daily Controller coming up");
-        //Setting Laundry status
-        ObservableList status = FXCollections.observableArrayList();
-        //status.add(State.STATUS_C);
-        //status.add(State.STATUS_P);
-        //status.add(State.STATUS_R);
-        //status.add(State.STATUS_N);
-        laundryStatus.setItems(status);
-        
         itemList = FXCollections.observableArrayList();
         userList = FXCollections.observableArrayList();
         serviceList = FXCollections.observableArrayList();
         returnList = FXCollections.observableArrayList();
         hotelServiceList = FXCollections.observableArrayList();
-        
         userId = FXCollections.observableHashMap();
+        serialText.setEditable(false);
         
         onLoad();
+        defaults();
         
+        addBtn.setOnAction((e) ->{
+            newDailyLaundry();
+        });
+    }    
+    
+    private void defaults(){
+        System.out.println("New daily Controller coming up");
+        //Setting Laundry status
+        ObservableList status = FXCollections.observableArrayList();
+        status.add(State.STATUS_C);
+        status.add(State.STATUS_P);
+        status.add(State.STATUS_R);
+        status.add(State.STATUS_N);
+        laundryStatus.setItems(status);
         
         laundryService.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -124,7 +131,7 @@ public class NewDailyController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
                      String [] lserv = Util.splitter(newValue, 'N');
-                     total += Integer.parseInt(lserv[1]);
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
                      totalBill.setText(String.valueOf(total));
                 }
            });
@@ -136,7 +143,7 @@ public class NewDailyController implements Initializable {
                     
                      //total -= Integer.parseInt(oldValue);
                      String [] lserv = Util.splitter(newValue, 'N');
-                     total += Integer.parseInt(lserv[1]);
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
                      totalBill.setText(String.valueOf(total));
                 }
            });
@@ -147,7 +154,7 @@ public class NewDailyController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
                      String [] lserv = Util.splitter(newValue, 'N');
-                     total += Integer.parseInt(lserv[1]);
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
                      totalBill.setText(String.valueOf(total));
                 }
            });
@@ -161,18 +168,31 @@ public class NewDailyController implements Initializable {
                 }
            });
         
-    }    
+    }
     
     private void onLoad(){
         
-        loadLaundryItems();
-        loadLaundryService();
-        loadReturnIn();
-        loadHotelService();
-        loadUsers();
+        serialText.setText(Util.randomString(6));
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+               
+                loadLaundryItems();
+                loadLaundryService();
+                loadReturnIn();
+                loadHotelService();
+                loadUsers();
+                
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        
+        
     }
     
-    @FXML
     private void newDailyLaundry(){
         
         List <NameValuePair> param = new ArrayList<>();
@@ -196,14 +216,37 @@ public class NewDailyController implements Initializable {
         param.add(new BasicNameValuePair("balance", totalBalance.getText()));
         param.add(new BasicNameValuePair("remark", remark.getText()));
         param.add(new BasicNameValuePair("performedBy", userId.get(laundryUser.getSelectionModel().getSelectedIndex()).toString()));
-           
-        System.out.println("Invoking new Daily Laundry Event");
-        response = nav.createDailyLaundry(param);
-        System.out.println("Making Laundry Sales : " + response);
-        
-        if(response != null){
-            Util.notify(State.NOTIFY_SUCCESS, "A New Laundry Operation Has been Registered", Pos.CENTER);
-        }
+          
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+               
+                System.out.println("Invoking new Daily Laundry Event");
+                response = nav.createDailyLaundry(param);
+                System.out.println("Making Laundry Sales : " + response);
+                if(response != null){
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            Util.notify(State.NOTIFY_SUCCESS, "A New Laundry Operation Has been Registered", Pos.CENTER);
+                        }
+                    });
+                }else{
+
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            Util.notify(State.NOTIFY_ERROR, "Laundry Failed to Register", Pos.CENTER);
+                        }
+                    });
+                }
+                
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
     }
     
     private void loadLaundryItems(){
@@ -214,7 +257,8 @@ public class NewDailyController implements Initializable {
             
             for(int i = 0; i < itemArray.length(); i++){
                 JSONObject items = itemArray.getJSONObject(i);
-                itemList.add(items.getString("name"));
+                String name = items.getString("name");
+                itemList.add(name);
             }
         } catch (JSONException ex) {
             ex.printStackTrace();

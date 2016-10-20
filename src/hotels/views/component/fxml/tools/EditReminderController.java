@@ -211,7 +211,6 @@ public class EditReminderController implements Initializable {
         
     }
     
-    
     private void fetchUser(){
         
         try {

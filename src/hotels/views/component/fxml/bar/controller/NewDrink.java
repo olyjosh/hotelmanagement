@@ -1,5 +1,6 @@
 package hotels.views.component.fxml.bar.controller;
 
+import hotels.views.component.fxml.bar.model.DrinkModel;
 import hotels.views.component.fxml.restaurant.controller.*;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;

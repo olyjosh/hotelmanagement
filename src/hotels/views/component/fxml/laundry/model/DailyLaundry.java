@@ -11,13 +11,31 @@ package hotels.views.component.fxml.laundry.model;
  */
 public class DailyLaundry {
     
+    private String id;
     private String linen;
     private String date;
     private String user;
     private String status;
     private String returns;
     private String remark;
+    
+    private String item;
+    private String laundryService;
+    private String hotelService;
+    private String returnDate;
+    private String totalBill;
+    private String paid;
+    private String balance;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    
     public String getLinen() {
         return linen;
     }
@@ -66,10 +84,65 @@ public class DailyLaundry {
         this.remark = remark;
     }
 
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public String getLaundryService() {
+        return laundryService;
+    }
+
+    public void setLaundryService(String laundryService) {
+        this.laundryService = laundryService;
+    }
+
+    public String getHotelService() {
+        return hotelService;
+    }
+
+    public void setHotelService(String hotelService) {
+        this.hotelService = hotelService;
+    }
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getTotalBill() {
+        return totalBill;
+    }
+
+    public void setTotalBill(String totalBill) {
+        this.totalBill = totalBill;
+    }
+
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(String paid) {
+        this.paid = paid;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
-        return "DailyLaundry{" + "linen=" + linen + ", date=" + date + ", user=" + user + ", status=" + status + ", returns=" + returns + ", remark=" + remark + '}';
+        return "DailyLaundry{" + "id=" + id + ", linen=" + linen + ", date=" + date + ", user=" + user + ", status=" + status + ", returns=" + returns + ", remark=" + remark + ", item=" + item + ", laundryService=" + laundryService + ", hotelService=" + hotelService + ", returnDate=" + returnDate + ", totalBill=" + totalBill + ", paid=" + paid + ", balance=" + balance + '}';
     }
-    
     
 }

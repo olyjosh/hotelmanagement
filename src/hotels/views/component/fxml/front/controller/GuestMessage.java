@@ -280,8 +280,6 @@ public class GuestMessage implements Initializable {
         guestData = FXCollections.observableArrayList();
         JSONObject fetchCustomers = nav.fetchCustomers();
         if(fetchCustomers!=null){
-                                        System.out.println("dwkdkjwbkbwdewdhdjdjbwkdbwkjdkwdjwdjwkjk");
-
             try {
                 JSONArray jsonArray = fetchCustomers.getJSONArray("message");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -349,12 +347,6 @@ public class GuestMessage implements Initializable {
             }
         }
     }
-    
-
-    
-    
-
-    
-    
+   
     
 }

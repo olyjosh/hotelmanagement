@@ -243,7 +243,7 @@ public class ReserveListController implements Initializable {
                                 
                 JSONObject oj3 = oj.getJSONObject("guest");
                 rs.setGuestName(oj3.getString("firstName") + "  " + oj3.getString("lastName"));
-             
+                rs.setPhone(oj3.getString("phone"));
                 reserv.addAll(rs);
             }
            

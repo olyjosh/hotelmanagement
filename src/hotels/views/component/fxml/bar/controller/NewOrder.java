@@ -1,5 +1,6 @@
 package hotels.views.component.fxml.bar.controller;
 
+import hotels.views.component.fxml.bar.model.DrinkModel;
 import hotels.views.component.fxml.restaurant.controller.*;
 import hotels.Hotels;
 import hotels.util.Navigator2;

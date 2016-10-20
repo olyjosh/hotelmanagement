@@ -48,6 +48,12 @@ public class State {
     public final static int ORDER_CANCEL = 1;
     public final static int ORDER_PREPARING = 2;
     public final static int ORDER_DONE = 3;
+    
+    //STATUS 
+    public final static String STATUS_C = "Complete";
+    public final static String STATUS_P = "Pending";
+    public final static String STATUS_R = "Returned";
+    public final static String STATUS_N = "Not Completed";
 }
     
 
