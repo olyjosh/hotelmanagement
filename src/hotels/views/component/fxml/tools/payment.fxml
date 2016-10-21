@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="progressHbox" alignment="CENTER" layoutX="220.0" layoutY="47.0" prefHeight="46.0" prefWidth="273.0" spacing="20.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="127.0" AnchorPane.topAnchor="47.0">
+         <children>
+            <ProgressIndicator layoutX="77.0" layoutY="23.0" prefHeight="38.0" prefWidth="37.0" />
+            <Label text="processing bills ... please wait" />
+         </children>
+      </HBox>
+      <ToolBar layoutX="-2.0" layoutY="-3.0" prefHeight="38.0" prefWidth="626.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Text fill="#8a8383" fontSmoothingType="LCD" layoutX="239.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Record Payment" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="239.2294921875" AnchorPane.topAnchor="14.46484375">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </items>
+      </ToolBar>
+      <VBox layoutY="48.0" prefHeight="405.0" prefWidth="184.0" spacing="10.0">
+         <children>
+            <TitledPane animated="false" prefHeight="86.0" prefWidth="201.0" text="Guest Information">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="name" text="FirstName LastName" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="86.0" prefWidth="201.0" text="Room Information" visible="false">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane prefHeight="55.0" prefWidth="179.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Room :" />
+                              <Label layoutX="10.0" layoutY="8.0" text="Room Type :" GridPane.rowIndex="1" />
+                              <Label fx:id="room" layoutX="10.0" layoutY="8.0" text="000" GridPane.columnIndex="1" />
+                              <Label fx:id="roomType" layoutX="99.0" layoutY="8.0" text="TYPE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" layoutX="10.0" layoutY="106.0" prefHeight="86.0" prefWidth="201.0" text="Pax Information" visible="false">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane prefHeight="55.0" prefWidth="179.0">
+                           <children>
+                              <Label text="Arrival:" />
+                              <Label layoutX="10.0" layoutY="8.0" text="Departure:" GridPane.rowIndex="1" />
+                              <Label fx:id="arrival" layoutX="10.0" layoutY="8.0" text="03/09/2016 09:12 PM" GridPane.columnIndex="1" />
+                              <Label fx:id="departure" layoutX="99.0" layoutY="8.0" text="03/09/2016" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" layoutX="10.0" layoutY="202.0" prefHeight="86.0" prefWidth="201.0" text="Tarrif Information" visible="false">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane prefHeight="55.0" prefWidth="179.0">
+                           <children>
+                              <Label text="Rate Apply :" />
+                              <Label fx:id="rate" layoutX="10.0" layoutY="8.0" text="000" GridPane.columnIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+         </children>
+      </VBox>
+      <Button fx:id="cancel" layoutX="213.0" layoutY="415.0" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="213.0" />
+      <Button fx:id="checkOut" defaultButton="true" disable="true" layoutX="552.0" layoutY="415.0" mnemonicParsing="false" text="Check Out" />
+      <Button fx:id="retry" layoutX="396.0" layoutY="415.0" mnemonicParsing="false" text="Retry" />
+      <Hyperlink layoutX="580.0" layoutY="36.0" text="Print">
+         <graphic>
+            <FontAwesomeIcon glyphName="PRINT" />
+         </graphic>
+      </Hyperlink>
+      <Label layoutX="288.0" layoutY="102.0" text="N898">
+         <font>
+            <Font size="72.0" />
+         </font></Label>
+      <Label fx:id="name1" layoutX="332.0" layoutY="204.0" text="Descriptions" />
+   </children>
+</AnchorPane>
