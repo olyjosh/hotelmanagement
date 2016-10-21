@@ -559,35 +559,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showNewUser" text="New">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="PLUS_CIRCLE" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="List Bookings">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="BOOK" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="92.0" prefWidth="143.0">
-                                 <children>
-                                    <HBox id="title" alignment="BASELINE_CENTER">
-                                       <children>
-                                          <Label id="newLabel" text="Configuration" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" text="Add">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#ff83d6" glyphName="BAN" size="2.5em" styleClass="icons" />
-                                             </graphic>
-                                          </Button>
-                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showRoomList" text="List">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showNewDrink" text="List of Drinks / Add New Drinks">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
