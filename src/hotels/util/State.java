@@ -20,7 +20,7 @@ public class State {
     public final static String channel_Mobile = "mobile";
     public final static String channel_FRONT = "front";
     public final static String channel_POS = "pos";
-    
+    public final static String channel_BANK_TRANSFER = "bank"; 
     
     public final static String NOTIFY_SUCCESS = "Operation Successful";
     public final static String NOTIFY_ERROR = "Error in Operation, process Aborted";
@@ -28,7 +28,6 @@ public class State {
     public final static String NOTIFY_BOOKING = "Booking Notification";
     public final static String NOTIFY_CHECKIN = "Checkin Notification";
     public final static String NOTIFY_RESERVE = "Reservation Notification";
-    
     
     //USERS PRIVILEDGES
     public final static int USER_SUPER_ADMIN = 0;

@@ -6,9 +6,11 @@
 
 package hotels.util;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +23,21 @@ import org.json.JSONObject;
 public class Trys {
 
     
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) {
+        
+        System.out.println(System.getProperty("user.country"));; 
+        showPriceInUSD(40);
+    }
+    
+    public static void showPriceInUSD(double price) {
+        
+        double priceInUSD = price;
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+        System.out.printf("Price in USD : %s %n", currencyFormat.format(priceInUSD));
+    }
+
+    
+    public static void sendArray() throws JSONException {
 //        57fcf4381c7114122e59e894
         
         List a = new ArrayList();
@@ -41,3 +57,21 @@ public class Trys {
         System.out.println(rawTest);
     }
 }
+
+
+
+//
+//db.guests.drop();db.floors.drop();db.roomtypes.drop();db.services.drop();db.identitycounters.drop();db.laundryitems.drop();db.lostfounds.drop();db.mealorders.drop();db.meals.drop();db.phones.drop();db.reminders.drop();db.returnins.drop();
+//
+//floors
+//guests
+//identitycounters
+//laundryitems
+//lostfounds
+//mealorders
+//meals
+//phones
+//reminders
+//returnins
+//roomtypes
+//services
