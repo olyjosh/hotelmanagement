@@ -26,6 +26,14 @@ public class DailyLaundry {
     private String totalBill;
     private String paid;
     private String balance;
+    private String room;
+    private String roomPosted;
+    private String guestName;
+    
+    private String laundryServicePrice;
+    private String hotelServicePrice;
+    private String returnInPrice;
+    
 
     public String getId() {
         return id;
@@ -140,9 +148,57 @@ public class DailyLaundry {
         this.balance = balance;
     }
 
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getRoomPosted() {
+        return roomPosted;
+    }
+
+    public void setRoomPosted(String roomPosted) {
+        this.roomPosted = roomPosted;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
+
+    public String getLaundryServicePrice() {
+        return laundryServicePrice;
+    }
+
+    public void setLaundryServicePrice(String laundryServicePrice) {
+        this.laundryServicePrice = laundryServicePrice;
+    }
+
+    public String getHotelServicePrice() {
+        return hotelServicePrice;
+    }
+
+    public void setHotelServicePrice(String hotelServicePrice) {
+        this.hotelServicePrice = hotelServicePrice;
+    }
+
+    public String getReturnInPrice() {
+        return returnInPrice;
+    }
+
+    public void setReturnInPrice(String returnInPrice) {
+        this.returnInPrice = returnInPrice;
+    }
+
     @Override
     public String toString() {
-        return "DailyLaundry{" + "id=" + id + ", linen=" + linen + ", date=" + date + ", user=" + user + ", status=" + status + ", returns=" + returns + ", remark=" + remark + ", item=" + item + ", laundryService=" + laundryService + ", hotelService=" + hotelService + ", returnDate=" + returnDate + ", totalBill=" + totalBill + ", paid=" + paid + ", balance=" + balance + '}';
+        return "DailyLaundry{" + "id=" + id + ", linen=" + linen + ", date=" + date + ", user=" + user + ", status=" + status + ", returns=" + returns + ", remark=" + remark + ", item=" + item + ", laundryService=" + laundryService + ", hotelService=" + hotelService + ", returnDate=" + returnDate + ", totalBill=" + totalBill + ", paid=" + paid + ", balance=" + balance + ", room=" + room + ", roomPosted=" + roomPosted + ", guestName=" + guestName + ", laundryServicePrice=" + laundryServicePrice + ", hotelServicePrice=" + hotelServicePrice + ", returnInPrice=" + returnInPrice + '}';
     }
     
 }

@@ -70,17 +70,7 @@
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>
             </Button>
-            <Button layoutX="336.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Close">
-               <graphic>
-                  <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
          </children>
       </HBox>
-      <Button layoutX="14.0" layoutY="408.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="34.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0">
-         <graphic>
-            <FontAwesomeIcon glyphName="REFRESH" />
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

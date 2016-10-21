@@ -9,10 +9,12 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.HotelService;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,12 +63,33 @@ public class NewRoomController implements Initializable {
         nav  = new Navigator(getApp().getMain());
     }
     
+    private boolean editMode;
+    private Room data;
     private Navigator nav;
     private JSONObject response;
     private ObservableList roomTypeList = FXCollections.observableArrayList();
     private ObservableList roomTypeId = FXCollections.observableArrayList();
     private ObservableList floorList = FXCollections.observableArrayList();
     private ObservableList floorId = FXCollections.observableArrayList();
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+    public Room getData() {
+        return data;
+    }
+
+    public void setData(Room data) {
+        this.data = data;
+    }
+    
+    
+    
     
     /**
      * Initializes the controller class.
@@ -74,10 +97,24 @@ public class NewRoomController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        defaults();
         onLoad();
     }    
 
+    private void defaults(){
+        if(isEditMode()){
+            popEdit();
+        }
+    }
+    
+    private void popEdit(){
+        alias.setText(data.getAlias());
+        name.setText(data.getName());
+        roomType.getSelectionModel().select(data.getType());
+        floor.getSelectionModel().select(data.getFloor());
+        desc.setText(data.getDesc());
+    }
+    
     private void onLoad(){
         try {
             JSONObject roomType = nav.fetchRoomType();
@@ -119,11 +156,74 @@ public class NewRoomController implements Initializable {
         param.add(new BasicNameValuePair("desc", desc.getText()));
         param.add(new BasicNameValuePair("roomType", roomTypeId.get(roomType.getSelectionModel().getSelectedIndex()).toString()));
         param.add(new BasicNameValuePair("floor", floorId.get(floor.getSelectionModel().getSelectedIndex()).toString()));
-                             
-        response = nav.createRoom(param);
-        System.out.println("Creating a Room : " + response);
-        
-        Util.notify(State.NOTIFY_SUCCESS, "New Room has been Created", Pos.CENTER);
+                   
+        if(!isEditMode()){
+            
+            Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    response = nav.createRoom(param);
+                    System.out.println("Creating a Room : " + response);
+                    if(response != null && response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "New Room has been Created", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Room Failed to Create", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        }else{
+            
+        Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                param.add(new BasicNameValuePair("id", data.getId()));
+                response = nav.editRoom(param);
+                    if(response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, data.getName() + " has been Updated", Pos.CENTER);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, data.getName() +" Failed to Update", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+        }
     }
     
 }

@@ -3,30 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.laundry;
+package hotels.views.component.fxml.tools;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.laundry.model.LaundryItem;
+import hotels.views.component.fxml.tools.model.Account;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -37,26 +30,53 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class NewItemController implements Initializable {
+public class NewAccountController implements Initializable {
 
     @FXML
+    private TextField accountName;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField phone;
+    @FXML
+    private TextField add1;
+    @FXML
+    private TextField add2;
+    @FXML
+    private TextField city;
+    @FXML
+    private TextField zip;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField web;
+    @FXML
+    private TextField accountNo;
+    @FXML
+    private TextField credit;
+    @FXML
+    private TextField balance;
+    @FXML
+    private TextField term;
+    @FXML
+    private ComboBox rep;
+    @FXML
+    private ComboBox country;
+    @FXML
+    private ComboBox state;
+    @FXML
+    private TextField contact;
+    @FXML
     private TextField alias;
-    @FXML
-    private TextField name;
-    @FXML
-    private ComboBox cat;
-    @FXML
-    private RadioButton vhotel;
-    @FXML
-    private RadioButton vguest;
-    @FXML
-    private ImageView image;
-    @FXML
-    private TextArea desc;
     
+    
+    private Hotels app;
     private Navigator nav;
     private JSONObject response;
-    private Hotels app;
+    private boolean editMode;
+    private Account data;
 
     public Hotels getApp() {
         return app;
@@ -66,13 +86,10 @@ public class NewItemController implements Initializable {
         this.app = app;
     }
 
-    public NewItemController(Hotels app) {
+    public NewAccountController(Hotels app) {
         this.app = app;
         nav  = new Navigator(getApp().getMain());
     }
-    
-    private boolean editMode;
-    private LaundryItem data;
 
     public boolean isEditMode() {
         return editMode;
@@ -82,13 +99,15 @@ public class NewItemController implements Initializable {
         this.editMode = editMode;
     }
 
-    public LaundryItem getData() {
+    public Account getData() {
         return data;
     }
 
-    public void setData(LaundryItem data) {
+    public void setData(Account data) {
         this.data = data;
     }
+    
+    
 
     /**
      * Initializes the controller class.
@@ -96,19 +115,7 @@ public class NewItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList type = FXCollections.observableArrayList();
-        type.add("Fabric");
-        type.add("Linen");
-        type.add("Native");
-        type.add("Wool");
-        cat.setItems(type);
-        
-        ToggleGroup tg = new ToggleGroup();
-        vguest.setToggleGroup(tg);
-        vhotel.setToggleGroup(tg);
-        
         onLoad();
-        
     }    
     
     private void onLoad(){
@@ -118,50 +125,61 @@ public class NewItemController implements Initializable {
     }
     
     private void popEdit(){
-        alias.setText(data.getAlias());
-        name.setText(data.getName());
-        cat.getSelectionModel().select(data.getCat());
-        if(data.getVis().equals("Hotel")){
-            vhotel.setSelected(true);
-        }else{
-            vguest.setSelected(true);
-        }
-        desc.setText(data.getDesc());
+        alias.setText(data.getCompanyName());
+        accountName.setText(data.getAccountName());
+        firstName.setText(data.getFirstName());
+        lastName.setText(data.getLastName());
+        phone.setText(data.getPhone());
+        add1.setText(data.getAdd1());
+        add2.setText(data.getAdd2());
+        city.setText(data.getCity());
+        zip.setText(data.getZip());
+        state.getSelectionModel().select(data.getState());
+        country.getSelectionModel().select(data.getCountry());
+        email.setText(data.getEmail());
+        web.setText(data.getWeb());
+        rep.getSelectionModel().select(data.getRep());
+        contact.setText(data.getContact());
+        accountNo.setText(data.getAccountNo());
+        credit.setText(data.getCredit());
+        balance.setText(data.getBalance());
+        term.setText(data.getTerm());
     }
     
-    @FXML
-    private void createItem(){
-        String choice;
-        List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("alias", alias.getText()));
-        param.add(new BasicNameValuePair("name", name.getText()));
-        param.add(new BasicNameValuePair("code", Util.random()));
-        param.add(new BasicNameValuePair("category", cat.getSelectionModel().getSelectedItem().toString()));
-        if(vguest.isSelected()){
-            choice = "Guest";
-        }else{
-            choice = "Hotel";
-        }
-        param.add(new BasicNameValuePair("visibility", choice));
-        param.add(new BasicNameValuePair("desc", desc.getText()));
-        param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
+    @FXML private void newAccount(){
 
-        response = nav.createLaundryItem(param);
-        System.out.println("Creating Laundry Item : " + response);
-        
+        List <NameValuePair> param = new ArrayList<>();
+        param.add(new BasicNameValuePair("alis", alias.getText()));
+        param.add(new BasicNameValuePair("accountName", accountName.getText()));
+        param.add(new BasicNameValuePair("firstName", firstName.getText()));
+        param.add(new BasicNameValuePair("lastName", lastName.getText()));
+        param.add(new BasicNameValuePair("address_one", add1.getText()));
+        param.add(new BasicNameValuePair("address_two", add2.getText()));
+        param.add(new BasicNameValuePair("city", city.getText()));
+        param.add(new BasicNameValuePair("zip", zip.getText()));
+        param.add(new BasicNameValuePair("state", state.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("country", country.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("email", email.getText()));
+        param.add(new BasicNameValuePair("website", web.getText()));
+        param.add(new BasicNameValuePair("rep", rep.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("cred_accountNo", accountNo.getText()));
+        param.add(new BasicNameValuePair("cred_creditLimit", credit.getText()));
+        param.add(new BasicNameValuePair("cred_openBalance", balance.getText()));
+        param.add(new BasicNameValuePair("cred_paymentTerm", term.getText()));
+        param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
+      
         if(!isEditMode()){
             
             Runnable task = new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        System.out.println("New Hotel Service Event Fired");
-                        response = nav.createLaundryItem(param);
+                        response = nav.createAccount(param);
                         if(response != null && response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "New Laundry Item "+name.getText()+" Created and Saved", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "New Account Created and Saved", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -169,7 +187,7 @@ public class NewItemController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Laundry Item Failed to Create", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "Account Failed to Create", Pos.CENTER);
                                 }
                             });
                         }
@@ -189,12 +207,12 @@ public class NewItemController implements Initializable {
             public void run() {
                 try {
                     param.add(new BasicNameValuePair("id", data.getId()));
-                    response = nav.editLaundryItem(param);
+                    response = nav.editAccount(param);
                         if(response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "Laundry Item "+name.getText()+" Updated", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "Account Updated", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -202,7 +220,7 @@ public class NewItemController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Laundry Item Failed to Update", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "Account Failed to Update", Pos.CENTER);
                                 }
                             });
                         }

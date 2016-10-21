@@ -10,8 +10,6 @@ import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
 import hotels.views.component.fxml.laundry.model.DailyLaundry;
-import hotels.views.component.fxml.tools.EditReminderController;
-import hotels.views.component.fxml.tools.model.Reminder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -125,7 +123,7 @@ public class DailyLaundryController implements Initializable {
             back.setDaemon(true);
             back.start();
             
-            linen.setCellValueFactory(new PropertyValueFactory<>("linen"));
+            linen.setCellValueFactory(new PropertyValueFactory<>("item"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             user.setCellValueFactory(new PropertyValueFactory<>("user"));
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -142,7 +140,7 @@ public class DailyLaundryController implements Initializable {
                 ls = new DailyLaundry();
                 JSONObject oj = dailyArray.getJSONObject(i);
                 
-                ls.setDate(oj.getString("date"));
+                ls.setDate(Util.stripDate(oj.getString("date")));
                 ls.setLinen(String.valueOf(oj.get("sn")));
                 ls.setRemark(oj.getString("remark"));
                //ls.setStatus(oj.getString("status"));
@@ -183,9 +181,10 @@ public class DailyLaundryController implements Initializable {
     private void showEditDaily(ActionEvent e) throws IOException{
        
         DailyLaundry item = table.getSelectionModel().getSelectedItem();
-        EditDailyLaundryController controller = new EditDailyLaundryController(this.getApp());
+        NewDailyController controller = new NewDailyController(this.getApp());
         controller.setApp(app);
-        controller.setLs(item);
+        controller.setEditMode(true);
+        controller.setData(item);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/laundry/newDaily.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
@@ -211,8 +210,7 @@ public class DailyLaundryController implements Initializable {
                         @Override
                         public void run() {
                             Util.notify(State.NOTIFY_SUCCESS, "A Laundry has been Deleted", Pos.CENTER);
-                            service.clear();
-                            onLoad();
+                            service.remove(item);
                         }
                     });
                 }else{

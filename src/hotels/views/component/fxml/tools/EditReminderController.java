@@ -208,6 +208,7 @@ public class EditReminderController implements Initializable {
         message.setText(data.getMessage());
         interval.getSelectionModel().select(data.getInterval());
         priority.getSelectionModel().select(data.getPriority());
+        startDate.getEditor().setText(Util.stripDate(data.getStartTime()));
         
     }
     
@@ -233,7 +234,7 @@ public class EditReminderController implements Initializable {
     
     private void editReminder(){
         
-        String datetime = startDate.getValue().toString()+"T"+
+        String datetime = startDate.getEditor().getText()+"T"+
                 convertTO24(hour.getSelectionModel().getSelectedItem()+":"+"00",//min.getSelectionModel().getSelectedItem().toString(), 
                 am_pm.getSelectionModel().getSelectedItem().toString());
         

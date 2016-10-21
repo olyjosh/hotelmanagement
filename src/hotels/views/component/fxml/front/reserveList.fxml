@@ -56,22 +56,17 @@
                   <FontAwesomeIcon glyphName="PRINT" />
                </graphic>
             </Button>
-            <Button fx:id="newBtn" layoutX="461.0" mnemonicParsing="false" onAction="#showCheckIn" prefHeight="31.0" prefWidth="108.0" text="New">
+            <Button fx:id="newBtn" layoutX="461.0" mnemonicParsing="false" onAction="#newBooking" prefHeight="31.0" prefWidth="108.0" text="New">
                <graphic>
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button layoutX="584.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Edit">
+            <Button layoutX="584.0" mnemonicParsing="false" onAction="#editBooking" prefHeight="31.0" prefWidth="108.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button layoutX="707.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Delete">
-               <graphic>
-                  <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
-            <Button layoutX="830.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" text="Close">
+            <Button layoutX="707.0" mnemonicParsing="false" onAction="#deleteBooking" prefHeight="31.0" prefWidth="108.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>

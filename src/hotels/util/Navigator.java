@@ -76,6 +76,7 @@ public class Navigator {
                                 }
                             });
                             res = new JSONObject(result);
+                            System.out.println("Printing res from Navigator : " + res);
                         } else if (status == HttpStatus.SC_UNAUTHORIZED) {
                             Platform.runLater(new Runnable() {
                                 @Override
@@ -201,6 +202,43 @@ public class Navigator {
         return null;
     }
     
+    public JSONObject editRoom(List data){
+        
+        String url = OP_URL+"edit/room";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            System.out.println("Printing URL : " + url);
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deleteRoom(List data){
+        
+        String url = OP_URL+"delete/room";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            System.out.println("Printing URL : " + url);
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //==========BOOKING THINGS================//
     public JSONObject createBooking(List data){
 
         String url = OP_URL+"create/book";
@@ -367,6 +405,9 @@ public class Navigator {
         return null;
     }
     
+    
+    //==============Daily Laundry===============//
+    
     public JSONObject createDailyLaundry(List data){
         System.out.println("Daily Laundry Event Processing.....");
         String url = OP_URL+"create/dailyLaundry";
@@ -426,9 +467,43 @@ public class Navigator {
         return null;
     }
     
+    //==============Laundry Item===============//
+    
     public JSONObject createLaundryItem(List data){
         String url = OP_URL+"create/laundryitem";
         try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editLaundryItem(List data){
+        String url = OP_URL+"edit/laundryitem";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deleteLaundryItem(List data){
+        String url = OP_URL+"delete/laundryitem";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
             HttpGet request = new HttpGet(url);
             
             httpClient.execute(request);
@@ -452,6 +527,8 @@ public class Navigator {
         return null;
     }
   
+    //==============Return In===============//
+    
     public JSONObject createReturn(List data){
         String url = OP_URL+"create/returnIn";
         try{
@@ -479,6 +556,8 @@ public class Navigator {
         }
         return null;
     }
+    
+    //==============HOtel Services===============//
     
     public JSONObject createHotelService(List data){
         String url = OP_URL+"create/service";
@@ -539,6 +618,9 @@ public class Navigator {
         }
         return null;
     }
+    
+    
+    //==============Lost and Found===============//
     
     public JSONObject createLostFound(List data){
         String url = OP_URL+"create/lostfound";
@@ -706,6 +788,188 @@ public class Navigator {
       
     public JSONObject deletePhone(List data){
         String url = OP_URL+"delete/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+     //==============Miscellaneouse Sales===============//
+    
+    public JSONObject createNewSale(List data){
+        String url = OP_URL+"create/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchSale(){
+        String url = OP_URL+"fetch/phone";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editSale(List data){
+        String url = OP_URL+"edit/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteSale(List data){
+        String url = OP_URL+"delete/phone";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    //==============Work Order===============//
+    
+    public JSONObject createWorkOrder(List data){
+        String url = OP_URL+"create/workorder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchWorkOrder(){
+        String url = OP_URL+"fetch/workorder";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editWorkOrder(List data){
+        String url = OP_URL+"edit/workorder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteWorkOrder(List data){
+        String url = OP_URL+"delete/workorder";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //==============Credit Accounts===============//
+    
+    public JSONObject createAccount(List data){
+        String url = OP_URL+"create/account";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchAccount(){
+        String url = OP_URL+"fetch/account";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editAccount(List data){
+        String url = OP_URL+"edit/account";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteAccount(List data){
+        String url = OP_URL+"delete/account";
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;

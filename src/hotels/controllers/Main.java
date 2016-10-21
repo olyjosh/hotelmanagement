@@ -2,6 +2,7 @@ package hotels.controllers;
 
 import hotels.Hotels;
 import hotels.views.component.fxml.admin.NewUserController;
+import hotels.views.component.fxml.admin.RoomListController;
 import hotels.views.component.fxml.front.ReserveListController;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
@@ -513,7 +514,7 @@ public class Main implements Initializable{
      private void showMisc() throws IOException {
          MiscSaleListController controller = new MiscSaleListController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/misc.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/miscSaleList.fxml"));
         loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = toolContentStack.getChildren();
@@ -595,6 +596,19 @@ public class Main implements Initializable{
         children.add(content);
     }
      
+      @FXML
+     private void showWorkOrder() throws IOException {
+        ReminderListController controller = new ReminderListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/workOrder.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
      
      //Restaurant 
      @FXML
@@ -658,5 +672,18 @@ public class Main implements Initializable{
         stage.showAndWait();
     }
     
+    @FXML
+     private void showRoomList() throws IOException {
+        RoomListController controller = new RoomListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomList.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = toolContentStack.getChildren();
+        if (children.size() > 0) {
+            toolContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
     
 }
