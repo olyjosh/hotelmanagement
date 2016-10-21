@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -13,29 +18,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="56.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="37.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="11.0" layoutY="9.0" text="Reservation / Booking List">
+            <Label layoutX="9.0" layoutY="1.0" text="Reservation / Booking List">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Text layoutX="11.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a List of all Reservations" />
+            <Text layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a List of all Reservations" />
          </children>
       </Pane>
-      <TitledPane collapsible="false" layoutX="6.0" layoutY="63.0" prefHeight="113.0" prefWidth="950.0" text="Search Criteria" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="63.0">
+      <TitledPane collapsible="false" layoutX="6.0" layoutY="39.0" prefHeight="71.0" prefWidth="950.0" text="Search Criteria" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="39.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="948.0">
                <children>
-                  <TextField fx:id="searchField" layoutX="27.0" layoutY="26.0" prefHeight="31.0" prefWidth="363.0" promptText="Search using any Field Below" />
-                  <ComboBox fx:id="statusCombo" layoutX="447.0" layoutY="26.0" prefHeight="31.0" prefWidth="301.0" promptText="Showing All" />
+                  <TextField fx:id="searchField" layoutX="27.0" layoutY="6.0" prefHeight="31.0" prefWidth="363.0" promptText="Search using any Field Below" />
+                  <ComboBox fx:id="statusCombo" layoutX="447.0" layoutY="6.0" prefHeight="31.0" prefWidth="301.0" promptText="Showing All" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <TableView fx:id="table" layoutX="7.0" layoutY="185.0" prefHeight="223.0" prefWidth="950.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="185.0">
+      <TableView fx:id="table" layoutX="7.0" layoutY="113.0" prefHeight="295.0" prefWidth="950.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="113.0">
         <columns>
             <TableColumn fx:id="col1" prefWidth="89.0" text="Reserv. No" />
             <TableColumn fx:id="col2" prefWidth="97.0" text="Room" />

@@ -1,5 +1,6 @@
-package hotels.views.component.fxml.restaurant.controller;
+package hotels.views.component.fxml.bar.model;
 
+import hotels.views.component.fxml.restaurant.controller.*;
 import javafx.beans.property.SimpleStringProperty;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -8,7 +9,7 @@ import org.json.JSONObject;
  *
  * @author Olyjosh
  */
-public class FoodOderModel {
+public class DrinkOderModel {
     
         
     private final SimpleStringProperty id = new SimpleStringProperty("");
@@ -22,75 +23,75 @@ public class FoodOderModel {
     private JSONArray array; 
 
         
-    private void setId(String x) {
+    public void setId(String x) {
         id.set(x);
     }
 
-    private String getId() {
+    public String getId() {
         return id.get();
     }
    
     
-    private void setGuestName(String x){
+    public void setGuestName(String x){
         guestName.set(x);
     }
     
-    private String getGuestName(){
+    public String getGuestName(){
         return guestName.get();
     }
     
-    private void setPhone(String x){
+    public void setPhone(String x){
         phone.set(x);
     }
     
-    private String getPhone(){
+    public String getPhone(){
         return phone.get();
     }
     
-    private void setOrderId(String x){
+    public void setOrderId(String x){
         orderId.set(x);
     }
     
-    private String getorderId(){
+    public String getorderId(){
         return orderId.get();
     }
     
-    private void setAmount(String x){
+    public void setAmount(String x){
         amount.set(x);
     }
     
-    private String getAmount(){
+    public String getAmount(){
         return amount.get();
     }
     
-    private void setIsPaid(String x){
+    public void setIsPaid(String x){
         isPaid.set(x);
     }
     
-    private String getIsPaid(){
+    public String getIsPaid(){
         return isPaid.get();
     }
  
-    private void setStatus(String x) {
+    public void setStatus(String x) {
         status.set(x);
     }
 
-    private String getStatus() {
+    public String getStatus() {
         return status.get();
     }
 
      
-    private void setRoom(String x) {
+    public void setRoom(String x) {
         room.set(x);
     }
 
-    private String getRoom() {
+    public String getRoom() {
         return room.get();
     }
 
     
     
-    public JSONArray getArray() {
+    public JSONArray getOrdersArray() {
         return array;
     }
 

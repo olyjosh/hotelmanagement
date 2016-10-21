@@ -1,6 +1,7 @@
-package hotels.views.component.fxml.restaurant.controller;
+package hotels.views.component.fxml.bar.controller;
 
-import hotels.views.component.fxml.restaurant.model.FoodModel;
+import hotels.views.component.fxml.bar.model.DrinkModel;
+import hotels.views.component.fxml.restaurant.controller.*;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
@@ -63,7 +64,7 @@ import org.json.JSONObject;
  *
  * @author mac
  */
-public class NewFood implements Initializable {
+public class NewDrink implements Initializable {
 
     @FXML private VBox progressBox;
     @FXML private StackPane imgStack;
@@ -72,8 +73,8 @@ public class NewFood implements Initializable {
     @FXML private TextField price,name;
     @FXML private TextArea desc,deatil;
     @FXML private Button save;
-    @FXML private TableView<FoodModel> table;
-    @FXML private TableColumn<FoodModel, String> nameCol, priceCol;
+    @FXML private TableView<DrinkModel> table;
+    @FXML private TableColumn<DrinkModel, String> nameCol, priceCol;
     @FXML private TableColumn statusCol;
     @FXML private TitledPane createTitledPane;
     @FXML private Hyperlink exitEdit;
@@ -81,7 +82,7 @@ public class NewFood implements Initializable {
     @FXML private HBox priceBox;
     
     
-    private ObservableList<FoodModel> list;
+    private ObservableList<DrinkModel> list;
     final private Text AVAIL = GlyphsDude.createIcon(FontAwesomeIcons.CIRCLE);
     final private Text NOT_AVAIL = GlyphsDude.createIcon(FontAwesomeIcons.CIRCLE);
     
@@ -95,7 +96,7 @@ public class NewFood implements Initializable {
         this.app = app;
     }
 
-    public NewFood(Hotels app) {
+    public NewDrink(Hotels app) {
         this.app =app;
         nav = new Navigator2(getApp().getMain());
         
@@ -118,8 +119,8 @@ public class NewFood implements Initializable {
         imgStack.setOnMouseClicked((MouseEvent)->pickFile());
         dragText.setText("Drag an image here or\n click to select image");
         
-        nameCol.setCellValueFactory(new PropertyValueFactory<FoodModel, String>("name"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<FoodModel, String>("price"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<DrinkModel, String>("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<DrinkModel, String>("price"));
 
         
 //        statusCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FoodModel, Text>, ObservableValue<Text>>() {
@@ -131,7 +132,7 @@ public class NewFood implements Initializable {
         list= FXCollections.observableArrayList();
         table.setItems(list);
         
-        table.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends FoodModel> observable, FoodModel oldValue, FoodModel newValue) -> {
+        table.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends DrinkModel> observable, DrinkModel oldValue, DrinkModel newValue) -> {
             if (newValue != null) {
                 deatil.setText(newValue.getDesc());
                 Image image = Util.getImage(newValue.getImage());
@@ -141,10 +142,10 @@ public class NewFood implements Initializable {
             
         });
         
-        table.setRowFactory(new Callback<TableView<FoodModel>, TableRow<FoodModel>>() {
+        table.setRowFactory(new Callback<TableView<DrinkModel>, TableRow<DrinkModel>>() {
             @Override
-            public TableRow<FoodModel> call(TableView<FoodModel> param) {
-                final TableRow<FoodModel> row = new TableRow<>();
+            public TableRow<DrinkModel> call(TableView<DrinkModel> param) {
+                final TableRow<DrinkModel> row = new TableRow<>();
                 MenuItem delete = new MenuItem("Delete", GlyphsDude.createIcon(FontAwesomeIcons.REMOVE)),
                         edit = new MenuItem("Edit", GlyphsDude.createIcon(FontAwesomeIcons.PENCIL)),
                         avail = new MenuItem("Set As NOT Available", GlyphsDude.createIcon(FontAwesomeIcons.PENCIL));//        
@@ -170,7 +171,7 @@ public class NewFood implements Initializable {
                 row.setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        FoodModel item = row.getItem();
+                        DrinkModel item = row.getItem();
                         if(item !=null){
                             if(Double.parseDouble(""+item.getPrice())==0)
                             row.setTooltip(new Tooltip("Needs Admin's price approval"));
@@ -185,10 +186,10 @@ public class NewFood implements Initializable {
     }
     
  
-    private void delete(FoodModel x) {
+    private void delete(DrinkModel x) {
         int i = table.getItems().indexOf(x);
         table.getItems().remove(x);
-        JSONObject del = nav.deleteFood(x.getId());
+        JSONObject del = nav.deleteDrink(x.getId());
         if (del != null) {
             try {
                 if (del.getInt("status") == 1) {
@@ -197,7 +198,7 @@ public class NewFood implements Initializable {
                     //allert problem while deleting
                 }
             } catch (JSONException ex) {
-                Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             //alert that it could not be deleted
@@ -214,7 +215,7 @@ public class NewFood implements Initializable {
         
         createTitledPane.setText("Edit Food");
         fadeAndStroke(paneStack);
-        FoodModel s = table.getSelectionModel().getSelectedItem();
+        DrinkModel s = table.getSelectionModel().getSelectedItem();
         name.setText(s.getName());
         desc.setText(s.getDesc());
         imgV.setImage(imgV2.getImage());
@@ -283,7 +284,7 @@ public class NewFood implements Initializable {
             imgV.setImage(new Image(new FileInputStream(upFile)));
             imageEdit=true;
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -418,7 +419,7 @@ public class NewFood implements Initializable {
                         }
                     }else image = fileId;
                     
-                    createFood = nav.editFood(id,nameS, descS, priceS, image);
+                    createFood = nav.editDrink(id,nameS, descS, priceS, image);
 //                        add1ToTable(createFood.getJSONObject("message"));
                         if (createFood != null) {
                             Platform.runLater(new Runnable() {
@@ -441,7 +442,7 @@ public class NewFood implements Initializable {
                         s = upload.getString("fileId");
                         image = s;
                         System.out.println(image);
-                        createFood = nav.createFood(nameS, descS, priceS, image);
+                        createFood = nav.createDrink(nameS, descS, priceS, image);
                         add1ToTable(createFood.getJSONObject("message"));
                         if (createFood != null) {
                             Platform.runLater(new Runnable() {
@@ -457,7 +458,7 @@ public class NewFood implements Initializable {
             } catch (JSONException ex) {
                 save.setText("Save");
                 save.setDisable(false);
-                Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
             }
         
     }
@@ -487,7 +488,7 @@ public class NewFood implements Initializable {
     }
     
     private void food(){
-        JSONObject foods = nav.fetchFoods();
+        JSONObject foods = nav.fetchDrinks();
         if(foods!=null){
             try {
                 JSONArray a = foods.getJSONArray("message");
@@ -499,14 +500,14 @@ public class NewFood implements Initializable {
                     
                 }
             } catch (JSONException ex) {
-                Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     private void add1ToTable(JSONObject o){
         try {
-            FoodModel m = new FoodModel();
+            DrinkModel m = new DrinkModel();
             m.setDesc(o.getString("desc"));
             m.setId(o.getString("_id"));
             m.setName(o.getString("name"));
@@ -514,13 +515,13 @@ public class NewFood implements Initializable {
             m.setImage(o.getString("img"));
             list.add(m);
         } catch (JSONException ex) {
-            Logger.getLogger(NewFood.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewDrink.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
   
-//    private class ButtonCell extends TableCell<FoodModel, FoodModel> {
+//    private class ButtonCell extends TableCell<FoodModel, DrinkModel> {
 //
 //
 //    private Button cellButton;
@@ -532,7 +533,7 @@ public class NewFood implements Initializable {
 //            @Override
 //            public void handle(ActionEvent t) {
 //                // do something when button clicked
-//                FoodModel record = getItem();
+//                DrinkModel record = getItem();
 //                // do something with record....
 //            }
 //        });
@@ -540,7 +541,7 @@ public class NewFood implements Initializable {
 //
 //    //Display button if the row is not empty
 //    @Override
-//    protected void updateItem(FoodModel record, boolean empty) {
+//    protected void updateItem(DrinkModel record, boolean empty) {
 //        super.updateItem(record, empty);
 //        if(!empty){
 //            cellButton.setText("Something with "+record.getId());

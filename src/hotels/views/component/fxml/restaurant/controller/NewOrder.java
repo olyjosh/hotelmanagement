@@ -1,5 +1,6 @@
 package hotels.views.component.fxml.restaurant.controller;
 
+import hotels.views.component.fxml.restaurant.model.FoodModel;
 import hotels.Hotels;
 import hotels.util.Navigator2;
 import java.net.URL;
@@ -13,7 +14,7 @@ import javafx.scene.text.Text;
  *
  * @author mac
  */
-public class Sample implements Initializable {
+public class NewOrder implements Initializable {
 
     @FXML private Text data;
 
@@ -34,7 +35,7 @@ public class Sample implements Initializable {
         this.app = app;
     }
 
-    public Sample(Hotels app) {
+    public NewOrder(Hotels app) {
         this.app =app;
         nav = new Navigator2(getApp().getMain());
         

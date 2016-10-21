@@ -10,11 +10,12 @@ import java.util.HashMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
@@ -69,6 +70,15 @@ public class Util
 
     }
     
+    public static String formatDate(String date){
+        String pattern = "MMM dd, yyyy";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+        return dateFormatter.format(LocalDate.parse(date.split("T")[0]));
+    
+    }
+
+    
+    
     private static HashMap<String, Image> imageCache = new HashMap<String, Image>();
     
     public static Image getImage(String imgId) {
@@ -81,35 +91,42 @@ public class Util
         }
         return null;
     }
-    public static JSONArray getUserList(){
-                
-        try {
-            JSONObject user = nav.fetchUsers();
-            JSONArray userArray = user.getJSONArray("message");
-            System.out.println("Printing User array : "+ userArray);
-            
-            return userArray;
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
+//    
+//    public static void notify(Stage stage, Pos pos, String title, String message, int h, int w ){
+//        
+//        Notification.Notifier.setPopupLocation(stage, pos);
+//        Notification.Notifier.setWidth(w);
+//        Notification.Notifier.setHeight(h);
+//        Notification.Notifier.INSTANCE.notifySuccess(title, message);
+//    }
+//    
+    public static void notify(String title, String msg, Pos pos){
+        Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "35px");
+        createIcon.setFill(Paint.valueOf("#ffffff"));
+        Notifications.create()
+             .title(title)
+             .text(msg)
+             .graphic(createIcon)
+             .position(pos)
+             .darkStyle()
+             .show();
+   }
     
     public static String random(){
         String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));
         return rand;
     }
     
-    public static void notify(String title, String msg, Pos pos){
-         Notifications.create()
-              .title(title)
-              .text(msg)
-              .graphic(GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "40px"))
-              .position(pos)
-              .darkStyle()
-              .show();
- 
-    }
+//    public static void notify(String title, String msg, Pos pos){
+//         Notifications.create()
+//              .title(title)
+//              .text(msg)
+//              .graphic(GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "40px"))
+//              .position(pos)
+//              .darkStyle()
+//              .show();
+// 
+//    }
     
     public static String [] splitter(String text, char regex){
         
@@ -121,6 +138,15 @@ public class Util
         String [] date = rawdate.split("T");
         return date[0];
     }
+    
+    public static MaskerPane mp(){
+        MaskerPane mp = new MaskerPane();
+        mp.setPrefHeight(100);
+        mp.setPrefWidth(400);
+        return mp;
+    }
+    
+    
     
     
 

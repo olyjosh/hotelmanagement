@@ -148,7 +148,7 @@ public class RoomStayView implements Initializable {
     
     
         
-    private GridBase buildGrid(Hashtable rowHeaders , JSONArray a) {
+    private GridBase buildGrid(Hashtable rowHeaders, JSONArray a) throws JSONException {
         String[] rowH = new String[rowHeaders.size()];
         rowHeaders.keySet().toArray(rowH);
         int rowCount =rowH.length;
@@ -159,12 +159,50 @@ public class RoomStayView implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         ObservableList<ObservableList<SpreadsheetCell>> rows = FXCollections.observableArrayList();
 //        final ObservableList<SpreadsheetCell> list = FXCollections.observableArrayList();
-        ObservableList<SpreadsheetCell> list = FXCollections.observableArrayList();
-        for (int i = 0; i < a.length(); i++) {
-            
-            try {
-                JSONObject get = a.getJSONObject(i);
-//                System.out.println(get);
+//        ObservableList<SpreadsheetCell> list = FXCollections.observableArrayList();
+//        for (int i = 0; i < a.length(); i++) {
+//            
+//            try {
+//                JSONObject get = a.getJSONObject(i);
+////                System.out.println(get);
+//                String string = get.getString("checkIn");
+//                String string1 = get.getString("checkOut");
+////                LocalDateStringConverter con = new LocalDateStringConverter();
+//                LocalDate d1 = LocalDate.parse(string.split("T")[0], formatter);//con.fromString(string);
+//                LocalDate d2 = LocalDate.parse(string1.split("T")[0], formatter);//con.fromString(string1);
+//                long diff=ChronoUnit.DAYS.between(d1, d2);
+////                retrieving the rows the room falls
+//                String room = get.getJSONObject("room").getString("alias");
+//                int row = (int) rowHeaders.get(room);
+//                if(rows.size()-1<row){
+//                    list = FXCollections.observableArrayList();
+//                    rows.add(list);
+//                }else{
+//                    list = rows.get(row);
+//                }
+//                
+////                SpreadsheetCellBase cell = new SpreadsheetCellBase(row, d1.getDayOfMonth(), 1, (int) diff);
+//                                
+//                SpreadsheetCellBase cell = new SpreadsheetCellBase(d1.getDayOfMonth(), row, 1, 3);
+//                ViewItem t = new ViewItem("John Doe Dosa ");
+//                //t.setStyle("-fx-background-color : "+Codes.COLOR_RESERVED);
+//                cell.setGraphic(t);
+//                list.add(cell);
+////                rows.add(list);
+//            } catch (JSONException ex) {
+//                Logger.getLogger(RoomStayView.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            
+//        }
+
+        for (int i = 0; i < a.length();++i) {
+            final ObservableList<SpreadsheetCell> list = FXCollections.observableArrayList();
+            JSONArray a2 = a.getJSONObject(i).getJSONArray("books");
+            System.out.println("THE ARRAY "+a2);
+            System.out.println("OOOOOOOOOOOOOOOOOOO "+i);
+            for (int j = 0; j < a2.length(); ++j) {
+                JSONObject get = a2.getJSONObject(j);
+                
                 String string = get.getString("checkIn");
                 String string1 = get.getString("checkOut");
 //                LocalDateStringConverter con = new LocalDateStringConverter();
@@ -172,28 +210,17 @@ public class RoomStayView implements Initializable {
                 LocalDate d2 = LocalDate.parse(string1.split("T")[0], formatter);//con.fromString(string1);
                 long diff=ChronoUnit.DAYS.between(d1, d2);
 //                retrieving the rows the room falls
-                String room = get.getJSONObject("room").getString("alias");
-                int row = (int) rowHeaders.get(room);
-                if(rows.size()-1<row){
-                    list = FXCollections.observableArrayList();
-                    rows.add(list);
-                }else{
-                    list = rows.get(row);
-                }
+                String room = get.getString("room");//.getString("alias");
                 
-//                SpreadsheetCellBase cell = new SpreadsheetCellBase(row, d1.getDayOfMonth(), 1, (int) diff);
-                                
-                SpreadsheetCellBase cell = new SpreadsheetCellBase(d1.getDayOfMonth(), row, 1, 3);
+                SpreadsheetCellBase cell = new SpreadsheetCellBase(i, d1.getDayOfMonth(), 1, (int)diff);
                 ViewItem t = new ViewItem("John Doe Dosa ");
                 //t.setStyle("-fx-background-color : "+Codes.COLOR_RESERVED);
                 cell.setGraphic(t);
                 list.add(cell);
-//                rows.add(list);
-            } catch (JSONException ex) {
-                Logger.getLogger(RoomStayView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            rows.add(list);
         }
+        
         
         
 //        for (int row = 0; row < grid.getRowCount(); ++row) {
