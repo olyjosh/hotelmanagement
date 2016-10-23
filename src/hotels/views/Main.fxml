@@ -218,7 +218,7 @@
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="211.0" layoutY="16.0" mnemonicParsing="false" onAction="#showPayOutList" text="Pay out List">
+                                          <Button contentDisplay="TOP" layoutX="211.0" layoutY="16.0" mnemonicParsing="false" onAction="#showRoomList" text="Pay out List">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="MONEY" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>

@@ -34,7 +34,7 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button fx:id="editButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#editPhone" prefHeight="31.0" prefWidth="158.0" text="Edit">
+            <Button fx:id="editButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#editPhone" prefHeight="31.0" prefWidth="158.0" text="Edit" visible="false">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
@@ -98,7 +98,7 @@
             <ListView fx:id="phoneList" prefHeight="200.0" prefWidth="200.0" />
          </content>
       </TitledPane>
-      <Button fx:id="deleteButton" layoutX="26.0" layoutY="410.0" mnemonicParsing="false" onAction="#deletePhone" prefHeight="31.0" prefWidth="158.0" text="Delete">
+      <Button fx:id="deleteButton" layoutX="26.0" layoutY="410.0" mnemonicParsing="false" onAction="#deletePhone" prefHeight="31.0" prefWidth="158.0" text="Delete" visible="false">
          <graphic>
             <FontAwesomeIcon glyphName="REMOVE" />
          </graphic>

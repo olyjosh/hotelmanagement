@@ -1,13 +1,25 @@
-package hotels.views.component.fxml.front;
+ /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotels.views.component.fxml.front.controller;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.front.controller.NewBookingController;
 import hotels.views.component.fxml.front.model.Reserve;
+import hotels.views.component.fxml.tools.HotelServiceListController;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -32,6 +44,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -237,7 +251,7 @@ public class ReserveListController implements Initializable {
                                 
                 JSONObject oj3 = oj.getJSONObject("guest");
                 rs.setGuestName(oj3.getString("firstName") + "  " + oj3.getString("lastName"));
-                rs.setPhone(oj3.getString("phone"));
+             
                 reserv.addAll(rs);
             }
            
@@ -246,19 +260,73 @@ public class ReserveListController implements Initializable {
         }
     }
     
-    
+  
     
     @FXML 
-    private void showCheckIn(ActionEvent e) throws IOException{
-        //Login controller = new Login();
-        //controller.setApp(this);
+    private void newBooking(ActionEvent e) throws IOException{
+      
+        NewBookingController controller = new NewBookingController(this.getApp());
+        controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/newBooking.fxml"));
-        //loader.setController(controller);
+        loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
         stage.setScene(new Scene(root));
         
         stage.showAndWait();
+    }
+    
+    @FXML 
+    private void editBooking(ActionEvent e) throws IOException{
+      
+        NewBookingController controller = new NewBookingController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/newBooking.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
+    }
+    
+    @FXML
+    private void deleteBooking(){
+        Reserve item = table.getSelectionModel().getSelectedItem();
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List <NameValuePair> param = new ArrayList<>();
+                    param.add(new BasicNameValuePair("id", item.getId()));
+                    JSONObject response = nav.deleteHotelService(param);
+                    
+                    if(response != null && response.getInt("status") == 1){
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_SUCCESS, "Reservation Information Deleted", Pos.CENTER);
+                                reserv.remove(item);
+                            }
+                        });
+                    }else{
+                        
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                Util.notify(State.NOTIFY_ERROR, "Reservation Failed to Delete", Pos.CENTER);
+                            }
+                        });
+                    }
+                } catch (JSONException ex) {
+                    Logger.getLogger(HotelServiceListController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
     }
    
 }

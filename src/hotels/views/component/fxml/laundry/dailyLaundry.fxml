@@ -32,7 +32,7 @@
       <Label layoutX="334.0" layoutY="79.0" text="Date" />
       <TableView fx:id="table" layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
         <columns>
-          <TableColumn fx:id="linen" prefWidth="75.0" text="Linen #" />
+          <TableColumn fx:id="linen" prefWidth="75.0" text="Laundry Item" />
           <TableColumn fx:id="date" prefWidth="141.0" text="Date Issued" />
             <TableColumn fx:id="user" prefWidth="173.0" text="User" />
             <TableColumn fx:id="status" minWidth="0.0" prefWidth="146.0" text="Status" />

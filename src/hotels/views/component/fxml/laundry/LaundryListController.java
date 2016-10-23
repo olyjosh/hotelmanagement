@@ -7,16 +7,22 @@ package hotels.views.component.fxml.laundry;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
-import hotels.views.component.fxml.laundry.model.DailyLaundry;
+import hotels.util.State;
+import hotels.util.Util;
 import hotels.views.component.fxml.laundry.model.LaundryList;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +36,7 @@ import org.json.JSONObject;
 public class LaundryListController implements Initializable {
 
     
-    @FXML private TableView table;
+    @FXML private TableView<LaundryList> table;
     @FXML private TableColumn room;
     @FXML private TableColumn guest;
     @FXML private TableColumn date;
@@ -40,6 +46,11 @@ public class LaundryListController implements Initializable {
     @FXML private TableColumn balance;
     @FXML private TableColumn status;
     @FXML private TableColumn user;
+    @FXML private TextField roomSearch;
+    @FXML private TextField guestSearch;
+    @FXML private ComboBox statusSearch;
+    @FXML private ComboBox userSearch;
+    @FXML private DatePicker dateSearch;
       
     private Hotels app;
     private Navigator nav;
@@ -67,30 +78,10 @@ public class LaundryListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try {
-            // TODO
+       
+        defaults();
+        onLoad();
             
-            daily = nav.fetchDailyLaundry();
-            System.out.println("printing daily : " + daily);
-            dailyArray = daily.getJSONArray("message");
-            
-            getLaundryList();
-            
-            
-            room.setCellValueFactory(new PropertyValueFactory<>("room"));
-            guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
-            date.setCellValueFactory(new PropertyValueFactory<>("date"));
-            items.setCellValueFactory(new PropertyValueFactory<>("items"));
-            total.setCellValueFactory(new PropertyValueFactory<>("total"));
-            posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
-            balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-            status.setCellValueFactory(new PropertyValueFactory<>("status"));
-            user.setCellValueFactory(new PropertyValueFactory<>("user"));
-            
-            table.getColumns().setAll(room, guest, date, items, total, posted, balance, status, user);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
     }
     
     private void getLaundryList(){
@@ -99,17 +90,17 @@ public class LaundryListController implements Initializable {
                 ls = new LaundryList();
                 JSONObject oj = dailyArray.getJSONObject(i);
                 System.out.println("printing daily array : " + dailyArray);
-                //ls.setRoom(oj.getString("room"));
-                //ls.setGuest(String.valueOf(oj.get("guest")));
-                ls.setDate(oj.getString("date"));
+//                ls.setRoom(oj.getString("room"));//here
+//                ls.setGuest(String.valueOf(oj.get("guest")));//here
+                ls.setDate(Util.stripDate(oj.getString("date")));
                 ls.setItems(oj.getString("item"));
                 ls.setTotal(String.valueOf(oj.get("bill")));
                 //ls.setPosted(oj.getString("posted"));
                 ls.setBalance(String.valueOf(oj.get("balance")));
-                //ls.setStatus(oj.getString("status"));
+//                ls.setStatus(oj.getString("status"));//here
                 ls.setUser(oj.getString("user"));
                 
-                System.out.println("printing LAundry List Object : " + ls);
+                System.out.println("printing Laundry List Object : " + ls);
                 service.addAll(ls);
                 
              
@@ -120,6 +111,184 @@ public class LaundryListController implements Initializable {
             e.printStackTrace();
         }
     }
-
     
+    private void defaults(){
+        
+        Util.formatDatePicker(dateSearch);
+        
+        statusSearch.getItems().addAll("Show All", State.STATUS_C, State.STATUS_N, State.STATUS_P, State.STATUS_R);
+        
+        roomSearch.textProperty().addListener(new InvalidationListener() {
+
+        @Override
+        public void invalidated(Observable observable) {
+            if(roomSearch.textProperty().get().isEmpty()) {
+                table.setItems(service);
+                return;
+            }
+            ObservableList<LaundryList> tableItems = FXCollections.observableArrayList();
+            ObservableList<TableColumn<LaundryList, ?>> cols = table.getColumns();
+            for(int i=0; i<service.size(); i++) {
+
+                for(int j=0; j<cols.size(); j++) {
+                    TableColumn col = cols.get(j);
+                    String cellValue = col.getCellData(service.get(i)).toString();
+                    cellValue = cellValue.toLowerCase();
+                    if(cellValue.contains(roomSearch.textProperty().get().toLowerCase())) {
+                        tableItems.add(service.get(i));
+                        break;
+                    }                        
+                }
+            }
+            table.setItems(tableItems);
+        }
+    });
+        
+        guestSearch.textProperty().addListener(new InvalidationListener() {
+
+        @Override
+        public void invalidated(Observable observable) {
+            if(guestSearch.textProperty().get().isEmpty()) {
+                table.setItems(service);
+                return;
+            }
+            ObservableList<LaundryList> tableItems = FXCollections.observableArrayList();
+            ObservableList<TableColumn<LaundryList, ?>> cols = table.getColumns();
+            for(int i=0; i<service.size(); i++) {
+
+                for(int j=0; j<cols.size(); j++) {
+                    TableColumn col = cols.get(j);
+                    String cellValue = col.getCellData(service.get(i)).toString();
+                    cellValue = cellValue.toLowerCase();
+                    if(cellValue.contains(guestSearch.textProperty().get().toLowerCase())) {
+                        tableItems.add(service.get(i));
+                        break;
+                    }                        
+                }
+            }
+            table.setItems(tableItems);
+        }
+    });
+        
+        statusSearch.getSelectionModel().selectedItemProperty().addListener(new InvalidationListener() {
+
+        @Override
+        public void invalidated(Observable observable) {
+            if(statusSearch.getSelectionModel().selectedItemProperty().get().toString().isEmpty() || statusSearch.getSelectionModel().selectedItemProperty().get().toString().equals("Show All")) {
+                table.setItems(service);
+                return;
+            }
+            if(statusSearch.getSelectionModel().getSelectedItem().toString().equals("Show All")){
+                table.setItems(service);
+                return;
+            }
+            ObservableList<LaundryList> tableItems = FXCollections.observableArrayList();
+            ObservableList<TableColumn<LaundryList, ?>> cols = table.getColumns();
+            for(int i=0; i<service.size(); i++) {
+
+                for(int j=0; j<cols.size(); j++) {
+                    TableColumn col = cols.get(j);
+                    String cellValue = col.getCellData(service.get(i)).toString();
+                    cellValue = cellValue.toLowerCase();
+                    if(cellValue.contains(statusSearch.getSelectionModel().selectedItemProperty().get().toString().toLowerCase())) {
+                        tableItems.add(service.get(i));
+                        break;
+                    }                        
+                }
+            }
+            table.setItems(tableItems);
+        }
+    });
+        
+        userSearch.getSelectionModel().selectedItemProperty().addListener(new InvalidationListener() {
+
+        @Override
+        public void invalidated(Observable observable) {
+            if(userSearch.getSelectionModel().selectedItemProperty().get().toString().isEmpty()) {
+                table.setItems(service);
+                return;
+            }
+            if(userSearch.getSelectionModel().getSelectedItem().toString().equals("Show All")){
+                table.setItems(service);
+                return;
+            }
+            ObservableList<LaundryList> tableItems = FXCollections.observableArrayList();
+            ObservableList<TableColumn<LaundryList, ?>> cols = table.getColumns();
+            for(int i=0; i<service.size(); i++) {
+
+                for(int j=0; j<cols.size(); j++) {
+                    TableColumn col = cols.get(j);
+                    String cellValue = col.getCellData(service.get(i)).toString();
+                    cellValue = cellValue.toLowerCase();
+                    if(cellValue.contains(userSearch.getSelectionModel().selectedItemProperty().get().toString().toLowerCase())) {
+                        tableItems.add(service.get(i));
+                        break;
+                    }                        
+                }
+            }
+            table.setItems(tableItems);
+        }
+    });
+        
+        dateSearch.getEditor().textProperty().addListener(new InvalidationListener() {
+
+        @Override
+        public void invalidated(Observable observable) {
+            if(dateSearch.getEditor().textProperty().get().isEmpty()) {
+                table.setItems(service);
+                return;
+            }
+            ObservableList<LaundryList> tableItems = FXCollections.observableArrayList();
+            ObservableList<TableColumn<LaundryList, ?>> cols = table.getColumns();
+            for(int i=0; i<service.size(); i++) {
+
+                for(int j=0; j<cols.size(); j++) {
+                    TableColumn col = cols.get(j);
+                    String cellValue = col.getCellData(service.get(i)).toString();
+                    cellValue = cellValue.toLowerCase();
+                    if(cellValue.contains(dateSearch.getEditor().textProperty().get().toLowerCase())) {
+                        tableItems.add(service.get(i));
+                        break;
+                    }                        
+                }
+            }
+            table.setItems(tableItems);
+        }
+    });
+        
+        room.setCellValueFactory(new PropertyValueFactory<>("room"));
+        guest.setCellValueFactory(new PropertyValueFactory<>("guest"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        items.setCellValueFactory(new PropertyValueFactory<>("items"));
+        total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        posted.setCellValueFactory(new PropertyValueFactory<>("posted"));
+        balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        user.setCellValueFactory(new PropertyValueFactory<>("user"));
+            
+        table.getColumns().setAll(room, guest, date, items, total, posted, balance, status, user);
+    }
+
+    private void onLoad(){
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    daily = nav.fetchDailyLaundry();
+                    System.out.println("printing daily : " + daily);
+                    dailyArray = daily.getJSONArray("message");
+                    
+                    getLaundryList();
+                    
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+    }
 }

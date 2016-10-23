@@ -32,6 +32,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
@@ -94,11 +95,14 @@ public class NewBookingController implements Initializable {
     @FXML
     private ComboBox room;
     @FXML
-    private TextField amount;
+    private TextField amount, amount1;
     @FXML
     private ComboBox isBooking;
     @FXML
     private CheckBox checkinNow;
+    @FXML private Label dayLabel;
+    
+    private static int days = 0;
 
     /**
      * Initializes the controller class.
@@ -114,6 +118,9 @@ public class NewBookingController implements Initializable {
         booking.add(State.RM_BOOKED);
         booking.add(State.RM_RESERVED);
         isBooking.setItems(booking);
+        
+        Util.formatDatePicker(checkIn);
+        Util.formatDatePicker(checkOut);
         
         isBooking.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -135,12 +142,11 @@ public class NewBookingController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     int index = suite.getSelectionModel().getSelectedIndex();
-                    System.out.println("Selected Index : " + index);
                     amount.setText(rateList.get(index).toString());
-                    
+                    amount1.setText(String.valueOf((int)rateList.get(index) * days));
                     getRoomTypeId();
-                    System.out.println("Selected Room Type ID : " + roomTypeId);
-                    roomList.clear();   fillRooms();
+                    roomList.clear();   
+                    fillRooms();
                      
                 }
            });
@@ -190,12 +196,12 @@ public class NewBookingController implements Initializable {
                                     setDisable(true);
                                     setStyle("-fx-background-color: #ffc0cb;");
                             }
-                            long p = ChronoUnit.DAYS.between(
-                                    checkIn.getValue(), item
-                            );
+                            int p = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
                             setTooltip(new Tooltip(
                                 "You're about to stay for " + p + " days")
                             );
+                            days = p;
+                            dayLabel.setText("for " + days + " days");
                     }
                 };
             }
@@ -213,7 +219,7 @@ public class NewBookingController implements Initializable {
                     rooms = nav.fetchRoom();
                     if(roomType != null && rooms != null ){
                         JSONArray roomTypeArray = roomType.getJSONArray("message");
-                        System.out.println("Printing JSON Array : " +  roomTypeArray);
+                        System.out.println("Printing RoomType Array : " +  roomTypeArray);
 
                         for(int i = 0; i < roomTypeArray.length(); i++){
                             JSONObject oj = roomTypeArray.getJSONObject(i);
@@ -254,7 +260,8 @@ public class NewBookingController implements Initializable {
             for(int i = 0; i < roomTypeArray.length(); i++){
                 JSONObject oj = roomTypeArray.getJSONObject(i);
                 if(suite.getSelectionModel().getSelectedItem().toString().equals(oj.getString("name"))){
-                    roomTypeId = oj.getString("_id");break;
+                    roomTypeId = oj.getString("_id");
+                    System.out.println("Printing ROom TYpe ID : " + roomTypeId);break;
                 }
             }
             
@@ -268,15 +275,16 @@ public class NewBookingController implements Initializable {
         JSONArray roomArray;
         try {
             roomArray = rooms.getJSONArray("message");
-            System.out.println("Printing Array of Rooms : " +  roomArray);
+            System.out.println("Printing Room Array: " +  roomArray);
             
             for(int i = 0; i < roomArray.length(); i++){
                 JSONObject oj = roomArray.getJSONObject(i);
-                if(oj.getString("roomType").equals(roomTypeId)){
+                if(oj.get("roomType") != null){
+                    if(oj.get("roomType").equals(roomTypeId)){
                     
-                    roomList.add(oj.getString("name"));
-                    roomID.add(oj.get("_id"));
-                    //System.out.println("Printing room ID : " + roomID);
+                        roomList.add(oj.getString("name"));
+                        roomID.add(oj.get("_id"));
+                    }
                 }
                 
             }
@@ -284,6 +292,7 @@ public class NewBookingController implements Initializable {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
+        System.out.println("Printing room List : " + roomList);
         room.setItems(roomList);
     }
     
@@ -315,7 +324,7 @@ public class NewBookingController implements Initializable {
             public void run() {
                 try {
                     response = nav.createBooking(param);
-                    if(response != null && response.getInt("status") == 200){
+                    if(response != null && response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {

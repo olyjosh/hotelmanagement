@@ -12,7 +12,6 @@ package hotels.views.component.fxml.tools.model;
 public class Phone {
     
     private String id;
-    private String ref;
     private String title;
     private String firstName;
     private String lastName;
@@ -34,14 +33,6 @@ public class Phone {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getRef() {
-        return ref;
-    }
-
-    public void setRef(String ref) {
-        this.ref = ref;
     }
 
     public String getFirstName() {
@@ -158,7 +149,7 @@ public class Phone {
 
     @Override
     public String toString() {
-        return "Phone{" + "id=" + id + ", ref=" + ref + ", title=" + title + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", mobile=" + mobile + ", work=" + work + ", residence=" + residence + ", email=" + email + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", country=" + country + ", remark=" + remark + '}';
+        return "Phone{" + "id=" + id + ", title=" + title + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", mobile=" + mobile + ", work=" + work + ", residence=" + residence + ", email=" + email + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", country=" + country + ", remark=" + remark + '}';
     }
     
     

@@ -7,6 +7,7 @@ import hotels.Hotels;
 import hotels.util.Navigator2;
 import hotels.util.Util;
 import hotels.views.component.fxml.front.model.FolioModel;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -243,7 +244,11 @@ return;
                 });
                 
                 pay.setOnAction((ActionEvent event) -> {
-
+//                    try {
+//                        app.getMain().showPayment("", "", "", "", true);
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 });
 
 //                row.setStyle("-fx-background-color :#6382ff");

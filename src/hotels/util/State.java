@@ -7,6 +7,15 @@ package hotels.util;
  */
 public class State {
     
+    
+    public static final String COLOR_ALL = "#d3d1d1";
+    public static final String COLOR_VACANT = "#6ed06d";
+    public static final String COLOR_OCCUPIED = "#4a4545";
+    public static final String COLOR_DIRTY = "#999a2c";
+    public static final String COLOR_OUT_ORDER = "#f23838";
+    public static final String COLOR_RESERVED = "#386fdd";
+    public static final String COLOR_DUE_OUT = "#c900b5";
+    
     public final static String RM_VACANT = "vacant";
     public final static String RM_BOOKED = "Booking";
     public final static String RM_OCCUPIED = "Occupied";
@@ -53,6 +62,22 @@ public class State {
     public final static String STATUS_P = "Pending";
     public final static String STATUS_R = "Returned";
     public final static String STATUS_N = "Not Completed";
+    
+    //Payment purpose
+    public final static int payment_BOOK = 0;
+    public final static int payment_LAUNDRY = 1;
+    public final static int payment_FOOD = 2;
+    public final static int payment_DRINK = 3;
+    public final static int payment_MISC_SALES = 4;
+    public final static int payment_CLEAR_BILL = 5;
+
+    //Department
+    public final static int DEPT_FRONT = 0;
+    public final static int DEPT_RESTAURANT = 1;
+    public final static int DEPT_BAR = 2;
+    public final static int DEPT_LAUNDRY = 3;
+    public final static int DEPT_OTHER = 4;
+
 }
     
 

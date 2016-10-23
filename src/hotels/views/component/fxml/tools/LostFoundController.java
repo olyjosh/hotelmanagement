@@ -278,18 +278,20 @@ public class LostFoundController implements Initializable {
                 JSONObject oj = lostArray.getJSONObject(i);
                 
                 ls.setId(oj.getString("_id"));
+                
                 if(oj.getJSONObject("reso").getString("discardBy") == null){
                     ls.setDiscardBy("");
                 }else{
                     ls.setDiscardBy(oj.getJSONObject("reso").getString("discardBy"));
                 }
+                
                 if(oj.getJSONObject("reso").get("discardDate") == null){
                     ls.setDiscardDate("");
                 }else{
                     ls.setDiscardDate(Util.stripDate(String.valueOf(oj.getJSONObject("reso").get("discardDate"))));
                 }
-                
-                
+//                
+//                
                 ls.setEntryDate(Util.stripDate(oj.getString("onDate")));
                 ls.setItemColour(oj.getString("color"));
                 ls.setItemName(oj.getString("name"));
@@ -350,10 +352,10 @@ public class LostFoundController implements Initializable {
                 service.addAll(ls);
                 
                 System.out.println("printing Loaded LostFound : " + ls.toString());
-                table.setItems(service);
+                
                 
             }
-           
+           table.setItems(service);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -406,8 +408,8 @@ public class LostFoundController implements Initializable {
                             @Override
                             public void run() {
                                 Util.notify(State.NOTIFY_SUCCESS, "Lost Item Information Deleted", Pos.CENTER);
-                                service.clear();
-                                onLoad();
+                                service.remove(item);
+                                
                             }
                         });
                     }else{

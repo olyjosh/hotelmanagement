@@ -9,22 +9,19 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.tools.model.HotelService;
+import hotels.views.component.fxml.tools.model.WorkOrder;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -35,9 +32,33 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class NewHotelServiceController implements Initializable {
+public class NewWorkOrderController implements Initializable {
 
+    @FXML
+    private TextField orderNo;
+    @FXML
+    private TextArea description;
+    @FXML
+    private DatePicker dateIssued;
+    @FXML
+    private ComboBox room;
+    @FXML
+    private ComboBox assignedTo;
+    @FXML
+    private ComboBox status;
+    @FXML
+    private DatePicker dueDate;
+    @FXML
+    private TextArea remark;
+    @FXML
+    private TextField workType;
+
+    
     private Hotels app;
+    private Navigator nav;
+    private JSONObject response;
+    private boolean editMode;
+    private WorkOrder data;
 
     public Hotels getApp() {
         return app;
@@ -47,42 +68,6 @@ public class NewHotelServiceController implements Initializable {
         this.app = app;
     }
 
-    public NewHotelServiceController(Hotels app) {
-        this.app = app;
-        nav  = new Navigator(getApp().getMain());
-    }
-    
-    
-    
-    private Navigator nav;
-    private JSONObject response;
-    
-    
-    @FXML
-    private TextField alias;
-    @FXML
-    private TextField name;
-    @FXML
-    private TextArea desc;
-    @FXML
-    private ImageView image;
-    @FXML
-    private TextField charge;
-    @FXML private Button button;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        onLoad();
-    }    
-    
-    private boolean editMode;
-    private HotelService data;
-
     public boolean isEditMode() {
         return editMode;
     }
@@ -91,13 +76,29 @@ public class NewHotelServiceController implements Initializable {
         this.editMode = editMode;
     }
 
-    public HotelService getData() {
+    public WorkOrder getData() {
         return data;
     }
 
-    public void setData(HotelService data) {
+    public void setData(WorkOrder data) {
         this.data = data;
     }
+    
+
+    public NewWorkOrderController(Hotels app) {
+        this.app = app;
+        nav  = new Navigator(getApp().getMain());
+    }
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        Util.formatDatePicker(dateIssued);
+        Util.formatDatePicker(dueDate);
+        onLoad();
+    }    
     
     private void onLoad(){
         if(isEditMode()){
@@ -106,22 +107,29 @@ public class NewHotelServiceController implements Initializable {
     }
     
     private void popEdit(){
-        alias.setText(data.getAlias());
-        name.setText(data.getName());
-        charge.setText(data.getCharge());
-        desc.setText(data.getDesc());
+        orderNo.setText(data.getOrderNo());
+        description.setText(data.getDes());
+        dateIssued.getEditor().setText(data.getDateIssued());
+        room.getSelectionModel().select(data.getRoom());
+        assignedTo.getSelectionModel().select(data.getAssignedTo());
+        status.getSelectionModel().select(data.getStatus());
+        dueDate.getEditor().setText(data.getDueDate());
+        remark.setText(data.getRemark());
+        workType.setText(data.getWorkType());
     }
     
-    
     @FXML private void newHotelService(){
-        
+
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("alias", alias.getText()));
-        param.add(new BasicNameValuePair("name", name.getText()));
-        param.add(new BasicNameValuePair("extraCharge", charge.getText()));
-        param.add(new BasicNameValuePair("desc", desc.getText()));
-        param.add(new BasicNameValuePair("image", "image"));
-        param.add(new BasicNameValuePair("servive", "hotel"));
+        param.add(new BasicNameValuePair("date", dateIssued.getEditor().getText()));
+        param.add(new BasicNameValuePair("type", workType.getText()));
+        param.add(new BasicNameValuePair("workOrderNo", orderNo.getText()));
+        param.add(new BasicNameValuePair("desc", description.getText()));
+        param.add(new BasicNameValuePair("assignedTo", assignedTo.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("room", room.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("status", status.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("dueDate", dueDate.getEditor().getText()));
+        param.add(new BasicNameValuePair("remarks", remark.getText()));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
       
         if(!isEditMode()){
@@ -130,13 +138,12 @@ public class NewHotelServiceController implements Initializable {
                 @Override
                 public void run() {
                     try {
-                        System.out.println("New Hotel Service Event Fired");
-                        response = nav.createHotelService(param);
+                        response = nav.createWorkOrder(param);
                         if(response != null && response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Created and Saved", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "A New Work Order has been Issued and Saved", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -144,7 +151,7 @@ public class NewHotelServiceController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Create", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "New Work Order Failed to Save", Pos.CENTER);
                                 }
                             });
                         }
@@ -169,7 +176,7 @@ public class NewHotelServiceController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Updated", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "Work Order has been Updated", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -177,7 +184,7 @@ public class NewHotelServiceController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Update", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "Work Order Failed to Update", Pos.CENTER);
                                 }
                             });
                         }
