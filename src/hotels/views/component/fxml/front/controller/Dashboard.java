@@ -252,14 +252,13 @@ return;
                         double amount = item.getBalance();
                         String desc = amount <0 ? "Paying up for bill" : "Funding Folio Whallet";
                         String payFor = desc;
-                        String refNo = "";
                         String orderId = item.getId();
                         int dept = State.DEPT_FRONT;
                         String guestId =item.getGuestId();
                         String name = item.getName();
                         String phone = item.getPhone();
                         
-                        app.getMain().showPayment(amount, desc, refNo, refNo, payFor, orderId, dept, guestId, name,phone, true);
+                        app.getMain().showPayment(amount, desc, payFor, orderId, dept, guestId, name,phone, true);
 
                     } catch (IOException ex) {
                         Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);

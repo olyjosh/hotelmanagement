@@ -66,18 +66,18 @@ public class Payment implements Initializable {
     private TextField current;
 
     private double amount; 
-//    private String descrr, 
-//            refNo, 
-//            payFor,
-//            orderId, 
-//            dept, 
-//            guestId,
-//            guestName, 
-//            guestPhone; 
-//    boolean isCoperate;
+    private String descrr, refNo,
+            payFor,
+            orderId, 
+            guestId,
+            guestPhone; 
+    private boolean isCoperate;
+    private int dept ;
     
-    public void setFields(double amount, String desc, String channel, 
-            String refNo, String payFor, String orderId, int dept, String guestId,
+    
+    
+    
+    public void setFields(double amount, String desc,String payFor, String orderId, int dept, String guestId,
             String guestName,String guestPhone, boolean isCoperate){
         
         this.amount = amount;
@@ -85,6 +85,14 @@ public class Payment implements Initializable {
         this.bal.setText(""+0);
         this.current.setText(""+amount);
         this.total.setText(""+amount);
+        this.name.setText(guestName==null?"#ANONYMOUS":guestName);
+        this.desc.setText(desc);
+        this.payFor = payFor;
+        this.orderId = orderId;
+        this.dept = dept;
+        this.isCoperate = isCoperate;
+        this.guestPhone = guestPhone;
+        this.guestId = guestId;
         
     }
     
@@ -119,7 +127,12 @@ public class Payment implements Initializable {
         bal.textProperty().bind(current.textProperty());
     }
     
-    
+    @FXML private void pay(){
+        
+//        cash
+////        this.channel 
+//        nav.pay(amount, descrr, payFor, descrr, payFor, orderId, dept, guestId, guestId);
+    }
     
     
 }

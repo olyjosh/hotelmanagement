@@ -715,9 +715,8 @@ public class Main implements Initializable{
     }
      
       @FXML
-     public void showPayment(double amount, String desc, String channel, 
-            String refNo, String payFor, String orderId, int dept, String guestId,
-            String guestName,String guestPhone, boolean isCoperate) throws IOException {
+     public void showPayment(double amount, String desc, String payFor, String orderId, int dept, String guestId,
+        String guestName,String guestPhone, boolean isCoperate) throws IOException {
 
         Payment controller = new Payment(this.getApp());
         controller.setApp(app);
@@ -727,7 +726,6 @@ public class Main implements Initializable{
         Stage stage = new Stage();
         stage.setScene(new Scene(content));
         stage.show();
-
     }
      
      
