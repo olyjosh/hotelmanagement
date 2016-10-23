@@ -5,9 +5,12 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import hotels.util.Navigator2;
+import hotels.util.State;
 import hotels.util.Util;
 import hotels.views.component.fxml.front.model.FolioModel;
+import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -244,6 +247,24 @@ return;
                 
                 pay.setOnAction((ActionEvent event) -> {
 
+                    try {
+                        FolioModel item = row.getItem();
+                        double amount = item.getBalance();
+                        String desc = amount <0 ? "Paying up for bill" : "Funding Folio Whallet";
+                        String payFor = desc;
+                        String refNo = "";
+                        String orderId = item.getId();
+                        int dept = State.DEPT_FRONT;
+                        String guestId =item.getGuestId();
+                        String name = item.getName();
+                        String phone = item.getPhone();
+                        
+                        app.getMain().showPayment(amount, desc, refNo, refNo, payFor, orderId, dept, guestId, name,phone, true);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 });
 
 //                row.setStyle("-fx-background-color :#6382ff");
@@ -300,6 +321,17 @@ return;
          
     }
     
+//    private String createGuest(String first, String last, String phone){
+//        HashMap hashMap = new HashMap();
+//        hasmap
+//            hashMap.put("price", i);
+//            hashMap.put("qty", 3);
+//            hashMap.put("food", aa[i]);
+//            new JSONObject(hashMap);
+//            
+//            
+//    }
+//    
     
      @FXML private void loadFolioTask(){
         

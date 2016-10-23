@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.laundry.model.DailyLaundry;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -69,8 +69,7 @@ public class NewDailyController implements Initializable {
     private TextField amountPaid;
     @FXML
     private TextField totalBalance;
-    @FXML
-    private Button addBtn;
+
 
     private Navigator nav;
     private JSONObject response;
@@ -79,6 +78,8 @@ public class NewDailyController implements Initializable {
     private ObservableMap userId;
     
     private Hotels app;
+    private boolean editMode;
+    private DailyLaundry data;
 
     public Hotels getApp() {
         return app;
@@ -87,6 +88,23 @@ public class NewDailyController implements Initializable {
     public void setApp(Hotels app) {
         this.app = app;
     }
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+    public DailyLaundry getData() {
+        return data;
+    }
+
+    public void setData(DailyLaundry data) {
+        this.data = data;
+    }
+    
 
     public NewDailyController(Hotels app) {
         this.app = app;
@@ -107,12 +125,13 @@ public class NewDailyController implements Initializable {
         userId = FXCollections.observableHashMap();
         serialText.setEditable(false);
         
+        Util.formatDatePicker(dateIssued);
+        Util.formatDatePicker(returnDate);
+        
         onLoad();
         defaults();
         
-        addBtn.setOnAction((e) ->{
-            newDailyLaundry();
-        });
+        
     }    
     
     private void defaults(){
@@ -164,7 +183,11 @@ public class NewDailyController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
-                     totalBalance.setText(String.valueOf(Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue)));
+                    if(newValue.isEmpty()){
+                        totalBalance.setText(totalBill.getText());
+                    }else{
+                        totalBalance.setText(String.valueOf(Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue)));
+                    }
                 }
            });
         
@@ -172,7 +195,12 @@ public class NewDailyController implements Initializable {
     
     private void onLoad(){
         
-        serialText.setText(Util.randomString(6));
+        if(isEditMode()){
+            popEdit();
+        }else{
+            serialText.setText(Util.randomString(6));
+        }
+        
         Runnable task = new Runnable() {
             @Override
             public void run() {
@@ -193,60 +221,20 @@ public class NewDailyController implements Initializable {
         
     }
     
-    private void newDailyLaundry(){
-        
-        List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("sn", serialText.getText()));
-        param.add(new BasicNameValuePair("date", dateIssued.getValue().toString()));
-        param.add(new BasicNameValuePair("item", laundryItem.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("user", laundryUser.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("status", laundryStatus.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("laundryService", laundryService.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("hotelService", hotelService.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("returnIn", returnIn.getSelectionModel().getSelectedItem().toString()));
-        
-        if(returnDate.getValue() == null){
-            param.add(new BasicNameValuePair("returned", ""));
-        }else{
-            param.add(new BasicNameValuePair("returned", returnDate.getValue().toString()));//Storage.getId()));
-        }
-               
-        param.add(new BasicNameValuePair("bill", totalBill.getText()));
-        param.add(new BasicNameValuePair("amonunt", amountPaid.getText()));
-        param.add(new BasicNameValuePair("balance", totalBalance.getText()));
-        param.add(new BasicNameValuePair("remark", remark.getText()));
-        param.add(new BasicNameValuePair("performedBy", userId.get(laundryUser.getSelectionModel().getSelectedIndex()).toString()));
-          
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-               
-                System.out.println("Invoking new Daily Laundry Event");
-                response = nav.createDailyLaundry(param);
-                System.out.println("Making Laundry Sales : " + response);
-                if(response != null){
-                    Platform.runLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            Util.notify(State.NOTIFY_SUCCESS, "A New Laundry Operation Has been Registered", Pos.CENTER);
-                        }
-                    });
-                }else{
-
-                    Platform.runLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            Util.notify(State.NOTIFY_ERROR, "Laundry Failed to Register", Pos.CENTER);
-                        }
-                    });
-                }
-                
-            }
-        };
-        Thread back = new Thread(task);
-        back.setPriority(Thread.MAX_PRIORITY);
-        back.setDaemon(true);
-        back.start();
+    private void popEdit(){
+        serialText.setText(data.getLinen());
+        dateIssued.getEditor().setText(data.getDate());
+        laundryItem.getSelectionModel().select(data.getItem());
+        laundryUser.getSelectionModel().select(data.getUser());
+        laundryStatus.getSelectionModel().select(data.getStatus());
+        laundryService.getSelectionModel().select(data.getLaundryService());
+        hotelService.getSelectionModel().select(data.getHotelService());
+        returnIn.getSelectionModel().select(data.getReturns());
+        returnDate.getEditor().setText(data.getReturnDate());
+        totalBill.setText(data.getTotalBill());
+        amountPaid.setText(data.getPaid());
+        totalBalance.setText(data.getBalance());
+        remark.setText(data.getRemark());
     }
     
     private void loadLaundryItems(){
@@ -347,5 +335,97 @@ public class NewDailyController implements Initializable {
         }
         hotelService.setItems(hotelServiceList);
         System.out.println("Printing Hotel Service : " + hotelServiceList);
+    }
+    
+    @FXML private void newDailyLaundry(){
+        
+        List <NameValuePair> param = new ArrayList<>();
+        param.add(new BasicNameValuePair("sn", serialText.getText()));
+        param.add(new BasicNameValuePair("date", dateIssued.getEditor().getText()));
+        param.add(new BasicNameValuePair("item", laundryItem.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("user", laundryUser.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("status", laundryStatus.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("laundryService", laundryService.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("hotelService", hotelService.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("returnIn", returnIn.getSelectionModel().getSelectedItem().toString()));
+        
+        if(returnDate.getValue() == null){
+            param.add(new BasicNameValuePair("returned", ""));
+        }else{
+            param.add(new BasicNameValuePair("returned", returnDate.getEditor().getText()));//Storage.getId()));
+        }
+               
+        param.add(new BasicNameValuePair("bill", totalBill.getText()));
+        param.add(new BasicNameValuePair("amonunt", amountPaid.getText()));
+        param.add(new BasicNameValuePair("balance", totalBalance.getText()));
+        param.add(new BasicNameValuePair("remark", remark.getText()));
+        param.add(new BasicNameValuePair("performedBy", userId.get(laundryUser.getSelectionModel().getSelectedIndex()).toString()));
+                
+        if(!isEditMode()){
+            
+            Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        response = nav.createDailyLaundry(param);
+                        if(response != null && response.getInt("status") == 1){
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    Util.notify(State.NOTIFY_SUCCESS, "A New Laundry Operation Has been Registered", Pos.CENTER);
+                                }
+                            });
+                        }else{
+
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    Util.notify(State.NOTIFY_ERROR, "Laundry Failed to Register", Pos.CENTER);
+                                }
+                            });
+                        }
+                    } catch (JSONException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+        }else{
+
+            Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    param.add(new BasicNameValuePair("id", data.getId()));
+                    response = nav.editDailyLaundry(param);
+                        if(response.getInt("status") == 1){
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    Util.notify(State.NOTIFY_SUCCESS, "Laundry Registered has been Updated", Pos.CENTER);
+                                }
+                            });
+                        }else{
+
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    Util.notify(State.NOTIFY_ERROR, "Laundry Register Failed to Update", Pos.CENTER);
+                                }
+                            });
+                        }
+                    } catch (JSONException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+            back.start();
+        }
     }
 }

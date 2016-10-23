@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="500.0" prefWidth="579.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation">
+      <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="574.0" prefWidth="579.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="577.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="577.0">
                <children>
                   <VBox layoutX="308.0" layoutY="51.0">
                      <children>
@@ -128,7 +128,7 @@
                   </VBox>
                   <VBox layoutX="307.0" layoutY="312.0" prefHeight="52.0" prefWidth="249.0">
                      <children>
-                        <Label text="Total Amount" />
+                        <Label text="Amount  Per Night" />
                         <HBox alignment="CENTER" spacing="3.0">
                            <children>
                               <TextField fx:id="amount" prefHeight="31.0" prefWidth="249.0" />
@@ -136,7 +136,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button layoutX="451.0" layoutY="403.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
+                  <Button layoutX="451.0" layoutY="470.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                      </graphic>
@@ -153,6 +153,21 @@
                      </children>
                   </VBox>
                   <CheckBox fx:id="checkinNow" layoutX="434.0" layoutY="276.0" mnemonicParsing="false" text="Checkin Now" />
+                  <VBox layoutX="307.0" layoutY="377.0" prefHeight="52.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="118.0" text="Total Bill" />
+                        <HBox alignment="CENTER" spacing="3.0">
+                           <children>
+                              <TextField fx:id="amount1" prefHeight="31.0" prefWidth="249.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Label fx:id="dayLabel" layoutX="463.0" layoutY="395.0" prefHeight="32.0" prefWidth="92.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </content>

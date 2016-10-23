@@ -141,7 +141,7 @@ public class NewLostFoundController implements Initializable {
     private void popEdit(){
 
         if(data != null){
-            lostOn.getEditor().setText(data.getEntryDate().replace('-', '/'));
+            lostOn.getEditor().setText(data.getEntryDate());
             itemName.setText(data.getItemName());
             color.setText(data.getItemColour());
             location.setText(data.getWhereLost());
@@ -156,9 +156,9 @@ public class NewLostFoundController implements Initializable {
             country.setText(data.getCountry());
             phone.setText(data.getPhone());
             returnBy.setText(data.getReturnBy());
-            returnDate.getEditor().setText(data.getReturnDate().replace('-', '/'));
+            returnDate.getEditor().setText(data.getReturnDate());
             discardBy.setText(data.getDiscardBy());
-            discardDate.getEditor().setText(data.getDiscardDate().replace('-', '/'));
+            discardDate.getEditor().setText(data.getDiscardDate());
         }
     }
     
@@ -194,7 +194,7 @@ public class NewLostFoundController implements Initializable {
         
         List <NameValuePair> param = new ArrayList<>();
         
-        param.add(new BasicNameValuePair("on", lostOn.getValue().toString()));
+        param.add(new BasicNameValuePair("on", lostOn.getEditor().getText()));
         param.add(new BasicNameValuePair("name", itemName.getText()));
         param.add(new BasicNameValuePair("color", color.getText()));
         param.add(new BasicNameValuePair("location", location.getText()));
@@ -220,13 +220,13 @@ public class NewLostFoundController implements Initializable {
         if(returnDate.getValue() == null){
             param.add(new BasicNameValuePair("reso_returnDate", ""));
         }else{
-            param.add(new BasicNameValuePair("reso_returnDate", returnDate.getValue().toString()));
+            param.add(new BasicNameValuePair("reso_returnDate", returnDate.getEditor().getText()));
         }
         
         if(discardDate.getValue() == null){
             param.add(new BasicNameValuePair("reso_discardDate", ""));
         }else{
-            param.add(new BasicNameValuePair("reso_discardDate", discardDate.getValue().toString()));
+            param.add(new BasicNameValuePair("reso_discardDate", discardDate.getEditor().getText()));
         }
         
         param.add(new BasicNameValuePair("remark", remark.getText()));
@@ -271,7 +271,7 @@ public class NewLostFoundController implements Initializable {
         public void run() {
             try {
                 param.add(new BasicNameValuePair("id", data.getId()));
-                response = nav.editLaundryService(param);
+                response = nav.editLostFound(param);System.out.println("response : " + response);
                     if(response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override

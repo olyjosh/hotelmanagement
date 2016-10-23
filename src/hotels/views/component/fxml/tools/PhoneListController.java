@@ -56,8 +56,6 @@ public class PhoneListController implements Initializable {
     @FXML
     private TextField lastName;
     @FXML
-    private ComboBox ref;
-    @FXML
     private ComboBox gender;
     @FXML
     private TextField mobile;
@@ -97,8 +95,8 @@ public class PhoneListController implements Initializable {
     }
     
     private ObservableList service = FXCollections.observableArrayList();
-    private ObservableList phoneService = FXCollections.observableArrayList();
-    private Phone ls;
+    private ObservableList<Phone> phoneService = FXCollections.observableArrayList();
+    private Phone ls; private static String id;
     
     
     /**
@@ -124,32 +122,33 @@ public class PhoneListController implements Initializable {
                         for(int i = 0; i < array.length(); i++){
                             ls = new Phone();
                             oj = array.getJSONObject(i);
-                            String name = oj.getString("firstName") + "  " + oj.getString("lastName");
+                            JSONObject con = oj.getJSONObject("contact");
+                            id = oj.getString("_id");// + "  " + oj.getString("lastName");
                             
-                            ls.setAddress(oj.getString("contact_address"));
-                            ls.setCity(oj.getString("contact_city"));
-                            ls.setCountry(oj.getString("contact_country"));
-                            ls.setEmail(oj.getString("contact.email"));
+                            ls.setAddress(con.getString("address"));
+                            ls.setCity(con.getString("city"));
+                            ls.setCountry(con.getString("country"));
+                           // ls.setEmail(con.getString("email"));
                             ls.setFirstName(oj.getString("firstName"));
                             ls.setGender(oj.getString("lastName"));
                             ls.setId(oj.getString("_id"));
                             ls.setLastName(oj.getString("lastName"));
-                            ls.setMobile(oj.getString("contact_mobile"));
-                            ls.setRef(oj.getString("ref"));
-                            ls.setRemark(oj.getString("remark"));
-                            ls.setResidence(oj.getString("contact_residence"));
-                            ls.setState(oj.getString("contact_state"));
+                            ls.setMobile(con.getString("mobile"));
+                            ls.setRemark(oj.getString("remarks"));
+                            ls.setResidence(con.getString("residence"));
+                            ls.setState(con.getString("state"));
                             ls.setTitle(oj.getString("title"));
-                            ls.setWork(oj.getString("contact_work"));
-                            ls.setZip(oj.getString("contact_zip"));
+                            ls.setWork(con.getString("workPhone"));
+                            ls.setZip(con.getString("zip"));
                             
-                            service.add(name);
+                            service.add(ls.getFirstName() + " " + ls.getLastName());
+                            phoneService.add(ls);
                         }
                     }
                 } catch (JSONException ex) {
                     ex.printStackTrace();
                 }
-                phoneList.getItems().addAll(service);
+                phoneList.setItems(service);
             }
         };
         // Run the task in a background thread
@@ -162,34 +161,28 @@ public class PhoneListController implements Initializable {
 
             @Override
             public void handle(MouseEvent event) {
-                // TODO Auto-generated method stub
-                String name = phoneList.getSelectionModel().getSelectedItem().toString();
-                System.out.println("ListView Selection Changed (selected: " + name);
+               
                 int index = phoneList.getSelectionModel().getSelectedIndex();
+                
                 try {
                     response = array.getJSONObject(index);
-                    oj = response.getJSONObject("name");
-
-                    System.out.println("index at : "+ index);
+                    oj = response.getJSONObject("contact");
                     
-                    Phone data = phoneList.getSelectionModel().getSelectedItem();
+                    title.setText(response.getString("title"));
+                    firstName.setText(response.getString("firstName"));
+                    lastName.setText(response.getString("lastName"));
+                    gender.getSelectionModel().select(response.getString("gender"));
+                    mobile.setText(oj.getString("mobile"));
+                    work.setText(oj.getString("workPhone"));
 
-                    ref.getSelectionModel().select(data.getRef());
-                    title.setText(data.getTitle());
-                    firstName.setText(data.getFirstName());
-                    lastName.setText(data.getLastName());
-                    gender.getSelectionModel().select(data.getGender());
-                    mobile.setText(data.getMobile());
-                    work.setText(data.getWork());
-
-                    residence.setText(data.getResidence());
-                    email.setText(data.getEmail());
-                    address.setText(data.getAddress());
-                    city.setText(data.getCity());
-                    state.setText(data.getState());
-                    zip.setText(data.getZip());
-                    country.setText(data.getCountry());
-                    remark.setText(data.getRemark());
+                    residence.setText(oj.getString("residence"));
+                    email.setText(oj.getString("email"));
+                    address.setText(oj.getString("address"));
+                    city.setText(oj.getString("city"));
+                    state.setText(oj.getString("state"));
+                    zip.setText(oj.getString("zip"));
+                    country.setText(oj.getString("country"));
+                    remark.setText(response.getString("remarks"));
 
                 } catch (JSONException ex) {
                     ex.printStackTrace();
@@ -201,12 +194,12 @@ public class PhoneListController implements Initializable {
     
     private void defaults(){
         
-        ref.getItems().addAll("Friends", "Newspaper", "TV Advert", "Google Search");
+        //ref.getItems().addAll("Friends", "Newspaper", "TV Advert", "Google Search");
         gender.getItems().addAll("Male", "Female");
     }
     
     private void clear(){
-        ref.getSelectionModel().select(0);
+        //ref.getSelectionModel().select(0);
         title.setText("");
         firstName.setText("");
         lastName.setText("");
@@ -227,7 +220,6 @@ public class PhoneListController implements Initializable {
     @FXML private void newPhone(){
 
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("ref", ref.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("title", title.getText()));
         param.add(new BasicNameValuePair("firstName", firstName.getText()));
         param.add(new BasicNameValuePair("lastName", lastName.getText()));
@@ -236,7 +228,7 @@ public class PhoneListController implements Initializable {
         param.add(new BasicNameValuePair("contact_workPhone", work.getText()));
         
         param.add(new BasicNameValuePair("contact_residence", residence.getText()));
-        param.add(new BasicNameValuePair("contact.email", email.getText()));
+        param.add(new BasicNameValuePair("contact_email", email.getText()));
         param.add(new BasicNameValuePair("contact_address", address.getText()));
         param.add(new BasicNameValuePair("contact_city", city.getText()));
         param.add(new BasicNameValuePair("contact_state", state.getText()));
@@ -256,6 +248,9 @@ public class PhoneListController implements Initializable {
                             @Override
                             public void run() {
                                 Util.notify(State.NOTIFY_SUCCESS, "A New Phone Directory is Created", Pos.CENTER);
+                                service.clear();
+                                onLoad();
+                                clear();
                             }
                         });
                     }else{
@@ -276,19 +271,16 @@ public class PhoneListController implements Initializable {
         back.start();
         
         //=========Refresh List View and UI=========
-        service.clear();
-        onLoad();
-        clear();
+        
         
     }
     
     @FXML private void editPhone(){
         
-        Phone data = phoneList.getSelectionModel().getSelectedItem();
+        
 
         List <NameValuePair> param = new ArrayList<>();
-        param.add(new BasicNameValuePair("_id", data.getId()));
-        param.add(new BasicNameValuePair("ref", ref.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("_id", id));
         param.add(new BasicNameValuePair("title", title.getText()));
         param.add(new BasicNameValuePair("firstName", firstName.getText()));
         param.add(new BasicNameValuePair("lastName", lastName.getText()));
@@ -297,7 +289,7 @@ public class PhoneListController implements Initializable {
         param.add(new BasicNameValuePair("contact_workPhone", work.getText()));
         
         param.add(new BasicNameValuePair("contact_residence", residence.getText()));
-        param.add(new BasicNameValuePair("contact.email", email.getText()));
+        param.add(new BasicNameValuePair("contact_email", email.getText()));
         param.add(new BasicNameValuePair("contact_address", address.getText()));
         param.add(new BasicNameValuePair("contact_city", city.getText()));
         param.add(new BasicNameValuePair("contact_state", state.getText()));
@@ -316,6 +308,8 @@ public class PhoneListController implements Initializable {
                             @Override
                             public void run() {
                                 Util.notify(State.NOTIFY_SUCCESS, "Phone Directory is Updated", Pos.CENTER);
+                                service.clear();
+                                onLoad();
                             }
                         });
                     }else{
@@ -342,7 +336,8 @@ public class PhoneListController implements Initializable {
     }
     
     @FXML private void deletePhone(){
-        Phone item = phoneList.getSelectionModel().getSelectedItem();
+        int index = phoneList.getSelectionModel().getSelectedIndex();
+        Phone item = phoneService.get(index);
         Runnable task = new Runnable() {
             @Override
             public void run() {
@@ -355,6 +350,7 @@ public class PhoneListController implements Initializable {
                         @Override
                         public void run() {
                             Util.notify(State.NOTIFY_SUCCESS, "A Phone Directory has been Deleted", Pos.CENTER);
+                            service.remove(item);
                         }
                     });
                 }else{

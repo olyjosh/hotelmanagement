@@ -200,6 +200,7 @@ public class ReminderListController implements Initializable {
                         @Override
                         public void run() {
                             Util.notify(State.NOTIFY_SUCCESS, "A Reminder has been Deleted", Pos.CENTER);
+                            service.remove(item);
                         }
                     });
                 }else{
