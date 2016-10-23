@@ -4,7 +4,7 @@ import hotels.views.component.fxml.restaurant.model.FoodModel;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
-import hotels.util.Codes;
+import hotels.util.State;
 import hotels.util.Navigator2;
 import hotels.util.Util;
 import java.io.File;
@@ -113,8 +113,8 @@ public class NewFood implements Initializable {
     
     
     private void defaults(){
-        AVAIL.setFill(Paint.valueOf(Codes.COLOR_VACANT));
-        NOT_AVAIL.setFill(Paint.valueOf(Codes.COLOR_OUT_ORDER));
+        AVAIL.setFill(Paint.valueOf(State.COLOR_VACANT));
+        NOT_AVAIL.setFill(Paint.valueOf(State.COLOR_OUT_ORDER));
         imgStack.setOnMouseClicked((MouseEvent)->pickFile());
         dragText.setText("Drag an image here or\n click to select image");
         

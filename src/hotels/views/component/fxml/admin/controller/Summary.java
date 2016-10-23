@@ -1,5 +1,7 @@
 package hotels.views.component.fxml.admin.controller;
 
+import hotels.Hotels;
+import hotels.util.Navigator2;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -72,7 +74,7 @@ public class Summary implements Initializable {
     @FXML
     private PieChart avail_pieChart;
     @FXML
-    private ChoiceBox<?> viewFor;
+    private ChoiceBox<String> viewFor, dept;
     @FXML
     private HBox datePickerBox;
     @FXML
@@ -80,13 +82,40 @@ public class Summary implements Initializable {
     @FXML
     private DatePicker endDate;
 
+    
+        
+    private Hotels app;
+    private Navigator2 nav;
+    public Hotels getApp() {
+        return app;
+    }
+
+    public void setApp(Hotels app) {
+        this.app = app;
+    }
+
+    public Summary(Hotels app) {
+        this.app =app;
+        nav = new Navigator2(getApp().getMain());
+        
+    }
+
+    
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        defaults();
     }    
+    
+    
+    private void defaults(){
+        viewFor.getItems().addAll("Today","Yesterday","Last Week","Last Month","--- Specify ---");
+        dept.getItems().addAll("All","Hotels Booking and Front Desk","Laundry","Restaurant", "Bar");
+    }
     
 }

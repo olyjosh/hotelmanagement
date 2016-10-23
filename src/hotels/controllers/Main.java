@@ -2,11 +2,12 @@ package hotels.controllers;
 
 import hotels.Hotels;
 import hotels.views.component.fxml.admin.NewUserController;
+import hotels.views.component.fxml.admin.controller.Summary;
 import hotels.views.component.fxml.admin.RoomListController;
 import hotels.views.component.fxml.bar.controller.DrinkOrder;
 import hotels.views.component.fxml.bar.controller.NewDrink;
 import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
-import hotels.views.component.fxml.front.ReserveListController;
+import hotels.views.component.fxml.front.controller.ReserveListController;
 import hotels.views.component.fxml.front.controller.Dashboard;
 import hotels.views.component.fxml.front.controller.GuestListController;
 import hotels.views.component.fxml.front.controller.GuestMessage;
@@ -36,6 +37,7 @@ import hotels.views.component.fxml.tools.NewHotelServiceController;
 import hotels.views.component.fxml.tools.PayOutListController;
 import hotels.views.component.fxml.tools.PhoneListController;
 import hotels.views.component.fxml.tools.ReminderListController;
+//import hotels.views.component.fxml.tools.controller.Payment;
 import hotels.views.component.fxml.tools.WorkOrderController;
 import java.io.IOException;
 import java.net.URL;
@@ -80,7 +82,7 @@ import org.controlsfx.control.PopOver;
 public class Main implements Initializable{
 
     @FXML public StackPane frontContentStack, laundryContentStack,
-            houseContentStack,toolContentStack,restaurantContentStack,barContentStack;
+            houseContentStack,toolContentStack,restaurantContentStack,barContentStack,adminContentStack;
     @FXML private HBox progHbox;
     @FXML private ProgressIndicator prog;
     @FXML private Label userButton, progLabel;
@@ -713,7 +715,114 @@ public class Main implements Initializable{
         children.add(content);
     }
      
+      @FXML
+     public void showPayment(double amount, String desc, String channel, 
+            String refNo, String payFor, String orderId, int dept, String guestId,
+            String guest, boolean isCoperate ) throws IOException {
+          
+//        Payment controller = new Payment(this.getApp());
+//        controller.setApp(app);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payment.fxml"));
+//        loader.setController(controller);
+//        AnchorPane content = (AnchorPane) loader.load();
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(content));
+//        stage.show();
+
+    }
      
+     
+     
+     
+     
+//Admin 
+     
+     @FXML
+     private void showRoomList() throws IOException {
+        RoomListController controller = new RoomListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomAmenityList.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showTypeList() throws IOException {
+        NewDrink controller = new NewDrink(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomTypeList.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     
+      @FXML
+     private void showFloorList() throws IOException {
+        NewDrink controller = new NewDrink(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/floorList.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+        
+     @FXML
+     private void showSeasonList() throws IOException {
+        NewDrink controller = new NewDrink(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/seasonList.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+     @FXML
+     private void showUserList() throws IOException {
+        NewDrink controller = new NewDrink(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/userList.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+     
+    
+     @FXML
+     private void showSummary() throws IOException {
+         Summary controller = new Summary(this.getApp());
+         
+         
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/summary.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(content));
+        stage.show();
+
+    }
      
      
      //Testing Codes down here.
@@ -731,30 +840,13 @@ public class Main implements Initializable{
         stage.showAndWait();
     }
     
-    @FXML
-     private void showRoomList() throws IOException {
-        RoomListController controller = new RoomListController(this.getApp());
-        controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomList.fxml"));
-        loader.setController(controller);
-        AnchorPane content = (AnchorPane) loader.load();
-        ObservableList<Node> children = toolContentStack.getChildren();
-        if (children.size() > 0) {
-            toolContentStack.getChildren().remove(0, children.size());
-        }
-        children.add(content);
-    }
-    
-    
-    
-    //User
+    // Administrative confirmation
     public String[]  showAdminComfirmation() throws IOException {
         // Create the custom dialog.
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Permission Required");
         dialog.setHeaderText("Asdministrative authorisation is required to complete this transaction");
 
-// Set the icon (must be included in the project).
 //        dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 
 // Set the button types.

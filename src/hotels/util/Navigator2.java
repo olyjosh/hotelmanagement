@@ -810,39 +810,6 @@ public class Navigator2 {
         }
         return null;
     }     
-     
-    
-    
-            
-    public static JSONObject createDrinkOrderTest(String ...x) throws JSONException {
-        List<NameValuePair> data = new ArrayList<>();
-        data.add(new BasicNameValuePair("channel", State.channel_FRONT));
-        data.add(new BasicNameValuePair("orders", x[0]));
-        data.add(new BasicNameValuePair("guest_firstName", x[1]));
-        data.add(new BasicNameValuePair("guest_lastName", x[2]));
-        data.add(new BasicNameValuePair("guest_phone", x[3]));
-        data.add(new BasicNameValuePair("performedBy", Storage.getId()));
-
-        String url = OP_URL + "create/drinkorders";
-        String param = URLEncodedUtils.format(data, "utf-8");
-        url += "?" + param;
-        try {
-            HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            request.setHeader("token", Storage.auth_token);
-            HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpResponse execute = httpClient.execute(request);
-            String toString = EntityUtils.toString(execute.getEntity());
-            System.out.println(toString);
-            return new JSONObject(toString);
-            
-        } catch (IOException e) {
-            e.printStackTrace(); 
-//            main.responseError("Network problem");
-        }
-        return null;
-    }     
-     
          
      public JSONObject fetchDrinksOrders(String channel, String d1,String d2) {
         String url = OP_URL + "fetch/drinkorders";
@@ -996,7 +963,7 @@ public class Navigator2 {
     }
          
              
-     public JSONObject fetchFolio( String d1,String d2) {
+    public JSONObject fetchFolio(String d1,String d2) {
         String url = OP_URL + "fetch/folio";
         List<NameValuePair> data = new ArrayList<>();
 
@@ -1004,8 +971,6 @@ public class Navigator2 {
             data.add(new BasicNameValuePair("d1", d1));
             data.add(new BasicNameValuePair("d2", d2));
         }
-
-
         String param = URLEncodedUtils.format(data, "utf-8");
         url += "?" + param;
 
@@ -1019,7 +984,52 @@ public class Navigator2 {
         return null;
     }
      
-      
+//  refNo : String,
+//  payFor : String,
+//  orderId : String,
+//  dept : String,
+//  guestId : {type : mongoose.Schema.Types.ObjectId , ref : 'Guest'},
+//  guest : {
+//      name :{
+//        firstName : String,
+//        lastName : String 
+//     },
+//      phone : String
+//  },
+//  performedBy: {type : mongoose.Schema.Types.ObjectId , ref : 'User'}
+//    
+//    
+    public JSONObject pay(double amount, String desc, String channel, 
+            String refNo, String payFor, String orderId, int dept, String guestId,
+            String guest) {
+        String url = OP_URL + "create/payment";
+        List<NameValuePair> data = new ArrayList<>();
+
+        data.add(new BasicNameValuePair("amount", ""+amount));
+        data.add(new BasicNameValuePair("desc", desc));
+        data.add(new BasicNameValuePair("channel", channel));
+        if(!channel.equals(State.channel_FRONT)){
+            data.add(new BasicNameValuePair("refNo", refNo));
+        }
+        data.add(new BasicNameValuePair("payFor", payFor));
+        data.add(new BasicNameValuePair("orderId", orderId));
+        data.add(new BasicNameValuePair("orderId", ""+dept));
+        if(guestId!=null){
+            data.add(new BasicNameValuePair("guestId", guestId));
+            data.add(new BasicNameValuePair("guest", guest));
+        }
+        data.add(new BasicNameValuePair("performedBy", Storage.getId()));
+        
+        try {
+            HttpPost request = new HttpPost(url);
+            request.setEntity(new UrlEncodedFormEntity(data));
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace(); main.responseError("Network problem");
+        }
+        return null;
+    }
          
     public JSONObject upload(File file){
         try{
@@ -1036,27 +1046,40 @@ public class Navigator2 {
         return null;
     }
 
+                
+    public static JSONObject createDrinkOrderTest(String ...x) throws JSONException {
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new BasicNameValuePair("channel", State.channel_FRONT));
+        data.add(new BasicNameValuePair("orders", x[0]));
+        data.add(new BasicNameValuePair("guest_firstName", x[1]));
+        data.add(new BasicNameValuePair("guest_lastName", x[2]));
+        data.add(new BasicNameValuePair("guest_phone", x[3]));
+        data.add(new BasicNameValuePair("performedBy", Storage.getId()));
+
+        String url = OP_URL + "create/drinkorders";
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+        try {
+            HttpGet request = new HttpGet(url);
+            request.setHeader("User-Agent", USER_AGENT);
+            request.setHeader("token", Storage.auth_token);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpResponse execute = httpClient.execute(request);
+            String toString = EntityUtils.toString(execute.getEntity());
+            System.out.println(toString);
+            return new JSONObject(toString);
+            
+        } catch (IOException e) {
+            e.printStackTrace(); 
+//            main.responseError("Network problem");
+        }
+        return null;
+    }     
+     
+    
     public static String getIMG_URL() {
         return IMG_URL;
     }
     
-    public static Map<String, String> parse(JSONObject json, Map<String, String> out) throws JSONException {
-        Iterator<String> keys = json.keys();
-        while (keys.hasNext()) {
-            String key = keys.next();
-            String val = null;
-            try {
-                JSONObject value = json.getJSONObject(key);
-                parse(value, out);
-            } catch (Exception e) {
-                val = json.getString(key);
-            }
-
-            if (val != null) {
-                out.put(key, val);
-            }
-        }
-        return out;
-    }
     
 }

@@ -193,6 +193,10 @@ return;
         list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends BorderPane> observable, BorderPane oldValue, BorderPane newValue) -> {
             JSONObject g=(JSONObject)newValue.getProperties().get("guest");
             JSONObject b=(JSONObject)newValue.getProperties().get("booking");
+            if(g==null){
+                detailGrid.setVisible(false);
+                return;
+            }
             try {
                 namr.setText(g.getJSONObject("name").getString("firstName")+" "+g.getJSONObject("name").getString("lastName"));
                 phone.setText(g.getString("phone"));
@@ -247,7 +251,11 @@ return;
                 });
                 
                 pay.setOnAction((ActionEvent event) -> {
-
+//                    try {
+//                        app.getMain().showPayment("", "", "", "", true);
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 });
 
 //                row.setStyle("-fx-background-color :#6382ff");
@@ -449,9 +457,9 @@ return;
             
             
             JSONArray jsonArray = j.getJSONArray("bookings");
+            if(jsonArray.length()<1){return h;}
             JSONObject booking = jsonArray.getJSONObject(jsonArray.length()-1);
             booking.getString("status");
-//            booking.
             h.getProperties().put("booking", booking);
             j.remove("bookings");
             h.getProperties().put("guest", j);

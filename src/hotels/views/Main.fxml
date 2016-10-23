@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.testapps.*?>
+<?import de.jensd.fx.glyphs.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import de.jensd.fx.glyphs.GlyphsStack?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
@@ -236,7 +243,7 @@
                                           </Button>
                                           <Button contentDisplay="TOP" layoutX="105.0" layoutY="16.0" mnemonicParsing="false" onAction="#showReminderList" text="Reminders">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="fontAwesomeIcon" />
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CLOCK_ALT" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
                                        </children>
@@ -408,7 +415,7 @@
                                        <children>
                                           <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showSchedule" text="Task and Schedule">
                                              <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="TASKS" size="2.5em" styleClass="icons" />
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CLOCK_ALT" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
                                        </children>
@@ -594,7 +601,124 @@
             </Tab>
           <Tab text="ADMIN">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <StackPane fx:id="adminContentStack" layoutY="104.0" prefHeight="456.0" prefWidth="1234.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0" />
+                        <ToolBar prefHeight="102.0" prefWidth="1234.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <VBox id="toolBarMenu" alignment="CENTER" prefHeight="92.0" prefWidth="449.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Room Settings and Price" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showRoomList" prefHeight="69.0" prefWidth="93.0" text="Room List">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="WINDOWS" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="25.0" layoutY="13.0" mnemonicParsing="false" onAction="#showTypeList" prefHeight="69.0" prefWidth="106.0" text="Room type">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CALENDAR" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showFloorList" text="Floor">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="LIST" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="233.0" layoutY="13.0" mnemonicParsing="false" onAction="#showSeasonList" prefHeight="69.0" prefWidth="128.0" text="Seasons and Rate">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="CLOUD" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="416.0" layoutY="10.0" prefHeight="92.0" prefWidth="136.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="User management" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showUserList" prefHeight="69.0" prefWidth="106.0" text="Users">
+                                             <graphic>
+                                                <FontAwesomeIcon fx:id="hotel1" fill="#3bb8f2" glyphName="GROUP" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="817.0" layoutY="10.0" prefHeight="92.0" prefWidth="339.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Reporting" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="71.0" prefWidth="335.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showSummary" prefHeight="69.0" prefWidth="139.0" text="Summary View">
+                                             <graphic>
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="DASHBOARD" size="2.5em" />
+                                                   </children>
+                                                </GlyphsStack>
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="69.0" prefWidth="114.0" text="Night Audit">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="MOON_ALT" size="2.5em" styleClass="fontAwesomeIcon" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="89.0" layoutY="16.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="151.0" text="Reports">
+                                             <graphic>
+                                                <GlyphsStack>
+                                                   <children>
+                                                      <FontAwesomeIcon fill="#3bb8f2" glyphName="PIE_CHART" size="2.5em" />
+                                                   </children>
+                                                </GlyphsStack>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox id="toolBarMenu" alignment="CENTER" layoutX="463.0" layoutY="10.0" prefHeight="92.0" prefWidth="194.0">
+                                 <children>
+                                    <HBox id="title" alignment="BASELINE_CENTER">
+                                       <children>
+                                          <Label id="newLabel" text="Others" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="69.0" prefWidth="106.0" text="Banks">
+                                             <graphic>
+                                                <FontAwesomeIcon fx:id="hotel11" fill="#3bb8f2" glyphName="BANK" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="TOP" layoutX="25.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="106.0" text="Hotel Info">
+                                             <graphic>
+                                                <FontAwesomeIcon fx:id="hotel111" fill="#3bb8f2" glyphName="INFO" size="2.5em" styleClass="icons" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </items>
+                        </ToolBar>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
