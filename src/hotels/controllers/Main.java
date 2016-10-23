@@ -36,6 +36,7 @@ import hotels.views.component.fxml.tools.NewHotelServiceController;
 import hotels.views.component.fxml.tools.PayOutListController;
 import hotels.views.component.fxml.tools.PhoneListController;
 import hotels.views.component.fxml.tools.ReminderListController;
+import hotels.views.component.fxml.tools.WorkOrderController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -611,7 +612,7 @@ public class Main implements Initializable{
      
       @FXML
      private void showWorkOrder() throws IOException {
-        ReminderListController controller = new ReminderListController(this.getApp());
+        WorkOrderController controller = new WorkOrderController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/workOrder.fxml"));
         loader.setController(controller);

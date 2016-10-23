@@ -186,8 +186,7 @@ public class WorkOrderController implements Initializable {
             @Override
             public void run() {
                 try {
-                    List <NameValuePair> param = new ArrayList<>();
-                    work = nav.fetchHotelService(param);
+                    work = nav.fetchWorkOrder();
                     workArray = work.getJSONArray("message");
                     
                     getWorkOrder();
@@ -228,7 +227,7 @@ public class WorkOrderController implements Initializable {
                 ls.setRoom(oj.getString("room"));
                 ls.setStatus(oj.getString("status"));
                 ls.setDueDate(oj.getString("dueDate"));
-                ls.setRemark(oj.getString("remark"));
+                ls.setRemark(oj.getString("remarks"));
                 
                 service.addAll(ls);
                 table.setItems(service);

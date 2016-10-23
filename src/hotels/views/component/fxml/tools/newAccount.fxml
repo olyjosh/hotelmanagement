@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.tools.NewAccountController">
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="7.0" layoutY="7.0" prefHeight="542.0" prefWidth="669.0" text="New Account Information">
         <content>
@@ -51,10 +51,10 @@
                   <TextField fx:id="balance" layoutX="466.0" layoutY="344.0" />
                   <Label layoutX="345.0" layoutY="390.0" text="Payment Term" />
                   <TextField fx:id="term" layoutX="466.0" layoutY="385.0" />
-                  <ComboBox fx:id="rep" layoutX="457.0" layoutY="140.0" prefHeight="31.0" prefWidth="186.0" />
-                  <ComboBox fx:id="country" layoutX="458.0" layoutY="21.0" prefHeight="31.0" prefWidth="186.0" />
+                  <ComboBox fx:id="rep" editable="true" layoutX="457.0" layoutY="140.0" prefHeight="31.0" prefWidth="186.0" />
+                  <ComboBox fx:id="country" editable="true" layoutX="458.0" layoutY="21.0" prefHeight="31.0" prefWidth="186.0" />
                   <ComboBox fx:id="state" editable="true" layoutX="128.0" layoutY="385.0" prefHeight="31.0" prefWidth="186.0" />
-                  <Button layoutX="527.0" layoutY="446.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" text="Save">
+                  <Button layoutX="527.0" layoutY="446.0" mnemonicParsing="false" onAction="#newAccount" prefHeight="31.0" prefWidth="128.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -22,6 +26,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -77,6 +82,8 @@ public class NewAccountController implements Initializable {
     private JSONObject response;
     private boolean editMode;
     private Account data;
+    private static ObservableList userList, userId;
+    private static String id;
 
     public Hotels getApp() {
         return app;
@@ -115,6 +122,19 @@ public class NewAccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        userList = FXCollections.observableArrayList();
+        userId = FXCollections.observableArrayList();
+        
+        rep.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                   int index = rep.getSelectionModel().getSelectedIndex();
+                   id = String.valueOf(userId.get(index));
+                   System.out.println("ID : " + id);
+                }
+           });
+        
         onLoad();
     }    
     
@@ -122,6 +142,34 @@ public class NewAccountController implements Initializable {
         if(isEditMode()){
             popEdit();
         }
+    }
+    
+    private void loadUsers(){
+      
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject user = nav.fetchUsers();
+                    JSONArray userArray = user.getJSONArray("message");
+                    for(int i = 0; i < userArray.length(); i++){
+                        
+                        JSONObject users = userArray.getJSONObject(i);
+                        JSONObject j = users.getJSONObject("name");
+                        userList.add(j.getString("firstName") + "  " + j.getString("lastName"));
+                        userId.add(users.get("_id"));
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+         
+        rep.setItems(userList);
     }
     
     private void popEdit(){
@@ -161,7 +209,7 @@ public class NewAccountController implements Initializable {
         param.add(new BasicNameValuePair("country", country.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("email", email.getText()));
         param.add(new BasicNameValuePair("website", web.getText()));
-        param.add(new BasicNameValuePair("rep", rep.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("rep", id));//need to load user and get user ID
         param.add(new BasicNameValuePair("cred_accountNo", accountNo.getText()));
         param.add(new BasicNameValuePair("cred_creditLimit", credit.getText()));
         param.add(new BasicNameValuePair("cred_openBalance", balance.getText()));

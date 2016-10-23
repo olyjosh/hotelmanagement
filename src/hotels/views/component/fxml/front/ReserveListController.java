@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.admin.NewRoomController;
 import hotels.views.component.fxml.front.controller.NewBookingController;
 import hotels.views.component.fxml.front.model.Reserve;
 import hotels.views.component.fxml.tools.HotelServiceListController;
@@ -327,6 +328,20 @@ public class ReserveListController implements Initializable {
         back.setPriority(Thread.MAX_PRIORITY);
         back.setDaemon(true);
         back.start();
+    }
+    
+     @FXML 
+    private void newRoomType(ActionEvent e) throws IOException{
+      
+        NewRoomController controller = new NewRoomController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoom.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        
+        stage.showAndWait();
     }
    
 }
