@@ -9,9 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.laundry.model.LaundryService;
 import hotels.views.component.fxml.tools.model.HotelService;
-import hotels.views.component.fxml.tools.model.LostFound;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,11 +44,8 @@ import org.json.JSONObject;
  * @author mac
  */
 public class HotelServiceListController implements Initializable {
-
+     
     
-              
-    private Hotels app;
-    private Navigator nav;
     @FXML
     private TableColumn alias;
     @FXML
@@ -61,6 +56,14 @@ public class HotelServiceListController implements Initializable {
     private TableColumn desc;
     @FXML
     private TableView<HotelService> table;
+    
+    
+    private Hotels app;
+    private Navigator nav;
+    private static JSONObject hotel;
+    private static JSONArray hotelArray;
+    private HotelService ls;
+    private ObservableList<HotelService> service = FXCollections.observableArrayList();
     
     public Hotels getApp() {
         return app;
@@ -76,10 +79,7 @@ public class HotelServiceListController implements Initializable {
     }
     
     
-    private static JSONObject hotel;
-    private static JSONArray hotelArray;
-    private HotelService ls;
-    private ObservableList<HotelService> service = FXCollections.observableArrayList();
+    
     
     
     
@@ -125,14 +125,6 @@ public class HotelServiceListController implements Initializable {
             
             table.getColumns().setAll(alias, name, charge, desc);
        
-        
-//        table.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) -> {
-//            //Check whether item is selected and print value of selected item
-//            if (table.getSelectionModel().getSelectedItem() != null) {
-//                System.out.println("Printing Selected value ID : "+ newValue.getItemName());
-//                selectedID = newValue.getId();
-//            }
-//        });
     }
     
     private void getLostList(){
@@ -198,7 +190,6 @@ public class HotelServiceListController implements Initializable {
                 try {
                     List <NameValuePair> param = new ArrayList<>();
                     param.add(new BasicNameValuePair("id", item.getId()));
-                    //param.add(new BasicNameValuePair("servive", "hotel"));
                     JSONObject response = nav.deleteHotelService(param);
                     
                     if(response.getInt("status") == 1){

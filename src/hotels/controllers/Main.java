@@ -519,7 +519,7 @@ public class Main implements Initializable{
      private void showBusiness() throws IOException {
          BusinessSourceController controller = new BusinessSourceController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/businessSources.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/businessSource.fxml"));
         loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = toolContentStack.getChildren();

@@ -9,6 +9,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.Business;
 import hotels.views.component.fxml.tools.model.HotelService;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,10 +19,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -32,24 +30,29 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class NewHotelServiceController implements Initializable {
+public class NewBizController implements Initializable {
 
-    
     @FXML
     private TextField alias;
     @FXML
     private TextField name;
     @FXML
-    private TextArea desc;
+    private TextField person;
     @FXML
-    private ImageView image;
+    private TextField city;
     @FXML
-    private TextField charge;
-    @FXML private Button button;
-
+    private TextField phone;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField plan;
+    @FXML
+    private TextField value;
+    
+    
     private Hotels app;
     private boolean editMode;
-    private HotelService data;
+    private Business data;
     private Navigator nav;
     private JSONObject response;
 
@@ -61,11 +64,6 @@ public class NewHotelServiceController implements Initializable {
         this.app = app;
     }
 
-    public NewHotelServiceController(Hotels app) {
-        this.app = app;
-        nav  = new Navigator(getApp().getMain());
-    }
-    
     public boolean isEditMode() {
         return editMode;
     }
@@ -74,23 +72,25 @@ public class NewHotelServiceController implements Initializable {
         this.editMode = editMode;
     }
 
-    public HotelService getData() {
+    public Business getData() {
         return data;
     }
 
-    public void setData(HotelService data) {
+    public void setData(Business data) {
         this.data = data;
     }
     
-    
-    
+    public NewBizController(Hotels app) {
+        this.app = app;
+        nav  = new Navigator(getApp().getMain());
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
         onLoad();
     }    
     
@@ -106,22 +106,27 @@ public class NewHotelServiceController implements Initializable {
         if(data != null){
             alias.setText(data.getAlias());
             name.setText(data.getName());
-            charge.setText(data.getCharge());
-            desc.setText(data.getDesc());
+            city.setText(data.getCity());
+            phone.setText(data.getPhone());
+            person.setText(data.getPerson());
+            email.setText(data.getEmail());
+            plan.setText(data.getPlan());
+            value.setText(data.getValue());
         }
         
-    }
+    }  
     
-    
-    @FXML private void newHotelService(){
+    @FXML private void newBusiness(){
         
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("alias", alias.getText()));
-        param.add(new BasicNameValuePair("name", name.getText()));
-        param.add(new BasicNameValuePair("extraCharge", charge.getText()));
-        param.add(new BasicNameValuePair("desc", desc.getText()));
-        param.add(new BasicNameValuePair("image", "image"));
-        param.add(new BasicNameValuePair("servive", "hotel"));
+        param.add(new BasicNameValuePair("compName", name.getText()));
+        param.add(new BasicNameValuePair("contPerson", person.getText()));
+        param.add(new BasicNameValuePair("city", city.getText()));
+        param.add(new BasicNameValuePair("phone", phone.getText()));
+        param.add(new BasicNameValuePair("email", email.getText()));
+        param.add(new BasicNameValuePair("plan", plan.getText()));
+        param.add(new BasicNameValuePair("planValue", value.getText()));
         param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
       
         if(!isEditMode()){
@@ -130,13 +135,12 @@ public class NewHotelServiceController implements Initializable {
                 @Override
                 public void run() {
                     try {
-                        System.out.println("New Hotel Service Event Fired");
-                        response = nav.createHotelService(param);
+                        response = nav.createBiz(param);
                         if(response != null && response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Created and Saved", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "Business Source Registered", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -144,7 +148,7 @@ public class NewHotelServiceController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Create", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "Business Failed to Register", Pos.CENTER);
                                 }
                             });
                         }
@@ -164,12 +168,12 @@ public class NewHotelServiceController implements Initializable {
             public void run() {
                 try {
                     param.add(new BasicNameValuePair("id", data.getId()));
-                    response = nav.editHotelService(param);
+                    response = nav.editBiz(param);
                         if(response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_SUCCESS, "Hotel Service "+name.getText()+" Updated", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_SUCCESS, "Business Source Updated", Pos.CENTER);
                                 }
                             });
                         }else{
@@ -177,7 +181,7 @@ public class NewHotelServiceController implements Initializable {
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Hotel Service Failed to Update", Pos.CENTER);
+                                    Util.notify(State.NOTIFY_ERROR, "Business Source Failed to Update", Pos.CENTER);
                                 }
                             });
                         }
@@ -192,5 +196,4 @@ public class NewHotelServiceController implements Initializable {
             back.start();
         }
     }
-    
 }
