@@ -984,4 +984,184 @@ public class Navigator {
         }
         return null;
     }
+    
+    //==============Business Sources===============//
+    
+    public JSONObject createBiz(List data){
+        String url = OP_URL+"create/bizsource";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchBiz(){
+        String url = OP_URL+"fetch/bizsource";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editBiz(List data){
+        String url = OP_URL+"edit/bizsource";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteBiz(List data){
+        String url = OP_URL+"delete/bizsource";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //==============Payout===============//
+    
+    public JSONObject createPayout(List data){
+        String url = OP_URL+"create/payout";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchPayout(){
+        String url = OP_URL+"fetch/payout";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editPayout(List data){
+        String url = OP_URL+"edit/payout";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deletePayout(List data){
+        String url = OP_URL+"delete/payout";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //==============Miscellaneous Sales===============//
+    
+    public JSONObject createMisc(List data){
+        String url = OP_URL+"create/pending";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject fetchMisc(){
+        String url = OP_URL+"fetch/pending";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editMisc(List data){
+        String url = OP_URL+"edit/pending";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+      
+    public JSONObject deleteMisc(List data){
+        String url = OP_URL+"delete/pending";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
