@@ -11,15 +11,12 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.tools.LostFoundController;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,7 +32,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -97,10 +93,12 @@ public class NewBookingController implements Initializable {
     @FXML
     private TextField amount, amount1;
     @FXML
-    private ComboBox isBooking;
+    private ComboBox isBooking, bookType;
     @FXML
     private CheckBox checkinNow;
     @FXML private Label dayLabel;
+    @FXML private TextField totalBill, amountPaid, balance, discount;
+    
     
     private static int days = 0;
 
@@ -121,6 +119,8 @@ public class NewBookingController implements Initializable {
         
         Util.formatDatePicker(checkIn);
         Util.formatDatePicker(checkOut);
+        
+        bookType.getItems().setAll("Corporate Booking", "Individual Booking", "Family Booking", "Group Booking");
         
         isBooking.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -261,7 +261,7 @@ public class NewBookingController implements Initializable {
                 JSONObject oj = roomTypeArray.getJSONObject(i);
                 if(suite.getSelectionModel().getSelectedItem().toString().equals(oj.getString("name"))){
                     roomTypeId = oj.getString("_id");
-                    System.out.println("Printing ROom TYpe ID : " + roomTypeId);break;
+                    System.out.println("Printing Selected ROom TYpe ID : " + roomTypeId);break;
                 }
             }
             
@@ -280,7 +280,7 @@ public class NewBookingController implements Initializable {
             for(int i = 0; i < roomArray.length(); i++){
                 JSONObject oj = roomArray.getJSONObject(i);
                 if(oj.get("roomType") != null){
-                    if(oj.get("roomType").equals(roomTypeId)){
+                    if(oj.getJSONObject("roomType").getString("_id").equals(roomTypeId)){
                     
                         roomList.add(oj.getString("name"));
                         roomID.add(oj.get("_id"));
@@ -329,7 +329,7 @@ public class NewBookingController implements Initializable {
                             @Override
                             public void run() {
                                 Util.notify( State.NOTIFY_BOOKING, firstName.getText() + " " +
-                                    lastName.getText() + "is Successfully Booked on Room " + 
+                                    lastName.getText() + "is Successfully Booked on " + 
                                     room.getSelectionModel().getSelectedItem().toString(), Pos.CENTER);
                             }
                         });

@@ -122,8 +122,7 @@
          </children>
       </VBox>
       <Button fx:id="cancel" layoutX="213.0" layoutY="415.0" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="213.0" />
-      <Button fx:id="checkOut" defaultButton="true" layoutX="552.0" layoutY="415.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" text="Pay" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
-      <Button fx:id="retry" layoutX="396.0" layoutY="415.0" mnemonicParsing="false" text="Retry" AnchorPane.bottomAnchor="13.0" />
+      <Button fx:id="pay" defaultButton="true" layoutX="552.0" layoutY="415.0" mnemonicParsing="false" onAction="#pay" prefHeight="27.0" prefWidth="97.0" text="Pay" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0" />
       <Hyperlink layoutX="580.0" layoutY="36.0" text="Print" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="36.0">
          <graphic>
             <FontAwesomeIcon glyphName="PRINT" />
@@ -182,10 +181,10 @@
                   </RadioButton>
                   <RadioButton fx:id="pos" mnemonicParsing="false" text="POS Device" toggleGroup="$channel" GridPane.rowIndex="1" />
                   <RadioButton fx:id="transfer" mnemonicParsing="false" text="Bank Transfer" toggleGroup="$channel" GridPane.rowIndex="2" />
-                  <TextField fx:id="posTransId" prefHeight="27.0" prefWidth="285.0" promptText="POS Transaction ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="posTransId" disable="true" prefHeight="27.0" prefWidth="285.0" promptText="POS Transaction ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="bankTransId" layoutX="128.0" layoutY="42.0" prefHeight="27.0" prefWidth="121.0" promptText="Transaction ID" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="bankTransId" disable="true" layoutX="128.0" layoutY="42.0" prefHeight="27.0" prefWidth="121.0" promptText="Transaction ID" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="bankList" prefHeight="27.0" prefWidth="156.0" />
                      </children>
                   </HBox>
@@ -200,11 +199,20 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="current" alignment="CENTER" layoutX="343.0" layoutY="162.0" prefHeight="92.0" prefWidth="281.0" text="N0.00">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </TextField>
+            <HBox>
+               <children>
+                  <TextField editable="false" layoutX="141.0" layoutY="10.0" prefHeight="92.0" prefWidth="188.0" text="N">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="current" editable="false" layoutX="343.0" layoutY="162.0" prefHeight="92.0" prefWidth="281.0" text="0.00">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
          </children>
       </HBox>
    </children>

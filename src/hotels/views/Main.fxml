@@ -68,7 +68,7 @@
                                                 <FontAwesomeIcon fx:id="hotel" fill="#3bb8f2" glyphName="HOTEL" size="2.5em" styleClass="icons" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showRoomStayView" text="Room Stay View">
+                                          <Button contentDisplay="TOP" layoutX="104.0" layoutY="16.0" mnemonicParsing="false" onAction="#showRoomStayView" text="Room Stay View" visible="false">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
@@ -114,7 +114,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="71.0" prefWidth="335.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCustomerLedger" prefHeight="69.0" prefWidth="82.0" text="Ledger">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showCustomerLedger" prefHeight="69.0" prefWidth="82.0" text="Ledger" visible="false">
                                              <graphic>
                                                 <GlyphsStack>
                                                    <children>
@@ -269,7 +269,7 @@
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="JOOMLA" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" layoutX="127.0" layoutY="11.0" mnemonicParsing="false" onAction="#showLostFound" text="Work Order">
+                                          <Button contentDisplay="TOP" layoutX="127.0" layoutY="11.0" mnemonicParsing="false" onAction="#showWorkOrder" text="Work Order">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="GEAR" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>
@@ -675,7 +675,7 @@
                                                 </GlyphsStack>
                                              </graphic>
                                           </Button>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="69.0" prefWidth="114.0" text="Night Audit">
+                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showNight" prefHeight="69.0" prefWidth="114.0" text="Night Audit">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="MOON_ALT" size="2.5em" styleClass="fontAwesomeIcon" />
                                              </graphic>

@@ -10,7 +10,6 @@ import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
 import hotels.views.component.fxml.tools.model.Account;
-import hotels.views.component.fxml.tools.model.HotelService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -109,11 +108,10 @@ public class AccountListController implements Initializable {
             public void run() {
                 try {
                     List <NameValuePair> param = new ArrayList<>();
-                    param.add(new BasicNameValuePair("servive", "hotel"));
-                    account = nav.fetchHotelService(param);
+                    account = nav.fetchAccount();
                     accountArray = account.getJSONArray("message");
                     
-                    getLostList();
+                    getAccountList();
                     
                 } catch (JSONException ex) {
                     ex.printStackTrace();
@@ -138,7 +136,7 @@ public class AccountListController implements Initializable {
        
     }
     
-    private void getLostList(){
+    private void getAccountList(){
         try {
             for(int i = 0; i < accountArray.length(); i++){
                 ls = new Account();
@@ -146,22 +144,22 @@ public class AccountListController implements Initializable {
                 System.out.println("Printing Hotel Service : " + oj);
                 ls.setId(oj.getString("_id"));
                 ls.setAccountName(oj.getString("accountName"));
-                ls.setAccountNo(oj.getString("cred_accountNo"));
-                ls.setAdd1(oj.getString("add1"));
-                ls.setAdd2(oj.getString("add2"));
-                ls.setBalance(oj.getString("cred_openBalance"));
+                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+                ls.setAdd1(oj.getJSONObject("address").getString("one"));
+                ls.setAdd2(oj.getJSONObject("address").getString("two"));
+                ls.setBalance(String.valueOf(oj.getJSONObject("cred").get("openBalance")));
                 ls.setCity(oj.getString("city"));
                 ls.setCompanyName(oj.getString("alis"));
-                ls.setContact(oj.getString("contact"));
+                //ls.setContact(oj.getString("contact"));
                 ls.setCountry(oj.getString("country"));
-                ls.setCredit(oj.getString("cred_creditLimit"));
+                ls.setCredit(String.valueOf(oj.getJSONObject("cred").get("creditLimit")));
                 ls.setEmail(oj.getString("email"));
                 ls.setFirstName(oj.getString("firstName"));
                 ls.setLastName(oj.getString("lastName"));
-                ls.setPhone(oj.getString("phone"));
+                //ls.setPhone(oj.getString("phone"));
                 ls.setRep(oj.getString("rep"));
                 ls.setState(oj.getString("state"));
-                ls.setTerm(oj.getString("cred_paymentTerm"));
+                ls.setTerm(oj.getJSONObject("cred").getString("paymentTerm"));
                 ls.setWeb(oj.getString("website"));
                 ls.setZip(oj.getString("zip"));
                 

@@ -4,13 +4,10 @@ import hotels.controllers.Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import org.apache.http.HttpException;
 import static org.apache.http.HttpHeaders.USER_AGENT;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -116,7 +113,7 @@ public class Navigator2 {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            main.responseError("Network problem");
+                            Util.notify_NETWORK();
                         }
                     });
                     res=null;
@@ -172,7 +169,7 @@ public class Navigator2 {
             }
             return res;
         } catch (IOException |JSONException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -185,7 +182,7 @@ public class Navigator2 {
             httpClient.execute(post);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -197,7 +194,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -214,7 +211,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -226,7 +223,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -240,7 +237,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -256,7 +253,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -275,7 +272,7 @@ public class Navigator2 {
             HttpResponse response = httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -295,7 +292,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -320,7 +317,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -340,7 +337,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -366,7 +363,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -384,7 +381,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -401,7 +398,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -414,7 +411,8 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
+            
         }
         return null;
     }
@@ -433,7 +431,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -451,7 +449,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -468,7 +466,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -487,7 +485,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -508,7 +506,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -530,7 +528,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -543,7 +541,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -680,7 +678,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -697,7 +695,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -724,7 +722,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -746,7 +744,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -759,7 +757,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -776,7 +774,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -806,7 +804,7 @@ public class Navigator2 {
             return new JSONObject(toString);
             
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }     
@@ -831,7 +829,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -848,7 +846,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -864,7 +862,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -881,7 +879,7 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -907,7 +905,7 @@ public class Navigator2 {
                 
             return res.getInt("status")==1;
         } catch (IOException | JSONException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return false;
     }
@@ -936,7 +934,7 @@ public class Navigator2 {
             
         } catch (IOException e) {
             e.printStackTrace(); 
-//            main.responseError("Network problem");
+//            Util.notify_NETWORK();
         }
         return null;
     }
@@ -957,7 +955,7 @@ public class Navigator2 {
             return res;
         } catch (IOException e) {
             e.printStackTrace(); 
-            main.responseError("Network problem");
+            Util.notify_NETWORK();
         }
         return null;
     }
@@ -979,11 +977,35 @@ public class Navigator2 {
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
      
+    
+                 
+    public JSONObject fetchNight() {
+        String url = OP_URL + "fetch/night";
+        List<NameValuePair> data = new ArrayList<>();
+
+//        if(d1!=null){
+//            data.add(new BasicNameValuePair("d1", d1));
+//            data.add(new BasicNameValuePair("d2", d2));
+//        }
+//        String param = URLEncodedUtils.format(data, "utf-8");
+//        url += "?" + param;
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace(); Util.notify_NETWORK();
+        }
+        return null;
+    }
+    
+    
 //  refNo : String,
 //  payFor : String,
 //  orderId : String,
@@ -1013,20 +1035,19 @@ public class Navigator2 {
         }
         data.add(new BasicNameValuePair("payFor", payFor));
         data.add(new BasicNameValuePair("orderId", orderId));
-        data.add(new BasicNameValuePair("orderId", ""+dept));
+        data.add(new BasicNameValuePair("dept", ""+dept));
         if(guestId!=null){
             data.add(new BasicNameValuePair("guestId", guestId));
             data.add(new BasicNameValuePair("guest", guest));
         }
         data.add(new BasicNameValuePair("performedBy", Storage.getId()));
-        
         try {
             HttpPost request = new HttpPost(url);
             request.setEntity(new UrlEncodedFormEntity(data));
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -1041,7 +1062,7 @@ public class Navigator2 {
             return res;
         } catch (IOException e) {
             res=null;
-            e.printStackTrace(); main.responseError("Network problem");
+            e.printStackTrace(); Util.notify_NETWORK();
         }
         return null;
     }
@@ -1071,7 +1092,7 @@ public class Navigator2 {
             
         } catch (IOException e) {
             e.printStackTrace(); 
-//            main.responseError("Network problem");
+//            Util.notify_NETWORK();
         }
         return null;
     }     

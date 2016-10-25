@@ -77,6 +77,17 @@ public class State {
     public final static int DEPT_BAR = 2;
     public final static int DEPT_LAUNDRY = 3;
     public final static int DEPT_OTHER = 4;
+    
+    public static String department(int x ){
+        switch(x){
+            case  DEPT_FRONT : return "Front Office - Booking and Room sales";
+            case  DEPT_RESTAURANT : return "Restaurant";
+            case  DEPT_BAR : return "Bar";
+            case  DEPT_LAUNDRY : return "Laundry";
+            case  DEPT_OTHER : return "Others - Misc. Sales";
+        }
+        return null;
+    }
 
 }
     

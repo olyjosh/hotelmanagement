@@ -7,6 +7,7 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
@@ -111,6 +112,50 @@ public class Util
              .darkStyle()
              .show();
    }
+    
+    public static void notify_SUCCESS(String title, String msg, Pos pos) {
+        Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.CHECK_CIRCLE, "35px");
+        createIcon.setFill(Paint.valueOf("#00aa00"));
+        Notifications.create()
+                .title(title)
+                .text(msg)
+                .graphic(createIcon)
+                .position(pos)
+                .darkStyle()
+                .show();
+    }
+
+    public static void notify_ERROR(String title, String msg, Pos pos) {
+        Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.INFO_CIRCLE, "35px");
+        createIcon.setFill(Paint.valueOf(State.COLOR_OUT_ORDER));   //"#aa0000"
+        Notifications.create()
+                .title(title)
+                .text(msg)
+                .graphic(createIcon)
+                .position(pos)
+                .darkStyle()
+                .show();
+    }
+    
+    
+    public static void notify_NETWORK() {
+        Text createIcon = GlyphsDude.createIcon(FontAwesomeIcons.SIGNAL, "35px");
+        createIcon.setFill(Paint.valueOf(State.COLOR_OUT_ORDER));   //"#aa0000"
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                 Notifications.create()
+                .title("Network")
+                .text("This is network connection problem. Check your network configurations")
+                .graphic(createIcon)
+                .position(Pos.CENTER)
+                .darkStyle()
+                .show();
+            }
+        });
+    }
+    
+    
     
     public static String random(){
         String rand = Long.toHexString(Double.doubleToLongBits(Math.random()));

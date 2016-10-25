@@ -7,6 +7,8 @@ import hotels.Hotels;
 import hotels.util.Navigator2;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.admin.NewRoomController;
+import hotels.views.component.fxml.admin.NewRoomTypeController;
 import hotels.views.component.fxml.front.model.FolioModel;
 import java.io.IOException;
 import java.net.URL;
@@ -22,9 +24,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -45,6 +50,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -503,4 +510,33 @@ return;
     }
     
    
+    //Testing
+    
+//    @FXML 
+//    private void newRoomType(ActionEvent e) throws IOException{
+//      
+//        NewRoomTypeController controller = new NewRoomTypeController(this.getApp());
+//        controller.setApp(getApp());
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoomType.fxml"));
+//        loader.setController(controller);
+//        Parent root = (Parent)loader.load();
+//        Stage stage = new Stage(StageStyle.UNIFIED);
+//        stage.setScene(new Scene(root));
+//        
+//        stage.showAndWait();
+//    }
+//    
+//    @FXML 
+//    private void newRoom(ActionEvent e) throws IOException{
+//      
+//        NewRoomController controller = new NewRoomController(this.getApp());
+//        controller.setApp(getApp());
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoom.fxml"));
+//        loader.setController(controller);
+//        Parent root = (Parent)loader.load();
+//        Stage stage = new Stage(StageStyle.UNIFIED);
+//        stage.setScene(new Scene(root));
+//        
+//        stage.showAndWait();
+//    }
 }

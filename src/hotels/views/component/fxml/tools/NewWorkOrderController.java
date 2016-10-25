@@ -118,7 +118,7 @@ public class NewWorkOrderController implements Initializable {
         workType.setText(data.getWorkType());
     }
     
-    @FXML private void newHotelService(){
+    @FXML private void newWorkOrder(){
 
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("date", dateIssued.getEditor().getText()));
@@ -171,8 +171,8 @@ public class NewWorkOrderController implements Initializable {
             public void run() {
                 try {
                     param.add(new BasicNameValuePair("id", data.getId()));
-                    response = nav.editHotelService(param);
-                        if(response.getInt("status") == 1){
+                    response = nav.editWorkOrder(param);
+                        if(response != null && response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
