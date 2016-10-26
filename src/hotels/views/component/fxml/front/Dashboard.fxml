@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="9.0" layoutY="7.0" prefHeight="358.0" prefWidth="331.0" text="Search Guest" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="7.0" />
       <StackPane layoutX="349.0" layoutY="6.0">
@@ -163,7 +163,7 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <HBox layoutX="830.0" layoutY="420.0" spacing="3.0" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="6.0">
+      <HBox layoutX="830.0" layoutY="420.0" spacing="3.0" visible="false" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="6.0">
          <children>
             <Button layoutX="696.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="95.0" text="Booking" />
             <Button layoutX="838.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Checkin" />

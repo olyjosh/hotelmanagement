@@ -27,7 +27,7 @@
                            <children>
                               <ImageView fx:id="imgV2" fitHeight="185.0" fitWidth="216.0" layoutX="389.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../images/high.png" />
+                                    <Image url="@../../../../images/hamburguer.png" />
                                  </image>
                               </ImageView>
                               <VBox fx:id="progressBox" alignment="CENTER" visible="false">
