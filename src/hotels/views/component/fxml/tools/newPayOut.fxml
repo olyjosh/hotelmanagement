@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="491.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.tools.NewPayOutController">
+<AnchorPane id="AnchorPane" prefHeight="491.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="5.0" layoutY="4.0" prefHeight="482.0" prefWidth="855.0" text="Information">
         <content>
@@ -48,7 +48,7 @@
                   </TitledPane>
                   <Label layoutX="466.0" layoutY="259.0" text="Total Amount" />
                   <TextField fx:id="total" layoutX="578.0" layoutY="254.0" prefHeight="31.0" prefWidth="256.0" />
-                  <Button layoutX="716.0" layoutY="387.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" text="Save">
+                  <Button layoutX="716.0" layoutY="387.0" mnemonicParsing="false" onAction="#newPayout" prefHeight="31.0" prefWidth="118.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

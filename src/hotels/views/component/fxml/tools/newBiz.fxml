@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.tools.NewBizController">
+<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="4.0" layoutY="4.0" prefHeight="459.0" prefWidth="449.0" text="Business Source">
          <content>
@@ -29,7 +29,7 @@
                   <TextField fx:id="plan" layoutX="172.0" layoutY="272.0" prefHeight="31.0" prefWidth="238.0" />
                   <Label layoutX="33.0" layoutY="319.0" text="Plan Value" />
                   <TextField fx:id="value" layoutX="172.0" layoutY="314.0" prefHeight="31.0" prefWidth="238.0" />
-                  <Button layoutX="301.0" layoutY="374.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" text="Save">
+                  <Button layoutX="301.0" layoutY="374.0" mnemonicParsing="false" onAction="#newBusiness" prefHeight="31.0" prefWidth="109.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>

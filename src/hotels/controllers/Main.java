@@ -3,9 +3,12 @@ package hotels.controllers;
 import hotel.reports.Reporter;
 import hotels.Hotels;
 import hotels.util.Navigator2;
+import hotels.views.component.fxml.admin.FloorListController;
 import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
 import hotels.views.component.fxml.admin.RoomListController;
+import hotels.views.component.fxml.admin.RoomTypeListController;
+import hotels.views.component.fxml.admin.UserListController;
 import hotels.views.component.fxml.bar.controller.DrinkOrder;
 import hotels.views.component.fxml.bar.controller.NewDrink;
 import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
@@ -744,8 +747,8 @@ public class Main implements Initializable{
      private void showRoomList() throws IOException {
         RoomListController controller = new RoomListController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomAmenityList.fxml"));
-//        loader.setController(controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomList.fxml"));
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -756,10 +759,10 @@ public class Main implements Initializable{
      
      @FXML
      private void showTypeList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+        RoomTypeListController controller = new RoomTypeListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomTypeList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -771,10 +774,10 @@ public class Main implements Initializable{
      
       @FXML
      private void showFloorList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+        FloorListController controller = new FloorListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/floorList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -799,10 +802,10 @@ public class Main implements Initializable{
      
      @FXML
      private void showUserList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+        UserListController controller = new UserListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/userList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {

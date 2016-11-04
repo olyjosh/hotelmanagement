@@ -160,7 +160,7 @@ public class BusinessSourceController implements Initializable {
     
     @FXML 
     private void showNewBiz(ActionEvent e) throws IOException{
-        NewHotelServiceController controller = new NewHotelServiceController(this.getApp());
+        NewBizController controller = new NewBizController(this.getApp());
         controller.setApp(getApp());
         controller.setEditMode(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/newBiz.fxml"));

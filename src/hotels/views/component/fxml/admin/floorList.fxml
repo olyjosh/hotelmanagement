@@ -23,11 +23,11 @@
             <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Define all Floors or Sections in the Property. Example First Floor or Second Floor or Beach View or Pool View" />
          </children>
       </Pane>
-      <TableView layoutX="6.0" layoutY="64.0" prefHeight="336.0" prefWidth="948.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
+      <TableView fx:id="table" layoutX="6.0" layoutY="64.0" prefHeight="336.0" prefWidth="948.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
         <columns>
-          <TableColumn prefWidth="177.0" text="Alias" />
-          <TableColumn minWidth="0.0" prefWidth="769.0" text="Name" />
-            <TableColumn prefWidth="177.0" text="Description" />
+          <TableColumn fx:id="alias" prefWidth="177.0" text="Alias" />
+          <TableColumn fx:id="name" minWidth="0.0" prefWidth="769.0" text="Name" />
+            <TableColumn fx:id="desc" prefWidth="177.0" text="Description" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -35,32 +35,22 @@
       </TableView>
       <HBox layoutX="464.0" layoutY="410.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="New">
+            <Button mnemonicParsing="false" onAction="#showNewFloor" prefHeight="31.0" prefWidth="158.0" text="New">
                <graphic>
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Edit">
+            <Button mnemonicParsing="false" onAction="#showEditFloor" prefHeight="31.0" prefWidth="158.0" text="Edit">
                <graphic>
                   <FontAwesomeIcon glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Delete">
-               <graphic>
-                  <FontAwesomeIcon glyphName="REMOVE" />
-               </graphic>
-            </Button>
-            <Button layoutX="336.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="Close">
+            <Button mnemonicParsing="false" onAction="#deleteFloor" prefHeight="31.0" prefWidth="158.0" text="Delete">
                <graphic>
                   <FontAwesomeIcon glyphName="REMOVE" />
                </graphic>
             </Button>
          </children>
       </HBox>
-      <Button layoutX="14.0" layoutY="408.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="34.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0">
-         <graphic>
-            <FontAwesomeIcon glyphName="REFRESH" />
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

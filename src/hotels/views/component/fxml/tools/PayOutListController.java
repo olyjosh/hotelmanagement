@@ -117,10 +117,10 @@ public class PayOutListController implements Initializable {
            
             
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
-            paidFor.setCellValueFactory(new PropertyValueFactory<>("paidFor"));
-            payType.setCellValueFactory(new PropertyValueFactory<>("payType"));
-            roomNo.setCellValueFactory(new PropertyValueFactory<>("room"));
-            voucher.setCellValueFactory(new PropertyValueFactory<>("voucherNo"));
+            paidFor.setCellValueFactory(new PropertyValueFactory<>("paidTo"));
+            payType.setCellValueFactory(new PropertyValueFactory<>("cat"));
+            roomNo.setCellValueFactory(new PropertyValueFactory<>("roomNo"));
+            voucher.setCellValueFactory(new PropertyValueFactory<>("voucher"));
             amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
             
             table.getColumns().setAll(date, paidFor, payType, roomNo, voucher, amount);
@@ -139,12 +139,12 @@ public class PayOutListController implements Initializable {
                 ls.setAmount(oj.getString("amount"));
                 ls.setAmountPaid(String.valueOf(oj.get("amountPaid")));
                 ls.setCat(oj.getString("category"));
-                ls.setDate(Util.stripDate(oj.getString("creattedAt")));
+                ls.setDate(Util.stripDate(oj.getString("createdAt")));
                 ls.setDiscount(oj.getString("discount"));
                 ls.setPaidTo(oj.getString("paidTo"));
-                ls.setQty(oj.getString("qty"));
+                ls.setQty(String.valueOf(oj.get("qty")));
                 ls.setRemark(oj.getString("remarks"));
-                ls.setRoomNo(oj.getString("roomNo"));
+                ls.setRoomNo(oj.getString("roomNO"));
                 ls.setTax(String.valueOf(oj.get("tax")));
                 ls.setTotal(String.valueOf(oj.get("total")));
                 ls.setVoucher(oj.getString("voucherNo"));

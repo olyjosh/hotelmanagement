@@ -9,9 +9,9 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.tools.LostFoundController;
-import hotels.views.component.fxml.tools.NewLostFoundController;
-import hotels.views.component.fxml.tools.model.LostFound;
+import hotels.views.component.fxml.tools.HotelServiceListController;
+import hotels.views.component.fxml.tools.NewHotelServiceController;
+import hotels.views.component.fxml.tools.model.HotelService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,25 +46,36 @@ import org.json.JSONObject;
  *
  * @author NOVA
  */
-public class RoomListController implements Initializable {
+public class RoomTypeListController implements Initializable {
 
     @FXML
-    private TextField search;
+    private TextField type;
     @FXML
-    private TableView<Room> table;
+    private TableView<RoomType> table;
     @FXML
     private TableColumn alias;
     @FXML
     private TableColumn name;
     @FXML
-    private TableColumn type;
+    private TableColumn ba;
     @FXML
-    private TableColumn floor;
+    private TableColumn bc;
+    @FXML
+    private TableColumn ma;
+    @FXML
+    private TableColumn mc;
+    @FXML
+    private TableColumn desc;
     
     
     private Hotels app;
-
-    public Hotels getApp() {
+    private Navigator nav;
+    private static JSONObject roomtype;
+    private static JSONArray roomtypeArray;
+    private RoomType ls;
+    private ObservableList<RoomType> service = FXCollections.observableArrayList();
+    
+     public Hotels getApp() {
         return app;
     }
 
@@ -74,17 +83,10 @@ public class RoomListController implements Initializable {
         this.app = app;
     }
 
-    public RoomListController(Hotels app) {
-        this.app = app;
-        nav  = new Navigator(getApp().getMain());
+    public RoomTypeListController(Hotels app) {
+        this.app =app;
+        nav = new Navigator(getApp().getMain());
     }
-    
-    private Navigator nav;
-    private JSONObject response;
-    private static JSONObject room;
-    private static JSONArray roomArray;
-    private Room ls;
-    private ObservableList<Room> service = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -92,40 +94,8 @@ public class RoomListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        onLoad();
-        defaults();
+            onLoad();
     }    
-    
-    private void defaults(){
-        
-        search.textProperty().addListener(new InvalidationListener() {
-
-        @Override
-        public void invalidated(Observable observable) {
-            if(search.textProperty().get().isEmpty()) {
-                table.setItems(service);
-                return;
-            }
-            ObservableList<Room> tableItems = FXCollections.observableArrayList();
-            ObservableList<TableColumn<Room, ?>> cols = table.getColumns();
-            for(int i=0; i<service.size(); i++) {
-
-                for(int j=0; j<cols.size(); j++) {
-                    TableColumn col = cols.get(j);
-                    String cellValue = col.getCellData(service.get(i)).toString();
-                    cellValue = cellValue.toLowerCase();
-                    if(cellValue.contains(search.textProperty().get().toLowerCase())) {
-                        tableItems.add(service.get(i));
-                        break;
-                    }                        
-                }
-            }
-            table.setItems(tableItems);
-        }
-    });
-   
-    }
     
     private void onLoad(){
         
@@ -133,10 +103,11 @@ public class RoomListController implements Initializable {
             @Override
             public void run() {
                 try {
-                    room = nav.fetchRoom();
-                    roomArray = room.getJSONArray("message");
-                    System.out.println(roomArray);
-                    getRoomList();
+                    roomtype = nav.fetchRoomType();
+                    roomtypeArray = roomtype.getJSONArray("message");
+                    
+                    getRoomTypeList();
+                    
                 } catch (JSONException ex) {
                     ex.printStackTrace();
                 }
@@ -151,54 +122,47 @@ public class RoomListController implements Initializable {
             
             alias.setCellValueFactory(new PropertyValueFactory<>("alias"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            type.setCellValueFactory(new PropertyValueFactory<>("type"));
-            floor.setCellValueFactory(new PropertyValueFactory<>("floor"));
+            ba.setCellValueFactory(new PropertyValueFactory<>("ba"));
+            bc.setCellValueFactory(new PropertyValueFactory<>("bc"));
+            ma.setCellValueFactory(new PropertyValueFactory<>("ma"));
+            mc.setCellValueFactory(new PropertyValueFactory<>("mc"));
+            desc.setCellValueFactory(new PropertyValueFactory<>("desc"));
             
-            table.getColumns().setAll(alias, name, type, floor);
-     
+            table.getColumns().setAll(alias, name, ba, bc, ma, mc, desc);
+       
     }
     
-    private void getRoomList(){
+    private void getRoomTypeList(){
         try {
-            for(int i = 0; i < roomArray.length(); i++){
-                ls = new Room();
-                JSONObject oj = roomArray.getJSONObject(i);
-                
+            for(int i = 0; i < roomtypeArray.length(); i++){
+                ls = new RoomType();
+                JSONObject oj = roomtypeArray.getJSONObject(i);
                 ls.setId(oj.getString("_id"));
-                
-                if(oj.getJSONObject("floor").getString("name") == null){
-                    ls.setFloor("");
-                }else{
-                    ls.setFloor(oj.getJSONObject("floor").getString("name"));
-                }
-                if(oj.getJSONObject("roomType").get("name") == null){
-                    ls.setType("");
-                }else{
-                    ls.setType(oj.getJSONObject("roomType").getString("name"));
-                }
-              
+                ls.setBa(String.valueOf(oj.getJSONObject("pax").get("baseAdult")));
                 ls.setDesc(oj.getString("desc"));
-                ls.setName(oj.getString("name"));
+                ls.setBc(String.valueOf(oj.getJSONObject("pax").get("baseChild")));
+                ls.setMa(String.valueOf(oj.getJSONObject("pax").get("maxAdult")));
+                ls.setMc(String.valueOf(oj.getJSONObject("pax").get("maxChild")));
                 ls.setAlias(oj.getString("alias"));
+                ls.setName(oj.getString("name"));
                 
                 service.addAll(ls);
-                
-                System.out.println("printing Loaded Rooms : " + ls.toString());
-                
+                table.setItems(service);
                 
             }
-           table.setItems(service);
+           
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
+    }    
+    
     
     @FXML 
-    private void showNewRoom(ActionEvent e) throws IOException{
-        NewRoomController controller = new NewRoomController(this.getApp());
+    private void showNewRoomType(ActionEvent e) throws IOException{
+        NewRoomTypeController controller = new NewRoomTypeController(this.getApp());
         controller.setApp(getApp());
         controller.setEditMode(false);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoom.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoomType.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
@@ -208,14 +172,14 @@ public class RoomListController implements Initializable {
     }
     
     @FXML 
-    private void showEditRoom(ActionEvent e) throws IOException{
+    private void showEditRoomType(ActionEvent e) throws IOException{
        
-        Room item = table.getSelectionModel().getSelectedItem();
-        NewRoomController controller = new NewRoomController(this.getApp());
+        RoomType item = table.getSelectionModel().getSelectedItem();
+        NewRoomTypeController controller = new NewRoomTypeController(this.getApp());
         controller.setApp(app);
         controller.setEditMode(true);
         controller.setData(item);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoom.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newRoomType.fxml"));
         loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
@@ -226,22 +190,23 @@ public class RoomListController implements Initializable {
     }
     
     @FXML
-    private void deleteRoom(){
-        Room item = table.getSelectionModel().getSelectedItem();
+    private void deleteRoomType(){
+        RoomType item = table.getSelectionModel().getSelectedItem();
         Runnable task = new Runnable() {
             @Override
             public void run() {
                 try {
                     List <NameValuePair> param = new ArrayList<>();
                     param.add(new BasicNameValuePair("id", item.getId()));
-                    JSONObject response = nav.deleteRoom(param);
+                    JSONObject response = nav.deleteRoomType(param);
+                    
                     if(response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_SUCCESS, item.getName() + "has been Deleted", Pos.CENTER);
-                                service.remove(item);
-                                
+                                Util.notify(State.NOTIFY_SUCCESS, "Room Type Deleted", Pos.CENTER);
+                                service.clear();
+                                onLoad();
                             }
                         });
                     }else{
@@ -249,12 +214,12 @@ public class RoomListController implements Initializable {
                         Platform.runLater(new Runnable(){
                             @Override
                             public void run() {
-                                Util.notify(State.NOTIFY_ERROR, item.getName() + "has been Deleted", Pos.CENTER);
+                                Util.notify(State.NOTIFY_ERROR, "Room Type Failed to Delete", Pos.CENTER);
                             }
                         });
                     }
                 } catch (JSONException ex) {
-                    Logger.getLogger(LostFoundController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HotelServiceListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
@@ -263,4 +228,5 @@ public class RoomListController implements Initializable {
         back.setDaemon(true);
         back.start();
     }
+    
 }

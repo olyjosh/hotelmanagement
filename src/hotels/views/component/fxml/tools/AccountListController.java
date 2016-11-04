@@ -156,7 +156,7 @@ public class AccountListController implements Initializable {
                 ls.setEmail(oj.getString("email"));
                 ls.setFirstName(oj.getString("firstName"));
                 ls.setLastName(oj.getString("lastName"));
-                //ls.setPhone(oj.getString("phone"));
+                ls.setPhone(oj.getString("phone"));
                 ls.setRep(oj.getString("rep"));
                 ls.setState(oj.getString("state"));
                 ls.setTerm(oj.getJSONObject("cred").getString("paymentTerm"));
