@@ -7,12 +7,10 @@ import hotels.Hotels;
 import hotels.util.Navigator2;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.admin.NewRoomController;
-import hotels.views.component.fxml.admin.NewRoomTypeController;
 import hotels.views.component.fxml.front.model.FolioModel;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,13 +22,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -49,10 +45,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
+import org.controlsfx.control.MaskerPane;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,6 +114,9 @@ public class Dashboard implements Initializable {
     
     private ObservableList<FolioModel> tableList;
     @FXML private GridPane detailGrid;
+    @FXML private DatePicker d1, d2;
+    @FXML private TextField folioSearch;
+    @FXML private StackPane folioStack;
     
     private Hotels app;
     private Navigator2 nav;
@@ -136,8 +136,6 @@ public class Dashboard implements Initializable {
         nav=new Navigator2(app.getMain());
     }
     
-    
-    
     /**
      * Initializes the controller class.
      */
@@ -150,7 +148,16 @@ public class Dashboard implements Initializable {
 //    private ObservableList<BorderPane> duplicate;
     private void defaults(){
         
-        
+        d2.setValue(LocalDate.now());
+        d1.setValue(LocalDate.now().minusMonths(3));
+        Util.formatDatePicker2(d1);
+        Util.formatDatePicker2(d2);
+        Font font = d1.getEditor().getFont();
+        font = new Font(font.getSize()-2);
+        d1.getEditor().setFont(font);
+        d2.getEditor().setFont(font);
+        search.setFont(font);
+        folioSearch.setFont(font);
         
         search.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -160,8 +167,9 @@ public class Dashboard implements Initializable {
 //                duplicate = list.getItems();
                    list.setItems(guestData);
 //                searchGuestData.clear();
-return;
-                }   JSONObject g,b;
+                    return;
+                }   
+                JSONObject g,b;
                 searchGuestData.clear();
                 for (int i = 0; i < guestData.size(); i++) {
                     try {
@@ -180,8 +188,6 @@ return;
                 }   list.setItems(searchGuestData);
             }
         });
-        
-        
         
         listDeafaults();
         tableDeafaults();
@@ -249,7 +255,12 @@ return;
                         pay = new MenuItem("Make Payment", GlyphsDude.createIcon(FontAwesomeIcons.PAYPAL));
                 ContextMenu con = new ContextMenu(pay, transac);
                 transac.setOnAction((ActionEvent event) -> {
-
+                    try {
+                        FolioModel item = row.getItem();
+                        app.getMain().showFolioDetail(item.getGuestId(), item.getName(), item.getPhone());
+                    } catch (IOException ex) {
+                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 });
                 
                 pay.setOnAction((ActionEvent event) -> {
@@ -337,9 +348,21 @@ return;
 //            
 //            
 //    }
-//    
+
+    boolean searching;
+     MaskerPane folioMp;
     
-     @FXML private void loadFolioTask(){
+    @FXML private void search(){
+        searching=true;
+        if(folioMp==null ){
+            folioMp= new MaskerPane();
+            folioStack.getChildren().add(folioMp);
+            folioMp.setVisible(searching);
+        }
+        loadFolioTask();
+    }
+    
+    private void loadFolioTask(){
         
         Runnable task = new Runnable() {
             public void run() {
@@ -353,8 +376,10 @@ return;
         back.start();
     }
     
+    
     private void folios(){
-        JSONObject foods = nav.fetchFolio(null, null);
+        
+        JSONObject foods = nav.fetchFolio(d1.getValue().toString(), d2.getValue().toString());
         if(foods!=null){
             try {
                 JSONArray a = foods.getJSONArray("message");
@@ -365,6 +390,7 @@ return;
                     add1ToTable(o);
                     
                 }
+                if(folioMp!=null)folioMp.setVisible(false);
             } catch (JSONException ex) {
                 Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -463,6 +489,7 @@ return;
             
             VBox v = new VBox(name,l);
             Text stat = GlyphsDude.createIcon(FontAwesomeIcons.CIRCLE,"1em");
+            
             HBox right = new HBox(stat);
             
             right.setAlignment(Pos.CENTER_RIGHT);
@@ -485,7 +512,21 @@ return;
             JSONArray jsonArray = j.getJSONArray("bookings");
             if(jsonArray.length()<1){return h;}
             JSONObject booking = jsonArray.getJSONObject(jsonArray.length()-1);
-            booking.getString("status");
+            
+            String string = booking.getString("status");
+            if(State.RM_BOOKED.contains("reser")){
+                stat.setFill(Paint.valueOf(State.COLOR_RESERVED));
+            }
+            
+            
+            if(booking.has("isCheckIn")){
+                if(booking.getBoolean("isCheckIn")){
+                    stat.setFill(Paint.valueOf(State.COLOR_OCCUPIED));
+                }
+            }
+            
+//            if()
+            
             h.getProperties().put("booking", booking);
             j.remove("bookings");
             h.getProperties().put("guest", j);

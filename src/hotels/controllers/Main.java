@@ -1,11 +1,13 @@
 package hotels.controllers;
 
-import hotel.reports.Reporter;
+import hotels.reports.Reporter;
 import hotels.Hotels;
 import hotels.util.Navigator2;
 import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
 import hotels.views.component.fxml.admin.RoomListController;
+import hotels.views.component.fxml.admin.controller.FolioDetail;
+import hotels.views.component.fxml.admin.controller.NightController;
 import hotels.views.component.fxml.bar.controller.DrinkOrder;
 import hotels.views.component.fxml.bar.controller.NewDrink;
 import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
@@ -75,6 +77,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
+import javax.swing.JFrame;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
@@ -203,7 +206,7 @@ public class Main implements Initializable{
                     
             Dashboard controller = new Dashboard(this.getApp());
             controller.setApp(getApp());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/Dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/front/dashboard.fxml"));
             loader.setController(controller);
             AnchorPane dashBoard = (AnchorPane)loader.load();
             ObservableList<Node> children = frontContentStack.getChildren();
@@ -517,7 +520,7 @@ public class Main implements Initializable{
               
      @FXML
      private void showBusiness() throws IOException {
-         BusinessSourceController controller = new BusinessSourceController(this.getApp());
+        BusinessSourceController controller = new BusinessSourceController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/businessSource.fxml"));
         loader.setController(controller);
@@ -531,7 +534,7 @@ public class Main implements Initializable{
      
      @FXML
      private void showMisc() throws IOException {
-         MiscSaleListController controller = new MiscSaleListController(this.getApp());
+        MiscSaleListController controller = new MiscSaleListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/miscSaleList.fxml"));
         loader.setController(controller);
@@ -589,7 +592,7 @@ public class Main implements Initializable{
      
       @FXML
      private void showPayOutList() throws IOException {
-          PayOutListController controller = new PayOutListController(this.getApp());
+        PayOutListController controller = new PayOutListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/tools/payOutList.fxml"));
         loader.setController(controller);
@@ -814,9 +817,7 @@ public class Main implements Initializable{
     
      @FXML
      private void showSummary() throws IOException {
-         Summary controller = new Summary(this.getApp());
-         
-         
+        Summary controller = new Summary(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/summary.fxml"));
         loader.setController(controller);
@@ -826,32 +827,39 @@ public class Main implements Initializable{
         stage.show();
 
     }
+    
      
-     
-     @FXML
-     private void showNight() throws IOException {
-         Navigator2 nav = new Navigator2(this);
-        JSONObject fetchNight = nav.fetchNight();
-        
-        if (fetchNight!=null){
-            new Reporter().buildNight(fetchNight);
-        };
-//        Summary controller = new Summary(this.getApp());
-//        controller.setApp(app);
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/summary.fxml"));
-//        loader.setController(controller);
-//        AnchorPane content = (AnchorPane) loader.load();
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(content));
-//        stage.show();
+    @FXML
+    private void showNight() throws IOException {
 
+        NightController controller = new NightController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/night.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(content));
+        stage.show();
+    }
+    
+     
+    @FXML
+    public void showFolioDetail(String guestId,String guestName,String guestPhone) throws IOException {
+        FolioDetail controller = new FolioDetail(this.getApp());
+        controller.setApp(app);
+        controller.setGuestData(guestId, guestName, guestPhone);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/night.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(content));
+        stage.show();
     }
      
      
      //Testing Codes down here.
     @FXML 
     private void showNewUser(ActionEvent e) throws IOException{
-      
         NewUserController controller = new NewUserController(this.getApp());
         controller.setApp(getApp());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));

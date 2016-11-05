@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="65.0" prefWidth="962.0" style="-fx-background-color: lightgrey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +27,7 @@
          </children>
       </Pane>
       <Label layoutX="33.0" layoutY="77.0" text="Linen No " />
-      <TextField fx:id="linenText" layoutX="116.0" layoutY="72.0" />
+      <TextField fx:id="linenText" layoutX="116.0" layoutY="72.0" prefHeight="27.0" prefWidth="187.0" />
       <Label layoutX="33.0" layoutY="116.0" text="User" />
       <Label layoutX="334.0" layoutY="79.0" text="Date" />
       <TableView fx:id="table" layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
@@ -43,7 +43,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <DatePicker fx:id="datePicker" layoutX="408.0" layoutY="74.0" />
+      <DatePicker fx:id="datePicker" layoutX="408.0" layoutY="74.0" prefHeight="27.0" prefWidth="218.0" />
       <HBox layoutX="449.0" layoutY="412.0" spacing="5.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0">
          <children>
             <Button mnemonicParsing="false" onAction="#showNewDailyLaundry" prefHeight="31.0" prefWidth="163.0" text="New">

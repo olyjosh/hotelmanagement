@@ -71,6 +71,38 @@ public class Util
 
     }
     
+    
+        
+    public static void formatDatePicker2(DatePicker datePicker) {
+        String pattern = "yyyy-MM-dd";
+        String pattern2 = "MMM dd, yyyy";
+        
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern),
+                    dateFormatter2 = DateTimeFormatter.ofPattern(pattern2);
+            
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter2.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter2);
+                } else {
+                    return null;
+                }
+            }
+        });
+
+    }
+    
     public static String formatDate(String date){
         String pattern = "MMM dd, yyyy";
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);

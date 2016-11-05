@@ -177,7 +177,6 @@ public class Navigator {
         String url = OP_URL+"fetch/room";
         try{
             HttpGet request = new HttpGet(url);
-            
             httpClient.execute(request);
             return res;
         } catch (IOException e) {

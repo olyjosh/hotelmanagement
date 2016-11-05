@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotels.views.component.fxml.tools.NewBizController">
+<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="4.0" layoutY="4.0" prefHeight="459.0" prefWidth="449.0" text="Business Source">
          <content>

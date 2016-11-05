@@ -661,8 +661,9 @@
 
 .button {
     -fx-background-color:#0072aa;
-    -fx-background-radius: 7, 6, 5, 4, 3, 5;
-    -fx-background-insets: -3 -3 -4 -3, -3, 0, 1, 2, 0;
+    -fx-background-radius: 3, 6, 3, 3, 3, 3;
+        /*-fx-background-insets: -3 -3 -4 -3, -3, 0, 1, 2, 0;*/
+    -fx-background-insets: -0 -0 -0 -0, -3, 0, 1, 2, 0;
     -fx-font-family: "Arial";
     -fx-text-fill: white;
     -fx-font-size: 15;
