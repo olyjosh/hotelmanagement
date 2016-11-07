@@ -116,35 +116,48 @@ public class NewRoomController implements Initializable {
     }
     
     private void onLoad(){
-        try {
-            JSONObject roomType = nav.fetchRoomType();
-            JSONObject floors = nav.fetchFloor();
         
-            System.out.println(roomType);
-            System.out.println(floors);
-            
-            JSONArray roomTypeArray = roomType.getJSONArray("message");
-            System.out.println("Printing JSON Array : " +  roomTypeArray);
-            
-            JSONArray floorArray = floors.getJSONArray("message");
-            System.out.println("Printing JSON Array : " +  floorArray);
-            
-            for(int i = 0; i < roomTypeArray.length(); i++){
-                JSONObject oj = roomTypeArray.getJSONObject(i);
-                roomTypeList.add(oj.getString("name"));
-                roomTypeId.add(oj.getString("_id"));
+        
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject roomType = nav.fetchRoomType();
+                    JSONObject floors = nav.fetchFloor();
+
+                    System.out.println(roomType);
+                    System.out.println(floors);
+
+                    JSONArray roomTypeArray = roomType.getJSONArray("message");
+                    System.out.println("Printing JSON Array : " +  roomTypeArray);
+
+                    JSONArray floorArray = floors.getJSONArray("message");
+                    System.out.println("Printing JSON Array : " +  floorArray);
+
+                    for(int i = 0; i < roomTypeArray.length(); i++){
+                        JSONObject oj = roomTypeArray.getJSONObject(i);
+                        roomTypeList.add(oj.getString("name"));
+                        roomTypeId.add(oj.getString("_id"));
+                    }
+
+                    for(int i = 0; i < floorArray.length(); i++){
+                        JSONObject oj = floorArray.getJSONObject(i);
+                        floorList.add(oj.getString("name"));
+                        floorId.add(oj.getString("_id"));
+                    }
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+                
+                roomType.setItems(roomTypeList);
+                floor.setItems(floorList);
             }
-            
-            for(int i = 0; i < floorArray.length(); i++){
-                JSONObject oj = floorArray.getJSONObject(i);
-                floorList.add(oj.getString("name"));
-                floorId.add(oj.getString("_id"));
-            }
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
-        roomType.setItems(roomTypeList);
-        floor.setItems(floorList);
+        };
+        // Run the task in a background thread
+            Thread back = new Thread(task);
+            back.setPriority(Thread.MAX_PRIORITY);
+            back.setDaemon(true);
+        
     } 
     
     @FXML

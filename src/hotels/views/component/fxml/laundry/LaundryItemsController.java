@@ -271,20 +271,25 @@ public class LaundryItemsController implements Initializable {
     private void getLaundryItem(){
         try {
             for(int i = 0; i < itemArray.length(); i++){
+                
                 ls = new LaundryItem();
                 JSONObject oj = itemArray.getJSONObject(i);
-                System.out.println("Printing Laundry Items : " + oj);
                 ls.setId(oj.getString("_id"));
                 ls.setCat(oj.getString("category"));
                 ls.setName(oj.getString("name"));
-                ls.setVis(String.valueOf(oj.get("visibility")));
+                
+                if(oj.get("visibility").equals("true")){
+                    ls.setVis("Hotel");
+                }else{
+                    ls.setVis("Guest");
+                }
+                
                 ls.setDesc(oj.getString("desc"));
                 
                 service.addAll(ls);
-                table.setItems(service);
                 
             }
-           
+           table.setItems(service);
         }catch(Exception e){
             e.printStackTrace();
         }

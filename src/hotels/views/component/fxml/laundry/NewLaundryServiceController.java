@@ -127,9 +127,7 @@ public class NewLaundryServiceController implements Initializable {
             @Override
             public void run() {
                 try {
-                    System.out.println("New Laundry Service Event Fired");
                     response = nav.createLaundryService(param);
-                    System.out.println("Creating Laundry Service : " + response);
                     if(response != null && response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override
@@ -162,9 +160,7 @@ public class NewLaundryServiceController implements Initializable {
         public void run() {
             try {
                 param.add(new BasicNameValuePair("id", data.getId()));
-                System.out.println("Edit Laundry Service Event Fired");
                 response = nav.editLaundryService(param);
-                System.out.println("Editing Laundry Service : " + response);
                     if(response != null && response.getInt("status") == 1){
                         Platform.runLater(new Runnable(){
                             @Override

@@ -9,11 +9,8 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
-import hotels.views.component.fxml.front.model.Reserve;
 import hotels.views.component.fxml.laundry.model.LaundryService;
 import hotels.views.component.fxml.tools.LostFoundController;
-import hotels.views.component.fxml.tools.NewLostFoundController;
-import hotels.views.component.fxml.tools.model.LostFound;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -134,7 +131,6 @@ public class LaundryServiceController implements Initializable {
                 ls.setName(oj.getString("name"));
                 
                 service.addAll(ls);
-                System.out.println("Printing Service before table : " + service);
                 table.setItems(service);
             }
            

@@ -123,12 +123,11 @@ public class MiscSaleListController implements Initializable {
             
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             paidFor.setCellValueFactory(new PropertyValueFactory<>("paidFor"));
-            payType.setCellValueFactory(new PropertyValueFactory<>("payType"));
             roomNo.setCellValueFactory(new PropertyValueFactory<>("room"));
             receiptNo.setCellValueFactory(new PropertyValueFactory<>("voucher"));
             amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
             
-            table.getColumns().setAll(date, paidFor, payType, roomNo, receiptNo, amount);
+            table.getColumns().setAll(date, paidFor, roomNo, receiptNo, amount);
        
     }
     
@@ -142,7 +141,7 @@ public class MiscSaleListController implements Initializable {
                 ls.setAdj(String.valueOf(oj.get("adjustment")));
                 ls.setAmount(oj.getString("amount"));
                 ls.setAmountPaid(String.valueOf(oj.get("amountPaid")));
-                ls.setCat(oj.getString("category"));
+                //ls.setCat(oj.getString("category"));
                 ls.setDate(Util.stripDate(oj.getString("creattedAt")));
                 ls.setDiscount(oj.getString("discount"));
                 ls.setPaidTo(oj.getString("receivedFor"));
@@ -189,7 +188,7 @@ public class MiscSaleListController implements Initializable {
         loader.setController(controller);
         Parent root = (Parent)loader.load();
         Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root)); 
 
         stage.showAndWait();
         
