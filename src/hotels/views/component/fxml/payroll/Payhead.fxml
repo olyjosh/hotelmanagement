@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+   <children>
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="7.0" prefHeight="439.0" prefWidth="290.0" text="Pay Head Type">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="28.0" prefHeight="21.0" prefWidth="113.0" text="Pay Head Name " />
+                  <TextField fx:id="pay" layoutX="25.0" layoutY="59.0" prefHeight="31.0" prefWidth="239.0" />
+                  <Label layoutX="25.0" layoutY="111.0" prefHeight="21.0" prefWidth="113.0" text="Description" />
+                  <Label layoutX="25.0" layoutY="227.0" prefHeight="21.0" prefWidth="188.0" text="Is it Addition or Deduction ?" />
+                  <TextArea fx:id="desc" layoutX="25.0" layoutY="136.0" prefHeight="71.0" prefWidth="240.0" />
+                  <ComboBox fx:id="type" layoutX="25.0" layoutY="255.0" prefHeight="31.0" prefWidth="238.0" promptText="Select Type" />
+                  <Button layoutX="25.0" layoutY="327.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: green;" text="Add Pay Head" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SAVE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="304.0" layoutY="7.0" prefHeight="439.0" prefWidth="652.0" text="List of Pay Head Types">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="table" layoutX="2.0" prefHeight="362.0" prefWidth="646.0">
+                    <columns>
+                      <TableColumn fx:id="payCol" prefWidth="183.0" text="Pay Head Name" />
+                      <TableColumn fx:id="descCol" prefWidth="282.0" text="Description" />
+                        <TableColumn fx:id="typeCol" prefWidth="180.0" text="Addition/Deduction" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="546.0" layoutY="367.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="94.0" style="-fx-background-color: RED;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="REMOVE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TitledPane>
+   </children>
+</AnchorPane>

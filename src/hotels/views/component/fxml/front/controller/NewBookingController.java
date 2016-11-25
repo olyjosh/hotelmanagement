@@ -122,7 +122,7 @@ public class NewBookingController implements Initializable {
         
         Util.formatDatePicker(checkIn);
         Util.formatDatePicker(checkOut);
-        
+                
         bookType.getItems().setAll("Corporate Booking", "Individual Booking", "Family Booking", "Group Booking");
         
         isBooking.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -150,6 +150,7 @@ public class NewBookingController implements Initializable {
                     System.out.println("Days : "+ days);
                     dayLabel.setText("for "+days+" days");
                     amount1.setText(String.valueOf((int)rateList.get(index) * days));
+                    balance.setText(amount1.getText());
                     getRoomTypeId();
                     roomList.clear();   
                     fillRooms();
@@ -194,11 +195,9 @@ public class NewBookingController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
-                    if(newValue.isEmpty()){
-                        balance.setText(totalBill.getText());
-                    }else{
-                        balance.setText(String.valueOf(Double.parseDouble(totalBill.getText()) - Double.parseDouble(amountPaid.getText())));
-                    }
+                    double val = Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue);
+                    balance.setText(String.valueOf(val));
+                    
                 }
            });
         

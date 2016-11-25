@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="25.0" prefHeight="195.0" prefWidth="952.0" text="Generate Pay Slip" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="21.0" prefHeight="21.0" prefWidth="113.0" text="Department *" />
+                  <Button layoutX="708.0" layoutY="105.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" style="-fx-background-color: red;" text="Generate Slip" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="PRINT" />
+                     </graphic>
+                  </Button>
+                  <Label layoutX="25.0" layoutY="85.0" prefHeight="21.0" prefWidth="113.0" text="Staff Name *" />
+                  <Label layoutX="367.0" layoutY="23.0" prefHeight="21.0" prefWidth="128.0" text="Year *" />
+                  <Label layoutX="367.0" layoutY="85.0" prefHeight="21.0" prefWidth="113.0" text="Month *" />
+                  <ComboBox fx:id="type" layoutX="367.0" layoutY="109.0" prefHeight="31.0" prefWidth="239.0" promptText="Select Type" />
+                  <ComboBox fx:id="pay" layoutX="367.0" layoutY="44.0" prefHeight="31.0" prefWidth="238.0" />
+                  <ComboBox fx:id="staff" layoutX="25.0" layoutY="106.0" prefHeight="31.0" prefWidth="240.0" />
+                  <ComboBox fx:id="depart" layoutX="25.0" layoutY="42.0" prefHeight="31.0" prefWidth="239.0" />
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="236.0" prefHeight="195.0" prefWidth="952.0" text="Generate Report" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="21.0" prefHeight="21.0" prefWidth="113.0" text="Department *" />
+                  <Button layoutX="710.0" layoutY="40.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="155.0" style="-fx-background-color: red;" text="Generate Report" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="PRINT" />
+                     </graphic>
+                  </Button>
+                  <Label layoutX="367.0" layoutY="21.0" prefHeight="21.0" prefWidth="113.0" text="Staff Name *" />
+                  <ComboBox fx:id="staff1" layoutX="367.0" layoutY="42.0" prefHeight="31.0" prefWidth="240.0" />
+                  <ComboBox fx:id="depart1" layoutX="25.0" layoutY="42.0" prefHeight="31.0" prefWidth="239.0" />
+               </children>
+            </AnchorPane>
+         </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TitledPane>
+   </children>
+</AnchorPane>
