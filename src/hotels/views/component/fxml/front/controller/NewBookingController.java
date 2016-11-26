@@ -97,7 +97,10 @@ public class NewBookingController implements Initializable {
     @FXML
     private CheckBox checkinNow;
     @FXML private Label dayLabel;
-    @FXML private TextField totalBill, amountPaid, balance, discount;
+    @FXML private TextField totalBill;
+    @FXML private TextField amountPaid; 
+    @FXML private TextField balance; 
+    @FXML private TextField discount;
     
     
     private static int days = 0, p;
@@ -143,6 +146,9 @@ public class NewBookingController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     int index = suite.getSelectionModel().getSelectedIndex();
                     amount.setText(rateList.get(index).toString());
+                    days = (int) ChronoUnit.DAYS.between(checkIn.getValue(), checkOut.getValue());
+                    System.out.println("Days : "+ days);
+                    dayLabel.setText("for "+days+" days");
                     amount1.setText(String.valueOf((int)rateList.get(index) * days));
                     getRoomTypeId();
                     roomList.clear();   
@@ -158,8 +164,7 @@ public class NewBookingController implements Initializable {
                     int index = room.getSelectionModel().getSelectedIndex();
                     System.out.println("Selected Index : " + index);
                     roomid = roomID.get(index).toString();
-                    
-                    System.out.println("Days : " + days);
+                                        
                 }
            });
         
@@ -183,6 +188,19 @@ public class NewBookingController implements Initializable {
                 }
             }
         });
+        
+        amountPaid.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    
+                    if(newValue.isEmpty()){
+                        balance.setText(totalBill.getText());
+                    }else{
+                        balance.setText(String.valueOf(Double.parseDouble(totalBill.getText()) - Double.parseDouble(amountPaid.getText())));
+                    }
+                }
+           });
         
         final Callback<DatePicker, DateCell> dayCellCheckin = 
             new Callback<DatePicker, DateCell>() {
@@ -214,7 +232,7 @@ public class NewBookingController implements Initializable {
                                     setDisable(true);
                                     setStyle("-fx-background-color: #ffc0cb;");
                             }
-                            days = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
+                            //days = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
                              p = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
                             
                             setTooltip(new Tooltip("You're about to stay for " + p + " days"));

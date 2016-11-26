@@ -258,11 +258,6 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="71.0" prefWidth="267.0">
                                        <children>
-                                          <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showHotelService" text="Hotel services">
-                                             <graphic>
-                                                <FontAwesomeIcon fill="#3bb8f2" glyphName="HOTEL" size="2.5em" styleClass="fontAwesomeIcon" />
-                                             </graphic>
-                                          </Button>
                                           <Button contentDisplay="TOP" layoutX="105.0" layoutY="16.0" mnemonicParsing="false" onAction="#showLostFound" text="Lost and Found">
                                              <graphic>
                                                 <FontAwesomeIcon fill="#3bb8f2" glyphName="JOOMLA" size="2.5em" styleClass="fontAwesomeIcon" />

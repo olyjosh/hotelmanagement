@@ -25,11 +25,9 @@
             <Text layoutX="22.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of all in-house materials coming in Laundry" />
          </children>
       </Pane>
-      <Label layoutX="33.0" layoutY="77.0" text="Linen No " />
-      <TextField fx:id="linenText" layoutX="116.0" layoutY="72.0" prefHeight="27.0" prefWidth="187.0" />
-      <Label layoutX="33.0" layoutY="116.0" text="User" />
-      <Label layoutX="334.0" layoutY="79.0" text="Date" />
-      <TableView fx:id="table" layoutX="14.0" layoutY="151.0" prefHeight="250.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0">
+      <Label layoutX="14.0" layoutY="87.0" text="Laundry Staff" />
+      <Label layoutX="595.0" layoutY="87.0" text="Date" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="133.0" prefHeight="268.0" prefWidth="934.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="133.0">
         <columns>
           <TableColumn fx:id="linen" prefWidth="75.0" text="Laundry Item" />
           <TableColumn fx:id="date" prefWidth="141.0" text="Date Issued" />
@@ -42,7 +40,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <DatePicker fx:id="datePicker" layoutX="408.0" layoutY="74.0" prefHeight="27.0" prefWidth="218.0" />
+      <DatePicker fx:id="datePicker" layoutX="634.0" layoutY="82.0" />
       <HBox layoutX="449.0" layoutY="412.0" spacing="5.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0">
          <children>
             <Button mnemonicParsing="false" onAction="#showNewDailyLaundry" prefHeight="31.0" prefWidth="163.0" text="New">
