@@ -1,5 +1,7 @@
 package hotels;
 
+import com.guigarage.flatterfx.FlatterFX;
+import com.guigarage.flatterfx.FlatterInputType;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,7 +98,9 @@ public class Hotels extends Application {
         //loader.setController(controller);  // Joshua this is use when u need to specify controller by your self. You must in this case remove the controller from fml file
         Parent root = (Parent)loader.load();
 //        System.out.println(stage);
+        FlatterFX.style(FlatterInputType.DEFAULT);
         stage.setScene(new Scene(root));
+        
     }
 
     public void setMain(Main m) {
