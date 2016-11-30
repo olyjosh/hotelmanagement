@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" style="-fx-padding: 0;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="4.0" prefHeight="445.0" prefWidth="399.0" text="Add Category" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <JFXTextField labelFloat="true" layoutX="45.0" layoutY="129.0" maxWidth="307.0" minWidth="307.0" prefHeight="37.0" prefWidth="307.0" promptText="Category Name" />
+                  <JFXButton buttonType="RAISED" layoutX="54.0" layoutY="214.0" prefHeight="38.0" prefWidth="87.0" ripplerFill="#d00fba" style="-fx-background-color: #7B1FA2;" text="Save" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SAVE" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXComboBox layoutX="54.0" layoutY="70.0" prefHeight="31.0" prefWidth="289.0" promptText="Select Vendor" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="412.0" layoutY="4.0" prefHeight="445.0" prefWidth="546.0" text="Category List" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
+               <children>
+                  <TableView layoutX="5.0" layoutY="5.0" prefHeight="360.0" prefWidth="534.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <columns>
+                      <TableColumn prefWidth="200.0" text="Company Name" />
+                      <TableColumn prefWidth="135.0" text="Contact Person" />
+                        <TableColumn prefWidth="197.0" text="Category" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXButton buttonType="RAISED" layoutX="397.0" layoutY="373.0" prefHeight="31.0" prefWidth="144.0" ripplerFill="#d00fba" style="-fx-background-color: red;" text="Delete Category" textFill="WHITE" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="14.0">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="REMOVE" />
+                     </graphic>
+                  </JFXButton>
+               </children></AnchorPane>
+         </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

@@ -1,8 +1,6 @@
 package hotels.controllers;
 
-import hotels.reports.Reporter;
 import hotels.Hotels;
-import hotels.util.Navigator2;
 import hotels.views.component.fxml.admin.FloorListController;
 import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
@@ -80,9 +78,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
-import javax.swing.JFrame;
 import org.controlsfx.control.PopOver;
-import org.json.JSONObject;
 
 /**
  *

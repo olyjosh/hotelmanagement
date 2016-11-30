@@ -11,9 +11,6 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Region;
 import hotels.Hotels;
 import hotels.views.component.WindowTop;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 //import org.controlsfx.control.NotificationPane;
 
 /**
