@@ -351,6 +351,9 @@ public class LostFoundController implements Initializable {
                 
                 service.addAll(ls);
                 
+                System.out.println("printing Loaded LostFound : " + ls.toString());
+                
+                
             }
            table.setItems(service);
         }catch(Exception e){

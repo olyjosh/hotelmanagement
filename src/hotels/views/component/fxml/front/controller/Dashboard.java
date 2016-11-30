@@ -379,7 +379,7 @@ public class Dashboard implements Initializable {
     
     private void folios(){
         
-        JSONObject foods = nav.fetchFolio(d1.getValue().toString(), d2.getValue().toString());
+        JSONObject foods =nav.fetchFolio(d1.getValue().toString(), d2.getValue().toString());
         if(foods!=null){
             try {
                 JSONArray a = foods.getJSONArray("message");

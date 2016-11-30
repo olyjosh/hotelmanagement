@@ -130,6 +130,7 @@ public class NewHotelServiceController implements Initializable {
                 @Override
                 public void run() {
                     try {
+                        System.out.println("New Hotel Service Event Fired");
                         response = nav.createHotelService(param);
                         if(response != null && response.getInt("status") == 1){
                             Platform.runLater(new Runnable(){

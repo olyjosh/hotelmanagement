@@ -135,8 +135,7 @@ public class NewAccountController implements Initializable {
                 }
            });
         
-        loadUsers();
-        onLoad(); //loadUsers();
+        onLoad();
     }    
     
     private void onLoad(){
@@ -159,8 +158,6 @@ public class NewAccountController implements Initializable {
                         JSONObject j = users.getJSONObject("name");
                         userList.add(j.getString("firstName") + "  " + j.getString("lastName"));
                         userId.add(users.get("_id"));
-                        
-                        rep.setItems(userList);
                     }
                 } catch (JSONException ex) {
                     ex.printStackTrace();
@@ -172,7 +169,7 @@ public class NewAccountController implements Initializable {
         back.setDaemon(true);
         back.start();
          
-        
+        rep.setItems(userList);
     }
     
     private void popEdit(){

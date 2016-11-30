@@ -19,7 +19,7 @@
                   <Label layoutX="24.0" layoutY="22.0" text="Serial No" />
                   <TextField fx:id="serialText" layoutX="148.0" layoutY="17.0" prefHeight="31.0" prefWidth="253.0" />
                   <Label layoutX="24.0" layoutY="67.0" text="Date Issued" />
-                  <Label layoutX="24.0" layoutY="147.0" text="Laundry Staff" />
+                  <Label layoutX="24.0" layoutY="147.0" text="Laundry User" />
                   <Label layoutX="24.0" layoutY="189.0" text="Laundry Status" />
                   <Label layoutX="427.0" layoutY="20.0" text="Return In" />
                   <Label layoutX="427.0" layoutY="225.0" text="Remark" />

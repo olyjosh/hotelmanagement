@@ -146,8 +146,6 @@ public class Navigator {
         return null;
     }
     
-    //=============USER ACCOUNT=================
-    
     public JSONObject registerUser(List data){
          
         try{
@@ -174,28 +172,10 @@ public class Navigator {
         }
         return null;
     }
-    
-    public JSONObject editUser(List data){
-         
+     
+    public JSONObject fetchRoom(){
+        String url = OP_URL+"fetch/room";
         try{
-            HttpPost post = new HttpPost(BASE_URL+"edit/register");
-            post.setEntity(new UrlEncodedFormEntity(data));
-            httpClient.execute(post);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public JSONObject deleteUser(List data){
-        
-        String url = OP_URL+"delete/user";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            System.out.println("Printing URL : " + url);
             HttpGet request = new HttpGet(url);
             httpClient.execute(request);
             return res;
@@ -203,9 +183,7 @@ public class Navigator {
             e.printStackTrace();
         }
         return null;
-    }
-     
-   //============ROOMS=========================
+    }        
     
     public JSONObject createRoom(List data){
         
@@ -224,19 +202,6 @@ public class Navigator {
         }
         return null;
     }
-    
-     public JSONObject fetchRoom(){
-        String url = OP_URL+"fetch/room";
-        try{
-            HttpGet request = new HttpGet(url);
-            
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }        
     
     public JSONObject editRoom(List data){
         
@@ -291,56 +256,29 @@ public class Navigator {
         return null;
     }
     
-    public JSONObject fetchBooking(){
-        String url = OP_URL+"fetch/book";
+    public JSONObject fetchRoomType(){
+        String url = OP_URL+"fetch/roomtype";
         try{
             HttpGet request = new HttpGet(url);
             
-            httpClient.execute(request);
+           httpClient.execute(request);
             return res;
         } catch (IOException e) {
-            
             e.printStackTrace();
-            
         }
         return null;
-    }
-    
-    public JSONObject editBooking(List data){
-
-        String url = OP_URL+"edit/book";
-        
+    }  
+    public JSONObject fetchFloor(){
+        String url = OP_URL+"fetch/floor";
         try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
             HttpGet request = new HttpGet(url);
-            httpClient.execute(request);
+           httpClient.execute(request);
             return res;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    public JSONObject deleteBooking(List data){
-        
-        String url = OP_URL+"delete/book";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            System.out.println("Printing URL : " + url);
-            HttpGet request = new HttpGet(url);
-            
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    //=============ROOM TYPE====================
     
     public JSONObject createRoomType(List data){
         
@@ -359,55 +297,6 @@ public class Navigator {
         return null;
     }
     
-    public JSONObject fetchRoomType(){
-        String url = OP_URL+"fetch/roomtype";
-        try{
-            HttpGet request = new HttpGet(url);
-            
-           httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public JSONObject editRoomType(List data){
-
-        String url = OP_URL+"edit/roomtype";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            HttpGet request = new HttpGet(url);
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public JSONObject deleteRoomType(List data){
-        
-        String url = OP_URL+"delete/roomtype";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            System.out.println("Printing URL : " + url);
-            HttpGet request = new HttpGet(url);
-            
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    
-    //==========FLOORS======================
     public JSONObject createFloor(List data){
         
         String url = OP_URL+"create/floor";
@@ -425,56 +314,6 @@ public class Navigator {
         return null;
     }   
     
-    public JSONObject fetchFloor(){
-        String url = OP_URL+"fetch/floor";
-        try{
-            HttpGet request = new HttpGet(url);
-           httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public JSONObject editFloor(List data){
-        
-        String url = OP_URL+"edit/floor";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            System.out.println("Printing URL : " + url);
-            HttpGet request = new HttpGet(url);
-            
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public JSONObject deleteFloor(List data){
-        
-        String url = OP_URL+"delete/floor";
-        
-        try{
-            String param = URLEncodedUtils.format(data, "utf-8");
-            url +="?"+ param;
-            System.out.println("Printing URL : " + url);
-            HttpGet request = new HttpGet(url);
-            
-            httpClient.execute(request);
-            return res;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    //=============GUEST========================
-    
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
         try{
@@ -487,11 +326,26 @@ public class Navigator {
         }
         return null;
     }
-
     
-    //==============LAUNDRY SERVICE=================
+    
+    
+    public JSONObject fetchBooking(){
+        String url = OP_URL+"fetch/book";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+            
+        }
+        return null;
+    }
     
     public JSONObject createLaundryService(List data){
+        System.out.println("Laundry Service Event Processing.....");
         String url = OP_URL+"create/service";
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
@@ -507,6 +361,7 @@ public class Navigator {
     } 
     
     public JSONObject editLaundryService(List data){
+        System.out.println("Laundry Service Event Processing.....");
         String url = OP_URL+"edit/service";
         try{
             String param = URLEncodedUtils.format(data, "utf-8");

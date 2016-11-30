@@ -8,7 +8,6 @@ package hotels.views.component.fxml.laundry;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
-import hotels.util.Storage;
 import hotels.util.Util;
 import hotels.views.component.fxml.laundry.model.DailyLaundry;
 import java.net.URL;
@@ -74,7 +73,6 @@ public class NewDailyController implements Initializable {
     private static ObservableList itemList, userList, serviceList, returnList, hotelServiceList;
     private static double total;
     private ObservableMap userId;
-    private static String id;
     
     private Hotels app;
     private boolean editMode;
@@ -134,7 +132,7 @@ public class NewDailyController implements Initializable {
     }    
     
     private void defaults(){
-        total = 0;
+        System.out.println("New daily Controller coming up");
         //Setting Laundry status
         ObservableList status = FXCollections.observableArrayList();
         status.add(State.STATUS_C);
@@ -149,8 +147,8 @@ public class NewDailyController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
                      String [] lserv = Util.splitter(newValue, 'N');
-//                     total += Integer.parseInt(lserv[1].replace("N", ""));
-//                     totalBill.setText(String.valueOf(total));
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
+                     totalBill.setText(String.valueOf(total));
                 }
            });
         
@@ -161,8 +159,8 @@ public class NewDailyController implements Initializable {
                     
                      //total -= Integer.parseInt(oldValue);
                      String [] lserv = Util.splitter(newValue, 'N');
-//                     total += Integer.parseInt(lserv[1].replace("N", ""));
-//                     totalBill.setText(String.valueOf(total));
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
+                     totalBill.setText(String.valueOf(total));
                 }
            });
         
@@ -172,8 +170,8 @@ public class NewDailyController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     
                      String [] lserv = Util.splitter(newValue, 'N');
-//                     total += Integer.parseInt(lserv[1].replace("N", ""));
-//                     totalBill.setText(String.valueOf(total));
+                     total += Integer.parseInt(lserv[1].replace("N", ""));
+                     totalBill.setText(String.valueOf(total));
                 }
            });
         
@@ -187,16 +185,6 @@ public class NewDailyController implements Initializable {
                     }else{
                         totalBalance.setText(String.valueOf(Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue)));
                     }
-                }
-           });
-        
-        laundryUser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                   int index = laundryUser.getSelectionModel().getSelectedIndex();
-                   id = String.valueOf(userId.get(index));
-                   System.out.println("ID : " + id);
                 }
            });
         
@@ -352,20 +340,23 @@ public class NewDailyController implements Initializable {
         param.add(new BasicNameValuePair("sn", serialText.getText()));
         param.add(new BasicNameValuePair("date", dateIssued.getEditor().getText()));
         param.add(new BasicNameValuePair("item", laundryItem.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("user", id));
+        param.add(new BasicNameValuePair("user", laundryUser.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("status", laundryStatus.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("laundryService", laundryService.getSelectionModel().getSelectedItem().toString()));
-        
-        System.out.println(laundryService.getSelectionModel().getSelectedItem().toString());
-        
         param.add(new BasicNameValuePair("hotelService", hotelService.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("returnIn", returnIn.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("returned", returnDate.getEditor().getText()));//Storage.getId()));
+        
+        if(returnDate.getValue() == null){
+            param.add(new BasicNameValuePair("returned", ""));
+        }else{
+            param.add(new BasicNameValuePair("returned", returnDate.getEditor().getText()));//Storage.getId()));
+        }
+               
         param.add(new BasicNameValuePair("bill", totalBill.getText()));
         param.add(new BasicNameValuePair("amonunt", amountPaid.getText()));
         param.add(new BasicNameValuePair("balance", totalBalance.getText()));
         param.add(new BasicNameValuePair("remark", remark.getText()));
-        param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
+        param.add(new BasicNameValuePair("performedBy", userId.get(laundryUser.getSelectionModel().getSelectedIndex()).toString()));
                 
         if(!isEditMode()){
             

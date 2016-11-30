@@ -166,19 +166,21 @@ public class RoomListController implements Initializable {
                 
                 ls.setId(oj.getString("_id"));
                 
-                if(oj.getJSONObject("floor").getString("name") == null){
-                    ls.setFloor("");
-                }else{
-                    ls.setFloor(oj.getJSONObject("floor").getString("name"));
-                }
-                if(oj.getJSONObject("roomType").get("name") == null){
-                    ls.setType("");
-                }else{
-                    ls.setType(oj.getJSONObject("roomType").getString("name"));
-                }
+//                if(oj.getJSONObject("floor").getString("name") == null){
+//                    ls.setFloor("");
+//                }else{
+//                    ls.setFloor(oj.getJSONObject("floor").getString("name"));
+//                }
+                
+//                if(oj.getJSONObject("roomType").get("name") == null){
+//                    ls.setType("");
+//                }else{
+//                    ls.setType(oj.getJSONObject("roomType").getString("name"));
+//                }
               
                 ls.setDesc(oj.getString("desc"));
                 ls.setName(oj.getString("name"));
+                
                 ls.setAlias(oj.getString("alias"));
                 
                 service.addAll(ls);

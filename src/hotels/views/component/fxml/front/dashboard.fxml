@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
@@ -19,8 +15,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane collapsible="false" layoutX="9.0" layoutY="7.0" prefHeight="358.0" prefWidth="331.0" text="Search Guest" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="7.0" />
       <StackPane layoutX="349.0" layoutY="6.0" prefHeight="445.0" prefWidth="392.0">
@@ -160,16 +158,8 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" layoutX="214.0" layoutY="8.0" prefHeight="27.0" prefWidth="288.0" spacing="15.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="8.0">
                            <children>
-                              <DatePicker fx:id="d1" layoutX="202.0" layoutY="8.0" prefHeight="27.0" prefWidth="114.0" promptText="FROM">
-                                 <tooltip>
-                                    <Tooltip text="Date from" />
-                                 </tooltip>
-                              </DatePicker>
-                              <DatePicker fx:id="d2" layoutX="343.0" layoutY="8.0" prefHeight="27.0" prefWidth="112.0" promptText="TO">
-                                 <tooltip>
-                                    <Tooltip text="Date to " />
-                                 </tooltip>
-                              </DatePicker>
+                              <DatePicker fx:id="d1" promptText="From" />
+                              <DatePicker fx:id="d2" layoutX="57.0" layoutY="10.0" promptText="To" />
                               <Button mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="32.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" onDragDetected="#search" />
