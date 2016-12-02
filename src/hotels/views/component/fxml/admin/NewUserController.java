@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +29,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -38,10 +41,10 @@ public class NewUserController implements Initializable {
 
     @FXML
     private TextField username;
-    @FXML
-    private TextField password;
-    @FXML
-    private TextField confirm;
+//    @FXML
+//    private TextField password;
+//    @FXML
+//    private TextField confirm;
     @FXML
     private TextField phone;
     @FXML
@@ -111,7 +114,7 @@ public class NewUserController implements Initializable {
     private void newUser(ActionEvent event) {
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("username", username.getText()));
-        param.add(new BasicNameValuePair("password", password.getText()));
+//        param.add(new BasicNameValuePair("password", password.getText()));
         param.add(new BasicNameValuePair("privilege", String.valueOf(role.getSelectionModel().getSelectedIndex())));
         param.add(new BasicNameValuePair("phone", phone.getText()));
         param.add(new BasicNameValuePair("email", email.getText()));
@@ -131,10 +134,22 @@ public class NewUserController implements Initializable {
         
         param.add(new BasicNameValuePair("country", String.valueOf(status)));
                             
-        response = nav.registerUser(param);
-        System.out.println("Registering User : " + response);
-        
-        Util.notify(State.NOTIFY_SUCCESS, "New User "+firstName.getText() +" "+lastName.getText() +" Created", Pos.CENTER);
+        response = nav.registerUser(param);       
+        try {
+            if (response != null) {
+                if (response.getInt("status") == 1) {
+                    Util.notify_SUCCESS(State.NOTIFY_SUCCESS, "New User " + firstName.getText() + " " + lastName.getText() + " Created", Pos.CENTER);
+                } else if (response.getInt("status") == 0) {
+                    Util.notify_ERROR(State.NOTIFY_ERROR, response.getString("message"), Pos.CENTER);
+                } else {
+                    Util.notify_ERROR(State.NOTIFY_ERROR, "Unexpected things do happen!!\n Please try again", Pos.CENTER);
+                }
+            }else{
+                Util.notify_ERROR(State.NOTIFY_ERROR, "Unexpected things do happen!!\n Please try again", Pos.CENTER);
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(NewUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -237,5 +237,13 @@ public class Util
        return sb.toString();
     }
 
+    
+    private String normalizePhone(String x ){
+        if(x.startsWith("+234") || x.startsWith("234")){
+            int a = x.indexOf(4);
+            x="0".concat(x.substring(a));
+        }
+        return x;
+    }
 
 }

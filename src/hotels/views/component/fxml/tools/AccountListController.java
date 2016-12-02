@@ -107,7 +107,6 @@ public class AccountListController implements Initializable {
             @Override
             public void run() {
                 try {
-                    List <NameValuePair> param = new ArrayList<>();
                     account = nav.fetchAccount();
                     accountArray = account.getJSONArray("message");
                     

@@ -11,6 +11,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.Account;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -26,10 +27,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.util.Callback;
@@ -101,6 +104,11 @@ public class NewBookingController implements Initializable {
     @FXML private TextField amountPaid; 
     @FXML private TextField balance; 
     @FXML private TextField discount;
+    
+    
+    @FXML private ChoiceBox copChoiceBox;
+    @FXML private CheckBox copCheckBox;
+    @FXML private ProgressIndicator progress;
     
     
     private static int days = 0;
@@ -194,10 +202,8 @@ public class NewBookingController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    
                     double val = Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue);
                     balance.setText(String.valueOf(val));
-                    
                 }
            });
         
@@ -226,6 +232,7 @@ public class NewBookingController implements Initializable {
             }
         };
         checkOut.setDayCellFactory(dayCellFactory);
+        defaults();
     }
     
     private void onLoad(){
@@ -373,4 +380,90 @@ public class NewBookingController implements Initializable {
     }
     
     
+    private void defaults(){
+        copChoiceBox.disableProperty().bind(copCheckBox.selectedProperty().not());                            
+        populateCoperate();
+    }
+    
+    
+    
+    private ObservableList<Account> coperates;
+    private void populateCoperate() {
+        if(coperates == null)coperates = FXCollections.observableArrayList();
+        copChoiceBox.setItems(coperates);
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject account = nav.fetchAccount();
+                    if (account !=null){
+                        JSONArray accountArray = account.getJSONArray("message");
+                        if(accountArray!=null)getAccountList(accountArray);
+                    } 
+
+
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        // Run the task in a background thread
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+
+    }
+ 
+     private void getAccountList(JSONArray accountArray){
+        
+        try {
+            Account ls; 
+            for(int i = 0; i < accountArray.length(); i++){
+                ls = new Account(){
+                    @Override
+                    public String toString() {
+                        return getAccountName() + "     ("+getCompanyName()+")";
+                    }
+                    
+                };
+                JSONObject oj = accountArray.getJSONObject(i);
+                System.out.println("Printing Hotel Service : " + oj);
+                ls.setId(oj.getString("_id"));
+                ls.setAccountName(oj.getString("accountName"));
+                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+                ls.setAdd1(oj.getJSONObject("address").getString("one"));
+                ls.setAdd2(oj.getJSONObject("address").getString("two"));
+                ls.setBalance(String.valueOf(oj.getJSONObject("cred").get("openBalance")));
+                ls.setCity(oj.getString("city"));
+                ls.setCompanyName(oj.getString("alis"));
+                //ls.setContact(oj.getString("contact"));
+                ls.setCountry(oj.getString("country"));
+                ls.setCredit(String.valueOf(oj.getJSONObject("cred").get("creditLimit")));
+                ls.setEmail(oj.getString("email"));
+                ls.setFirstName(oj.getString("firstName"));
+                ls.setLastName(oj.getString("lastName"));
+                //ls.setPhone(oj.getString("phone"));
+                ls.setRep(oj.getString("rep"));
+                ls.setState(oj.getString("state"));
+                ls.setTerm(oj.getJSONObject("cred").getString("paymentTerm"));
+                ls.setWeb(oj.getString("website"));
+                ls.setZip(oj.getString("zip"));
+                
+                coperates.add(ls);
+                
+//                service.addAll(ls);
+//                table.setItems(service);
+                
+                
+            }
+           
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
 }
+

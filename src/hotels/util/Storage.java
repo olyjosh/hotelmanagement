@@ -6,8 +6,8 @@ package hotels.util;
  */
 public class Storage {
     
-    public static String auth_token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2RlY2E1ZDM1ZmI5YTQ4N2JkZWI3MGYiLCJlbWFpbCI6Im9seWpvc2hvbmVAZ21haWwuY29tIiwibmFtZSI6eyJ1c2VybmFtZSI6ImFkbWluIiwiZmlyc3ROYW1lIjoiQWRtaW4iLCJsYXN0TmFtZSI6IkFkbWluIn0sImV4cCI6MTQ4MTEwNTc1OSwiaWF0IjoxNDgwNTAwOTU5fQ.BaTaZHhaPi9IOzzYPh1-lpy1-aKcnbw6IYUMNUIPtWQ";
-    private static String id = "57deca5d35fb9a487bdeb70f";
+    public static String auth_token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODQwYzM5MGI2YTU3OGJlMTZiNTQ0NmEiLCJlbWFpbCI6Im9seWpvc2hvbmVAZ21haWwuY29tIiwibmFtZSI6eyJ1c2VybmFtZSI6Im9seWpvc2giLCJmaXJzdE5hbWUiOiJKb3NodWEiLCJsYXN0TmFtZSI6IkFyb2tlIn0sImV4cCI6MTQ4MTI0OTAzNCwiaWF0IjoxNDgwNjQ0MjM0fQ.74N5-8pSZ5uX1Acqlv0CohjHD9lsyLgizclJUgqt1jg";
+    private static String id = "5840c390b6a578be16b5446a";
     
     public static String getAuth_token() {
         return auth_token;

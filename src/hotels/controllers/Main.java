@@ -5,6 +5,7 @@ import hotels.Hotels;
 import hotels.views.component.fxml.admin.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
 import hotels.views.component.fxml.admin.RoomListController;
+import hotels.views.component.fxml.admin.UserListController;
 //import hotels.views.component.fxml.admin.RoomTypeListController;
 //import hotels.views.component.fxml.admin.UserListController;
 import hotels.views.component.fxml.admin.controller.FolioDetail;
@@ -801,10 +802,10 @@ public class Main implements Initializable{
      
      @FXML
      private void showUserList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+         UserListController controller = new UserListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/userList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -855,20 +856,174 @@ public class Main implements Initializable{
         stage.show();
     }
      
+    //Inventory
+    @FXML
+    private void showInventCategory() throws IOException {
+        UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/inventory/category.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    
+    @FXML
+    private void showInventItem() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/inventory/item.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML
+    private void showInventStock() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/inventory/report.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML
+    private void showInventVendor() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/inventory/stock.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML
+    private void showInventReport() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/inventory/vendors.fxml"));
+//        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    //PayRoll
+    @FXML
+    private void showSalary() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/Salary.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML
+    private void showStaffSalary() throws IOException {
+        UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/StaffSalary.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML    
+    private void showPayType() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/PayType.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    @FXML    
+    private void showPaySlip() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/PaySlip.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+    
+     @FXML   
+    private void showPayHead() throws IOException {
+         UserListController controller = new UserListController(this.getApp());
+        controller.setApp(app);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/Payhead.fxml"));
+        loader.setController(controller);
+        AnchorPane content = (AnchorPane) loader.load();
+        ObservableList<Node> children = adminContentStack.getChildren();
+        if (children.size() > 0) {
+            adminContentStack.getChildren().remove(0, children.size());
+        }
+        children.add(content);
+    }
+    
+//    
+//     @FXML   
+//    private void showPayRoll() throws IOException {
+//        UserListController controller = new UserListController(this.getApp());
+//        controller.setApp(app);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/userList.fxml"));
+//        loader.setController(controller);
+//        AnchorPane content = (AnchorPane) loader.load();
+//        ObservableList<Node> children = adminContentStack.getChildren();
+//        if (children.size() > 0) {
+//            adminContentStack.getChildren().remove(0, children.size());
+//        }
+//        children.add(content);
+//    }
+//    
+    
+    
+    
+    
+    
+    
      
      //Testing Codes down here.
-    @FXML 
-    private void showNewUser(ActionEvent e) throws IOException{
-        NewUserController controller = new NewUserController(this.getApp());
-        controller.setApp(getApp());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-        
-        stage.showAndWait();
-    }
+
     
     // Administrative confirmation
     public String[]  showAdminComfirmation() throws IOException {

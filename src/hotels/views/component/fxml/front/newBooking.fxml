@@ -3,9 +3,11 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,13 +16,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="621.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="656.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="8.0" layoutY="7.0" prefHeight="609.0" prefWidth="579.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation">
+      <TitledPane collapsible="false" layoutX="8.0" layoutY="-6.0" prefHeight="662.0" prefWidth="613.0" stylesheets="@../../../../ensemble2.css" text="New  Checkin/Booking/Reservation" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="577.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="611.0">
                <children>
-                  <VBox layoutX="308.0" layoutY="51.0">
+                  <VBox layoutX="322.0" layoutY="121.0">
                      <children>
                         <Label text="Check In" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -31,7 +33,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="308.0" layoutY="113.0">
+                  <VBox layoutX="322.0" layoutY="183.0">
                      <children>
                         <Label text="Check Out" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -42,7 +44,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="25.0" layoutY="51.0">
+                  <VBox layoutX="39.0" layoutY="121.0">
                      <children>
                         <Label text="First Name" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -53,7 +55,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="25.0" layoutY="113.0">
+                  <VBox layoutX="39.0" layoutY="183.0">
                      <children>
                         <Label text="Last Name" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -64,7 +66,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="306.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
+                  <VBox layoutX="320.0" layoutY="255.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
                         <Label text="Room Type" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -75,7 +77,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="25.0" layoutY="188.0">
+                  <VBox layoutX="39.0" layoutY="258.0">
                      <children>
                         <Label text="Phone No" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -86,7 +88,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="25.0" layoutY="250.0">
+                  <VBox layoutX="39.0" layoutY="320.0">
                      <children>
                         <Label text="email address" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -96,7 +98,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="25.0" layoutY="312.0">
+                  <VBox layoutX="39.0" layoutY="382.0">
                      <children>
                         <Label text="Physical Address" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -106,17 +108,17 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label layoutX="25.0" layoutY="14.0" text="Guest Information" underline="true">
+                  <Label layoutX="39.0" layoutY="84.0" text="Guest Information" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="308.0" layoutY="14.0" text="Checkin Information" underline="true">
+                  <Label layoutX="322.0" layoutY="84.0" text="Checkin Information" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="434.0" layoutY="185.0" prefHeight="52.0" prefWidth="127.0">
+                  <VBox layoutX="448.0" layoutY="255.0" prefHeight="52.0" prefWidth="127.0">
                      <children>
                         <Label text="Room No" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -127,22 +129,22 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="307.0" layoutY="312.0" prefHeight="52.0" prefWidth="249.0">
+                  <VBox layoutX="321.0" layoutY="382.0" prefHeight="52.0" prefWidth="264.0">
                      <children>
                         <Label text="Amount  Per Night" />
                         <HBox alignment="CENTER" spacing="3.0">
                            <children>
-                              <TextField fx:id="amount" prefHeight="31.0" prefWidth="249.0" />
+                              <TextField fx:id="amount" prefHeight="31.0" prefWidth="264.0" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <Button layoutX="451.0" layoutY="531.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
+                  <Button layoutX="465.0" layoutY="587.0" mnemonicParsing="false" onAction="#bookMe" prefHeight="31.0" prefWidth="110.0" text="Book">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
                      </graphic>
                   </Button>
-                  <VBox layoutX="308.0" layoutY="250.0" prefHeight="52.0" prefWidth="125.0">
+                  <VBox layoutX="322.0" layoutY="320.0" prefHeight="52.0" prefWidth="125.0">
                      <children>
                         <Label text="Book or Reserve ?" />
                         <HBox alignment="CENTER" spacing="3.0">
@@ -153,8 +155,8 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <CheckBox fx:id="checkinNow" layoutX="434.0" layoutY="276.0" mnemonicParsing="false" text="Checkin Now" />
-                  <Pane layoutX="25.0" layoutY="443.0" prefHeight="64.0" prefWidth="530.0" style="-fx-border-color: grey;">
+                  <CheckBox fx:id="checkinNow" layoutX="448.0" layoutY="346.0" mnemonicParsing="false" text="Checkin Now" />
+                  <Pane layoutX="38.0" layoutY="508.0" prefHeight="64.0" prefWidth="549.0" style="-fx-border-color: grey;">
                      <children>
                         <VBox layoutX="277.0" layoutY="6.0" prefHeight="52.0" prefWidth="109.0">
                            <children>
@@ -193,7 +195,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <VBox layoutX="26.0" layoutY="374.0" prefHeight="59.0" prefWidth="529.0" style="-fx-border-color: green;">
+                  <VBox layoutX="39.0" layoutY="439.0" prefHeight="59.0" prefWidth="548.0" style="-fx-border-color: green;">
                      <children>
                         <Label text="Booking Type" />
                         <HBox alignment="CENTER" prefHeight="31.0" prefWidth="256.0" spacing="3.0">
@@ -206,6 +208,13 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <VBox layoutX="39.0" layoutY="6.0" spacing="5.0">
+                     <children>
+                        <CheckBox fx:id="copCheckBox" mnemonicParsing="false" text="Coperate Booking - " />
+                        <ChoiceBox fx:id="copChoiceBox" disable="true" prefHeight="29.0" prefWidth="526.0" />
+                     </children>
+                  </VBox>
+                  <ProgressIndicator fx:id="progress" layoutX="587.0" layoutY="1.0" prefHeight="27.0" prefWidth="21.0" />
                </children>
             </AnchorPane>
         </content>
