@@ -42,9 +42,9 @@ public class Navigator {
     private HttpResponse response = null;
     private HttpClient httpClient ;//= HttpClientBuilder.create().build(); 
     private JSONObject res;
-    private final String BASE_URL = "http://127.0.0.1:9016/api/"; //development
+    //private final String BASE_URL = "http://127.0.0.1:9016/api/"; //development
     //private final String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-//    private final String BASE_URL = "http://35.164.173.241:9016/api/";   //Production
+    private final String BASE_URL = "http://35.164.173.241:9016/api/";   //Production
     
     public final String OP_URL = BASE_URL+"op/";
     
@@ -1208,6 +1208,67 @@ public class Navigator {
       
     public JSONObject deleteMisc(List data){
         String url = OP_URL+"delete/pending";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //==============Payroll PayHead===============//
+    
+    public JSONObject createPayHead(List data){
+        System.out.println("Daily Laundry Event Processing.....");
+        String url = OP_URL+"create/payhead";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject fetchPayHead(){
+        String url = OP_URL+"fetch/payhead";
+        try{
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject editPayHead(List data){
+        String url = OP_URL+"edit/payhead";
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+           httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public JSONObject deletePayHead(List data){
+        String url = OP_URL+"delet/payhead";
         try{
             String param = URLEncodedUtils.format(data, "utf-8");
             url +="?"+ param;

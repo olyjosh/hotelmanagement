@@ -42,9 +42,9 @@ public class Navigator2 {
     private JSONObject res;
     private HttpClient httpClient;
 
-    private final static String BASE_URL = "http://127.0.0.1:9016/api/"; 
+//    private final static String BASE_URL = "http://127.0.0.1:9016/api/"; 
 //    private final static String BASE_URL = "http://192.168.0.197:9016/api/";   //development
-//    private final static String BASE_URL = "http://52.38.37.185:9016/api/";   //Production
+    private final static String BASE_URL = "http://35.164.173.241:9016/api/";   //Production
 
     private final static String OP_URL = BASE_URL + "op/";
     public final static String IMG_URL = BASE_URL+"static/image?id=";

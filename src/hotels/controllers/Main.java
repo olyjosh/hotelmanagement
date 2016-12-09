@@ -3,7 +3,6 @@ package hotels.controllers;
 import hotels.Hotels;
 import hotels.views.component.fxml.admin.controller.FloorListController;
 //import hotels.views.component.fxml.admin.FloorListController;
-import hotels.views.component.fxml.admin.controller.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
 import hotels.views.component.fxml.admin.controller.RoomListController;
 import hotels.views.component.fxml.admin.controller.UserListController;
@@ -33,6 +32,7 @@ import hotels.views.component.fxml.laundry.LaundryServiceController;
 import hotels.views.component.fxml.laundry.NewItemController;
 import hotels.views.component.fxml.laundry.NewLaundryServiceController;
 import hotels.views.component.fxml.laundry.ReturnInController;
+import hotels.views.component.fxml.payroll.PayHeadController;
 import hotels.views.component.fxml.restaurant.controller.FoodOrder;
 import hotels.views.component.fxml.restaurant.controller.NewFood;
 import hotels.views.component.fxml.restaurant.controller.OnlineFoodOrder;
@@ -990,7 +990,7 @@ public class Main implements Initializable{
     
      @FXML   
     private void showPayHead() throws IOException {
-         UserListController controller = new UserListController(this.getApp());
+        PayHeadController controller = new PayHeadController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/payroll/Payhead.fxml"));
         loader.setController(controller);
