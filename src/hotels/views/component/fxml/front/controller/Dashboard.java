@@ -192,10 +192,7 @@ public class Dashboard implements Initializable {
         listDeafaults();
         tableDeafaults();
     }
-    
-    
-    
-    
+
     private void listDeafaults(){
     
         list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends BorderPane> observable, BorderPane oldValue, BorderPane newValue) -> {
@@ -247,7 +244,7 @@ public class Dashboard implements Initializable {
         tableList= FXCollections.observableArrayList();
         table.setItems(tableList);
         
-         table.setRowFactory(new Callback<TableView<FolioModel>, TableRow<FolioModel>>() {
+        table.setRowFactory(new Callback<TableView<FolioModel>, TableRow<FolioModel>>() {
             @Override
             public TableRow<FolioModel> call(TableView<FolioModel> param) {
                 final TableRow<FolioModel> row = new TableRow<>();

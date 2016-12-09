@@ -143,7 +143,9 @@ public class AccountListController implements Initializable {
                 System.out.println("Printing Hotel Service : " + oj);
                 ls.setId(oj.getString("_id"));
                 ls.setAccountName(oj.getString("accountName"));
-                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+//                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+                
+                ls.setDiscount(oj.getString("discount"));
                 ls.setAdd1(oj.getJSONObject("address").getString("one"));
                 ls.setAdd2(oj.getJSONObject("address").getString("two"));
                 ls.setBalance(String.valueOf(oj.getJSONObject("cred").get("openBalance")));

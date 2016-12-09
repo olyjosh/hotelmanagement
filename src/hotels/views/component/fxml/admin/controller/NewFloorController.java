@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.admin;
+package hotels.views.component.fxml.admin.controller;
 
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.admin.model.Floor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -41,6 +43,8 @@ public class NewFloorController implements Initializable {
     private JSONObject response;
     
     private Hotels app;
+    private boolean editMode;
+    private Floor data;
 
     public Hotels getApp() {
         return app;
@@ -61,21 +65,65 @@ public class NewFloorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        if(editMode)editDefault();
     }    
 
     @FXML
-    private void newFloor(ActionEvent event) {
-        
+    private void newFloor(ActionEvent event) throws JSONException {
+        if(!validat())return;
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("alias", alias.getText()));
         param.add(new BasicNameValuePair("name", name.getText()));
         param.add(new BasicNameValuePair("desc", desc.getText()));
-      
+        response = editMode? nav.editFloor(param) : nav.createFloor(param);
         
-        response = nav.createFloor(param);
-        System.out.println("Creating Floor : " + response);
+        if(response!=null){
+            String t = editMode? "updated" : "created";
+            if(response.getInt("status")==1){
+                
+                Util.notify_SUCCESS(State.NOTIFY_SUCCESS, name.getText() + " has been "+t, Pos.CENTER);
+                if(!editMode)clearFieds();
+            }else{
+                Util.notify_ERROR(State.NOTIFY_ERROR,  "Error while creating "+name.getText() , Pos.CENTER);
+            }
+        }else{
+            Util.notify_ERROR(State.NOTIFY_ERROR,  "Error while creating "+name.getText() , Pos.CENTER);
+        }
         
-        Util.notify(State.NOTIFY_SUCCESS, name.getText() + " Has been Created", Pos.CENTER);
+    }
+    
+    @FXML
+    private void close(ActionEvent event){
+        ((Stage)this.alias.getScene().getWindow()).close();
+        
+    }
+    
+    private boolean validat(){
+        return true;
+    }
+    
+        
+    
+    private void clearFieds(){
+        alias.clear();
+        name.clear();
+        desc.clear();
+    }
+        
+        
+    public void setData(Floor data) {
+        this.data = data;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+    
+    
+    private void editDefault(){
+        alias.setText(this.data.getAlias());
+        name.setText(this.data.getName());
+        desc.setText(this.data.getDesc());
     }
     
 }

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package hotels.views.component.fxml.admin;
+package hotels.views.component.fxml.admin.controller;
 
+import hotels.views.component.fxml.admin.model.Room;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
@@ -154,7 +150,7 @@ public class RoomListController implements Initializable {
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
             floor.setCellValueFactory(new PropertyValueFactory<>("floor"));
             
-            table.getColumns().setAll(alias, name, type, floor);
+//            table.getColumns().setAll(alias, name, type, floor);
      
     }
     
@@ -166,18 +162,6 @@ public class RoomListController implements Initializable {
                 
                 ls.setId(oj.getString("_id"));
                 
-//                if(oj.getJSONObject("floor").getString("name") == null){
-//                    ls.setFloor("");
-//                }else{
-//                    ls.setFloor(oj.getJSONObject("floor").getString("name"));
-//                }
-                
-//                if(oj.getJSONObject("roomType").get("name") == null){
-//                    ls.setType("");
-//                }else{
-//                    ls.setType(oj.getJSONObject("roomType").getString("name"));
-//                }
-              
                 ls.setDesc(oj.getString("desc"));
                 ls.setName(oj.getString("name"));
                 

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.admin;
+package hotels.views.component.fxml.admin.controller;
 
+import hotels.views.component.fxml.admin.model.Room;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;

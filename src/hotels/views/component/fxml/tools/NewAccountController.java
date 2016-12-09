@@ -6,14 +6,18 @@
 package hotels.views.component.fxml.tools;
 
 import hotels.Hotels;
+import hotels.util.CountryModel;
 import hotels.util.Navigator;
 import hotels.util.State;
+import hotels.util.Storage;
 import hotels.util.Util;
 import hotels.views.component.fxml.tools.model.Account;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,10 +26,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.jfree.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,18 +63,20 @@ public class NewAccountController implements Initializable {
     private TextField email;
     @FXML
     private TextField web;
-    @FXML
-    private TextField accountNo;
+//    @FXML
+//    private TextField accountNo;
     @FXML
     private TextField credit;
     @FXML
     private TextField balance;
     @FXML
     private TextField term;
+    @FXML 
+    private TextField discount;
     @FXML
     private ComboBox rep;
     @FXML
-    private ComboBox country;
+    private ChoiceBox<CountryModel> country;
     @FXML
     private ComboBox state;
     @FXML
@@ -134,7 +142,8 @@ public class NewAccountController implements Initializable {
                    System.out.println("ID : " + id);
                 }
            });
-        
+        country.setItems(Util.getCountries());
+        country.getSelectionModel().select(164);
         onLoad();
     }    
     
@@ -183,15 +192,15 @@ public class NewAccountController implements Initializable {
         city.setText(data.getCity());
         zip.setText(data.getZip());
         state.getSelectionModel().select(data.getState());
-        country.getSelectionModel().select(data.getCountry());
+//        country.getSelectionModel().select(data.getCountry());
         email.setText(data.getEmail());
         web.setText(data.getWeb());
         rep.getSelectionModel().select(data.getRep());
         contact.setText(data.getContact());
-        accountNo.setText(data.getAccountNo());
         credit.setText(data.getCredit());
         balance.setText(data.getBalance());
         term.setText(data.getTerm());
+        discount.setText(data.getDiscount());
     }
     
     @FXML private void newAccount(){
@@ -206,16 +215,19 @@ public class NewAccountController implements Initializable {
         param.add(new BasicNameValuePair("city", city.getText()));
         param.add(new BasicNameValuePair("zip", zip.getText()));
         param.add(new BasicNameValuePair("state", state.getSelectionModel().getSelectedItem().toString()));
-        param.add(new BasicNameValuePair("country", country.getSelectionModel().getSelectedItem().toString()));
+        param.add(new BasicNameValuePair("country", country.getSelectionModel().getSelectedItem().getCode()));
         param.add(new BasicNameValuePair("email", email.getText()));
+        param.add(new BasicNameValuePair("phone", phone.getText()));
         param.add(new BasicNameValuePair("website", web.getText()));
-        param.add(new BasicNameValuePair("rep", id));//need to load user and get user ID
-        param.add(new BasicNameValuePair("cred_accountNo", accountNo.getText()));
+        param.add(new BasicNameValuePair("rep", rep.getEditor().getText()));//need to load user and get user ID
+//        param.add(new BasicNameValuePair("cred_accountNo", accountNo.getText()));
         param.add(new BasicNameValuePair("cred_creditLimit", credit.getText()));
         param.add(new BasicNameValuePair("cred_openBalance", balance.getText()));
         param.add(new BasicNameValuePair("cred_paymentTerm", term.getText()));
-        param.add(new BasicNameValuePair("performedBy", "57deca5d35fb9a487bdeb70f"));
-      
+        param.add(new BasicNameValuePair("discount", discount.getText()));
+        param.add(new BasicNameValuePair("performedBy", Storage.getId()));
+     
+        
         if(!isEditMode()){
             
             Runnable task = new Runnable() {
@@ -228,6 +240,19 @@ public class NewAccountController implements Initializable {
                                 @Override
                                 public void run() {
                                     Util.notify(State.NOTIFY_SUCCESS, "New Account Created and Saved", Pos.CENTER);
+                                }
+                            });
+                        }else if(response.getInt("status") ==0){
+
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    try {
+                                        Log.warn(response);
+                                        Util.notify_ERROR(State.NOTIFY_ERROR, response.getString("message"), Pos.CENTER);
+                                    } catch (JSONException ex) {
+                                        Logger.getLogger(NewAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }
                             });
                         }else{
@@ -263,14 +288,25 @@ public class NewAccountController implements Initializable {
                                     Util.notify(State.NOTIFY_SUCCESS, "Account Updated", Pos.CENTER);
                                 }
                             });
-                        }else{
+                        }else if(response.getInt("status") ==0){
 
                             Platform.runLater(new Runnable(){
                                 @Override
                                 public void run() {
-                                    Util.notify(State.NOTIFY_ERROR, "Account Failed to Update", Pos.CENTER);
+                                    try {
+                                        Util.notify_ERROR(State.NOTIFY_ERROR, response.getString("message"), Pos.CENTER);
+                                    } catch (JSONException ex) {
+                                        Logger.getLogger(NewAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }
                             });
+                        }else{
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    Util.notify_ERROR(State.NOTIFY_ERROR, "Account Failed to Update", Pos.CENTER);
+                                }
+                            });    
                         }
                     } catch (JSONException ex) {
                         ex.printStackTrace();

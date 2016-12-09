@@ -108,12 +108,12 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label layoutX="39.0" layoutY="84.0" text="Guest Information" underline="true">
+                  <Label layoutX="39.0" layoutY="94.0" text="Guest Information" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="322.0" layoutY="84.0" text="Checkin Information" underline="true">
+                  <Label layoutX="322.0" layoutY="94.0" text="Checkin Information" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -195,15 +195,24 @@
                         </Label>
                      </children>
                   </Pane>
-                  <VBox layoutX="39.0" layoutY="439.0" prefHeight="59.0" prefWidth="548.0" style="-fx-border-color: green;">
+                  <VBox alignment="CENTER_LEFT" layoutX="39.0" layoutY="439.0" prefHeight="59.0" prefWidth="548.0" style="-fx-border-color: green;">
                      <children>
-                        <Label text="Booking Type" />
-                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="256.0" spacing="3.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="256.0" spacing="20.0">
                            <children>
-                              <ComboBox fx:id="bookType" prefHeight="31.0" prefWidth="227.0" />
                               <FontAwesomeIcon fill="#aea6a6" glyphName="ASTERISK" size="0.6em" />
-                              <Label prefHeight="21.0" prefWidth="73.0" text="Discount" />
-                              <TextField fx:id="discount" prefHeight="31.0" prefWidth="211.0" />
+                              <HBox alignment="CENTER" prefHeight="31.0" prefWidth="177.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="66.0" text="Discount: " />
+                                    <TextField fx:id="discount" prefHeight="31.0" prefWidth="80.0" />
+                                    <Label prefHeight="21.0" prefWidth="17.0" text="\%" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="212.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="42.0" text="Tax: " />
+                                    <ComboBox prefHeight="27.0" prefWidth="99.0" promptText="0%" />
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
                      </children>
@@ -212,6 +221,39 @@
                      <children>
                         <CheckBox fx:id="copCheckBox" mnemonicParsing="false" text="Coperate Booking - " />
                         <ChoiceBox fx:id="copChoiceBox" disable="true" prefHeight="29.0" prefWidth="526.0" />
+                        <HBox fx:id="compHBox" spacing="20.0" visible="false">
+                           <children>
+                              <Label fx:id="compPhone">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="PHONE" size="0.8em" />
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="compEmail">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="AT" size="0.8em" />
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="compWeb" layoutX="74.0" layoutY="10.0">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="GLOBE" size="0.8em" />
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="compAddress" layoutX="135.0" layoutY="10.0">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                   <ProgressIndicator fx:id="progress" layoutX="587.0" layoutY="1.0" prefHeight="27.0" prefWidth="21.0" />

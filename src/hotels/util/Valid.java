@@ -40,6 +40,10 @@ public class Valid {
         return s.matches("[a-zA-z]+([ '-][a-zA-Z]+)*");
     }
     
+    public static boolean isNumber(String s){
+        return s.matches("/[0-9]+/");
+    }
+    
     public String errorStyle = "-fx-border-color: red ;";
     public String defaultFieldStyle;
     public boolean checkTextField(TextField ...e){

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotels.views.component.fxml.admin;
+package hotels.views.component.fxml.admin.controller;
 
 import hotels.Hotels;
+import hotels.util.CountryModel;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
@@ -21,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -56,7 +58,7 @@ public class NewUserController implements Initializable {
     @FXML
     private TextField lastName;
     @FXML
-    private TextField country;
+    private ChoiceBox<CountryModel> country;
     @FXML
     private ComboBox<?> sex;
     @FXML
@@ -84,8 +86,8 @@ public class NewUserController implements Initializable {
     
     private Navigator nav;
     private JSONObject response;
-    private static String [] userRole = {"USER_SUPER_ADMIN","USER_ADMIN","USER_ADMIN_2","USER_FRONT","USER_HOUSEKEEP",
-            "USER_LAUNDRY","USER_KITCHEN","USER_MINIBAR","USER_MAINTENANCE"};
+    private static String [] userRole = {"SUPERADMIN","ADMIN","ADMIN2","FRONT","HOUSEKEEP",
+            "LAUNDRY","KITCHEN","MINIBAR","MAINTENANCE"};
     
     /**
      * Initializes the controller class.
@@ -108,6 +110,8 @@ public class NewUserController implements Initializable {
         ToggleGroup tg = new ToggleGroup();
         staff.setToggleGroup(tg);
         nonStaff.setToggleGroup(tg);
+        country.setItems(Util.getCountries());
+        country.getSelectionModel().select(Util.getCountry("NG"));
     }    
 
     @FXML
@@ -123,7 +127,8 @@ public class NewUserController implements Initializable {
         param.add(new BasicNameValuePair("lastName", lastName.getText()));
         param.add(new BasicNameValuePair("sex", sex.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("dob", dob.getValue().toString()));
-        param.add(new BasicNameValuePair("country", country.getText()));
+//        param.add(new BasicNameValuePair("country", country.getText()));
+        param.add(new BasicNameValuePair("country", country.getSelectionModel().getSelectedItem().getCode()));
         
         boolean status;
         if(staff.isSelected()){
@@ -132,7 +137,7 @@ public class NewUserController implements Initializable {
             status = false;
         }
         
-        param.add(new BasicNameValuePair("country", String.valueOf(status)));
+//        param.add(new BasicNameValuePair("country", String.valueOf(status)));
                             
         response = nav.registerUser(param);       
         try {

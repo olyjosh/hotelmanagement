@@ -1,15 +1,17 @@
 package hotels.controllers;
 
 import hotels.Hotels;
+import hotels.views.component.fxml.admin.controller.FloorListController;
 //import hotels.views.component.fxml.admin.FloorListController;
-import hotels.views.component.fxml.admin.NewUserController;
+import hotels.views.component.fxml.admin.controller.NewUserController;
 import hotels.views.component.fxml.admin.controller.Summary;
-import hotels.views.component.fxml.admin.RoomListController;
-import hotels.views.component.fxml.admin.UserListController;
+import hotels.views.component.fxml.admin.controller.RoomListController;
+import hotels.views.component.fxml.admin.controller.UserListController;
 //import hotels.views.component.fxml.admin.RoomTypeListController;
 //import hotels.views.component.fxml.admin.UserListController;
-import hotels.views.component.fxml.admin.controller.FolioDetail;
+import hotels.views.component.fxml.front.controller.FolioDetail;
 import hotels.views.component.fxml.admin.controller.NightController;
+import hotels.views.component.fxml.admin.controller.RoomTypeListController;
 import hotels.views.component.fxml.bar.controller.DrinkOrder;
 import hotels.views.component.fxml.bar.controller.NewDrink;
 import hotels.views.component.fxml.bar.controller.OnlineDrinkOrder;
@@ -747,8 +749,8 @@ public class Main implements Initializable{
      private void showRoomList() throws IOException {
         RoomListController controller = new RoomListController(this.getApp());
         controller.setApp(app);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomAmenityList.fxml"));
-//        loader.setController(controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomList1.fxml"));
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -759,10 +761,10 @@ public class Main implements Initializable{
      
      @FXML
      private void showTypeList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+         RoomTypeListController controller = new RoomTypeListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/roomTypeList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -774,10 +776,10 @@ public class Main implements Initializable{
      
       @FXML
      private void showFloorList() throws IOException {
-        NewDrink controller = new NewDrink(this.getApp());
+        FloorListController controller = new FloorListController(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/floorList.fxml"));
-//        loader.setController(controller);
+        loader.setController(controller);
         AnchorPane content = (AnchorPane) loader.load();
         ObservableList<Node> children = adminContentStack.getChildren();
         if (children.size() > 0) {
@@ -785,9 +787,9 @@ public class Main implements Initializable{
         }
         children.add(content);
     }
-        
-     @FXML
-     private void showSeasonList() throws IOException {
+
+    @FXML
+    private void showSeasonList() throws IOException {
         NewDrink controller = new NewDrink(this.getApp());
         controller.setApp(app);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/seasonList.fxml"));
@@ -1086,5 +1088,17 @@ public class Main implements Initializable{
         });
         return x;
     }
+            
+    // Confirmation
+    public boolean  showComfirmation(String message) {
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.setTitle("Confirm your action");
+        dialog.setHeaderText(message);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.YES, ButtonType.CANCEL);
+        Optional showAndWait = dialog.showAndWait();
+        return showAndWait.get().equals(ButtonType.YES);
+    }
+    
+    
     
 }

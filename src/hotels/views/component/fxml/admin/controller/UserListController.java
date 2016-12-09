@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package hotels.views.component.fxml.admin;
+package hotels.views.component.fxml.admin.controller;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import hotels.util.Navigator;
-import hotels.util.State;
 import hotels.views.component.fxml.admin.model.UserModel;
 import hotels.views.component.fxml.front.controller.Dashboard;
-import hotels.views.component.fxml.front.model.FolioModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,7 +43,7 @@ import org.json.JSONObject;
 public class UserListController implements Initializable {
 
     @FXML private TableView table;  
-    @FXML private TableColumn usernameCol, roleCol, deptCol;
+    @FXML private TableColumn usernameCol,nameCol,staffIdCol, roleCol, deptCol;
     private ObservableList<UserModel> tableList;
     
     
@@ -81,59 +74,51 @@ public class UserListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        
+        tableDeafaults();
         loadUsersTask();
     }    
-    
-    
-    
-    
-       private void tableDeafaults(){
-         usernameCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-         roleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-         deptCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
-        
-        tableList= FXCollections.observableArrayList();
+
+    private void tableDeafaults() {
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        roleCol.setCellValueFactory(new PropertyValueFactory<>("priviledge"));
+        deptCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+
+        tableList = FXCollections.observableArrayList();
         table.setItems(tableList);
-        
-         table.setRowFactory(new Callback<TableView<FolioModel>, TableRow<FolioModel>>() {
+
+        table.setRowFactory(new Callback<TableView<UserModel>, TableRow<UserModel>>() {
             @Override
-            public TableRow<FolioModel> call(TableView<FolioModel> param) {
-                final TableRow<FolioModel> row = new TableRow<>();
-                MenuItem transac = new MenuItem("View Foilio transactions", GlyphsDude.createIcon(FontAwesomeIcons.EYE)),
-                        pay = new MenuItem("Make Payment", GlyphsDude.createIcon(FontAwesomeIcons.PAYPAL));
-                ContextMenu con = new ContextMenu(pay, transac);
-                transac.setOnAction((ActionEvent event) -> {
-                    try {
-                        FolioModel item = row.getItem();
-                        app.getMain().showFolioDetail(item.getGuestId(), item.getName(), item.getPhone());
-                    } catch (IOException ex) {
-                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                });
-                
-                pay.setOnAction((ActionEvent event) -> {
-
-                    try {
-                        FolioModel item = row.getItem();
-                        double amount = item.getBalance();
-                        String desc = amount <0 ? "Paying up for bill" : "Funding Folio Whallet";
-                        String payFor = desc;
-                        String orderId = item.getId();
-                        int dept = State.DEPT_FRONT;
-                        String guestId =item.getGuestId();
-                        String name = item.getName();
-                        String phone = item.getPhone();
-                        
-                        app.getMain().showPayment(amount, desc, payFor, orderId, dept, guestId, name,phone, true);
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+            public TableRow<UserModel> call(TableView<UserModel> param) {
+                final TableRow<UserModel> row = new TableRow<>();
+                MenuItem view = new MenuItem("Detail", GlyphsDude.createIcon(FontAwesomeIcons.EYE)),
+                        message = new MenuItem("Message", GlyphsDude.createIcon(FontAwesomeIcons.PAYPAL));
+                ContextMenu con = new ContextMenu(view);
+                view.setOnAction((ActionEvent event) -> {
+                    UserModel item = row.getItem();
                 });
 
+//                message.setOnAction((ActionEvent event) -> {
+//
+//                    try {
+//                        FolioModel item = row.getItem();
+//                        double amount = item.getBalance();
+//                        String desc = amount <0 ? "Paying up for bill" : "Funding Folio Whallet";
+//                        String payFor = desc;
+//                        String orderId = item.getId();
+//                        int dept = State.DEPT_FRONT;
+//                        String guestId =item.getGuestId();
+//                        String name = item.getName();
+//                        String phone = item.getPhone();
+//                        
+//                        app.getMain().showPayment(amount, desc, payFor, orderId, dept, guestId, name,phone, true);
+//
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//
+//                });
 //                row.setStyle("-fx-background-color :#6382ff");
                 row.contextMenuProperty().bind(
                         Bindings.when(row.emptyProperty())
@@ -144,14 +129,13 @@ public class UserListController implements Initializable {
                 row.setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        
+
                     }
                 });
                 return row;
-                
             }
         });
-         
+
 //         balanceCol.setCellFactory(column -> {
 //             return new TableCell<FolioModel,Double>(){
 //                 @Override
@@ -184,11 +168,8 @@ public class UserListController implements Initializable {
 //        });
 //
 //         
-         
-         
     }
-    
-    
+
     
     
         
@@ -233,7 +214,7 @@ public class UserListController implements Initializable {
             
             m.setId((String) o.get("_id"));
             JSONObject name = o.getJSONObject("name");
-            m.setFirstName(name.getString("firstName"));
+            m.setFirstName(name.getString("firstName")+" "+name.getString("lastName"));
             m.setLastName(name.getString("lastName"));
             m.setUsername(name.getString("username"));
             m.setCountry(o.getString("country"));
@@ -241,8 +222,10 @@ public class UserListController implements Initializable {
             m.setEmail(o.getString("email"));
             m.setIsStaff(o.getJSONObject("staff").getBoolean("isStaff"));
             m.setPhone(o.getString("phone"));
-//            m.setPriviledge(0);
+            m.setPriviledge(Integer.valueOf((String)o.getJSONObject("staff").get("privilege")));
             m.setSex(o.getString("sex"));
+            m.setStaffId(o.getInt("staffId"));
+            
             
 //            m.set
 

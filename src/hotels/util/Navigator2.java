@@ -26,6 +26,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import static org.apache.log4j.Level.WARN;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,6 +51,7 @@ public class Navigator2 {
     
     
     public Navigator2(Main main) {
+
         this.main = main;
         this.httpClient = HttpClientBuilder.create()
                 .addInterceptorFirst(new HttpRequestInterceptor() {

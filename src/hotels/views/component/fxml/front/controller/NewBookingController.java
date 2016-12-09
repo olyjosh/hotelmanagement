@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -96,7 +97,8 @@ public class NewBookingController implements Initializable {
     @FXML
     private TextField amount, amount1;
     @FXML
-    private ComboBox isBooking, bookType;
+    private ComboBox isBooking; 
+//            bookType;
     @FXML
     private CheckBox checkinNow;
     @FXML private Label dayLabel;
@@ -106,8 +108,10 @@ public class NewBookingController implements Initializable {
     @FXML private TextField discount;
     
     
-    @FXML private ChoiceBox copChoiceBox;
+    @FXML private ChoiceBox<Account> copChoiceBox;
     @FXML private CheckBox copCheckBox;
+    @FXML private Label compPhone, compEmail, compWeb, compAddress;
+    @FXML private HBox compHBox;
     @FXML private ProgressIndicator progress;
     
     
@@ -131,7 +135,7 @@ public class NewBookingController implements Initializable {
         Util.formatDatePicker(checkIn);
         Util.formatDatePicker(checkOut);
                 
-        bookType.getItems().setAll("Corporate Booking", "Individual Booking", "Family Booking", "Group Booking");
+//        bookType.getItems().setAll("Corporate Booking", "Individual Booking", "Family Booking", "Group Booking");
         
         isBooking.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -326,6 +330,12 @@ public class NewBookingController implements Initializable {
     private void bookMe(){
         
         List <NameValuePair> param = new ArrayList<>();
+        if(copCheckBox.isSelected()){
+            param.add(new BasicNameValuePair("isCoperate", Boolean.toString(true)));
+            param.add(new BasicNameValuePair("coperateId", copChoiceBox.getSelectionModel().getSelectedItem().getId()));
+        }else{
+            param.add(new BasicNameValuePair("isCoperate", Boolean.toString(false)));
+        }    
         param.add(new BasicNameValuePair("checkIn", checkIn.getValue().toString()));
         param.add(new BasicNameValuePair("checkOut", checkOut.getValue().toString()));
         param.add(new BasicNameValuePair("firstName", firstName.getText()));
@@ -338,6 +348,8 @@ public class NewBookingController implements Initializable {
         param.add(new BasicNameValuePair("amount", amount.getText()));
         param.add(new BasicNameValuePair("status", isBooking.getSelectionModel().getSelectedItem().toString()));
         param.add(new BasicNameValuePair("channel", State.channel_FRONT));
+        
+        
         
         if(checkinNow.isSelected()){
             param.add(new BasicNameValuePair("isCheckIn", "true"));
@@ -381,14 +393,45 @@ public class NewBookingController implements Initializable {
     
     
     private void defaults(){
+
         copChoiceBox.disableProperty().bind(copCheckBox.selectedProperty().not());                            
+        copCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) {
+                    discount.setText("0");
+//                    firstName.clear();
+                    address.clear();
+                    email.clear();
+                    phone.clear();
+                }
+            }
+        });
+        
+        copChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Account>() {
+            @Override
+            public void changed(ObservableValue<? extends Account> observable, Account oldValue, Account newValue) {
+                discount.setText(newValue.getDiscount());
+//                firstName.setText(newValue.getCompanyName());
+                compAddress.setText(newValue.getAdd1());
+                compEmail.setText(newValue.getEmail());
+                compPhone.setText(newValue.getPhone());
+                compWeb.setText(newValue.getWeb());
+                compHBox.setVisible(true);
+                
+            }
+        });
+        
+
         populateCoperate();
+        
     }
     
     
     
     private ObservableList<Account> coperates;
     private void populateCoperate() {
+        
         if(coperates == null)coperates = FXCollections.observableArrayList();
         copChoiceBox.setItems(coperates);
         Runnable task = new Runnable() {
@@ -396,6 +439,7 @@ public class NewBookingController implements Initializable {
             public void run() {
                 try {
                     JSONObject account = nav.fetchAccount();
+                    
                     if (account !=null){
                         JSONArray accountArray = account.getJSONArray("message");
                         if(accountArray!=null)getAccountList(accountArray);
@@ -428,10 +472,17 @@ public class NewBookingController implements Initializable {
                     
                 };
                 JSONObject oj = accountArray.getJSONObject(i);
+                
                 System.out.println("Printing Hotel Service : " + oj);
-                ls.setId(oj.getString("_id"));
+                ls.setId(oj.get("_id").toString());
+                
+                JSONObject name = oj.getJSONObject("name");
+                ls.setFirstName(name.getString("firstName"));
+                ls.setLastName(name.getString("lastName"));
+                
+                oj = oj.getJSONObject("coperate");
                 ls.setAccountName(oj.getString("accountName"));
-                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+//                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
                 ls.setAdd1(oj.getJSONObject("address").getString("one"));
                 ls.setAdd2(oj.getJSONObject("address").getString("two"));
                 ls.setBalance(String.valueOf(oj.getJSONObject("cred").get("openBalance")));
@@ -441,28 +492,21 @@ public class NewBookingController implements Initializable {
                 ls.setCountry(oj.getString("country"));
                 ls.setCredit(String.valueOf(oj.getJSONObject("cred").get("creditLimit")));
                 ls.setEmail(oj.getString("email"));
-                ls.setFirstName(oj.getString("firstName"));
-                ls.setLastName(oj.getString("lastName"));
+
                 //ls.setPhone(oj.getString("phone"));
                 ls.setRep(oj.getString("rep"));
                 ls.setState(oj.getString("state"));
                 ls.setTerm(oj.getJSONObject("cred").getString("paymentTerm"));
                 ls.setWeb(oj.getString("website"));
                 ls.setZip(oj.getString("zip"));
-                
                 coperates.add(ls);
-                
-//                service.addAll(ls);
-//                table.setItems(service);
-                
-                
+   
             }
            
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    
     
     
 }

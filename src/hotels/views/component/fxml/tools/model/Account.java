@@ -27,10 +27,13 @@ public class Account {
     private String web;
     private String rep;
     private String contact;
-    private String accountNo;
+//    private String accountNo;
+
     private String credit;
     private String balance;
     private String term;
+    private String discount;
+    
 
     public String getId() {
         return id;
@@ -159,14 +162,14 @@ public class Account {
     public void setContact(String contact) {
         this.contact = contact;
     }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
+//
+//    public String getAccountNo() {
+//        return accountNo;
+//    }
+//
+//    public void setAccountNo(String accountNo) {
+//        this.accountNo = accountNo;
+//    }
 
     public String getCredit() {
         return credit;
@@ -192,9 +195,19 @@ public class Account {
         this.term = term;
     }
 
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    
+    
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", companyName=" + companyName + ", accountName=" + accountName + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", add1=" + add1 + ", add2=" + add2 + ", city=" + city + ", zip=" + zip + ", state=" + state + ", country=" + country + ", email=" + email + ", web=" + web + ", rep=" + rep + ", contact=" + contact + ", accountNo=" + accountNo + ", credit=" + credit + ", balance=" + balance + ", term=" + term + '}';
+        return "Account{" + "id=" + id + ", companyName=" + companyName + ", accountName=" + accountName + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", add1=" + add1 + ", add2=" + add2 + ", city=" + city + ", zip=" + zip + ", state=" + state + ", country=" + country + ", email=" + email + ", web=" + web + ", rep=" + rep + ", contact=" + contact + ", credit=" + credit + ", balance=" + balance + ", term=" + term + '}';
     }
     
 }

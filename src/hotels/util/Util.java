@@ -7,7 +7,10 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
@@ -246,4 +249,25 @@ public class Util
         return x;
     }
 
+    
+    public static ObservableList getCountries() {
+        ObservableList<CountryModel> x = FXCollections.observableArrayList();
+        String[] locales = Locale.getISOCountries();
+        Locale obj;
+        for (String countryCode : locales) {
+            obj = new Locale("", countryCode);
+            x.add(new CountryModel(obj.getCountry(), obj.getDisplayCountry()));
+        }
+        return x;
+    }
+
+    public static CountryModel getCountry(String countryCode){
+        Locale obj = new Locale("", countryCode);
+        return new CountryModel(countryCode, obj.getDisplayCountry());
+    }
+    
+    public static String getCountryName(String countryCode){
+        return new Locale("", countryCode).getDisplayCountry();
+    }
+    
 }

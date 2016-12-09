@@ -89,6 +89,9 @@ public class State {
         return null;
     }
 
+    
+    public final int NIGERIA= 164;
+    
 }
     
 

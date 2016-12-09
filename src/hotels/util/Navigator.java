@@ -27,8 +27,10 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import static org.apache.log4j.Level.WARN;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 /**
  *
@@ -47,6 +49,7 @@ public class Navigator {
     public final String OP_URL = BASE_URL+"op/";
     
     public Navigator(Main main) {
+        
 
         this.httpClient = HttpClientBuilder.create()
                 .addInterceptorFirst(new HttpRequestInterceptor() {
@@ -267,7 +270,9 @@ public class Navigator {
             e.printStackTrace();
         }
         return null;
-    }  
+    } 
+    
+    
     public JSONObject fetchFloor(){
         String url = OP_URL+"fetch/floor";
         try{
@@ -297,6 +302,41 @@ public class Navigator {
         return null;
     }
     
+    public JSONObject editRoomType(List data){
+        
+        String url = OP_URL+"edit/roomtype";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public JSONObject deleteRoomType(List data){
+        
+        String url = OP_URL+"delete/roomtype";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            System.out.println("Printing URL : " + url);
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public JSONObject createFloor(List data){
         
         String url = OP_URL+"create/floor";
@@ -312,7 +352,25 @@ public class Navigator {
             e.printStackTrace();
         }
         return null;
-    }   
+    }  
+    
+        
+    public JSONObject editFloor(List data){
+        
+        String url = OP_URL+"edit/floor";
+        
+        try{
+            String param = URLEncodedUtils.format(data, "utf-8");
+            url +="?"+ param;
+            HttpGet request = new HttpGet(url);
+            
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public JSONObject fetchGuest(){
         String url = OP_URL+"fetch/customers";
@@ -945,7 +1003,6 @@ public class Navigator {
         String url = OP_URL+"fetch/account";
         try{
             HttpGet request = new HttpGet(url);
-            
             httpClient.execute(request);
             return res;
         } catch (IOException e) {
