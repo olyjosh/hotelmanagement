@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="962.0" style="-fx-padding: 0;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="4.0" layoutY="7.0" prefHeight="439.0" prefWidth="290.0" text="Pay Head Type">
+      <TitledPane collapsible="false" layoutX="4.0" layoutY="7.0" prefHeight="439.0" prefWidth="290.0" text="Pay Head Type" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="7.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -25,7 +24,7 @@
                   <Label layoutX="25.0" layoutY="227.0" prefHeight="21.0" prefWidth="188.0" text="Is it Addition or Deduction ?" />
                   <TextArea fx:id="desc" layoutX="25.0" layoutY="136.0" prefHeight="71.0" prefWidth="240.0" />
                   <ComboBox fx:id="type" layoutX="25.0" layoutY="255.0" prefHeight="31.0" prefWidth="238.0" promptText="Select Type" />
-                  <Button layoutX="25.0" layoutY="327.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: green;" text="Add Pay Head" textFill="WHITE">
+                  <Button layoutX="25.0" layoutY="327.0" mnemonicParsing="false" onAction="#newPayHead" prefHeight="35.0" prefWidth="239.0" style="-fx-background-color: green;" text="Add Pay Head" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -40,18 +39,18 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </TitledPane>
-      <TitledPane collapsible="false" layoutX="304.0" layoutY="7.0" prefHeight="439.0" prefWidth="652.0" text="List of Pay Head Types">
+      <TitledPane collapsible="false" layoutX="304.0" layoutY="7.0" prefHeight="439.0" prefWidth="652.0" text="List of Pay Head Types" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
                <children>
-                  <TableView fx:id="table" layoutX="2.0" prefHeight="362.0" prefWidth="646.0">
+                  <TableView fx:id="table" layoutX="2.0" prefHeight="362.0" prefWidth="646.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                     <columns>
                       <TableColumn fx:id="payCol" prefWidth="183.0" text="Pay Head Name" />
                       <TableColumn fx:id="descCol" prefWidth="282.0" text="Description" />
                         <TableColumn fx:id="typeCol" prefWidth="180.0" text="Addition/Deduction" />
                     </columns>
                   </TableView>
-                  <Button layoutX="546.0" layoutY="367.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="94.0" style="-fx-background-color: RED;" text="Delete" textFill="WHITE">
+                  <Button layoutX="546.0" layoutY="367.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="94.0" style="-fx-background-color: RED;" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

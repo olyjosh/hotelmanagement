@@ -244,7 +244,11 @@ public class ReserveListController implements Initializable {
                 rs.setArrival(Util.stripDate(oj.getString("arrival")));
                 rs.setCreatedAt(Util.stripDate(oj.getString("createdAt")));
                 rs.setChannel(oj.getString("channel"));
-                rs.setStatus(oj.getString("status"));
+                
+                // I'm commenting this incase of any future error. The 
+                String string = oj.getString("status"),
+                        status=string.equals(State.RM_RESERVED)?"Reserved" : (string.equals(State.RM_BOOKED)?"Booked":string);
+                rs.setStatus(status);
                 
                 JSONObject oj2 = oj.getJSONObject("room");
                 rs.setRoom(oj2.getString("name"));

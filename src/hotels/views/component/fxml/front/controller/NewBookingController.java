@@ -11,6 +11,7 @@ import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
 import hotels.util.Util;
+import hotels.views.component.fxml.tools.model.Account;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -26,10 +27,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.util.Callback;
@@ -103,7 +106,12 @@ public class NewBookingController implements Initializable {
     @FXML private TextField discount;
     
     
-    private static int days = 0, p;
+    @FXML private ChoiceBox copChoiceBox;
+    @FXML private CheckBox copCheckBox;
+    @FXML private ProgressIndicator progress;
+    
+    
+    private static int days = 0;
 
     /**
      * Initializes the controller class.
@@ -194,30 +202,10 @@ public class NewBookingController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    
                     double val = Double.parseDouble(totalBill.getText()) - Double.parseDouble(newValue);
                     balance.setText(String.valueOf(val));
-                    
                 }
            });
-        
-        final Callback<DatePicker, DateCell> dayCellCheckin = 
-            new Callback<DatePicker, DateCell>() {
-                @Override
-                public DateCell call(final DatePicker datePicker) {
-                    return new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
-                            if (item.isBefore(LocalDate.now())) {
-                                    setDisable(true);
-                                    setStyle("-fx-background-color: #ffc0cb;");
-                            }
-                    }
-                };
-            }
-        };
-        checkIn.setDayCellFactory(dayCellCheckin);
         
         final Callback<DatePicker, DateCell> dayCellFactory = 
             new Callback<DatePicker, DateCell>() {
@@ -227,19 +215,24 @@ public class NewBookingController implements Initializable {
                         @Override
                         public void updateItem(LocalDate item, boolean empty) {
                             super.updateItem(item, empty);
-                            if (item.isBefore(checkIn.getValue())) {
+                            if (item.isBefore(
+                                    checkIn.getValue().plusDays(1))
+                                ) {
                                     setDisable(true);
                                     setStyle("-fx-background-color: #ffc0cb;");
                             }
-                            //days = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
-                             p = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
-                            
-                            setTooltip(new Tooltip("You're about to stay for " + p + " days"));
+                            int p = (int) ChronoUnit.DAYS.between(checkIn.getValue(), item);
+                            setTooltip(new Tooltip(
+                                "You're about to stay for " + p + " days")
+                            );
+                            days = p;
+                            dayLabel.setText("for " + days + " days");
                     }
                 };
             }
         };
         checkOut.setDayCellFactory(dayCellFactory);
+        defaults();
     }
     
     private void onLoad(){
@@ -252,6 +245,7 @@ public class NewBookingController implements Initializable {
                     rooms = nav.fetchRoom();
                     if(roomType != null && rooms != null ){
                         JSONArray roomTypeArray = roomType.getJSONArray("message");
+                        System.out.println("Printing RoomType Array : " +  roomTypeArray);
 
                         for(int i = 0; i < roomTypeArray.length(); i++){
                             JSONObject oj = roomTypeArray.getJSONObject(i);
@@ -293,6 +287,7 @@ public class NewBookingController implements Initializable {
                 JSONObject oj = roomTypeArray.getJSONObject(i);
                 if(suite.getSelectionModel().getSelectedItem().toString().equals(oj.getString("name"))){
                     roomTypeId = oj.getString("_id");
+                    System.out.println("Printing Selected ROom TYpe ID : " + roomTypeId);break;
                 }
             }
             
@@ -306,6 +301,7 @@ public class NewBookingController implements Initializable {
         JSONArray roomArray;
         try {
             roomArray = rooms.getJSONArray("message");
+            System.out.println("Printing Room Array: " +  roomArray);
             
             for(int i = 0; i < roomArray.length(); i++){
                 JSONObject oj = roomArray.getJSONObject(i);
@@ -322,6 +318,7 @@ public class NewBookingController implements Initializable {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
+        System.out.println("Printing room List : " + roomList);
         room.setItems(roomList);
     }
     
@@ -383,4 +380,90 @@ public class NewBookingController implements Initializable {
     }
     
     
+    private void defaults(){
+        copChoiceBox.disableProperty().bind(copCheckBox.selectedProperty().not());                            
+        populateCoperate();
+    }
+    
+    
+    
+    private ObservableList<Account> coperates;
+    private void populateCoperate() {
+        if(coperates == null)coperates = FXCollections.observableArrayList();
+        copChoiceBox.setItems(coperates);
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject account = nav.fetchAccount();
+                    if (account !=null){
+                        JSONArray accountArray = account.getJSONArray("message");
+                        if(accountArray!=null)getAccountList(accountArray);
+                    } 
+
+
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        // Run the task in a background thread
+        Thread back = new Thread(task);
+        back.setPriority(Thread.MAX_PRIORITY);
+        back.setDaemon(true);
+        back.start();
+
+    }
+ 
+     private void getAccountList(JSONArray accountArray){
+        
+        try {
+            Account ls; 
+            for(int i = 0; i < accountArray.length(); i++){
+                ls = new Account(){
+                    @Override
+                    public String toString() {
+                        return getAccountName() + "     ("+getCompanyName()+")";
+                    }
+                    
+                };
+                JSONObject oj = accountArray.getJSONObject(i);
+                System.out.println("Printing Hotel Service : " + oj);
+                ls.setId(oj.getString("_id"));
+                ls.setAccountName(oj.getString("accountName"));
+                ls.setAccountNo(oj.getJSONObject("cred").getString("accountNo"));
+                ls.setAdd1(oj.getJSONObject("address").getString("one"));
+                ls.setAdd2(oj.getJSONObject("address").getString("two"));
+                ls.setBalance(String.valueOf(oj.getJSONObject("cred").get("openBalance")));
+                ls.setCity(oj.getString("city"));
+                ls.setCompanyName(oj.getString("alis"));
+                //ls.setContact(oj.getString("contact"));
+                ls.setCountry(oj.getString("country"));
+                ls.setCredit(String.valueOf(oj.getJSONObject("cred").get("creditLimit")));
+                ls.setEmail(oj.getString("email"));
+                ls.setFirstName(oj.getString("firstName"));
+                ls.setLastName(oj.getString("lastName"));
+                //ls.setPhone(oj.getString("phone"));
+                ls.setRep(oj.getString("rep"));
+                ls.setState(oj.getString("state"));
+                ls.setTerm(oj.getJSONObject("cred").getString("paymentTerm"));
+                ls.setWeb(oj.getString("website"));
+                ls.setZip(oj.getString("zip"));
+                
+                coperates.add(ls);
+                
+//                service.addAll(ls);
+//                table.setItems(service);
+                
+                
+            }
+           
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
 }
+

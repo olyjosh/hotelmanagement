@@ -64,12 +64,13 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label fx:id="expArrival_Booking" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label fx:id="noOfCancel_Booking" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label fx:id="noOfVoid_Booking" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Label fx:id="bookednReserverd_Booking" layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label fx:id="noOfMobile_Booking" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label fx:id="bookednReserverd_Booking" layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                           <Label text="Booking" GridPane.columnIndex="1">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
@@ -90,7 +91,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="44.0" text="No of Void" GridPane.rowIndex="3">
+                                          <Label layoutX="10.0" layoutY="44.0" text="Mobile App" GridPane.rowIndex="3">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
@@ -100,19 +101,27 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="72.0" text="Book/Reserved" GridPane.rowIndex="4">
+                                          <Label layoutX="10.0" layoutY="72.0" text="Book/Reserved" GridPane.rowIndex="5">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
                                           <Label fx:id="expArrival_Reserve" layoutX="133.0" layoutY="41.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                           <Label fx:id="noOfCancel_Reserve" layoutX="223.0" layoutY="41.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <Label layoutX="223.0" layoutY="67.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <Label layoutX="223.0" layoutY="93.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <Label fx:id="noOfMobile_Reserve" layoutX="223.0" layoutY="67.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <Label layoutX="223.0" layoutY="93.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                           <Label layoutX="223.0" layoutY="120.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                           <Label layoutX="315.0" layoutY="41.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <Label fx:id="noOfVoid_Total" layoutX="315.0" layoutY="67.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <Label fx:id="booknReserved_Total" layoutX="315.0" layoutY="93.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                          <Label fx:id="noOfMobile_Total" layoutX="315.0" layoutY="67.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <Label fx:id="booknReserved_Total" layoutX="315.0" layoutY="93.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <Label text="Front Desk" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="noOfFront_Booking" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label fx:id="noOfFront_Reserve" layoutX="214.0" layoutY="101.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <Label fx:id="noOfFront_Total" layoutX="306.0" layoutY="101.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -245,12 +254,10 @@
                                        <children>
                                           <GridPane prefHeight="241.0" prefWidth="213.0">
                                              <columnConstraints>
-                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="136.0" />
-                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="48.0" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="107.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="77.0" />
                                              </columnConstraints>
                                              <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -260,7 +267,6 @@
                                                 <Label fx:id="settle_online" layoutX="10.0" layoutY="16.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <Label fx:id="settle_pos" layoutX="10.0" layoutY="44.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label fx:id="settle_bank" layoutX="10.0" layoutY="72.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label layoutX="10.0" layoutY="100.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <Label text="Cash collection">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
@@ -281,17 +287,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="settle_paymentOnHold" layoutX="10.0" layoutY="72.0" text="Payment on Hold" GridPane.rowIndex="4">
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </Label>
                                                 <Label fx:id="settle_cash" layoutX="214.0" layoutY="41.0" text="0" GridPane.columnIndex="1" />
-                                                <Label fx:id="settle_void" layoutX="10.0" layoutY="101.0" text="Void" GridPane.rowIndex="5">
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </Label>
                                              </children>
                                           </GridPane>
                                        </children>

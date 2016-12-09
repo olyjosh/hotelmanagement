@@ -427,7 +427,7 @@ public class NewDrink implements Initializable {
                                 public void run() {
                                     clear();
                                     
-                                    Util.notify("Edited", "Food Menu Edited Successfully", Pos.CENTER);
+                                    Util.notify("Edited", "Drink Edited Successfully", Pos.CENTER);
                                 }
                             });
                         }
@@ -449,7 +449,7 @@ public class NewDrink implements Initializable {
                                 @Override
                                 public void run() {
                                     clear();
-                                    Util.notify( "Food Created", "Food Menu Created Successfully", Pos.CENTER);
+                                    Util.notify( "Food Created", "Drink Added Successfully", Pos.CENTER);
                                 }
                             });
                         }

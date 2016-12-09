@@ -11,26 +11,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="377.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="377.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane collapsible="false" layoutX="5.0" layoutY="4.0" prefHeight="367.0" prefWidth="869.0" text="New User Details">
+      <TitledPane collapsible="false" layoutX="5.0" layoutY="4.0" prefHeight="377.0" prefWidth="880.0" text="New Staff Details" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="25.0" layoutY="28.0" text="Username" />
-                  <TextField fx:id="username" layoutX="163.0" layoutY="23.0" prefHeight="31.0" prefWidth="248.0" />
-                  <Label layoutX="25.0" layoutY="67.0" text="Password" />
-                  <TextField fx:id="password" layoutX="163.0" layoutY="62.0" prefHeight="31.0" prefWidth="248.0" />
-                  <Label layoutX="25.0" layoutY="106.0" text="Confirm Password" />
-                  <TextField fx:id="confirm" layoutX="163.0" layoutY="101.0" prefHeight="31.0" prefWidth="248.0" />
+                  <TextField fx:id="username" layoutX="163.0" layoutY="23.0" prefHeight="31.0" prefWidth="674.0" />
                   <Label layoutX="25.0" layoutY="146.0" text="Privilege/Role" />
                   <Label layoutX="25.0" layoutY="185.0" text="Mobile No" />
                   <TextField fx:id="phone" layoutX="163.0" layoutY="180.0" prefHeight="31.0" prefWidth="248.0" />
                   <Label layoutX="25.0" layoutY="224.0" text="Email" />
                   <TextField fx:id="email" layoutX="163.0" layoutY="219.0" prefHeight="31.0" prefWidth="248.0" />
                   <ComboBox fx:id="role" layoutX="163.0" layoutY="141.0" prefHeight="31.0" prefWidth="248.0" />
-                  <Label layoutX="451.0" layoutY="30.0" text="First Name" />
-                  <TextField fx:id="firstName" layoutX="589.0" layoutY="25.0" prefHeight="31.0" prefWidth="248.0" />
+                  <Label layoutX="25.0" layoutY="69.0" text="First Name" />
+                  <TextField fx:id="firstName" layoutX="163.0" layoutY="64.0" prefHeight="31.0" prefWidth="248.0" />
                   <Label layoutX="451.0" layoutY="69.0" text="Last Name" />
                   <TextField fx:id="lastName" layoutX="589.0" layoutY="64.0" prefHeight="31.0" prefWidth="248.0" />
                   <Label layoutX="451.0" layoutY="108.0" text="Status" />

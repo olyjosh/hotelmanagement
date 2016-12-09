@@ -5,39 +5,39 @@
  */
 package hotels.views.component.fxml.admin;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import hotels.Hotels;
 import hotels.util.Navigator;
 import hotels.util.State;
-import hotels.util.Util;
-import hotels.views.component.fxml.tools.HotelServiceListController;
-import hotels.views.component.fxml.tools.NewHotelServiceController;
-import hotels.views.component.fxml.tools.model.HotelService;
+import hotels.views.component.fxml.admin.model.UserModel;
+import hotels.views.component.fxml.front.controller.Dashboard;
+import hotels.views.component.fxml.front.model.FolioModel;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,31 +45,17 @@ import org.json.JSONObject;
 /**
  * FXML Controller class
  *
- * @author NOVA
+ * @author olyjosh
  */
 public class UserListController implements Initializable {
 
-    @FXML
-    private TextField user;
-    @FXML
-    private ComboBox roleCombo;
-    @FXML
-    private TableView<Users> table;
-    @FXML
-    private TableColumn username;
-    @FXML
-    private TableColumn role;
-    @FXML
-    private TableColumn dep;
-
+    @FXML private TableView table;  
+    @FXML private TableColumn usernameCol, roleCol, deptCol;
+    private ObservableList<UserModel> tableList;
+    
     
     private Hotels app;
     private Navigator nav;
-    private static JSONObject users;
-    private static JSONArray usersArray;
-    private Users ls;
-    private ObservableList<Users> service = FXCollections.observableArrayList();
-    
     
     public Hotels getApp() {
         return app;
@@ -82,148 +68,211 @@ public class UserListController implements Initializable {
     public UserListController(Hotels app) {
         this.app =app;
         nav = new Navigator(getApp().getMain());
+        
     }
+
     
     
     
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-     onLoad();
+        
+        
+        loadUsersTask();
     }    
     
-    private void onLoad(){
+    
+    
+    
+       private void tableDeafaults(){
+         usernameCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+         roleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+         deptCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        
+        tableList= FXCollections.observableArrayList();
+        table.setItems(tableList);
+        
+         table.setRowFactory(new Callback<TableView<FolioModel>, TableRow<FolioModel>>() {
+            @Override
+            public TableRow<FolioModel> call(TableView<FolioModel> param) {
+                final TableRow<FolioModel> row = new TableRow<>();
+                MenuItem transac = new MenuItem("View Foilio transactions", GlyphsDude.createIcon(FontAwesomeIcons.EYE)),
+                        pay = new MenuItem("Make Payment", GlyphsDude.createIcon(FontAwesomeIcons.PAYPAL));
+                ContextMenu con = new ContextMenu(pay, transac);
+                transac.setOnAction((ActionEvent event) -> {
+                    try {
+                        FolioModel item = row.getItem();
+                        app.getMain().showFolioDetail(item.getGuestId(), item.getName(), item.getPhone());
+                    } catch (IOException ex) {
+                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                
+                pay.setOnAction((ActionEvent event) -> {
+
+                    try {
+                        FolioModel item = row.getItem();
+                        double amount = item.getBalance();
+                        String desc = amount <0 ? "Paying up for bill" : "Funding Folio Whallet";
+                        String payFor = desc;
+                        String orderId = item.getId();
+                        int dept = State.DEPT_FRONT;
+                        String guestId =item.getGuestId();
+                        String name = item.getName();
+                        String phone = item.getPhone();
+                        
+                        app.getMain().showPayment(amount, desc, payFor, orderId, dept, guestId, name,phone, true);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                });
+
+//                row.setStyle("-fx-background-color :#6382ff");
+                row.contextMenuProperty().bind(
+                        Bindings.when(row.emptyProperty())
+                        .then((ContextMenu) null)
+                        .otherwise(con)
+                );
+
+                row.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        
+                    }
+                });
+                return row;
+                
+            }
+        });
+         
+//         balanceCol.setCellFactory(column -> {
+//             return new TableCell<FolioModel,Double>(){
+//                 @Override
+//                 protected void updateItem(Double item, boolean empty) {
+//                     super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+//                
+//                    if (item == null || empty) { //If the cell is empty
+//                        setText(null);
+//                        setStyle("");
+//                    } else { //If the cell is not empty
+//
+//                        setText(""+item); //Put the String data in the cell
+////                        setStyle("-fx-background-color: yellow");
+//
+//                        if(item<0){
+//                            setTextFill(Color.RED);
+//                        }else if(item >0){
+//                            setTextFill(Color.BLUE);
+//                        }else{
+//                            setTextFill(Color.BLACK);
+//                        }
+//                        
+////                        Person auxPerson = getTableView().getItems().get(getIndex());
+//
+//                    }
+//
+//                }
+//
+//            };
+//        });
+//
+//         
+         
+         
+    }
+    
+    
+    
+    
+        
+    private void loadUsersTask(){
         
         Runnable task = new Runnable() {
-            @Override
             public void run() {
-                try {
-                    users = nav.fetchUsers();
-                    usersArray = users.getJSONArray("message");
-                    
-                    getUserList();
-                    
-                } catch (JSONException ex) {
-                    ex.printStackTrace();
-                }
+                users();
             }
         };
         // Run the task in a background thread
-            Thread back = new Thread(task);
-            back.setPriority(Thread.MAX_PRIORITY);
-            back.setDaemon(true);
-            back.start();
-           
-            
-            username.setCellValueFactory(new PropertyValueFactory<>("username"));
-            role.setCellValueFactory(new PropertyValueFactory<>("role"));
-            dep.setCellValueFactory(new PropertyValueFactory<>("dep"));
-            
-            table.getColumns().setAll(username, role, dep);
-       
-    }
-    
-    private void getUserList(){
-        try {
-            for(int i = 0; i < usersArray.length(); i++){
-                ls = new Users();
-                JSONObject oj = usersArray.getJSONObject(i);
-                System.out.println("Printing Hotel Service : " + oj);
-                ls.setId(oj.getString("_id"));
-                ls.setUsername(oj.getJSONObject("name").getString("username"));
-                ls.setFirstname(oj.getJSONObject("name").getString("firstName"));
-                ls.setLastname(oj.getJSONObject("name").getString("lastName"));
-                ls.setPhone(oj.getString("phone"));
-                //ls.setRole(oj.getString("role"));
-                //ls.setDep(oj.getString("dep"));
-                ls.setCountry(oj.getString("country"));
-                ls.setDob(oj.getString("dob"));
-                ls.setEmail(oj.getString("email"));
-                ls.setSex(oj.getString("sex"));
-                ls.setStaff(String.valueOf(oj.getJSONObject("staff").get("isStaff")));
-                
-                service.addAll(ls);
-                table.setItems(service);
-                
-            }
-           
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }   
-    
-    @FXML 
-    private void showNewUser(ActionEvent e) throws IOException{
-        NewUserController controller = new NewUserController(this.getApp());
-        controller.setApp(getApp());
-        controller.setEditMode(false);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-        
-        stage.showAndWait();
-    }
-    
-    @FXML 
-    private void showEditUser(ActionEvent e) throws IOException{
-       
-        Users item = table.getSelectionModel().getSelectedItem();
-        NewUserController controller = new NewUserController(this.getApp());
-        controller.setApp(app);
-        controller.setEditMode(true);
-        controller.setData(item);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
-        loader.setController(controller);
-        Parent root = (Parent)loader.load();
-        Stage stage = new Stage(StageStyle.UNIFIED);
-        stage.setScene(new Scene(root));
-
-        stage.showAndWait();
-        
-    }
-    
-    @FXML
-    private void deleteUser(){
-        Users item = table.getSelectionModel().getSelectedItem();
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    List <NameValuePair> param = new ArrayList<>();
-                    param.add(new BasicNameValuePair("id", item.getId()));
-                    JSONObject response = nav.deleteHotelService(param);
-                    
-                    if(response.getInt("status") == 1){
-                        Platform.runLater(new Runnable(){
-                            @Override
-                            public void run() {
-                                Util.notify(State.NOTIFY_SUCCESS, "User Account has been Deleted", Pos.CENTER);
-                                service.clear();
-                                onLoad();
-                            }
-                        });
-                    }else{
-                        
-                        Platform.runLater(new Runnable(){
-                            @Override
-                            public void run() {
-                                Util.notify(State.NOTIFY_ERROR, "User Account Failed to Delete", Pos.CENTER);
-                            }
-                        });
-                    }
-                } catch (JSONException ex) {
-                    Logger.getLogger(HotelServiceListController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        };
         Thread back = new Thread(task);
         back.setPriority(Thread.MAX_PRIORITY);
         back.setDaemon(true);
         back.start();
     }
+    
+    
+    
+    private void users(){
+        JSONObject foods =nav.fetchUsers();
+        if(foods!=null){
+            try {
+                JSONArray a = foods.getJSONArray("message");
+                tableList.clear();
+                for (int i = 0; i < a.length(); i++) {
+                    JSONObject o = a.getJSONObject(i);
+                    
+                    add1ToTable(o);
+                    
+                }
+//                if(folioMp!=null)folioMp.setVisible(false);
+            } catch (JSONException ex) {
+                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void add1ToTable(JSONObject o){
+        try {
+            UserModel m = new UserModel();
+            
+            m.setId((String) o.get("_id"));
+            JSONObject name = o.getJSONObject("name");
+            m.setFirstName(name.getString("firstName"));
+            m.setLastName(name.getString("lastName"));
+            m.setUsername(name.getString("username"));
+            m.setCountry(o.getString("country"));
+            m.setDob(o.getString("dob"));
+            m.setEmail(o.getString("email"));
+            m.setIsStaff(o.getJSONObject("staff").getBoolean("isStaff"));
+            m.setPhone(o.getString("phone"));
+//            m.setPriviledge(0);
+            m.setSex(o.getString("sex"));
+            
+//            m.set
+
+
+            
+//            m.setBalance(o.getDouble("balance"));
+//            m.setGuestId(o.getString("guestId"));
+//            JSONObject oo = o.getJSONObject("guest");
+//            m.setName(oo.getJSONObject("name").getString("firstName")+" "+oo.getJSONObject("name").getString("lastName"));
+//            m.setPhone(oo.getString("phone"));
+            
+            tableList.add(m);
+        } catch (JSONException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    @FXML 
+    private void showNewUser(ActionEvent e) throws IOException{
+        NewUserController controller = new NewUserController(this.getApp());
+        controller.setApp(getApp());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels/views/component/fxml/admin/newUser.fxml"));
+        loader.setController(controller);
+        Parent root = (Parent)loader.load();
+        Stage stage = new Stage(StageStyle.UNIFIED);
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+    }
+    
+    
 }

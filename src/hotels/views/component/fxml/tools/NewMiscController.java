@@ -117,7 +117,7 @@ public class NewMiscController implements Initializable {
             voucher.setText(data.getVoucher());
             paidTo.setText(data.getPaidTo());
             charge.setText(data.getCharge());
-            //cat.setText(data.getCat());
+            cat.setText(data.getCat());
             room.setText(data.getRoomNo());
             amount.setText(data.getAmount());
             discount.setText(data.getDiscount());
@@ -136,7 +136,7 @@ public class NewMiscController implements Initializable {
         List <NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("voucherNo", voucher.getText()));
         param.add(new BasicNameValuePair("paidTo", paidTo.getText()));
-       // param.add(new BasicNameValuePair("category", cat.getText()));
+        param.add(new BasicNameValuePair("category", cat.getText()));
         param.add(new BasicNameValuePair("extraCharge", charge.getText()));
         param.add(new BasicNameValuePair("roomNO", room.getText()));
         param.add(new BasicNameValuePair("amount", amount.getText()));

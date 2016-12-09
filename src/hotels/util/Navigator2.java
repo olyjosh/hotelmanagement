@@ -986,8 +986,8 @@ public class Navigator2 {
                  
     public JSONObject fetchNight() {
         String url = OP_URL + "fetch/night";
-        List<NameValuePair> data = new ArrayList<>();
-
+//        List<NameValuePair> data = new ArrayList<>();
+//
 //        if(d1!=null){
 //            data.add(new BasicNameValuePair("d1", d1));
 //            data.add(new BasicNameValuePair("d2", d2));
@@ -1004,6 +1004,35 @@ public class Navigator2 {
         }
         return null;
     }
+            
+    public JSONObject fetchFolioDetail(String guestID, String phone, String d1,String d2) {
+        String url = OP_URL + "fetch/night";
+        List<NameValuePair> data = new ArrayList<>();
+
+        if(d1!=null){
+            data.add(new BasicNameValuePair("d1", d1));
+            data.add(new BasicNameValuePair("d2", d2));
+        }
+                    
+        data.add(new BasicNameValuePair("id", guestID));
+        data.add(new BasicNameValuePair("phone", phone));
+
+
+        
+        String param = URLEncodedUtils.format(data, "utf-8");
+        url += "?" + param;
+
+        try {
+            HttpGet request = new HttpGet(url);
+            httpClient.execute(request);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace(); Util.notify_NETWORK();
+        }
+        return null;
+    }
+    
+//    String guestId,String guestName,String guestPhone
     
     
 //  refNo : String,

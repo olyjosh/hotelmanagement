@@ -89,6 +89,10 @@ public class State {
         return null;
     }
 
+    //Pay roll 
+    public final static String ADDITION = "ADDITION";
+    public final static String DEDUCTION = "DEDUCTION";
+    
 }
     
 

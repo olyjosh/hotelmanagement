@@ -78,6 +78,11 @@ public class HotelServiceListController implements Initializable {
         nav = new Navigator(getApp().getMain());
     }
     
+    
+    
+    
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -113,12 +118,12 @@ public class HotelServiceListController implements Initializable {
             back.start();
            
             
-//            alias.setCellValueFactory(new PropertyValueFactory<>("alias"));
+            alias.setCellValueFactory(new PropertyValueFactory<>("alias"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
             charge.setCellValueFactory(new PropertyValueFactory<>("charge"));
             desc.setCellValueFactory(new PropertyValueFactory<>("desc"));
             
-            table.getColumns().setAll(name, charge, desc);
+            table.getColumns().setAll(alias, name, charge, desc);
        
     }
     

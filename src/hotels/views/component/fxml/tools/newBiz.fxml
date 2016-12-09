@@ -29,7 +29,7 @@
                   <TextField fx:id="plan" layoutX="172.0" layoutY="272.0" prefHeight="31.0" prefWidth="238.0" />
                   <Label layoutX="33.0" layoutY="319.0" text="Plan Value" />
                   <TextField fx:id="value" layoutX="172.0" layoutY="314.0" prefHeight="31.0" prefWidth="238.0" />
-                  <Button layoutX="301.0" layoutY="374.0" mnemonicParsing="false" onAction="#newBusiness" prefHeight="31.0" prefWidth="109.0" text="Save">
+                  <Button layoutX="301.0" layoutY="374.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" text="Save">
                      <graphic>
                         <FontAwesomeIcon glyphName="SAVE" />
                      </graphic>
